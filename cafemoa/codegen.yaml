@@ -1,0 +1,7 @@
+schema: http://backend10.codebootcamp.co.kr/graphql
+generates:
+  ./src/commons/types/generated/types.ts:
+    plugins:
+      - typescript
+    config: # 타입들 변수명앞에 I를 붙여주세요
+      typesPrefix: I
