@@ -41,7 +41,7 @@ const BUTTON_COLOR: IButtonColorTypes = {
     borderColor: "#FFE004",
     color: "#000000",
   },
-  gary: {
+  gray: {
     bgColor: "#a0a0a0",
     borderColor: "#a0a0a0",
     color: "#ffffff",
@@ -74,6 +74,7 @@ export const BtnWrap = styled.div`
   padding-left: 12px;
   padding-right: 12px;
 `;
+
 export const LargeBtn = styled.button`
   margin: 0 12px;
   padding: 32px;
@@ -116,12 +117,4 @@ export const SmallBtn = styled.button`
       color: ${BUTTON_COLOR[props.color].color};
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
-`;
-
-export const DeepGrayBtn = styled(LargeBtn)`
-  border: 1px solid #bdbdbd;
-  &:hover {
-    color: #ff1b6d;
-    border-color: #ff1b6d;
-  }
 `;
