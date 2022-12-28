@@ -1,11 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-interface ITagProps {
-  size: "sm" | "md" | "lg";
-  children: string;
-}
-
 interface ITagSizeProps {
   sm: { fontSize: string; padding: string; marginRight: string };
   md: { fontSize: string; padding: string; marginRight: string };
@@ -35,11 +30,7 @@ const TAG_SIZE: ITagSizeProps = {
   },
 };
 
-export default function Tag(props: ITagProps) {
-  return <Word size={props.size}>{props.children}</Word>;
-}
-
-const Word = styled.span`
+export const Word = styled.span`
   display: inline-block;
   border-radius: 50px;
   background-color: #f3e6d8;
