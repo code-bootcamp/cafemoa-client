@@ -59,9 +59,10 @@ const BUTTON_COLOR: IButtonColorTypes = {
 };
 
 export const ContainerWrap = styled.div`
-  width: 100%;
-  max-width: 1374px;
   margin: 0 auto;
+  padding: 0 120px;
+  max-width: 1640px;
+  width: 100%;
 `;
 
 export const BtnWrap = styled.div`
