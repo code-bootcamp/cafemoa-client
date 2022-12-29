@@ -12,6 +12,7 @@ export default function HeaderLayout() {
             </a>
           </Link>
         </S.Logo>
+        <S.Utiles></S.Utiles>
       </S.HeaderInner>
     </S.HeaderWrap>
   );
