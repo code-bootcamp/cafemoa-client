@@ -27,27 +27,22 @@ export const DEFAULT_COLOR: IDefaultColorTypes = {
 };
 
 interface IButtonColorTypes {
-  black?: {
+  beige?: {
     bgColor: string;
     borderColor: string;
     color: string;
   };
-  yellow?: {
+  lightBeige?: {
     bgColor: string;
     borderColor: string;
     color: string;
   };
-  gray?: {
+  brown?: {
     bgColor: string;
     borderColor: string;
     color: string;
   };
-  lightGray?: {
-    bgColor: string;
-    borderColor: string;
-    color: string;
-  };
-  white?: {
+  brownLine?: {
     bgColor: string;
     borderColor: string;
     color: string;
@@ -56,30 +51,25 @@ interface IButtonColorTypes {
 }
 
 const BUTTON_COLOR: IButtonColorTypes = {
-  black: {
-    bgColor: "#000000",
-    borderColor: "#000000",
-    color: "#ffffff",
+  beige: {
+    bgColor: "#F5E9DF",
+    borderColor: "#F5E9DF",
+    color: "#69473E",
   },
-  yellow: {
+  lightBeige: {
     bgColor: "#FFE004",
     borderColor: "#FFE004",
     color: "#000000",
   },
-  gray: {
-    bgColor: "#a0a0a0",
-    borderColor: "#a0a0a0",
+  brown: {
+    bgColor: "#69473E",
+    borderColor: "#69473E",
     color: "#ffffff",
   },
-  lightGray: {
-    bgColor: "#c9c9c9",
-    borderColor: "#c9c9c9",
-    color: "#ffffff",
-  },
-  white: {
-    bgColor: "#ffffff",
-    borderColor: "#000000",
-    color: "#000000",
+  brownLine: {
+    bgColor: "#69473E",
+    borderColor: "transparent",
+    color: "#69473E",
   },
 };
 
@@ -130,20 +120,21 @@ export const MediumBtn = styled.button`
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
 `;
-export const SmallBtn = styled.button`
-  padding: 14px 16px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #bdbdbd;
-  transition: all 0.2s;
-  ${(props) =>
-    props.color !== undefined &&
-    css`
-      background-color: ${BUTTON_COLOR[props.color].bgColor};
-      color: ${BUTTON_COLOR[props.color].color};
-      border-color: ${BUTTON_COLOR[props.color].borderColor};
-    `}
-`;
+
+// export const SmallBtn = styled.button`
+//   padding: 14px 16px;
+//   border-width: 1px;
+//   border-style: solid;
+//   border-color: #bdbdbd;
+//   transition: all 0.2s;
+//   ${(props) =>
+//     props.color !== undefined &&
+//     css`
+//       background-color: ${BUTTON_COLOR[props.color].bgColor};
+//       color: ${BUTTON_COLOR[props.color].color};
+//       border-color: ${BUTTON_COLOR[props.color].borderColor};
+//     `}
+// `;
 
 export const EllipsisOne = styled.div`
   overflow: hidden;
