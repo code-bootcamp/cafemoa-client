@@ -15,11 +15,21 @@ interface ITextProps {
     | "72"
     | "80";
   weight?: "300" | "500" | "700";
-  children: string;
+  fontColor?:
+    | "black"
+    | "white"
+    | "gray"
+    | "beige"
+    | "deepBeige"
+    | "lightBeige"
+    | "green"
+    | "brown"
+    | "deepBrown";
+  children: string | [string, JSX.Element];
 }
 export default function Text(props: ITextProps) {
   return (
-    <S.Word size={props.size} weight={props.weight}>
+    <S.Word size={props.size} weight={props.weight} fontColor={props.fontColor}>
       {props.children}
     </S.Word>
   );

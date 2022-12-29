@@ -1,6 +1,31 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
+interface IDefaultColorTypes {
+  black?: string;
+  white?: string;
+  gray?: string;
+  beige?: string;
+  deepBeige?: string;
+  lightBeige?: string;
+  green?: string;
+  brown?: string;
+  deepBrown?: string;
+  [prop: string]: any;
+}
+
+export const DEFAULT_COLOR: IDefaultColorTypes = {
+  black: "#000",
+  white: "#ffffff",
+  gray: "#8B8B8B",
+  beige: "#F5E9DF",
+  deepBeige: "#F3E6D8",
+  lightBeige: "#F6F5F1",
+  green: "#5A7B2F",
+  brown: "#69473E",
+  deepBrown: "#81564B",
+};
+
 interface IButtonColorTypes {
   black?: {
     bgColor: string;
@@ -118,4 +143,22 @@ export const SmallBtn = styled.button`
       color: ${BUTTON_COLOR[props.color].color};
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
+`;
+
+export const EllipsisOne = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+export const EllipsisTwo = styled.div`
+  display: -webkit-box;
+  line-height: 1.2;
+  height: 2.4em;
+  word-break: break-word;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
