@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { ContainerWrap } from "../../src/commons/styles/commonStyles";
 import Box01 from "../../src/components/common/box/01/Box01.index";
 import Card01 from "../../src/components/common/card/01/Card01.index";
+import Card02 from "../../src/components/common/card/02/Card02.index";
 import Input01 from "../../src/components/common/input/01/Input01.index";
 import Input02 from "../../src/components/common/input/02/Input02.index";
 import Like01 from "../../src/components/common/like/01/Like01.index";
@@ -50,13 +51,13 @@ export default function UiTest() {
           </Text>
         </div>
         <div>
-          <Text size="16" weight="300">
+          <Text size="16" weight="300" fontColor="gray">
             16px
           </Text>
-          <Text size="18" weight="300">
+          <Text size="18" weight="300" fontColor="brown">
             18px
           </Text>
-          <Text size="20" weight="300">
+          <Text size="20" weight="300" fontColor="green">
             20px
           </Text>
           <Text size="24" weight="300">
@@ -82,6 +83,7 @@ export default function UiTest() {
           </Text>
           <Text size="80" weight="300">
             80px
+            <br />
           </Text>
         </div>
         <div>
@@ -223,9 +225,21 @@ export default function UiTest() {
               </Card01>
             </LI>
           </UL>
+          <UL>
+            <LI>
+              <Card02 imageUrl="/images/temp/temp01.png">
+                <div>sss</div>
+              </Card02>
+            </LI>
+            <LI>
+              <Card02 imageUrl="/images/temp/temp03.png">
+                <div>sss</div>
+              </Card02>
+            </LI>
+          </UL>
         </div>
         <div>
-          <Like01 iconColor="black" count={22} />
+          <Like01 iconColor="black" fontColor="black" count={22} />
           <Like01 iconColor="red" count={22} />
           <Input01 type="text" />
           <Input02 type="text" name="이메일" />

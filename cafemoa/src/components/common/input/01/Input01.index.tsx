@@ -8,7 +8,6 @@ interface IInputProps {
 }
 
 export default function Input01(props: IInputProps) {
-  // console.log(props);
   return (
     <S.InputWrap>
       <input type={props.type} />

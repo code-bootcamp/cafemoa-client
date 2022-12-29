@@ -15,4 +15,6 @@ export default function Layout(props: ILayoutProps) {
     </>
   );
 }
-const Contents = styled.div``;
+const Contents = styled.div`
+  padding-top: 100px;
+`;
