@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Box01 from "../../../common/box/01/Box01.index";
 import HeroWrap from "../../../common/hero/HeroWrap.index";
 import Text from "../../../common/text/01/Text01.index";
 import MyCouponInvalid from "./MyCoupon-invalid";
@@ -7,16 +5,6 @@ import MyCouponValid from "./MyCoupon-valid";
 import * as S from "./MyCoupon.styles";
 
 export default function MyCoupon() {
-  const [isValid, setIsValid] = useState(true);
-
-  const onClickValid = () => {
-    setIsValid(true);
-  };
-
-  const onClickInValid = () => {
-    setIsValid(false);
-  };
-
   return (
     <>
       <HeroWrap
@@ -31,17 +19,22 @@ export default function MyCoupon() {
               쿠폰을 모아보세요!
             </Text>
           </S.TitleWrapper>
-          <S.CouponOption>
-            <S.CouponOptionWrapper onClick={onClickValid}>
-              사용가능 쿠폰<S.CouponCount>4</S.CouponCount>
-            </S.CouponOptionWrapper>
-            <S.CouponOptionWrapper onClick={onClickInValid}>
-              사용완료 쿠폰<S.CouponCount>6</S.CouponCount>
-            </S.CouponOptionWrapper>
-          </S.CouponOption>
-          <S.CouponWrapper>
-            {isValid ? <MyCouponValid /> : <MyCouponInvalid />}
-          </S.CouponWrapper>
+
+          <S.TapWrap
+            defaultActiveKey="1"
+            items={[
+              {
+                label: "사용가능 쿠폰",
+                key: "1",
+                children: <MyCouponValid />,
+              },
+              {
+                label: "사용완료 쿠폰",
+                key: "2",
+                children: <MyCouponInvalid />,
+              },
+            ]}
+          />
         </S.Container>
       </S.ContainerWrapper>
     </>

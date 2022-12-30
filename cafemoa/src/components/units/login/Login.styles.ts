@@ -1,8 +1,14 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { ContainerWrap } from "../../../commons/styles/commonStyles";
+import { stubArray } from "lodash";
+import { ContainerWrap, MediumBtn } from "../../../commons/styles/commonStyles";
 
 export const ContainerWrapper = styled(ContainerWrap)``;
+
+export const LoginButton = styled(MediumBtn)`
+  padding-top: 8px;
+  padding-bottom: 8px;
+`;
 export const Wrapper = styled.section`
   display: flex;
   justify-content: center;
@@ -38,6 +44,10 @@ export const OptionsRegister = styled.div`
 `;
 
 export const OptionsDetail = styled.div`
+  padding-top: 25px;
+`;
+
+export const OptionsButtonWrap = styled.div`
   padding-top: 25px;
 `;
 
@@ -122,16 +132,16 @@ export const FindPassword = styled.button`
   }
 `;
 
-export const LoginButton = styled.button`
-  // margin-top: 30px;
-  /* border: 1px solid black; */
-  border-radius: 3px;
-  padding: 10px 50px;
-  color: #ffffff;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  background-color: #69473e;
-  :hover {
-    color: white;
-    background-color: black;
-  }
-`;
+// export const LoginButton = styled.button`
+//   // margin-top: 30px;
+//   /* border: 1px solid black; */
+//   border-radius: 3px;
+//   padding: 10px 50px;
+//   color: #ffffff;
+//   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+//   background-color: #69473e;
+//   :hover {
+//     color: white;
+//     background-color: black;
+//   }
+// `;
