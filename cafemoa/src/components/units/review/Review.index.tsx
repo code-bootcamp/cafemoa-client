@@ -1,9 +1,9 @@
-import Card01 from "../../common/card/01/Card01.index";
-import HeroWrap from "../../common/hero/HeroWrap.index";
-import Tag from "../../common/text/02/Text02.index";
+import Card01 from "../../commons/card/01/Card01.index";
+import HeroWrap from "../../commons/hero/HeroWrap.index";
+import Tag from "../../commons/text/02/Text02.index";
 import * as S from "./Review.styles";
-import Users01 from "../../common/user/01/Users01.index";
-import Text from "../../common/text/01/Text01.index";
+import Users01 from "../../commons/user/01/Users01.index";
+import Text from "../../commons/text/01/Text01.index";
 import Masonry from "react-masonry-component";
 
 export default function ReviewList() {

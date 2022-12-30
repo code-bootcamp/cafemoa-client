@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Input02 from "../../common/input/02/Input02.index";
-import Text from "../../common/text/01/Text01.index";
+import Input02 from "../../commons/input/02/Input02.index";
+import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Login.styles";
 
 export default function Login() {

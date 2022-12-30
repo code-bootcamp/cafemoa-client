@@ -6,19 +6,19 @@ import {
   MediumBtn,
   TagWrap,
 } from "../../src/commons/styles/commonStyles";
-import Box01 from "../../src/components/common/box/01/Box01.index";
-import Card01 from "../../src/components/common/card/01/Card01.index";
-import Card02 from "../../src/components/common/card/02/Card02.index";
-import Input01 from "../../src/components/common/input/01/Input01.index";
-import Input02 from "../../src/components/common/input/02/Input02.index";
-import Like01 from "../../src/components/common/like/01/Like01.index";
-import Select01 from "../../src/components/common/select/01/Select01.index";
-import Text from "../../src/components/common/text/01/Text01.index";
-import Tag from "../../src/components/common/text/02/Text02.index";
-import Users01 from "../../src/components/common/user/01/Users01.index";
+import Box01 from "../../src/components/commons/box/01/Box01.index";
+import Card01 from "../../src/components/commons/card/01/Card01.index";
+import Card02 from "../../src/components/commons/card/02/Card02.index";
+import Input01 from "../../src/components/commons/input/01/Input01.index";
+import Input02 from "../../src/components/commons/input/02/Input02.index";
+import Like01 from "../../src/components/commons/like/01/Like01.index";
+import Select01 from "../../src/components/commons/select/01/Select01.index";
+import Text from "../../src/components/commons/text/01/Text01.index";
+import Tag from "../../src/components/commons/text/02/Text02.index";
+import Users01 from "../../src/components/commons/user/01/Users01.index";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import MessageModal from "../../src/components/common/modal/message/MessageModal.index";
+import MessageModal from "../../src/components/commons/modal/message/MessageModal.index";
 import { useForm } from "react-hook-form";
 
 const SELECT_VALUES01 = [
