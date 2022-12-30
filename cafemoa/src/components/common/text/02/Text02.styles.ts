@@ -10,6 +10,7 @@ interface ITagSizeProps {
 
 interface ITagStyleProps {
   size: string;
+  isActive?: boolean;
 }
 
 const TAG_SIZE: ITagSizeProps = {
@@ -46,5 +47,12 @@ export const Word = styled.span`
       font-size: ${TAG_SIZE[props.size].fontSize};
       padding: ${TAG_SIZE[props.size].padding};
       margin-right: ${TAG_SIZE[props.size].marginRight};
+    `}
+  ${(props: ITagStyleProps) =>
+    props.isActive !== undefined &&
+    props.isActive &&
+    css`
+      background-color: #69473e;
+      color: #ffffff;
     `}
 `;
