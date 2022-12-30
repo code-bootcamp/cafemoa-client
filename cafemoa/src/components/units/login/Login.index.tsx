@@ -33,7 +33,7 @@ export default function Login() {
           <S.OptionsContainer>
             <S.OptionsRegister>
               <div>
-                <Text size="28" weight="300">
+                <Text size="28" weight="300" fontColor="deepBrown">
                   카페모아 <br />
                   파트너이신가요?
                 </Text>
@@ -44,16 +44,21 @@ export default function Login() {
                   하세요.
                 </Text>
               </S.OptionsDetail>
-              <div>
-                <S.OptionsButton onClick={onCLickPartner("left")}>
-                  파트너사 로그인
-                </S.OptionsButton>
-              </div>
+              <S.OptionsButtonWrap>
+                <S.LoginButton
+                  color="brownLine"
+                  onClick={onCLickPartner("left")}
+                >
+                  <Text size="20" fontColor="deepBrown" weight="300">
+                    파트너사 로그인
+                  </Text>
+                </S.LoginButton>
+              </S.OptionsButtonWrap>
             </S.OptionsRegister>
 
             <S.OptionsRegister>
               <div>
-                <Text size="28" weight="300">
+                <Text size="28" weight="300" fontColor="deepBrown">
                   카페모아 <br />
                   고객이신가요?
                 </Text>
@@ -64,11 +69,17 @@ export default function Login() {
                   하세요.
                 </Text>
               </S.OptionsDetail>
-              <div>
-                <S.OptionsButton onClick={onCLickPartner("right")}>
-                  일반회원 로그인
-                </S.OptionsButton>
-              </div>
+
+              <S.OptionsButtonWrap>
+                <S.LoginButton
+                  color="brownLine"
+                  onClick={onCLickPartner("right")}
+                >
+                  <Text size="20" fontColor="deepBrown" weight="300">
+                    일반회원 로그인
+                  </Text>
+                </S.LoginButton>
+              </S.OptionsButtonWrap>
             </S.OptionsRegister>
           </S.OptionsContainer>
 
@@ -96,9 +107,15 @@ export default function Login() {
                 </div>
                 <S.FormsButtonsWrapper>
                   <S.FindPassword type="button" onClick={onClickFindPw}>
-                    비밀번호를 잊으셨나요?
+                    <Text size="16" weight="300" fontColor="gray">
+                      비밀번호를 잊으셨나요?
+                    </Text>
                   </S.FindPassword>
-                  <S.LoginButton type="submit">로그인</S.LoginButton>
+                  <S.LoginButton color="brown">
+                    <Text size="20" weight="300" fontColor="white">
+                      로그인
+                    </Text>
+                  </S.LoginButton>
                 </S.FormsButtonsWrapper>
               </form>
             </S.RegistForms>

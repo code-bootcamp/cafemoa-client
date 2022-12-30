@@ -15,7 +15,7 @@ export default function MyReview() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="28" weight="500">
+            <Text size="36" weight="500">
               내가 남긴 리뷰를 모아보세요!
             </Text>
           </S.TitleWrapper>

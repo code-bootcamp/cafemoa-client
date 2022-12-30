@@ -30,7 +30,7 @@ export default function MyStamp() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="28" weight="500">
+            <Text size="36" weight="500">
               카페별 스탬프를 모아보세요!
             </Text>
           </S.TitleWrapper>
