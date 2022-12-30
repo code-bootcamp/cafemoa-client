@@ -13,9 +13,11 @@ export const CafeImage = styled.div`
 export const CafeContent = styled.div`
   width: 100%;
   opacity: 0;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin-left: 50px;
-//   background: red;
+  // background: red;
   transform: translateX(-45px)translateY(100px); 
   transition : all 0.8s;  
 `
@@ -28,7 +30,7 @@ export const SlideWrapper = styled.div`
     }
     ${CafeContent}{
         opacity: 1;
-        transform: translateX(-45px) translateY(40px)
+        transform: translateX(-45px) translateY(60px)
     }
   `}
 `
@@ -45,14 +47,16 @@ export const StyledSlider = styled(Slider)`
     opacity: 1;
     font-size: 30px;
   }
-  .slick-prev {
-    left: 0px;
-    z-index: 9;
-  }
-  .slick-next {
-    right: 0px;
-    z-index: 9;
-  }
+  // .slick-prev {
+  //   top: 40%;
+  //   left: 31%;
+  //   z-index: 9;
+  // }
+  // .slick-next {
+  //   top: 40%;
+  //   right: 32%;
+  //   z-index: 9;
+  // }
   .slick-slide{
     padding: 0 40px
   }
