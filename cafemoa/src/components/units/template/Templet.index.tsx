@@ -1,4 +1,4 @@
-import HeroWrap from "../../common/hero/HeroWrap.index";
+import HeroWrap from "../../commons/hero/HeroWrap.index";
 import * as S from "./Templet.styles";
 
 export default function Template() {

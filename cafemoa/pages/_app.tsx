@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import Layout from "../src/components/common/layout";
+import Layout from "../src/components/commons/layout";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
