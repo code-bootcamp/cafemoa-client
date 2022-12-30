@@ -39,37 +39,37 @@ export default function CafeList() {
                     <span>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
-                    <span style={{marginLeft: 20}}>
+                    <span style={{marginLeft: "2%"}}>
                         <Tag size="md">태그</Tag>
                     </span>
                 </S.TagsWrapper>
@@ -81,9 +81,9 @@ export default function CafeList() {
                                         <Like01 iconColor="red" fontColor="white" count={22} />
                                     </S.LikeWrapper>
                                     <Text size="24" weight="500">카페명</Text>
-                                    <div style={{marginTop: 24}}>
+                                    <div style={{marginTop: "8%"}}>
                                         <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
-                                        <div style={{marginTop: 16}}>
+                                        <div style={{marginTop: "7%"}}>
                                             <Tag size="sm">태그</Tag>
                                             <Tag size="sm">태그</Tag>  
                                             <Tag size="sm">태그</Tag>  
@@ -99,9 +99,9 @@ export default function CafeList() {
                                         <Like01 iconColor="red" fontColor="white" count={22} />
                                     </S.LikeWrapper>
                                     <Text size="24" weight="500">카페명</Text>
-                                    <div style={{marginTop: 24}}>
+                                    <div style={{marginTop: "8%"}}>
                                         <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
-                                        <div style={{marginTop: 16}}>
+                                        <div style={{marginTop: "7%"}}>
                                             <Tag size="sm">태그</Tag>
                                             <Tag size="sm">태그</Tag>  
                                             <Tag size="sm">태그</Tag>  
@@ -117,9 +117,9 @@ export default function CafeList() {
                                         <Like01 iconColor="red" fontColor="white" count={22} />
                                     </S.LikeWrapper>
                                     <Text size="24" weight="500">카페명</Text>
-                                    <div style={{marginTop: 24}}>
+                                    <div style={{marginTop: "8%"}}>
                                         <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
-                                        <div style={{marginTop: 16}}>
+                                        <div style={{marginTop: "7%"}}>
                                             <Tag size="sm">태그</Tag>
                                             <Tag size="sm">태그</Tag>  
                                             <Tag size="sm">태그</Tag>  
@@ -135,9 +135,9 @@ export default function CafeList() {
                                         <Like01 iconColor="red" fontColor="white" count={22} />
                                     </S.LikeWrapper>
                                     <Text size="24" weight="500">카페명</Text>
-                                    <div style={{marginTop: 24}}>
+                                    <div style={{marginTop: "8%"}}>
                                         <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
-                                        <div style={{marginTop: 16}}>
+                                        <div style={{marginTop: "7%"}}>
                                             <Tag size="sm">태그</Tag>
                                             <Tag size="sm">태그</Tag>  
                                             <Tag size="sm">태그</Tag>  
@@ -153,9 +153,9 @@ export default function CafeList() {
                                         <Like01 iconColor="red" fontColor="white" count={22} />
                                     </S.LikeWrapper>
                                     <Text size="24" weight="500">카페명</Text>
-                                    <div style={{marginTop: 24}}>
+                                    <div style={{marginTop: "8%"}}>
                                         <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
-                                        <div style={{marginTop: 16}}>
+                                        <div style={{marginTop: "7%"}}>
                                             <Tag size="sm">태그</Tag>
                                             <Tag size="sm">태그</Tag>  
                                             <Tag size="sm">태그</Tag>  
@@ -171,9 +171,9 @@ export default function CafeList() {
                                         <Like01 iconColor="red" fontColor="white" count={22} />
                                     </S.LikeWrapper>
                                     <Text size="24" weight="500">카페명</Text>
-                                    <div style={{marginTop: 24}}>
+                                    <div style={{marginTop: "8%"}}>
                                         <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
-                                        <div style={{marginTop: 16}}>
+                                        <div style={{marginTop: "7%"}}>
                                             <Tag size="sm">태그</Tag>
                                             <Tag size="sm">태그</Tag>  
                                             <Tag size="sm">태그</Tag>  
