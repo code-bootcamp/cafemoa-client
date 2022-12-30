@@ -70,7 +70,6 @@ export const ContainerWrap = styled.div`
   padding: 0 6.25%;
   max-width: 1640px;
   width: 100%;
-  overflow: hidden;
 `;
 
 export const BtnWrap = styled.div`
@@ -98,7 +97,7 @@ export const LargeBtn = styled.button`
     `}
 `;
 export const MediumBtn = styled.button`
-  padding: 24px;
+  padding: 16px 32px;
   border-width: ${(props) => (props.color === "brownLine" ? "3px" : "1px")};
   border-style: solid;
   border-color: #bdbdbd;

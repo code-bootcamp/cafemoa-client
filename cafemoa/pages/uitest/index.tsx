@@ -18,6 +18,8 @@ import Tag from "../../src/components/common/text/02/Text02.index";
 import Users01 from "../../src/components/common/user/01/Users01.index";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import MessageModal from "../../src/components/common/modal/message/MessageModal.index";
+import { useForm } from "react-hook-form";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -43,6 +45,8 @@ const SELECT_VALUES02 = [
   { label: "경상남도", value: "경남" },
   { label: "제주도", value: "제주도" },
 ];
+
+// 태그 정리된 값
 const TAG_VALUES = [
   "스터디",
   "힐링",
@@ -66,7 +70,14 @@ const TAG_VALUES = [
 
 export default function UiTest() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
+  const { ModalComponent, onClickIsModalOpen } = MessageModal();
+  const { register, handleSubmit } = useForm();
 
+  const onModalSubmit = (data) => {
+    console.log(data);
+  };
+
+  // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
     const tagArr = selectTag;
     const _tempTag = tagArr.filter((el) => el.includes(value));
@@ -82,6 +93,7 @@ export default function UiTest() {
     tagArr.push(value);
     setSelectTag([...tagArr]);
   };
+
   return (
     <UitestWrap>
       <div>
@@ -371,8 +383,51 @@ export default function UiTest() {
           <TestLargeBtn01>
             <Text size="28">테스트</Text>
           </TestLargeBtn01>
+          <br />
+          <br />
+          <Text size="54" weight="700">
+            Modal
+          </Text>
+          <br />
+          <TestMediumBtn01 color="brown" onClick={onClickIsModalOpen}>
+            <Text size="28" fontColor="white">
+              테스트
+            </Text>
+          </TestMediumBtn01>
         </div>
       </div>
+      <ModalComponent
+        title={`비밀번호 입력`}
+        text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
+        hasInput={true}
+        status="write"
+        buttons={
+          <>
+            {/* <TestMediumBtn01 color="lightBeige">
+              <Text size="24" fontColor="gray">
+                취소
+              </Text>
+            </TestMediumBtn01> */}
+            <TestMediumBtn01 color="beige">
+              <Text size="24">확인</Text>
+            </TestMediumBtn01>
+          </>
+        }
+      >
+        <ModalFromWrap onSubmit={handleSubmit(onModalSubmit)}>
+          <Input01
+            type="text"
+            textAlign="center"
+            placeHolder="가맹주 비밀번호 입력"
+            register={register("password")}
+          />
+        </ModalFromWrap>
+      </ModalComponent>
+      {/* <ModalComponent
+        title={`비밀번호 입력`}
+        text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
+        hasInput={true}
+      ></ModalComponent> */}
     </UitestWrap>
   );
 }
@@ -409,4 +464,8 @@ const InputIconWrap = styled.div`
   svg {
     font-size: 24px;
   }
+`;
+
+const ModalFromWrap = styled.form`
+  padding-top: 32px;
 `;
