@@ -5,6 +5,7 @@ import Card02 from "../../common/card/02/Card02.index";
 import Select01 from "../../common/select/01/Select01.index";
 import Tag from "../../common/text/02/Text02.index";
 import Text from "../../common/text/01/Text01.index";
+import Like01 from "../../common/like/01/Like01.index";
 
 export default function CafeList() {
     const SELECT_VALUES02 = [
@@ -23,9 +24,9 @@ export default function CafeList() {
     return(
         <>
             <HeroWrap
-            imageUrl="/images/temp/temp_hero01.png"
-            title="카페 모아"
-            subject="카페를 한눈에 보기 쉽게 모아!"
+                imageUrl="/images/temp/temp_hero01.png"
+                title="카페 모아"
+                subject="카페를 한눈에 보기 쉽게 모아!"
             ></HeroWrap>
             <S.SliderWrapper>
                 <SlickSlider />
@@ -72,40 +73,116 @@ export default function CafeList() {
                         <Tag size="md">태그</Tag>
                     </span>
                 </S.TagsWrapper>
-                <S.CardsWrapper>
-                    <S.UL> {/*map으로 코드 간소화 예정, UL,LI 이름바꾸기 */}
-                        <S.LI>
+                    <S.CardsWrapper> {/*map으로 코드 간소화 예정 */}
+                        <S.CardBox>
                             <Card02 imageUrl="/images/temp/temp01.png">
-                                <div>sss</div>
+                                <div>
+                                    <S.LikeWrapper>
+                                        <Like01 iconColor="red" fontColor="white" count={22} />
+                                    </S.LikeWrapper>
+                                    <Text size="24" weight="500">카페명</Text>
+                                    <div style={{marginTop: 24}}>
+                                        <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
+                                        <div style={{marginTop: 16}}>
+                                            <Tag size="sm">태그</Tag>
+                                            <Tag size="sm">태그</Tag>  
+                                            <Tag size="sm">태그</Tag>  
+                                        </div>
+                                    </div>
+                                </div>
                             </Card02>
-                        </S.LI>
-                        <S.LI>
+                        </S.CardBox>
+                        <S.CardBox>
                             <Card02 imageUrl="/images/temp/temp01.png">
-                                <div>sss</div>
+                                <div>
+                                    <S.LikeWrapper>
+                                        <Like01 iconColor="red" fontColor="white" count={22} />
+                                    </S.LikeWrapper>
+                                    <Text size="24" weight="500">카페명</Text>
+                                    <div style={{marginTop: 24}}>
+                                        <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
+                                        <div style={{marginTop: 16}}>
+                                            <Tag size="sm">태그</Tag>
+                                            <Tag size="sm">태그</Tag>  
+                                            <Tag size="sm">태그</Tag>  
+                                        </div>
+                                    </div>
+                                </div>
                             </Card02>
-                        </S.LI>
-                        <S.LI>
+                        </S.CardBox>
+                        <S.CardBox>
                             <Card02 imageUrl="/images/temp/temp01.png">
-                                <div>sss</div>
+                                <div>
+                                    <S.LikeWrapper>
+                                        <Like01 iconColor="red" fontColor="white" count={22} />
+                                    </S.LikeWrapper>
+                                    <Text size="24" weight="500">카페명</Text>
+                                    <div style={{marginTop: 24}}>
+                                        <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
+                                        <div style={{marginTop: 16}}>
+                                            <Tag size="sm">태그</Tag>
+                                            <Tag size="sm">태그</Tag>  
+                                            <Tag size="sm">태그</Tag>  
+                                        </div>
+                                    </div>
+                                </div>
                             </Card02>
-                        </S.LI>
-                        <S.LI>
+                        </S.CardBox>
+                        <S.CardBox>
                             <Card02 imageUrl="/images/temp/temp01.png">
-                                <div>sss</div>
+                                <div>
+                                    <S.LikeWrapper>
+                                        <Like01 iconColor="red" fontColor="white" count={22} />
+                                    </S.LikeWrapper>
+                                    <Text size="24" weight="500">카페명</Text>
+                                    <div style={{marginTop: 24}}>
+                                        <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
+                                        <div style={{marginTop: 16}}>
+                                            <Tag size="sm">태그</Tag>
+                                            <Tag size="sm">태그</Tag>  
+                                            <Tag size="sm">태그</Tag>  
+                                        </div>
+                                    </div>
+                                </div>
                             </Card02>
-                        </S.LI>
-                        <S.LI>
+                        </S.CardBox>
+                        <S.CardBox>
                             <Card02 imageUrl="/images/temp/temp01.png">
-                                <div>sss</div>
+                                <div>
+                                    <S.LikeWrapper>
+                                        <Like01 iconColor="red" fontColor="white" count={22} />
+                                    </S.LikeWrapper>
+                                    <Text size="24" weight="500">카페명</Text>
+                                    <div style={{marginTop: 24}}>
+                                        <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
+                                        <div style={{marginTop: 16}}>
+                                            <Tag size="sm">태그</Tag>
+                                            <Tag size="sm">태그</Tag>  
+                                            <Tag size="sm">태그</Tag>  
+                                        </div>
+                                    </div>
+                                </div>
                             </Card02>
-                        </S.LI>
-                        <S.LI>
+                        </S.CardBox>
+                        <S.CardBox>
                             <Card02 imageUrl="/images/temp/temp01.png">
-                                <div>sss</div>
+                                <div>
+                                    <S.LikeWrapper>
+                                        <Like01 iconColor="red" fontColor="white" count={22} />
+                                    </S.LikeWrapper>
+                                    <Text size="24" weight="500">카페명</Text>
+                                    <div style={{marginTop: 24}}>
+                                        <Text size="16" weight="300">카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개 카페소개</Text>
+                                        <div style={{marginTop: 16}}>
+                                            <Tag size="sm">태그</Tag>
+                                            <Tag size="sm">태그</Tag>  
+                                            <Tag size="sm">태그</Tag>  
+                                        </div>
+                                    </div>
+                                </div>
                             </Card02>
-                        </S.LI>
-                    </S.UL>
-                </S.CardsWrapper>                
+                        </S.CardBox>
+                    </S.CardsWrapper>
             </S.ContainerWrapper>
         </>
     )
