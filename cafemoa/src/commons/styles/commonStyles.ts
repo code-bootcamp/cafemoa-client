@@ -30,22 +30,18 @@ interface IButtonColorTypes {
   beige?: {
     bgColor: string;
     borderColor: string;
-    color: string;
   };
   lightBeige?: {
     bgColor: string;
     borderColor: string;
-    color: string;
   };
   brown?: {
     bgColor: string;
     borderColor: string;
-    color: string;
   };
   brownLine?: {
     bgColor: string;
     borderColor: string;
-    color: string;
   };
   [prop: string]: any;
 }
@@ -54,30 +50,27 @@ const BUTTON_COLOR: IButtonColorTypes = {
   beige: {
     bgColor: "#F5E9DF",
     borderColor: "#F5E9DF",
-    color: "#69473E",
   },
   lightBeige: {
-    bgColor: "#FFE004",
-    borderColor: "#FFE004",
-    color: "#000000",
+    bgColor: "#F4F0EB",
+    borderColor: "#F4F0EB",
   },
   brown: {
     bgColor: "#69473E",
     borderColor: "#69473E",
-    color: "#ffffff",
   },
   brownLine: {
-    bgColor: "#69473E",
-    borderColor: "transparent",
-    color: "#69473E",
+    bgColor: "transparent",
+    borderColor: "#69473E",
   },
 };
 
 export const ContainerWrap = styled.div`
   margin: 0 auto;
-  padding: 0 120px;
+  padding: 0 6.25%;
   max-width: 1640px;
   width: 100%;
+  overflow: hidden;
 `;
 
 export const BtnWrap = styled.div`
@@ -94,21 +87,19 @@ export const BtnWrap = styled.div`
 export const LargeBtn = styled.button`
   margin: 0 12px;
   padding: 32px;
-  border-width: 1px;
+  border-width: ${(props) => (props.color === "brownLine" ? "3px" : "1px")};
   border-style: solid;
   border-color: #bdbdbd;
-  font-size: 30px;
   ${(props) =>
     props.color !== undefined &&
     css`
       background-color: ${BUTTON_COLOR[props.color].bgColor};
-      color: ${BUTTON_COLOR[props.color].color};
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
 `;
 export const MediumBtn = styled.button`
-  padding: 25px 16px;
-  border-width: 1px;
+  padding: 24px;
+  border-width: ${(props) => (props.color === "brownLine" ? "3px" : "1px")};
   border-style: solid;
   border-color: #bdbdbd;
   transition: all 0.2s;
@@ -116,7 +107,6 @@ export const MediumBtn = styled.button`
     props.color !== undefined &&
     css`
       background-color: ${BUTTON_COLOR[props.color].bgColor};
-      color: ${BUTTON_COLOR[props.color].color};
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
 `;
@@ -152,4 +142,21 @@ export const EllipsisTwo = styled.div`
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+
+export const TagWrap = styled.div`
+  position: relative;
+  padding: 0 16px 18px;
+  max-width: max-content;
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  > * {
+    position: relative;
+    float: left;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+  }
 `;
