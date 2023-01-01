@@ -6,6 +6,13 @@ import {
 import Input01 from "../../../../commons/input/01/Input01.index";
 
 export const ContainerWrapper = styled(ContainerWrap)``;
+
+export const ModalButton = styled(MediumBtn)``;
+
+export const ModalFromWrap = styled.form`
+  padding-top: 32px;
+`;
+
 export const StampButton = styled(MediumBtn)`
   border-radius: 10px;
   background-color: #f3e6d8;
