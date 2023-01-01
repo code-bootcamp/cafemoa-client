@@ -6,6 +6,7 @@ import {
 } from "../../../../../commons/styles/commonStyles";
 
 export const ContainerWrapper = styled(ContainerWrap)``;
+export const ModalButton = styled(MediumBtn)``;
 
 export const CouponUseBtn = styled(MediumBtn)`
   padding-top: 8px;
@@ -140,4 +141,8 @@ export const TapWrap = styled(Tabs)`
   .ant-tabs-top > .ant-tabs-nav::before {
     border-bottom: none;
   }
+`;
+
+export const ModalFromWrap = styled.form`
+  padding-top: 32px;
 `;
