@@ -11,14 +11,6 @@ export const SelectWrap = styled.div`
   display: block;
   > div {
     position: relative;
-    .anticon {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform-origin: top;
-      transform: translateY(-50%);
-      transition: all 0.2s;
-    }
     > button {
       padding: 16px;
       display: block;
@@ -26,6 +18,15 @@ export const SelectWrap = styled.div`
       background-color: #f3e6d8;
       font-size: 20px;
       border-radius: 10px;
+
+      .anticon {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform-origin: top;
+        transform: translateY(-50%);
+        transition: all 0.2s;
+      }
     }
   }
   > ul {
@@ -59,7 +60,7 @@ export const SelectWrap = styled.div`
         visibility: visible;
       }
 
-      > div > .anticon {
+      > div > button > .anticon {
         transform: rotateX(180deg) translateY(-50%);
       }
     `}
