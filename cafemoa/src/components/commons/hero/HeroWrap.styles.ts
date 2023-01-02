@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 interface IHeroProps {
   imageUrl: string;
 }
-export const ImageWrap = styled.div`
+export const ImageWrap = styled.div<IHeroProps>`
   position: relative;
   width: 100%;
   height: 100%;
@@ -12,7 +12,7 @@ export const ImageWrap = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: ${(props: IHeroProps) =>
+  background-image: ${(props) =>
     props.imageUrl !== "" && `url(${props.imageUrl})`};
 
   ::after {

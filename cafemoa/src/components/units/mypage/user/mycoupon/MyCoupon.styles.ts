@@ -4,8 +4,11 @@ import {
   ContainerWrap,
   MediumBtn,
 } from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 export const ModalButton = styled(MediumBtn)``;
 
 export const CouponUseBtn = styled(MediumBtn)`
@@ -16,7 +19,6 @@ export const CouponUseBtn = styled(MediumBtn)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 100px;
 `;
 
 export const TitleWrapper = styled.div`
@@ -33,11 +35,16 @@ export const ValidWrapper = styled.ul`
 export const ValidBox = styled.li`
   display: block;
   width: 50%;
-  padding: 0 30px 70px;
+  padding: 0 30px 72px;
+  ${mq.MobileL} {
+    width: 100%;
+    padding: 0 30px 32px;
+  }
 `;
 
 export const BoxWrapper = styled.div`
   position: relative;
+  height: 100%;
   background-color: #f3e6d8;
   padding-right: 90px;
   border-radius: 10px;
@@ -51,20 +58,29 @@ export const UsedCouponBoxWrapper = styled.div`
   ::before {
     content: "";
     width: 100%;
+    height: 100%;
     position: absolute;
-    top: 56px;
-    left: 393px;
+    top: 0;
+    left: 0;
     background-image: url("/images/mycoupon/mycoupon_used.png");
     background-repeat: no-repeat;
-    height: 100%;
     background-color: transparent;
+    background-position: right 140px center;
     z-index: 99;
+  }
+  ${mq.MobileS} {
+    padding-right: 0;
+    padding-bottom: 64px;
+    ::before {
+      background-position: center;
+    }
   }
 `;
 
 export const CouponDetail = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   background-color: #ffffff;
   border: 1px solid black;
   border-radius: 10px;
@@ -113,6 +129,13 @@ export const CouponImg = styled.img`
   position: absolute;
   right: 28px;
   top: 62px;
+  ${mq.MobileS} {
+    right: initial;
+    top: initial;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg) scale(0.6);
+    bottom: -64px;
+  }
 `;
 
 export const CoffeeImgWrap = styled.div`

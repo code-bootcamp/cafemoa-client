@@ -8,6 +8,7 @@ import Text from "../../commons/text/01/Text01.index";
 import Like01 from "../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import { TAG_VALUES } from "../../../commons/default/default";
 
 const SELECT_VALUES02 = [
   { label: "서울시", value: "서울" },
@@ -22,27 +23,6 @@ const SELECT_VALUES02 = [
   { label: "제주도", value: "제주도" },
 ];
 
-// 태그 정리된 값
-const TAG_VALUES = [
-  "스터디",
-  "힐링",
-  "사진찍기좋은카페",
-  "뷰 좋은 카페",
-  "데이트하기 좋은",
-  "애견동반카페",
-  "키즈존/노키즈존 카페",
-  "갬성",
-  "커피가맛있는 카페",
-  "로스팅 카페",
-  "베이커리 카페",
-  "디저트가 맛있는 카페",
-  "테라스가있는 ",
-  "창고형 카페",
-  "가성비좋은 카페",
-  "조명이 있는 카페",
-  "모임 하기좋은",
-  "브런치",
-];
 export default function CafeList() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
   // 태그 클릭 버튼
@@ -79,7 +59,7 @@ export default function CafeList() {
         <S.TagsWrap style={{ marginBottom: "40px" }}>
           {TAG_VALUES.map((el) => (
             <button key={uuidv4()} onClick={onClickTag(el)}>
-              <Tag size="lg" isActive={selectTag.includes(el)}>
+              <Tag size="md" isActive={selectTag.includes(el)}>
                 {el}
               </Tag>
             </button>

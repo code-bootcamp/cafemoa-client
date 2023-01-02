@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import InfiniteScroll from "react-infinite-scroller";
 import { ContainerWrap, TagWrap } from "../../../commons/styles/commonStyles";
+import * as mq from "../../../commons/styles/mediaQuery";
 
 // --------------------------------------------------카페 상세페이지 퍼블리싱
 export const ContainerWrapper = styled(ContainerWrap)`
@@ -17,6 +18,12 @@ export const CardBox = styled.li`
   display: block;
   width: 25%;
   padding: 20px;
+  ${mq.MobileL} {
+    width: 50%;
+  }
+  ${mq.MobileM} {
+    width: 100%;
+  }
 `;
 export const FilterWrapper = styled.div`
   width: 10%;
@@ -33,9 +40,9 @@ export const SliderWrapper = styled.div`
   padding-top: 100px;
 `;
 export const LikeWrapper = styled.div`
-  width: 100%;
-  transform: translateX(248px) translateY(-200px);
-  margin-bottom: -40px;
+  position: absolute;
+  right: 16px;
+  top: 6px;
 `;
 
 // -------------------------------------------------카페 상세페이지 기능부분

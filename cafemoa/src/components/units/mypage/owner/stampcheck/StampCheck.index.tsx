@@ -38,7 +38,7 @@ export default function StampCheck() {
                 </Text>
               </div>
               <S.ConfirmBtn color="brown">
-                <Text size="24" fontColor="white">
+                <Text size="16" fontColor="white">
                   확인
                 </Text>
               </S.ConfirmBtn>

@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import * as S from "./Text01.styles";
 
 interface ITextProps {
@@ -14,7 +15,7 @@ interface ITextProps {
     | "brown"
     | "deepBrown"
     | "red";
-  children: string | [string, JSX.Element];
+  children: ReactNode;
 }
 export default function Text(props: ITextProps) {
   return (

@@ -25,15 +25,9 @@ export default function SlickSlider() {
             <img src="/images/cafelist/Cafe1.jpeg" />
           </S.CafeImage>
           <S.CafeContent>
-            <span style={{ marginLeft: 0 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
@@ -48,15 +42,9 @@ export default function SlickSlider() {
             <img src="/images/cafelist/Cafe2.jpeg" />
           </S.CafeImage>
           <S.CafeContent>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
@@ -71,15 +59,9 @@ export default function SlickSlider() {
             <img src="/images/cafelist/Cafe3.jpeg" />
           </S.CafeImage>
           <S.CafeContent>
-            <span style={{ marginLeft: 0 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
@@ -94,15 +76,10 @@ export default function SlickSlider() {
             <img src="/images/cafelist/Cafe1.jpeg" />
           </S.CafeImage>
           <S.CafeContent>
-            <span style={{ marginLeft: 0 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
+
+            <Tag size="md">태그</Tag>
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
@@ -117,15 +94,10 @@ export default function SlickSlider() {
             <img src="/images/cafelist/Cafe1.jpeg" />
           </S.CafeImage>
           <S.CafeContent>
-            <span style={{ marginLeft: 0 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
+
+            <Tag size="md">태그</Tag>
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
@@ -140,15 +112,10 @@ export default function SlickSlider() {
             <img src="/images/cafelist/Cafe1.jpeg" />
           </S.CafeImage>
           <S.CafeContent>
-            <span style={{ marginLeft: 0 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
-            <span style={{ marginLeft: 30 }}>
-              <Tag size="md">태그</Tag>
-            </span>
+            <Tag size="md">태그</Tag>
+            <Tag size="md">태그</Tag>
+
+            <Tag size="md">태그</Tag>
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>

@@ -30,11 +30,6 @@ export default function MyReview() {
                           카페모아 구로디지털점
                         </Text>
                       </S.CafeName>
-                      <div>
-                        <Text size="14" weight="300" fontColor="gray">
-                          2022.12.27
-                        </Text>
-                      </div>
                     </S.ReviewInfoHead>
                     <S.LikeCount>
                       <Like01 iconColor="black" count={22} />
@@ -45,9 +40,15 @@ export default function MyReview() {
                       댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
                     </Text>
                   </S.Review>
+                  <S.DateWrap>
+                    <Text size="14" weight="300" fontColor="gray">
+                      2022.12.27
+                    </Text>
+                  </S.DateWrap>
                 </div>
               </Box01>
             </S.ReviewContentWrapper>
+
             <S.ReviewContentWrapper>
               <Box01>
                 <div>
@@ -58,11 +59,6 @@ export default function MyReview() {
                           카페모아 구로디지털점
                         </Text>
                       </S.CafeName>
-                      <div>
-                        <Text size="14" weight="300" fontColor="gray">
-                          2022.12.27
-                        </Text>
-                      </div>
                     </S.ReviewInfoHead>
                     <S.LikeCount>
                       <Like01 iconColor="black" count={22} />
@@ -73,9 +69,15 @@ export default function MyReview() {
                       댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
                     </Text>
                   </S.Review>
+                  <S.DateWrap>
+                    <Text size="14" weight="300" fontColor="gray">
+                      2022.12.27
+                    </Text>
+                  </S.DateWrap>
                 </div>
               </Box01>
             </S.ReviewContentWrapper>
+
             <S.ReviewContentWrapper>
               <Box01>
                 <div>
@@ -86,11 +88,6 @@ export default function MyReview() {
                           카페모아 구로디지털점
                         </Text>
                       </S.CafeName>
-                      <div>
-                        <Text size="14" weight="300" fontColor="gray">
-                          2022.12.27
-                        </Text>
-                      </div>
                     </S.ReviewInfoHead>
                     <S.LikeCount>
                       <Like01 iconColor="black" count={22} />
@@ -101,6 +98,11 @@ export default function MyReview() {
                       댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
                     </Text>
                   </S.Review>
+                  <S.DateWrap>
+                    <Text size="14" weight="300" fontColor="gray">
+                      2022.12.27
+                    </Text>
+                  </S.DateWrap>
                 </div>
               </Box01>
             </S.ReviewContentWrapper>

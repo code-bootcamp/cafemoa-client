@@ -4,9 +4,30 @@ import Tag from "../../commons/text/02/Text02.index";
 import * as S from "./Review.styles";
 import Users01 from "../../commons/user/01/Users01.index";
 import Text from "../../commons/text/01/Text01.index";
-import Masonry from "react-masonry-component";
+// import Masonry from "react-masonry-component";
+import { v4 as uuidv4 } from "uuid";
+import { TAG_VALUES } from "../../../commons/default/default";
+import { useState } from "react";
 
 export default function ReviewList() {
+  const [selectTag, setSelectTag] = useState<string[]>([]);
+  // 태그 클릭 버튼
+  const onClickTag = (value: string) => () => {
+    const tagArr = selectTag;
+    const _tempTag = tagArr.filter((el) => el.includes(value));
+    if (_tempTag.length === 1) {
+      const idx = tagArr.indexOf(value);
+      tagArr.splice(idx, 1);
+      setSelectTag([...tagArr]);
+      return;
+    }
+    if (tagArr.length >= 3) {
+      tagArr.shift();
+    }
+    tagArr.push(value);
+    setSelectTag([...tagArr]);
+  };
+
   return (
     <>
       <HeroWrap
@@ -16,18 +37,17 @@ export default function ReviewList() {
       ></HeroWrap>
       <S.ContainerWrapper>
         <S.Container>
-          <S.TagWrapper>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
+          <S.TagWrapper style={{ marginBottom: "40px" }}>
+            {TAG_VALUES.map((el) => (
+              <button key={uuidv4()} onClick={onClickTag(el)}>
+                <Tag size="md" isActive={selectTag.includes(el)}>
+                  {el}
+                </Tag>
+              </button>
+            ))}
           </S.TagWrapper>
-          <S.UL>
-            <S.LI>
+          <S.ReviewListsWrap>
+            <S.ReviewList>
               <Card01 imageUrl="/images/temp/temp01.png">
                 <div>
                   <Users01
@@ -60,8 +80,8 @@ export default function ReviewList() {
                   </S.ReviewTag>
                 </div>
               </Card01>
-            </S.LI>
-            <S.LI>
+            </S.ReviewList>
+            <S.ReviewList>
               <Card01 imageUrl="/images/temp/temp01.png">
                 <div>
                   <Users01
@@ -104,8 +124,8 @@ export default function ReviewList() {
                   </S.ReviewTag>
                 </div>
               </Card01>
-            </S.LI>
-            <S.LI>
+            </S.ReviewList>
+            <S.ReviewList>
               <Card01 imageUrl="/images/temp/temp01.png">
                 <div>
                   <Users01
@@ -138,8 +158,8 @@ export default function ReviewList() {
                   </S.ReviewTag>
                 </div>
               </Card01>
-            </S.LI>
-            <S.LI>
+            </S.ReviewList>
+            <S.ReviewList>
               <Card01 imageUrl="/images/temp/temp01.png">
                 <div>
                   <Users01
@@ -182,8 +202,8 @@ export default function ReviewList() {
                   </S.ReviewTag>
                 </div>
               </Card01>
-            </S.LI>
-          </S.UL>
+            </S.ReviewList>
+          </S.ReviewListsWrap>
         </S.Container>
       </S.ContainerWrapper>
     </>

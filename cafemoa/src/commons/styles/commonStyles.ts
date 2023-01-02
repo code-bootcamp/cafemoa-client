@@ -1,31 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-
-interface IDefaultColorTypes {
-  black?: string;
-  white?: string;
-  gray?: string;
-  beige?: string;
-  deepBeige?: string;
-  lightBeige?: string;
-  green?: string;
-  brown?: string;
-  deepBrown?: string;
-  [prop: string]: any;
-}
-
-export const DEFAULT_COLOR: IDefaultColorTypes = {
-  black: "#000",
-  white: "#ffffff",
-  gray: "#8B8B8B",
-  beige: "#F5E9DF",
-  deepBeige: "#F3E6D8",
-  lightBeige: "#F6F5F1",
-  green: "#5A7B2F",
-  brown: "#69473E",
-  deepBrown: "#81564B",
-  red: "#ff1717",
-};
+import * as mq from "./mediaQuery";
 
 interface IButtonColorTypes {
   beige?: {
@@ -71,7 +46,7 @@ export const ContainerWrap = styled.div`
   padding: 0 6.25%;
   max-width: 1640px;
   width: 100%;
-  @media screen and (max-width: 1024px) {
+  ${mq.MobileL} {
     padding-top: 56px;
   }
 `;
@@ -85,6 +60,13 @@ export const BtnWrap = styled.div`
   margin-right: -12px;
   padding-left: 12px;
   padding-right: 12px;
+  ${mq.MobileL} {
+    margin-top: 36px;
+    margin-left: -6px;
+    margin-right: -6px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
 `;
 
 export const LargeBtn = styled.button`
@@ -112,6 +94,9 @@ export const MediumBtn = styled.button`
       background-color: ${BUTTON_COLOR[props.color].bgColor};
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
+  ${mq.MobileL} {
+    padding: 16px;
+  }
 `;
 
 export const SmallBtn = styled.button`

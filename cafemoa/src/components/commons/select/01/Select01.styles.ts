@@ -6,7 +6,7 @@ interface ISelectStylesProps {
   isValue: boolean;
 }
 
-export const SelectWrap = styled.div`
+export const SelectWrap = styled.div<ISelectStylesProps>`
   position: relative;
   display: block;
   > div {
@@ -53,7 +53,7 @@ export const SelectWrap = styled.div`
       background-color: #f3e6d8;
     }
   }
-  ${(props: ISelectStylesProps) =>
+  ${(props) =>
     props.isOpen &&
     css`
       > ul {
@@ -65,7 +65,7 @@ export const SelectWrap = styled.div`
         transform: rotateX(180deg) translateY(-50%);
       }
     `}
-  ${(props: ISelectStylesProps) =>
+  ${(props) =>
     !props.isValue &&
     css`
       > div > button {

@@ -1,11 +1,16 @@
-import { css } from "@emotion/react";
 import { Modal } from "antd";
 import { BtnWrap } from "../../../../commons/styles/commonStyles";
 import styled from "@emotion/styled";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 export const ModalWrap = styled(Modal)`
   .ant-modal-body {
     padding: 64px 80px;
+  }
+  ${mq.MobileL} {
+    .ant-modal-body {
+      padding: 32px 3%;
+    }
   }
 `;
 export const ModalContentsWrap = styled.div`
