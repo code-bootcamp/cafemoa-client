@@ -37,14 +37,14 @@ export const Search = styled.button`
   color: #8b8b8b;
 `;
 
-export const UL = styled.ul`
+export const StampContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   margin: 0 -30px;
 `;
 
-export const LI = styled.li`
+export const StampWrapper = styled.li`
   display: block;
   width: 50%;
   padding: 0 30px 70px;
@@ -76,7 +76,7 @@ export const IconWrap = styled.div`
   width: 70%;
 `;
 
-export const StampWrapper = styled.div`
+export const Stamp = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
