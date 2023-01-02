@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
   MediumBtn,
   SmallBtn,
 } from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
@@ -43,12 +45,19 @@ export const StampContainer = styled.ul`
   flex-wrap: wrap;
   padding: 0;
   margin: 0 -30px;
+
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
 export const StampWrapper = styled.li`
   display: block;
-  width: 50%;
   padding: 0 30px 70px;
+  width: 50%;
+  ${mq.MobileM} {
+    width: 100%;
+  }
 `;
 
 export const StampInfoWrapper = styled.div`
@@ -63,29 +72,35 @@ export const StampInfoWrapper = styled.div`
 export const StampInfo = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  width: 30%;
+  width: calc(100% - 30px);
+  > span + span {
+    margin-left: 8px;
+  }
 `;
 
 export const IconWrap = styled.div`
   font-size: 30px;
-  color: gray;
+  color: ${DEFAULT_COLOR.gray};
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 70%;
+  width: 30px;
 `;
 
 export const Stamp = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 9%;
 `;
 
 export const IconWrap2 = styled.div`
+  width: 20%;
+  text-align: center;
   font-size: 70px;
-  color: lightgray;
-  margin-right: 7%;
+  color: ${DEFAULT_COLOR.lightGray};
+  ${mq.MobileL} {
+    font-size: 54px;
+  }
+  /* margin-right: 7%; */
 `;

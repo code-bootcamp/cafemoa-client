@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
@@ -37,15 +38,17 @@ export const CafeName = styled.div`
   background-color: #f3e6d8;
   padding: 17px 24px;
   margin-right: 32px;
+  word-break: keep-all;
+  ${mq.MobileM} {
+    margin-right: 16px;
+  }
 `;
 
-export const ReviewDate = styled.div`
-  margin-right: 753px;
+export const DateWrap = styled.div`
+  padding-top: 8px;
+  text-align: right;
 `;
-
-export const LikeCount = styled.div`
-  padding-right: 1.6%;
-`;
+export const LikeCount = styled.div``;
 
 export const Review = styled.div`
   padding-left: 24px;

@@ -24,8 +24,15 @@ export const NotificationWrapper = styled.div`
   background: #f3e6d8;
   padding: 16px 24px;
   margin-bottom: 40px;
+  > div {
+    width: calc(100% - 72px);
+  }
+  > button {
+    width: 72px;
+  }
 `;
 export const ConfirmBtn = styled(MediumBtn)`
   border-radius: 15px;
   padding: 10px;
+  text-align: center;
 `;

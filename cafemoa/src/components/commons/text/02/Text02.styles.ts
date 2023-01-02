@@ -31,7 +31,7 @@ const TAG_SIZE: ITagSizeProps = {
   },
 };
 
-export const Word = styled.span`
+export const Word = styled.span<ITagStyleProps>`
   display: inline-block;
   border-radius: 50px;
   background-color: #f3e6d8;
@@ -42,13 +42,13 @@ export const Word = styled.span`
   &:last-of-type {
     margin-right: 0;
   }
-  ${(props: ITagStyleProps) =>
+  ${(props) =>
     css`
       font-size: ${TAG_SIZE[props.size].fontSize};
       padding: ${TAG_SIZE[props.size].padding};
       margin-right: ${TAG_SIZE[props.size].marginRight};
     `}
-  ${(props: ITagStyleProps) =>
+  ${(props) =>
     props.isActive !== undefined &&
     props.isActive &&
     css`

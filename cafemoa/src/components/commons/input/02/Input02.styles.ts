@@ -5,7 +5,7 @@ interface IInput02StylesProps {
   isVaild?: boolean;
 }
 
-export const InputWrap = styled.div`
+export const InputWrap = styled.div<IInput02StylesProps>`
   position: relative;
   font-size: 16px;
 
@@ -38,7 +38,7 @@ export const InputWrap = styled.div`
     color: #69473e;
   }
 
-  ${(props: IInput02StylesProps) =>
+  ${(props) =>
     props.isVaild === true &&
     css`
       & > input {

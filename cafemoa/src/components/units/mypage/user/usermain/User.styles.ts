@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
@@ -8,6 +9,9 @@ export const ContainerWrapper = styled(ContainerWrap)`
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  ${mq.MobileL} {
+    flex-direction: column;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
@@ -16,14 +20,25 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  > div {
+  > * {
     padding-bottom: 15px;
+  }
+  ${mq.MobileL} {
+    width: 100%;
+    padding-right: 0;
   }
 `;
 
 export const UserName = styled.div`
   // padding-bottom: 10px;
+`;
+export const SettingIcon = styled.div`
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  > svg {
+    font-size: 32px;
+  }
 `;
 
 export const UserMainArea = styled.div`
@@ -32,6 +47,10 @@ export const UserMainArea = styled.div`
 
 export const MenuWrapper = styled.div`
   width: calc(100% - 300px);
+
+  ${mq.MobileL} {
+    width: 100%;
+  }
 `;
 
 export const BoxContainer = styled.ul`
@@ -46,6 +65,10 @@ export const BoxWrapper = styled.li`
   width: 50%;
   height: 100%;
   padding: 8px;
+
+  ${mq.MobileM} {
+    width: 100%;
+  }
 `;
 
 export const MypageButton = styled.div`
