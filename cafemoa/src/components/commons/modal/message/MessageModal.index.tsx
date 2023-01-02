@@ -1,12 +1,14 @@
 import { useState } from "react";
 import * as S from "./MessageModal.styles";
 import Text from "../../text/01/Text01.index";
+import { BiEdit } from "react-icons/bi";
+import { FiCheckCircle } from "react-icons/fi";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 interface IErrorModalProps {
   title: string;
   text: string;
   status: "write" | "success" | "warning";
-  hasInput?: boolean;
   children?: JSX.Element;
   buttons?: JSX.Element;
 }
@@ -32,6 +34,11 @@ export default function MessageModal() {
         >
           <S.ModalContentsWrap>
             <S.ModalTitle>
+              <S.IconWrap>
+                {props.status === "write" && <BiEdit />}
+                {props.status === "success" && <FiCheckCircle />}
+                {props.status === "warning" && <RiErrorWarningLine />}
+              </S.IconWrap>
               <Text size="48">{props.title}</Text>
             </S.ModalTitle>
             <S.ModalContents>

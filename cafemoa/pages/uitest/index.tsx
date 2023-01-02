@@ -396,18 +396,17 @@ export default function UiTest() {
           </TestMediumBtn01>
         </div>
       </div>
-      <ModalComponent
+      {/* <ModalComponent
         title={`비밀번호 입력`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        hasInput={true}
         status="write"
         buttons={
           <>
-            {/* <TestMediumBtn01 color="lightBeige">
+            <TestMediumBtn01 color="lightBeige">
               <Text size="24" fontColor="gray">
                 취소
               </Text>
-            </TestMediumBtn01> */}
+            </TestMediumBtn01>
             <TestMediumBtn01 color="beige">
               <Text size="24">확인</Text>
             </TestMediumBtn01>
@@ -422,12 +421,19 @@ export default function UiTest() {
             register={register("password")}
           />
         </ModalFromWrap>
-      </ModalComponent>
-      {/* <ModalComponent
+      </ModalComponent> */}
+      <ModalComponent
         title={`비밀번호 입력`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        hasInput={true}
-      ></ModalComponent> */}
+        status="success"
+        buttons={
+          <>
+            <TestMediumBtn01 color="beige">
+              <Text size="24">확인</Text>
+            </TestMediumBtn01>
+          </>
+        }
+      ></ModalComponent>
     </UitestWrap>
   );
 }

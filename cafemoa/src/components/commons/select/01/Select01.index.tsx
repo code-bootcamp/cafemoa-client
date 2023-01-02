@@ -30,8 +30,8 @@ export default function Select01(props: ISelectProps) {
       <div>
         <button onClick={onClickOpen}>
           {value !== undefined ? value : props.defaultText ?? "선택"}
+          <DownOutlined />
         </button>
-        <DownOutlined />
       </div>
       <ul>
         {props.selectValue?.map((el) => (
