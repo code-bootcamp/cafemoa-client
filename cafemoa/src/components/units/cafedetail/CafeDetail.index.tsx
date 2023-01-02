@@ -5,10 +5,11 @@ import Tag from "../../commons/text/02/Text02.index";
 import { Image } from "antd";
 import * as S from "./CafeDetail.styles";
 import { useState } from "react";
-import CafeDetailPhoto from "./CafeDetail.isSelectFalse";
-import CafeDetailReview from "./CafeDetail.isSelectTrue";
+import CafeDetailPhoto from "./CafeDetail.Photos";
+import CafeDetailReview from "./CafeDetail.Reviews";
 
 export default function CafeDetail() {
+  const [isSelect, setIsSelect] = useState(true);
   return (
     <>
       <HeroWrap
@@ -198,21 +199,21 @@ export default function CafeDetail() {
           </Text>
         </div>
         <S.ColorLine></S.ColorLine>
-        <S.ComponentsTabs
-          defaultActiveKey="1"
-          items={[
-            {
-              label: `사진모아`,
-              key: "1",
-              children: <CafeDetailPhoto />,
-            },
-            {
-              label: `리뷰모아`,
-              key: "2",
-              children: <CafeDetailReview />,
-            },
-          ]}
-        />
+          <S.ComponentsTabs
+            defaultActiveKey="1"
+            items={[
+              {
+                label: `사진모아`,
+                key: "1",
+                children: <CafeDetailPhoto />,
+              },
+              {
+                label: `리뷰모아`,
+                key: "2",
+                children: <CafeDetailReview />,
+              },
+            ]}
+          />
       </S.DetailContainer>
     </>
   );
