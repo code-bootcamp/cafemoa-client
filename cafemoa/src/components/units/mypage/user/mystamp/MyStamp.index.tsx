@@ -49,8 +49,8 @@ export default function MyStamp() {
             </S.SubArea>
             <S.Search>검색</S.Search>
           </S.AreaWrapper>
-          <S.UL>
-            <S.LI>
+          <S.StampContainer>
+            <S.StampWrapper>
               <Box01>
                 <div>
                   <S.StampInfoWrapper>
@@ -66,17 +66,17 @@ export default function MyStamp() {
                       <TbTrash />
                     </S.IconWrap>
                   </S.StampInfoWrapper>
-                  <S.StampWrapper>
+                  <S.Stamp>
                     {new Array(10).fill(1).map((el, index) => (
                       <S.IconWrap2 key={index}>
                         <CgCoffee />
                       </S.IconWrap2>
                     ))}
-                  </S.StampWrapper>
+                  </S.Stamp>
                 </div>
               </Box01>
-            </S.LI>
-            <S.LI>
+            </S.StampWrapper>
+            <S.StampWrapper>
               <Box01>
                 <div>
                   <S.StampInfoWrapper>
@@ -92,17 +92,17 @@ export default function MyStamp() {
                       <TbTrash />
                     </S.IconWrap>
                   </S.StampInfoWrapper>
-                  <S.StampWrapper>
+                  <S.Stamp>
                     {new Array(10).fill(1).map((el, index) => (
                       <S.IconWrap2 key={index}>
                         <CgCoffee />
                       </S.IconWrap2>
                     ))}
-                  </S.StampWrapper>
+                  </S.Stamp>
                 </div>
               </Box01>
-            </S.LI>
-            <S.LI>
+            </S.StampWrapper>
+            <S.StampWrapper>
               <Box01>
                 <div>
                   <S.StampInfoWrapper>
@@ -118,17 +118,17 @@ export default function MyStamp() {
                       <TbTrash />
                     </S.IconWrap>
                   </S.StampInfoWrapper>
-                  <S.StampWrapper>
+                  <S.Stamp>
                     {new Array(10).fill(1).map((el, index) => (
                       <S.IconWrap2 key={index}>
                         <CgCoffee />
                       </S.IconWrap2>
                     ))}
-                  </S.StampWrapper>
+                  </S.Stamp>
                 </div>
               </Box01>
-            </S.LI>
-            <S.LI>
+            </S.StampWrapper>
+            <S.StampWrapper>
               <Box01>
                 <div>
                   <S.StampInfoWrapper>
@@ -144,17 +144,17 @@ export default function MyStamp() {
                       <TbTrash />
                     </S.IconWrap>
                   </S.StampInfoWrapper>
-                  <S.StampWrapper>
+                  <S.Stamp>
                     {new Array(10).fill(1).map((el, index) => (
                       <S.IconWrap2 key={index}>
                         <CgCoffee />
                       </S.IconWrap2>
                     ))}
-                  </S.StampWrapper>
+                  </S.Stamp>
                 </div>
               </Box01>
-            </S.LI>
-          </S.UL>
+            </S.StampWrapper>
+          </S.StampContainer>
         </S.Container>
       </S.ContainerWrapper>
     </>
