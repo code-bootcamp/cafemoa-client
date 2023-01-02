@@ -1,7 +1,6 @@
-import { css } from "@emotion/react"
 import styled from "@emotion/styled"
-import { Tabs } from "antd"
-import { ContainerWrap } from "../../../commons/styles/commonStyles"
+import { Modal, Tabs } from "antd"
+import { ContainerWrap, MediumBtn } from "../../../commons/styles/commonStyles"
 
 export const DetailContainer = styled(ContainerWrap)``
 export const CafeImageWrapper = styled.div`
@@ -95,20 +94,8 @@ export const TimeTableWrapper = styled.div`
     display: flex;
     flex-direction: row;
 `
-export const SelectBox = styled.div`
-    margin-top: 40px;
-    ${(props) => props.isSelect && css`
-    ${SelectBoxUnderBar}{
-        transform: translateX(115px)
-    }
-  `}
-`
-export const SelectBoxUnderBar = styled.div`
-    width: 6%;
-    border-bottom: 5px solid #BB8044;
-    margin-left: 5px;
-    transition : all 0.5s; 
-`
+// ------------------------사진모아 부분 -------------------
+
 export const OwnerImageContainer = styled.div`
     width: 100%;
     display:flex;
@@ -121,13 +108,8 @@ export const OwnerImageWrapper = styled.div`
     width: 24%;
     display: inline-block;
 `
-export const SelectBoxPhoto = styled.div`
-    display: inline-block;
-`
-export const SelectBoxReview = styled.div`
-    display: inline-block;
-    margin-left: 24px;
-`
+// ------------------------리뷰모아 부분-------------------
+
 export const ReviewContainer = styled.div`
     width: 100%;
     margin-top: 32px;
@@ -135,16 +117,45 @@ export const ReviewContainer = styled.div`
 export const ReviewWrapper = styled.div`
     width: 40%;
     display: inline-block;
+    // padding: 0% 4% % 0%;
     margin: 0% 10% 5% 0%;
+    // background: blue;
+`
+export const ReviewHeader = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     // background: red;
+
+`
+export const BtnWrapper = styled.div`
+    width:20%;
+    display: flex;
+    // background: yellow;
+`
+export const EditBtn = styled.span`
+    width: 100%;
+    text-align: center;
+    // background: yellow;
+`
+export const DeleteBtn = styled.span`
+    width: 100%;
+    text-align: center;
+    // background: green;
 `
 export const ReviewContents = styled.div`
     width: 100%;
     margin-left: 96px;
 `
+export const ReplyBtn = styled.div`
+    // background: red;
+    width: 15%;
+    margin-left: 450px;
+    padding-left: 8px;
+`
 export const ReviewColorLine = styled.div`
-    width: 90%;
-    border-bottom: 3px solid #BB8044;
+    width: 79%;
+    border-bottom: 10px solid #F3E6D8;
     margin: 32px 0px 16px 96px;
 `
 export const ReviewImageContainer = styled.div`
@@ -186,5 +197,80 @@ export const ComponentsTabs = styled(Tabs)`
     //     position: absolute;
     // }
 `
+export const ReviewBtnWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    // background: red;
+`
+export const ReviewWriteBtn = styled(MediumBtn)`
+    // display: flex;
+    // flex-direction: row;
+    width: 15%;
+    padding: 1%;
+    border-radius: 20px;
+`
+export const BtnInnerWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`
+// ============================점주 답글부분=====================
+export const ReplyWrapper = styled.div`
+    width: 100%;
+    padding-left: 88px;
+`
 
+// ----------------------------모달 부분----------------------
 
+export const ModalWrapper = styled(Modal)`
+    // width: 1500px;
+    .ant-modal-content{
+        
+    }
+    .ant-modal-centered .ant-modal{
+
+    }
+    .ant-modal-body{
+        // width: fit-content
+    }
+    .ant-modal-body{
+
+    }
+`
+export const ModalReviewWrapper = styled.div`
+    width: 100%;
+    padding: 0% 10%;
+`
+export const ModalReviewTitle = styled.div`
+    padding: 15% 0% 10% 0%;
+`
+export const ModalReviewContents = styled.div`
+`
+export const ModalReviewBtnContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    // background: red;
+    // padding: 20%;
+`
+export const ReviewSubmitBtn = styled(MediumBtn)`
+    border-radius: 20px;
+`
+export const ReviewCancelBtn = styled(MediumBtn)`
+    border-radius: 20px;
+     margin-right: 3%;
+`
+export const ModalReviewFromWrap = styled.form`
+`
+export const ModalUserWrapper = styled.div`
+    padding-top: 10%;
+`
+export const ModalInputWrapper = styled.div`
+    padding-top: 5%;
+    padding-bottom: 20%;
+`
+export const ModalBtnWrapper = styled.div`
+`
