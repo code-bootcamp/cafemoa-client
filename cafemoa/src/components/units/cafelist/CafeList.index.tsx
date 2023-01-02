@@ -6,20 +6,61 @@ import Select01 from "../../commons/select/01/Select01.index";
 import Tag from "../../commons/text/02/Text02.index";
 import Text from "../../commons/text/01/Text01.index";
 import Like01 from "../../commons/like/01/Like01.index";
+import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
+const SELECT_VALUES02 = [
+  { label: "서울시", value: "서울" },
+  { label: "경기도", value: "경기" },
+  { label: "강원도", value: "강원" },
+  { label: "충청북도", value: "충북" },
+  { label: "충청남도", value: "충남" },
+  { label: "전라북도", value: "전북" },
+  { label: "전라남도", value: "전남" },
+  { label: "경상북도", value: "경북" },
+  { label: "경상남도", value: "경남" },
+  { label: "제주도", value: "제주도" },
+];
+
+// 태그 정리된 값
+const TAG_VALUES = [
+  "스터디",
+  "힐링",
+  "사진찍기좋은카페",
+  "뷰 좋은 카페",
+  "데이트하기 좋은",
+  "애견동반카페",
+  "키즈존/노키즈존 카페",
+  "갬성",
+  "커피가맛있는 카페",
+  "로스팅 카페",
+  "베이커리 카페",
+  "디저트가 맛있는 카페",
+  "테라스가있는 ",
+  "창고형 카페",
+  "가성비좋은 카페",
+  "조명이 있는 카페",
+  "모임 하기좋은",
+  "브런치",
+];
 export default function CafeList() {
-  const SELECT_VALUES02 = [
-    { label: "서울시", value: "서울" },
-    { label: "경기도", value: "경기" },
-    { label: "강원도", value: "강원" },
-    { label: "충청북도", value: "충북" },
-    { label: "충청남도", value: "충남" },
-    { label: "전라북도", value: "전북" },
-    { label: "전라남도", value: "전남" },
-    { label: "경상북도", value: "경북" },
-    { label: "경상남도", value: "경남" },
-    { label: "제주도", value: "제주도" },
-  ];
+  const [selectTag, setSelectTag] = useState<string[]>([]);
+  // 태그 클릭 버튼
+  const onClickTag = (value: string) => () => {
+    const tagArr = selectTag;
+    const _tempTag = tagArr.filter((el) => el.includes(value));
+    if (_tempTag.length === 1) {
+      const idx = tagArr.indexOf(value);
+      tagArr.splice(idx, 1);
+      setSelectTag([...tagArr]);
+      return;
+    }
+    if (tagArr.length >= 3) {
+      tagArr.shift();
+    }
+    tagArr.push(value);
+    setSelectTag([...tagArr]);
+  };
 
   return (
     <>
@@ -35,49 +76,17 @@ export default function CafeList() {
         <S.FilterWrapper>
           <Select01 defaultText="지역" selectValue={SELECT_VALUES02}></Select01>
         </S.FilterWrapper>
-        <S.TagsWrapper>
-          {" "}
-          {/*map으로 코드 간소화 예정*/}
-          <span>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-          <span style={{ marginLeft: "2%" }}>
-            <Tag size="md">태그</Tag>
-          </span>
-        </S.TagsWrapper>
+        <S.TagsWrap style={{ marginBottom: "40px" }}>
+          {TAG_VALUES.map((el) => (
+            <button key={uuidv4()} onClick={onClickTag(el)}>
+              <Tag size="lg" isActive={selectTag.includes(el)}>
+                {el}
+              </Tag>
+            </button>
+          ))}
+        </S.TagsWrap>
         <S.CardsWrapper>
-          {" "}
-          {/*map으로 코드 간소화 예정 */}
+          {/* map으로 코드 간소화 예정 */}
           <S.CardBox>
             <Card02 imageUrl="/images/temp/temp01.png">
               <div>

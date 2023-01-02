@@ -1,41 +1,42 @@
 import styled from "@emotion/styled";
-import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
+import {
+  ContainerWrap,
+  MediumBtn,
+  SmallBtn,
+} from "../../../../../commons/styles/commonStyles";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
 `;
 
 export const TitleWrapper = styled.div`
-  padding-bottom: 113px;
+  padding-bottom: 56px;
 `;
 
 export const AreaWrapper = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
   width: 100%;
-  padding-bottom: 113px;
+  padding-bottom: 40px;
 `;
 
 export const MainArea = styled.div`
-  width: 15%;
+  min-width: 150px;
   margin-right: 2%;
 `;
 
 export const SubArea = styled.div`
-  width: 15%;
+  min-width: 150px;
   margin-right: 2%;
 `;
 
-export const Search = styled.button`
-  border-radius: 10px;
-  background-color: #f3e6d8;
-  padding: 17px 22px;
-  color: #8b8b8b;
-`;
+export const Search = styled(SmallBtn)``;
 
 export const StampContainer = styled.ul`
   display: flex;

@@ -8,7 +8,9 @@ export const ModalWrap = styled(Modal)`
     padding: 64px 80px;
   }
 `;
-export const ModalContentsWrap = styled.div``;
+export const ModalContentsWrap = styled.div`
+  padding: 3% 32px;
+`;
 export const IconWrap = styled.div`
   position: absolute;
   left: 50%;

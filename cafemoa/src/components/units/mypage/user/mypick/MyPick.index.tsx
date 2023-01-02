@@ -14,7 +14,7 @@ export default function MyPick() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="36" weight="500">
+            <Text size="32" weight="500">
               내가 찜한 카페를 모아보세요!
             </Text>
           </S.TitleWrapper>

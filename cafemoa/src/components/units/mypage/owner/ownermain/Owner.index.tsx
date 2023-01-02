@@ -1,3 +1,4 @@
+import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./Owner.styles";
@@ -11,42 +12,62 @@ export default function OwnerMyPage() {
       ></HeroWrap>
       <S.MyPageContainer>
         <S.OwnerMenuContainer>
-          <S.Box>
-            <S.EditCafeInfo>
-              <div style={{ paddingBottom: "5%" }}>
-                <Text size="54" weight="700">
-                  카페 정보 수정
-                </Text>
+          <div>
+            <Box01 styles={{ height: "100%" }}>
+              <div>
+                <S.TitleWrap>
+                  <Text size="32" weight="700">
+                    카페 정보 수정
+                  </Text>
+                </S.TitleWrap>
+                <S.ImageWrap>
+                  <img src="/images/owner/Owner02.png" />
+                </S.ImageWrap>
               </div>
-              <img src="/images/owner/Owner02.png" />
-            </S.EditCafeInfo>
-            <S.EditMyInfo>
-              <div style={{ paddingBottom: "5%" }}>
-                <Text size="54" weight="700">
-                  내 개인정보 수정
-                </Text>
+            </Box01>
+          </div>
+          <div>
+            <Box01 styles={{ height: "100%" }}>
+              <div>
+                <S.TitleWrap>
+                  <Text size="32" weight="700">
+                    내 개인정보 수정
+                  </Text>
+                </S.TitleWrap>
+                <S.ImageWrap>
+                  <img src="/images/owner/Owner03.png" />
+                </S.ImageWrap>
               </div>
-              <img src="/images/owner/Owner03.png" />
-            </S.EditMyInfo>
-          </S.Box>
-          <S.Box>
-            <S.CheckUsers>
-              <div style={{ paddingBottom: "5%" }}>
-                <Text size="54" weight="700">
-                  적립 회원 점검
-                </Text>
+            </Box01>
+          </div>
+          <div>
+            <Box01 styles={{ height: "100%" }}>
+              <div>
+                <S.TitleWrap>
+                  <Text size="32" weight="700">
+                    적립 회원 점검
+                  </Text>
+                </S.TitleWrap>
+                <S.ImageWrap>
+                  <img src="/images/owner/Owner04.png" />
+                </S.ImageWrap>
               </div>
-              <img src="/images/owner/Owner04.png" />
-            </S.CheckUsers>
-            <S.StampPage>
-              <div style={{ paddingBottom: "5%" }}>
-                <Text size="54" weight="700">
-                  적립 페이지
-                </Text>
+            </Box01>
+          </div>
+          <div>
+            <Box01 styles={{ height: "100%" }}>
+              <div>
+                <S.TitleWrap>
+                  <Text size="32" weight="700">
+                    적립 페이지
+                  </Text>
+                </S.TitleWrap>
+                <S.ImageWrap>
+                  <img src="/images/owner/Owner05.png" />
+                </S.ImageWrap>
               </div>
-              <img src="/images/owner/Owner05.png" />
-            </S.StampPage>
-          </S.Box>
+            </Box01>
+          </div>
         </S.OwnerMenuContainer>
       </S.MyPageContainer>
     </>

@@ -5,7 +5,9 @@ import {
 } from "../../../../../commons/styles/commonStyles";
 import Input01 from "../../../../commons/input/01/Input01.index";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 
 export const ModalButton = styled(MediumBtn)``;
 
@@ -21,11 +23,11 @@ export const StampButton = styled(MediumBtn)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
 `;
 
 export const TitleWrapper = styled.div`
-  padding-bottom: 113px;
+  text-align: center;
+  padding-bottom: 56px;
 `;
 
 export const StampWrapper = styled.div`
@@ -33,7 +35,6 @@ export const StampWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-bottom: 100px;
 `;
 
 export const Label = styled.div`
@@ -56,4 +57,7 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   padding-top: 40px;
+`;
+export const SelectWrap = styled.div`
+  max-width: 100px;
 `;

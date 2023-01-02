@@ -36,12 +36,12 @@ export default function ReviewList() {
                     size="sm"
                   />
                   <S.CafeName>
-                    <Text size="28" weight="500">
+                    <Text size="24" weight="500">
                       카페모아
                     </Text>
                   </S.CafeName>
                   <S.ReviewContent>
-                    <Text size="20" weight="300">
+                    <Text size="16" weight="300">
                       정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
                       가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
                       먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
@@ -53,7 +53,7 @@ export default function ReviewList() {
                       <Tag size="sm">태그</Tag>
                     </div>
                     <S.ReviewDate>
-                      <Text size="20" weight="300" fontColor="gray">
+                      <Text size="14" weight="300" fontColor="gray">
                         3일 전
                       </Text>
                     </S.ReviewDate>
@@ -70,12 +70,12 @@ export default function ReviewList() {
                     size="sm"
                   />
                   <S.CafeName>
-                    <Text size="28" weight="500">
+                    <Text size="24" weight="500">
                       카페모아
                     </Text>
                   </S.CafeName>
                   <S.ReviewContent>
-                    <Text size="20" weight="300">
+                    <Text size="16" weight="300">
                       일산에 갈 때마다 방문하는 카페인데 사장님도 너무
                       친절하시고 커피 맛도 최고에요! 일산에 방문하는 모든 사람들
                       이 카페 꼭 가보세요
@@ -97,7 +97,7 @@ export default function ReviewList() {
                       <Tag size="sm">태그</Tag>
                     </div>
                     <S.ReviewDate>
-                      <Text size="20" weight="300" fontColor="gray">
+                      <Text size="14" weight="300" fontColor="gray">
                         6일 전
                       </Text>
                     </S.ReviewDate>
@@ -114,12 +114,12 @@ export default function ReviewList() {
                     size="sm"
                   />
                   <S.CafeName>
-                    <Text size="28" weight="500">
+                    <Text size="24" weight="500">
                       카페모아
                     </Text>
                   </S.CafeName>
                   <S.ReviewContent>
-                    <Text size="20" weight="300">
+                    <Text size="16" weight="300">
                       정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
                       가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
                       먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
@@ -131,7 +131,7 @@ export default function ReviewList() {
                       <Tag size="sm">태그</Tag>
                     </div>
                     <S.ReviewDate>
-                      <Text size="20" weight="300" fontColor="gray">
+                      <Text size="14" weight="300" fontColor="gray">
                         3일 전
                       </Text>
                     </S.ReviewDate>
@@ -148,12 +148,12 @@ export default function ReviewList() {
                     size="sm"
                   />
                   <S.CafeName>
-                    <Text size="28" weight="500">
+                    <Text size="24" weight="500">
                       카페모아
                     </Text>
                   </S.CafeName>
                   <S.ReviewContent>
-                    <Text size="20" weight="300">
+                    <Text size="16" weight="300">
                       일산에 갈 때마다 방문하는 카페인데 사장님도 너무
                       친절하시고 커피 맛도 최고에요! 일산에 방문하는 모든 사람들
                       이 카페 꼭 가보세요
@@ -175,7 +175,7 @@ export default function ReviewList() {
                       <Tag size="sm">태그</Tag>
                     </div>
                     <S.ReviewDate>
-                      <Text size="20" weight="300" fontColor="gray">
+                      <Text size="14" weight="300" fontColor="gray">
                         6일 전
                       </Text>
                     </S.ReviewDate>

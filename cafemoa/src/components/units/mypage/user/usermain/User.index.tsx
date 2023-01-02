@@ -37,7 +37,7 @@ export default function UserMain() {
               <img src="/images/user/User.png" />
             </div>
             <S.UserName>
-              <Text size="36" weight="700">
+              <Text size="32" weight="700">
                 닉네임
               </Text>
             </S.UserName>
@@ -51,13 +51,15 @@ export default function UserMain() {
           <S.MenuWrapper>
             <S.BoxContainer>
               <S.BoxWrapper>
-                <Box01>
+                <Box01 styles={{ height: "100%" }}>
                   <S.MypageButton onClick={onClickMystamp}>
-                    <Text size="36" weight="700">
-                      스탬프를 확인
-                    </Text>
+                    <div>
+                      <Text size="28" weight="700">
+                        스탬프를 확인
+                      </Text>
+                    </div>
                     <S.MenuDetail>
-                      <Text size="24" weight="300">
+                      <Text size="18" weight="300">
                         스탬프가 적립 된 곳이 5개 있습니다.
                       </Text>
                     </S.MenuDetail>
@@ -65,46 +67,44 @@ export default function UserMain() {
                 </Box01>
               </S.BoxWrapper>
               <S.BoxWrapper>
-                <Box01>
+                <Box01 styles={{ height: "100%" }}>
                   <S.MypageButton onClick={onClickMycoupon}>
-                    <Text size="36" weight="700">
-                      쿠폰을 모아보세요!
-                    </Text>
+                    <div>
+                      <Text size="28" weight="700">
+                        쿠폰을 모아보세요!
+                      </Text>
+                    </div>
                     <S.MenuDetail>
                       <div>
-                        <S.CouponLabel>
-                          <Text size="24" weight="500" fontColor="deepBrown">
-                            사용가능 쿠폰
-                          </Text>
-                        </S.CouponLabel>
-                        <S.CouponCount>
-                          <Text size="24" weight="300" fontColor="deepBrown">
-                            4
-                          </Text>
-                        </S.CouponCount>
-                        <S.CouponLabel>
-                          <Text size="24" weight="500" fontColor="deepBrown">
-                            사용완료 쿠폰
-                          </Text>
-                        </S.CouponLabel>
-                        <div>
-                          <Text size="24" weight="300" fontColor="deepBrown">
-                            6
-                          </Text>
-                        </div>
+                        <Text size="18" weight="500" fontColor="deepBrown">
+                          사용가능 쿠폰 &nbsp;
+                        </Text>
+                        <Text size="18" weight="300" fontColor="deepBrown">
+                          4
+                        </Text>
+                      </div>
+                      <div>
+                        <Text size="18" weight="500" fontColor="deepBrown">
+                          사용완료 쿠폰 &nbsp;
+                        </Text>
+                        <Text size="18" weight="300" fontColor="deepBrown">
+                          6
+                        </Text>
                       </div>
                     </S.MenuDetail>
                   </S.MypageButton>
                 </Box01>
               </S.BoxWrapper>
               <S.BoxWrapper>
-                <Box01>
+                <Box01 styles={{ height: "100%" }}>
                   <S.MypageButton onClick={onClickMyPick}>
-                    <Text size="36" weight="700">
-                      나의 찜 리스트
-                    </Text>
+                    <div>
+                      <Text size="28" weight="700">
+                        나의 찜 리스트
+                      </Text>
+                    </div>
                     <S.MenuDetail>
-                      <Text size="24" weight="300">
+                      <Text size="18" weight="300">
                         찜한 가게가 5개 있습니다.
                       </Text>
                     </S.MenuDetail>
@@ -112,13 +112,15 @@ export default function UserMain() {
                 </Box01>
               </S.BoxWrapper>
               <S.BoxWrapper>
-                <Box01>
+                <Box01 styles={{ height: "100%" }}>
                   <S.MypageButton onClick={onClickMyreview}>
-                    <Text size="36" weight="700">
-                      나의 리뷰 확인
-                    </Text>
+                    <div>
+                      <Text size="28" weight="700">
+                        나의 리뷰 확인
+                      </Text>
+                    </div>
                     <S.MenuDetail>
-                      <Text size="24" weight="300">
+                      <Text size="18" weight="300">
                         리뷰작성 글이 5개 있습니다.
                       </Text>
                     </S.MenuDetail>

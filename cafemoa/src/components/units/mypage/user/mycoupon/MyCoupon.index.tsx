@@ -15,7 +15,7 @@ export default function MyCoupon() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="36" weight="500">
+            <Text size="32" weight="500">
               쿠폰을 모아보세요!
             </Text>
           </S.TitleWrapper>
