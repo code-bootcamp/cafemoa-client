@@ -1,16 +1,17 @@
 import styled from "@emotion/styled";
 import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
 `;
 
 export const TitleWrapper = styled.div`
-  padding-bottom: 113px;
+  padding-bottom: 56px;
 `;
 
 export const StampContainer = styled.ul`

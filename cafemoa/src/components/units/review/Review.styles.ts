@@ -6,12 +6,12 @@ export const ContainerWrapper = styled(ContainerWrap)``;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
+  padding-top: 100px;
 `;
 
 export const TagWrapper = styled.div`
   position: relative;
-  padding-bottom: 157px;
+  padding-bottom: 56px;
 `;
 
 export const UL = styled.ul`

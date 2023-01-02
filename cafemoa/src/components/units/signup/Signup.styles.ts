@@ -15,10 +15,10 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
 export const ContainerInner = styled.form`
-  padding-top: 100px;
+  padding: 100px 6.25%;
   max-width: 920px;
   margin: 0 auto;
-  box-shadow: 0 0 10px 10px;
+  box-shadow: 0 0 20px 0;
 `;
 export const TitleWrap = styled.div`
   position: relative;

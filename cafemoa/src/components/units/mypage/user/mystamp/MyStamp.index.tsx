@@ -30,7 +30,7 @@ export default function MyStamp() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="36" weight="500">
+            <Text size="32" weight="500">
               카페별 스탬프를 모아보세요!
             </Text>
           </S.TitleWrapper>
@@ -39,6 +39,7 @@ export default function MyStamp() {
               <Select01
                 defaultText="지역"
                 selectValue={SELECT_VALUES02}
+                // styles={{  }}
               ></Select01>
             </S.MainArea>
             <S.SubArea>
@@ -47,7 +48,9 @@ export default function MyStamp() {
                 selectValue={SELECT_VALUES02}
               ></Select01>
             </S.SubArea>
-            <S.Search>검색</S.Search>
+            <S.Search color="beige">
+              <Text size="14">검색</Text>
+            </S.Search>
           </S.AreaWrapper>
           <S.StampContainer>
             <S.StampWrapper>

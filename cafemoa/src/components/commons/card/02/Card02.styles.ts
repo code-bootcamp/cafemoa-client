@@ -13,7 +13,10 @@ export const CardImgWrap = styled.div`
   }
 `;
 export const CardInfoWrap = styled.div`
-  padding: 32px 16px 16px;
+  padding: 24px 24px 48px;
+  @media screen and (max-width: 1024px) {
+    padding: 16px 16px 24px;
+  }
 `;
 export const CardWrapper = styled.div`
   width: 100%;

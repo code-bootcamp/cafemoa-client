@@ -39,10 +39,10 @@ export default function MessageModal() {
                 {props.status === "success" && <FiCheckCircle />}
                 {props.status === "warning" && <RiErrorWarningLine />}
               </S.IconWrap>
-              <Text size="48">{props.title}</Text>
+              <Text size="32">{props.title}</Text>
             </S.ModalTitle>
             <S.ModalContents>
-              <Text size="24">{props.text}</Text>
+              <Text size="20">{props.text}</Text>
             </S.ModalContents>
             <div>{props.children}</div>
             <S.ModalBtnWrap>{props.buttons}</S.ModalBtnWrap>

@@ -15,13 +15,13 @@ export default function MyReview() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="36" weight="500">
+            <Text size="32" weight="500">
               내가 남긴 리뷰를 모아보세요!
             </Text>
           </S.TitleWrapper>
           <div>
             <S.ReviewContentWrapper>
-              <Box01 styles={{ padding: "50px 20px" }}>
+              <Box01>
                 <div>
                   <S.ReviewInfoWrapper>
                     <S.ReviewInfoHead>
@@ -31,7 +31,7 @@ export default function MyReview() {
                         </Text>
                       </S.CafeName>
                       <div>
-                        <Text size="18" weight="300" fontColor="gray">
+                        <Text size="14" weight="300" fontColor="gray">
                           2022.12.27
                         </Text>
                       </div>
@@ -41,7 +41,7 @@ export default function MyReview() {
                     </S.LikeCount>
                   </S.ReviewInfoWrapper>
                   <S.Review>
-                    <Text size="24" weight="300">
+                    <Text size="18" weight="300">
                       댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
                     </Text>
                   </S.Review>
@@ -49,7 +49,7 @@ export default function MyReview() {
               </Box01>
             </S.ReviewContentWrapper>
             <S.ReviewContentWrapper>
-              <Box01 styles={{ padding: "50px 20px" }}>
+              <Box01>
                 <div>
                   <S.ReviewInfoWrapper>
                     <S.ReviewInfoHead>
@@ -59,7 +59,7 @@ export default function MyReview() {
                         </Text>
                       </S.CafeName>
                       <div>
-                        <Text size="18" weight="300" fontColor="gray">
+                        <Text size="14" weight="300" fontColor="gray">
                           2022.12.27
                         </Text>
                       </div>
@@ -69,7 +69,7 @@ export default function MyReview() {
                     </S.LikeCount>
                   </S.ReviewInfoWrapper>
                   <S.Review>
-                    <Text size="24" weight="300">
+                    <Text size="18" weight="300">
                       댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
                     </Text>
                   </S.Review>
@@ -77,7 +77,7 @@ export default function MyReview() {
               </Box01>
             </S.ReviewContentWrapper>
             <S.ReviewContentWrapper>
-              <Box01 styles={{ padding: "50px 20px" }}>
+              <Box01>
                 <div>
                   <S.ReviewInfoWrapper>
                     <S.ReviewInfoHead>
@@ -87,7 +87,7 @@ export default function MyReview() {
                         </Text>
                       </S.CafeName>
                       <div>
-                        <Text size="18" weight="300" fontColor="gray">
+                        <Text size="14" weight="300" fontColor="gray">
                           2022.12.27
                         </Text>
                       </div>
@@ -97,36 +97,8 @@ export default function MyReview() {
                     </S.LikeCount>
                   </S.ReviewInfoWrapper>
                   <S.Review>
-                    <Text size="24" weight="300">
+                    <Text size="18" weight="300">
                       댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
-                    </Text>
-                  </S.Review>
-                </div>
-              </Box01>
-            </S.ReviewContentWrapper>
-            <S.ReviewContentWrapper>
-              <Box01 styles={{ padding: "50px 20px" }}>
-                <div>
-                  <S.ReviewInfoWrapper>
-                    <S.ReviewInfoHead>
-                      <S.CafeName>
-                        <Text size="20" weight="500" fontColor="brown">
-                          카페모아 구로디지털점
-                        </Text>
-                      </S.CafeName>
-                      <div>
-                        <Text size="18" weight="300" fontColor="gray">
-                          2022.12.27
-                        </Text>
-                      </div>
-                    </S.ReviewInfoHead>
-                    <S.LikeCount>
-                      <Like01 iconColor="black" count={22} />
-                    </S.LikeCount>
-                  </S.ReviewInfoWrapper>
-                  <S.Review>
-                    <Text size="24" weight="300">
-                      리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우리뷰리뷰리뷰리뷰우우우우우우우우우우우우
                     </Text>
                   </S.Review>
                 </div>

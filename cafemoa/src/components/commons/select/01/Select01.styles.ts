@@ -12,11 +12,12 @@ export const SelectWrap = styled.div`
   > div {
     position: relative;
     > button {
-      padding: 16px;
+      padding: 8px 16px;
       display: block;
       width: 100%;
+      /* height: 100%; */
       background-color: #f3e6d8;
-      font-size: 20px;
+      font-size: 16px;
       border-radius: 10px;
 
       .anticon {

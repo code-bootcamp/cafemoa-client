@@ -7,7 +7,7 @@ interface IInput02StylesProps {
 
 export const InputWrap = styled.div`
   position: relative;
-  font-size: 20px;
+  font-size: 16px;
 
   & > input {
     padding: 14px 0;
@@ -33,7 +33,7 @@ export const InputWrap = styled.div`
     left: -6px;
     transform: translateY(-50%);
     padding: 0;
-    font-size: 16px;
+    font-size: 12px;
     background-color: #ffffff;
     color: #69473e;
   }
@@ -49,7 +49,7 @@ export const InputWrap = styled.div`
         left: -6px;
         transform: translateY(-50%);
         padding: 0;
-        font-size: 16px;
+        font-size: 12px;
         background-color: #ffffff;
         color: #69473e;
       }

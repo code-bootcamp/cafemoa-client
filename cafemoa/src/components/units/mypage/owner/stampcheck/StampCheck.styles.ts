@@ -4,11 +4,12 @@ import {
   MediumBtn,
 } from "../../../../../commons/styles/commonStyles";
 
-export const StampCheckContainer = styled(ContainerWrap)``;
+export const StampCheckContainer = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 export const Title = styled.div`
   width: 100%;
-  padding-top: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 56px;
 `;
 export const NotificationContainer = styled.div`
   width: 100%;
@@ -21,11 +22,10 @@ export const NotificationWrapper = styled.div`
   justify-content: space-between;
   border-radius: 10px;
   background: #f3e6d8;
-  padding: 2% 0% 2% 2%;
-  margin-bottom: 3%;
+  padding: 16px 24px;
+  margin-bottom: 40px;
 `;
 export const ConfirmBtn = styled(MediumBtn)`
   border-radius: 15px;
   padding: 10px;
-  margin-right: 4%;
 `;

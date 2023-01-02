@@ -24,6 +24,7 @@ export const DEFAULT_COLOR: IDefaultColorTypes = {
   green: "#5A7B2F",
   brown: "#69473E",
   deepBrown: "#81564B",
+  red: "#ff1717",
 };
 
 interface IButtonColorTypes {
@@ -70,6 +71,9 @@ export const ContainerWrap = styled.div`
   padding: 0 6.25%;
   max-width: 1640px;
   width: 100%;
+  @media screen and (max-width: 1024px) {
+    padding-top: 56px;
+  }
 `;
 
 export const BtnWrap = styled.div`
@@ -110,20 +114,19 @@ export const MediumBtn = styled.button`
     `}
 `;
 
-// export const SmallBtn = styled.button`
-//   padding: 14px 16px;
-//   border-width: 1px;
-//   border-style: solid;
-//   border-color: #bdbdbd;
-//   transition: all 0.2s;
-//   ${(props) =>
-//     props.color !== undefined &&
-//     css`
-//       background-color: ${BUTTON_COLOR[props.color].bgColor};
-//       color: ${BUTTON_COLOR[props.color].color};
-//       border-color: ${BUTTON_COLOR[props.color].borderColor};
-//     `}
-// `;
+export const SmallBtn = styled.button`
+  padding: 8px 16px;
+  border-width: ${(props) => (props.color === "brownLine" ? "3px" : "1px")};
+  border-style: solid;
+  border-color: #bdbdbd;
+  transition: all 0.2s;
+  ${(props) =>
+    props.color !== undefined &&
+    css`
+      background-color: ${BUTTON_COLOR[props.color].bgColor};
+      border-color: ${BUTTON_COLOR[props.color].borderColor};
+    `}
+`;
 
 export const EllipsisOne = styled.div`
   overflow: hidden;
@@ -144,7 +147,9 @@ export const EllipsisTwo = styled.div`
 `;
 
 export const TagWrap = styled.div`
-  position: relative;
+  position: sticky;
+  left: 0;
+  top: 100px;
   padding: 0 16px 18px;
   max-width: max-content;
   display: flex;

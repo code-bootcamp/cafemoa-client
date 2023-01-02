@@ -11,9 +11,13 @@ interface ISelectValues {
 interface ISelectProps {
   selectValue: ISelectValues[];
   defaultText?: string;
+  styles?: {
+    [key: string]: string | number;
+  };
 }
 
 export default function Select01(props: ISelectProps) {
+  const _styles = { ...props.styles };
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState<string | number>();
   const onClickOpen = () => {
@@ -26,7 +30,7 @@ export default function Select01(props: ISelectProps) {
     };
 
   return (
-    <S.SelectWrap isOpen={isOpen} isValue={value !== undefined}>
+    <S.SelectWrap style={_styles} isOpen={isOpen} isValue={value !== undefined}>
       <div>
         <button onClick={onClickOpen}>
           {value !== undefined ? value : props.defaultText ?? "선택"}

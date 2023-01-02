@@ -55,7 +55,7 @@ export default function CafeSearchModal() {
         >
           <S.ModalContentsWrap>
             <S.ModalTitle>
-              <Text size="20">{props.title}</Text>
+              <Text size="24">{props.title}</Text>
             </S.ModalTitle>
 
             <div
@@ -96,20 +96,20 @@ export default function CafeSearchModal() {
             <S.ModalContents>
               <S.ContentWrapper>
                 <S.SearchCafeInfo>
-                  <Text size="24" weight="500">
+                  <Text size="20" weight="500">
                     카페모아 구로디지털점
                   </Text>
-                  <Text size="18" weight="300" fontColor="gray">
+                  <Text size="14" weight="300" fontColor="gray">
                     0.2km
                   </Text>
                 </S.SearchCafeInfo>
                 <div>
-                  <Text size="18" weight="500" fontColor="gray">
+                  <Text size="16" weight="500" fontColor="gray">
                     서울특별시 구로구 디지털로34길 43 코오롱싸이언스밸리1차 1층
                   </Text>
                 </div>
                 <div>
-                  <Text size="16" weight="300" fontColor="gray">
+                  <Text size="14" weight="300" fontColor="gray">
                     02-111-2222
                   </Text>
                 </div>

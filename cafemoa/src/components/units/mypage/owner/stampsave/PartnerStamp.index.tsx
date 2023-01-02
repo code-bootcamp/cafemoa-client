@@ -68,7 +68,7 @@ export default function PartnerStamp() {
       <S.ContainerWrapper>
         <S.Container>
           <S.TitleWrapper>
-            <Text size="36" weight="500">
+            <Text size="32" weight="500">
               스탬프를 적립해보세요!
             </Text>
           </S.TitleWrapper>
@@ -98,9 +98,9 @@ export default function PartnerStamp() {
                     적립 스탬프 갯수
                   </Text>
                 </S.Label>
-                <div style={{ width: "30%" }}>
+                <S.SelectWrap>
                   <Select01 selectValue={SELECT_VALUES01} />
-                </div>
+                </S.SelectWrap>
                 <S.ButtonWrapper>
                   <S.StampButton
                     color="beige"

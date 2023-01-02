@@ -33,7 +33,7 @@ export default function Login() {
           <S.OptionsContainer>
             <S.OptionsRegister>
               <div>
-                <Text size="28" weight="300" fontColor="deepBrown">
+                <Text size="32" weight="500" fontColor="deepBrown">
                   카페모아 <br />
                   파트너이신가요?
                 </Text>
@@ -58,7 +58,7 @@ export default function Login() {
 
             <S.OptionsRegister>
               <div>
-                <Text size="28" weight="300" fontColor="deepBrown">
+                <Text size="32" weight="500" fontColor="deepBrown">
                   카페모아 <br />
                   고객이신가요?
                 </Text>

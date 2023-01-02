@@ -1,19 +1,7 @@
 import * as S from "./Text01.styles";
 
 interface ITextProps {
-  size?:
-    | "16"
-    | "18"
-    | "20"
-    | "24"
-    | "28"
-    | "32"
-    | "36"
-    | "42"
-    | "48"
-    | "54"
-    | "72"
-    | "80";
+  size?: "14" | "16" | "18" | "20" | "24" | "28" | "32" | "40" | "54";
   weight?: "300" | "500" | "700";
   fontColor?:
     | "black"
@@ -24,7 +12,8 @@ interface ITextProps {
     | "lightBeige"
     | "green"
     | "brown"
-    | "deepBrown";
+    | "deepBrown"
+    | "red";
   children: string | [string, JSX.Element];
 }
 export default function Text(props: ITextProps) {

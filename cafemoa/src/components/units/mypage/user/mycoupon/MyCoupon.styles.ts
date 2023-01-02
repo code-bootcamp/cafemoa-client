@@ -16,11 +16,11 @@ export const CouponUseBtn = styled(MediumBtn)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
+  padding-top: 100px;
 `;
 
 export const TitleWrapper = styled.div`
-  padding-bottom: 113px;
+  padding-bottom: 32px;
 `;
 
 export const ValidWrapper = styled.ul`
@@ -121,13 +121,22 @@ export const CoffeeImgWrap = styled.div`
 `;
 
 export const TapWrap = styled(Tabs)`
+  .ant-tabs-nav::before {
+    display: none;
+  }
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: #81564b;
-    font-size: 20px;
+    transform: scale(1);
   }
 
-  .ant-tabs-tab {
-    color: gray;
+  .ant-tabs-tab + .ant-tabs-tab {
+    margin-left: 16px;
+  }
+
+  .ant-tabs-tab-btn {
+    font-size: 20px;
+    color: #8b8b8b;
+    transform: scale(0.8);
   }
 
   .ant-tabs-ink-bar {
@@ -135,7 +144,7 @@ export const TapWrap = styled(Tabs)`
   }
 
   .ant-tabs-content {
-    padding-top: 100px;
+    padding-top: 56px;
   }
 
   .ant-tabs-top > .ant-tabs-nav::before {

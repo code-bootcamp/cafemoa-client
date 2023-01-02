@@ -1,16 +1,17 @@
 import styled from "@emotion/styled";
 import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
 `;
 
 export const TitleWrapper = styled.div`
-  padding-bottom: 113px;
+  padding-bottom: 56px;
 `;
 
 export const ReviewContentWrapper = styled.div`
@@ -34,7 +35,7 @@ export const ReviewInfoHead = styled.div`
 export const CafeName = styled.div`
   border-radius: 20px;
   background-color: #f3e6d8;
-  padding: 17px 22px;
+  padding: 17px 24px;
   margin-right: 32px;
 `;
 
@@ -47,6 +48,6 @@ export const LikeCount = styled.div`
 `;
 
 export const Review = styled.div`
-  padding-left: 22px;
-  padding-top: 22px;
+  padding-left: 24px;
+  padding-top: 24px;
 `;

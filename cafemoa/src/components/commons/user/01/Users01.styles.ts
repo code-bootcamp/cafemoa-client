@@ -22,14 +22,23 @@ const USER_SIZE: IUserSizeProps = {
 };
 
 export const UserImageWrap = styled.div`
+  position: relative;
   width: 45px;
   height: 45px;
   background-color: #c4c4c4;
   border-radius: 100%;
+  overflow: hidden;
+  > img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+  }
 `;
 export const UserName = styled.div`
   padding-left: 16px;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
 `;
 export const UserTime = styled.div``;

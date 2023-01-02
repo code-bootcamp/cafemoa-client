@@ -8,9 +8,9 @@ export const InputWrap = styled.div`
   position: relative;
   margin-bottom: 16px;
   & > input {
-    padding: 14px 16px;
+    padding: 8px 16px;
     width: 100%;
-    font-size: 24px;
+    font-size: 16px;
     background-color: #f3e6d8;
     border-radius: 10px;
     text-align: ${(props: IInputStylesProps) =>
