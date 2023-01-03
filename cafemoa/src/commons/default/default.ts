@@ -1,9 +1,9 @@
 interface IDefaultColorTypes {
   mainColor?: string; // deepBrown
-  subCcolor01?: string; // brown
-  subCcolor02?: string; // beige
-  subCcolor03?: string; // lightBeige
-  subCcolor04?: string; // deepBeige
+  subColor01?: string; // brown
+  subColor02?: string; // beige
+  subColor03?: string; // lightBeige
+  subColor04?: string; // deepBeige
   green?: string;
   black?: string;
   white?: string;
@@ -14,10 +14,10 @@ interface IDefaultColorTypes {
 
 export const DEFAULT_COLOR: IDefaultColorTypes = {
   mainColor: "#81564B", // deepBrown
-  subCcolor01: "#69473E", // brown
-  subCcolor02: "#F5E9DF", // beige
-  subCcolor03: "#F6F5F1", // lightBeige
-  subCcolor04: "#F3E6D8", // deepBeige
+  subColor01: "#69473E", // brown
+  subColor02: "#F5E9DF", // beige
+  subColor03: "#F6F5F1", // lightBeige
+  subColor04: "#F3E6D8", // deepBeige
   green: "#5A7B2F",
   black: "#000",
   white: "#ffffff",

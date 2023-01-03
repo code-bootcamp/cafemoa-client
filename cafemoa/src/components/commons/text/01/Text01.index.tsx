@@ -5,15 +5,15 @@ interface ITextProps {
   size?: "14" | "16" | "18" | "20" | "24" | "28" | "32" | "40" | "54";
   weight?: "300" | "500" | "700";
   fontColor?:
+    | "mainColor" // deepBrown
+    | "subColor01" // brown
+    | "subColor02" // beige
+    | "subColor03" // lightBeige
+    | "subColor04" // deepBeige
     | "black"
     | "white"
     | "gray"
-    | "beige"
-    | "deepBeige"
-    | "lightBeige"
     | "green"
-    | "brown"
-    | "deepBrown"
     | "red";
   children: ReactNode;
 }
