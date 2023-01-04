@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Tabs } from "antd";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
   MediumBtn,
@@ -45,14 +46,14 @@ export const ValidBox = styled.li`
 export const BoxWrapper = styled.div`
   position: relative;
   height: 100%;
-  background-color: #f3e6d8;
+  background-color: ${DEFAULT_COLOR.subColor04};
   padding-right: 90px;
   border-radius: 10px;
 `;
 
 export const UsedCouponBoxWrapper = styled.div`
   position: relative;
-  background-color: #f3e6d8;
+  background-color: ${DEFAULT_COLOR.subColor04};
   padding-right: 90px;
   border-radius: 10px;
   ::before {
@@ -81,8 +82,8 @@ export const CouponDetail = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #ffffff;
-  border: 1px solid black;
+  background-color: ${DEFAULT_COLOR.white};
+  border: 1px solid ${DEFAULT_COLOR.black};
   border-radius: 10px;
   padding: 40px 24px 40px;
 `;
@@ -90,8 +91,8 @@ export const CouponDetail = styled.div`
 export const UsedCoupon = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  border: 1px solid black;
+  background-color: ${DEFAULT_COLOR.white};
+  border: 1px solid ${DEFAULT_COLOR.black};
   border-radius: 10px;
   padding: 40px 24px 40px;
   ::before {
@@ -106,10 +107,6 @@ export const UsedCoupon = styled.div`
     height: 100%;
   }
 `;
-
-// export const InValidCoupon = styled.div`
-//   background-color: lightgray;
-// `;
 
 export const Div = styled.div`
   padding-bottom: 10px;
@@ -140,7 +137,7 @@ export const CouponImg = styled.img`
 
 export const CoffeeImgWrap = styled.div`
   font-size: 40px;
-  color: #69473e;
+  color: ${DEFAULT_COLOR.subColor01};
 `;
 
 export const TapWrap = styled(Tabs)`
@@ -148,7 +145,7 @@ export const TapWrap = styled(Tabs)`
     display: none;
   }
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: #81564b;
+    color: ${DEFAULT_COLOR.mainColor};
     transform: scale(1);
   }
 
@@ -158,7 +155,7 @@ export const TapWrap = styled(Tabs)`
 
   .ant-tabs-tab-btn {
     font-size: 20px;
-    color: #8b8b8b;
+    color: ${DEFAULT_COLOR.gray};
     transform: scale(0.8);
   }
 

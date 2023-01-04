@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { stubArray } from "lodash";
+import { DefaultContext } from "react-icons/lib";
+import { DEFAULT_COLOR } from "../../../commons/default/default";
 import { ContainerWrap, MediumBtn } from "../../../commons/styles/commonStyles";
 
 export const ContainerWrapper = styled(ContainerWrap)``;
@@ -27,8 +29,7 @@ export const OptionsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  //  height: 690px;
-  background-color: #f3e6d8;
+  background-color: ${DEFAULT_COLOR.subColor04};
   border-radius: 3px;
   padding: 25px 0;
 `;
@@ -38,7 +39,7 @@ export const OptionsRegister = styled.div`
   flex-direction: column;
   width: 50%;
   padding: 75px 45px;
-  color: #ffffff;
+  color: ${DEFAULT_COLOR.white};
   font-weight: 300;
   padding: 50px 45px;
 `;
@@ -56,12 +57,12 @@ export const OptionsButton = styled.button`
   border: 1px solid black;
   border-radius: 3px;
   padding: 10px 30px;
-  color: #ffffff;
+  color: ${DEFAULT_COLOR.white};
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 
   :hover {
-    color: white;
-    background-color: black;
+    color: ${DEFAULT_COLOR.white};
+    background-color: ${DEFAULT_COLOR.black};
   }
 `;
 
@@ -71,9 +72,9 @@ export const FormsContainer = styled.div`
   left: 30px;
   width: calc(50% - 30px);
   min-height: 500px;
-  background-color: #ffffff;
+  background-color: ${DEFAULT_COLOR.white};
   border-radius: 3px;
-  box-shadow: 2px 0 15px rgba($black, 0.25);
+  box-shadow: 2px 0 15px rgba(${DEFAULT_COLOR.black} 0.25);
   overflow: hidden;
   transform: translate3d(0, -50%, 0);
   transition: 0.4s ease-in-out;
@@ -93,9 +94,6 @@ export const RegistForms = styled.div`
   top: 70px;
   left: 40px;
   width: calc(100% - 80px);
-  //  opacity: ${(props) => (props.dir === props.posi ? 1 : 0)};
-  /* visibility: ${(props) =>
-    props.dir === props.posi ? "visible" : "hidden"}; */
   transition: opacity 0.4s ease-in-out,
     visibility 0.4s ease-in-out transform 0.5s ease-in-out;
   transform: translate3d(0, 0, 0);
@@ -105,14 +103,8 @@ export const FormTitle = styled.div`
   padding-bottom: 40px;
 `;
 
-// export const Form = styled.form`
-//   padding-top: 10px;
-// `;
-
 export const FormsField = styled.div`
   margin-bottom: 50px;
-  /* :not(:last-of-type) {
-  } */
 `;
 
 export const FormsButtonsWrapper = styled.div`
@@ -123,25 +115,7 @@ export const FormsButtonsWrapper = styled.div`
 `;
 
 export const FindPassword = styled.button`
-  color: #8b8b8b;
+  color: ${DEFAULT_COLOR.gray};
   text-decoration: underline;
   transition: color 0.2s ease-in-out;
-
-  :hover {
-    color: darken(#8b8b8b, 10%);
-  }
 `;
-
-// export const LoginButton = styled.button`
-//   // margin-top: 30px;
-//   /* border: 1px solid black; */
-//   border-radius: 3px;
-//   padding: 10px 50px;
-//   color: #ffffff;
-//   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-//   background-color: #69473e;
-//   :hover {
-//     color: white;
-//     background-color: black;
-//   }
-// `;

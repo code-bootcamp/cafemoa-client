@@ -39,7 +39,6 @@ export default function MyStamp() {
               <Select01
                 defaultText="지역"
                 selectValue={SELECT_VALUES02}
-                // styles={{  }}
               ></Select01>
             </S.MainArea>
             <S.SubArea>
@@ -58,7 +57,7 @@ export default function MyStamp() {
                 <div>
                   <S.StampInfoWrapper>
                     <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="brown">
+                      <Text size="24" weight="500" fontColor="subColor01">
                         카페한번모아
                       </Text>
                       <Text size="16" weight="300" fontColor="gray">
@@ -84,7 +83,7 @@ export default function MyStamp() {
                 <div>
                   <S.StampInfoWrapper>
                     <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="brown">
+                      <Text size="24" weight="500" fontColor="subColor01">
                         카페한번모아
                       </Text>
                       <Text size="16" weight="300" fontColor="gray">
@@ -110,7 +109,7 @@ export default function MyStamp() {
                 <div>
                   <S.StampInfoWrapper>
                     <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="brown">
+                      <Text size="24" weight="500" fontColor="subColor01">
                         카페한번모아
                       </Text>
                       <Text size="16" weight="300" fontColor="gray">
@@ -136,7 +135,7 @@ export default function MyStamp() {
                 <div>
                   <S.StampInfoWrapper>
                     <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="brown">
+                      <Text size="24" weight="500" fontColor="subColor01">
                         카페한번모아
                       </Text>
                       <Text size="16" weight="300" fontColor="gray">

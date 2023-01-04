@@ -26,7 +26,7 @@ export default function MyReview() {
                   <S.ReviewInfoWrapper>
                     <S.ReviewInfoHead>
                       <S.CafeName>
-                        <Text size="20" weight="500" fontColor="brown">
+                        <Text size="20" weight="500" fontColor="subColor01">
                           카페모아 구로디지털점
                         </Text>
                       </S.CafeName>
@@ -55,7 +55,7 @@ export default function MyReview() {
                   <S.ReviewInfoWrapper>
                     <S.ReviewInfoHead>
                       <S.CafeName>
-                        <Text size="20" weight="500" fontColor="brown">
+                        <Text size="20" weight="500" fontColor="subColor01">
                           카페모아 구로디지털점
                         </Text>
                       </S.CafeName>
@@ -84,7 +84,7 @@ export default function MyReview() {
                   <S.ReviewInfoWrapper>
                     <S.ReviewInfoHead>
                       <S.CafeName>
-                        <Text size="20" weight="500" fontColor="brown">
+                        <Text size="20" weight="500" fontColor="subColor01">
                           카페모아 구로디지털점
                         </Text>
                       </S.CafeName>

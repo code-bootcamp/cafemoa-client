@@ -42,7 +42,6 @@ export default function CafeSearchModal() {
   };
 
   const ModalComponent = (props: ISearchModalProps) => {
-    console.log(props.buttons);
     return (
       <>
         <S.ModalWrap
@@ -75,15 +74,6 @@ export default function CafeSearchModal() {
                     selectValue={SELECT_VALUES02}
                   />
                 </S.SubAreaSelectWrap>
-                {/* <S.AreaSelectWrap>
-                  <S.AreaSelect defaultValue="지역" options={SELECT_VALUES02} />
-                </S.AreaSelectWrap>
-                <S.SubAreaSelectWrap>
-                  <S.AreaSelect
-                    defaultValue="시/군/구"
-                    options={SELECT_VALUES02}
-                  />
-                </S.SubAreaSelectWrap> */}
               </S.AreaContainer>
               <div style={{ width: "100%" }}>
                 <Input01 type="text" placeHolder="구로">
@@ -126,7 +116,7 @@ export default function CafeSearchModal() {
                       <div>
                         <S.CafeOperationWrap>
                           <div>
-                            <Text size="18" weight="500" fontColor="deepBrown">
+                            <Text size="18" weight="500" fontColor="mainColor">
                               영업시간
                             </Text>
                           </div>
@@ -159,7 +149,7 @@ export default function CafeSearchModal() {
                         </S.CafeOperationWrap>
                         <div>
                           <div>
-                            <Text size="18" weight="500" fontColor="deepBrown">
+                            <Text size="18" weight="500" fontColor="mainColor">
                               매장정보
                             </Text>
                           </div>
@@ -219,7 +209,7 @@ export default function CafeSearchModal() {
                       <div>
                         <S.CafeOperationWrap>
                           <div>
-                            <Text size="18" weight="500" fontColor="deepBrown">
+                            <Text size="18" weight="500" fontColor="mainColor">
                               영업시간
                             </Text>
                           </div>
@@ -252,7 +242,7 @@ export default function CafeSearchModal() {
                         </S.CafeOperationWrap>
                         <div>
                           <div>
-                            <Text size="18" weight="500" fontColor="deepBrown">
+                            <Text size="18" weight="500" fontColor="mainColor">
                               매장정보
                             </Text>
                           </div>
