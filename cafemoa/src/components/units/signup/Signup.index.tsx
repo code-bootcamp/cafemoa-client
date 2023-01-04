@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
-import useVerification from "../../commons/hooks/customs/verification/useVerification";
 import Input02 from "../../commons/input/02/Input02.index";
 import Text from "../../commons/text/01/Text01.index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as S from "./Signup.styles";
 import { SignUpSchema } from "./Signup.validation";
+import { useCreateUser } from "../../commons/hooks/mutation/useCreateUser";
+import { useRouter } from "next/router";
 
 export default function SignUp() {
-  const { onClickVerification } = useVerification();
+  const router = useRouter();
+  const { createUserSubmit } = useCreateUser();
   const { register, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(SignUpSchema),
     mode: "onChange",
@@ -22,7 +24,8 @@ export default function SignUp() {
     },
   });
   const onSignUpSubmit = (data: any) => {
-    console.log(data);
+    void createUserSubmit(data);
+    void router.push("/");
   };
   const onClickAddress = () => {
     setValue("address", "asdadasdasd", { shouldValidate: true });
@@ -72,7 +75,7 @@ export default function SignUp() {
             name="핸드폰 번호"
             register={register("phone")}
           />
-          <S.PhoneBtn type="button" color="beige" onClick={onClickVerification}>
+          <S.PhoneBtn type="button" color="beige">
             <Text size="16">인증 요청</Text>
           </S.PhoneBtn>
         </S.InputWrap>

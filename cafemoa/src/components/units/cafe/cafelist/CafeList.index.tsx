@@ -76,12 +76,12 @@ export default function CafeList() {
                 <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ paddingTop: "32pxx" }}>
+                <div style={{ paddingTop: "32px" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ paddingTop: "32pxx" }}>
+                  <div style={{ paddingTop: "32px" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
