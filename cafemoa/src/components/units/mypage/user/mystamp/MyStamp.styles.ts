@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
-  MediumBtn,
   SmallBtn,
 } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
@@ -65,7 +64,6 @@ export const StampInfoWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* padding-bottom: 20px; */
   padding: 20px 0px 30px;
 `;
 

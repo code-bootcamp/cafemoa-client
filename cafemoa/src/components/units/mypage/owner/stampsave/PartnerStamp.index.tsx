@@ -2,10 +2,12 @@ import * as S from "./PartnerStamp.styles";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import Box01 from "../../../../commons/box/01/Box01.index";
-import Select01 from "../../../../commons/select/01/Select01.index";
 import Input01 from "../../../../commons/input/01/Input01.index";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
 import { useForm } from "react-hook-form";
+import { SearchOutlined } from "@ant-design/icons";
+import { Pagination } from "antd";
+import Select01 from "../../../../commons/select/01/Select01.index";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -33,9 +35,8 @@ export default function PartnerStamp() {
   return (
     <>
       <ModalComponent
-        title={`비밀번호 입력`}
+        title={`스탬프 적립`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        hasInput={true}
         status="write"
         buttons={
           <>
@@ -74,45 +75,66 @@ export default function PartnerStamp() {
           </S.TitleWrapper>
           <S.StampWrapper>
             <Box01 styles={{ padding: "40px 50px" }}>
-              <>
-                <S.Label>
-                  <Text size="20" weight="500" fontColor="deepBrown">
-                    핸드폰 번호 입력
-                  </Text>
-                </S.Label>
-                <S.PhoneWrapper>
-                  <div style={{ width: "100%" }}>
-                    <Input01 type="text" placeHolder="01012345678" />
-                  </div>
-                  {/* <span>-</span>
-                  <div>
-                    <Input01 type="text" />
-                  </div>
-                  <span>-</span>
-                  <div>
-                    <Input01 type="text" />
-                  </div> */}
-                </S.PhoneWrapper>
-                <S.Label>
+              <S.StampContainer>
+                <S.UserWrapper>
+                  <Input01 type="text" placeHolder="이름">
+                    <S.InputIconWrap>
+                      <SearchOutlined />
+                    </S.InputIconWrap>
+                  </Input01>
+                  <S.StampSelect>
+                    <Select01
+                      defaultText="적립스탬프 갯수"
+                      selectValue={SELECT_VALUES01}
+                    />
+                  </S.StampSelect>
+                </S.UserWrapper>
+                <S.StampTable>
+                  <ul>
+                    <S.Name>이름</S.Name>
+                    <S.PhoneEnd>전화번호 뒷자리</S.PhoneEnd>
+                    <S.SaveStamp></S.SaveStamp>
+                  </ul>
+                  <ul>
+                    <S.Name>김예은</S.Name>
+                    <S.PhoneEnd>1234</S.PhoneEnd>
+                    <S.SaveStamp>
+                      <S.SaveButton color="beige" onClick={onClickIsModalOpen}>
+                        <Text size="14">적립 </Text>
+                      </S.SaveButton>
+                    </S.SaveStamp>
+                  </ul>
+                  <ul>
+                    <S.Name>김예은</S.Name>
+                    <S.PhoneEnd>5678</S.PhoneEnd>
+                    <S.SaveStamp>
+                      <S.SaveButton color="beige">
+                        <Text size="14">적립 </Text>
+                      </S.SaveButton>
+                    </S.SaveStamp>
+                  </ul>
+                  <ul>
+                    <S.Name>김예은</S.Name>
+                    <S.PhoneEnd>0956</S.PhoneEnd>
+                    <S.SaveStamp>
+                      <S.SaveButton color="beige">
+                        <Text size="14">적립 </Text>
+                      </S.SaveButton>
+                    </S.SaveStamp>
+                  </ul>
+                </S.StampTable>
+                <S.PageWrapper>
+                  <Pagination defaultCurrent={1} total={50} />
+                </S.PageWrapper>
+                {/* <S.Label>
                   <Text size="20" weight="500" fontColor="deepBrown">
                     적립 스탬프 갯수
                   </Text>
                 </S.Label>
                 <S.SelectWrap>
                   <Select01 selectValue={SELECT_VALUES01} />
-                </S.SelectWrap>
-                <S.ButtonWrapper>
-                  <S.StampButton
-                    color="beige"
-                    type="submit"
-                    onClick={onClickIsModalOpen}
-                  >
-                    <Text size="20" fontColor="deepBrown">
-                      번호로 적립하기
-                    </Text>
-                  </S.StampButton>
-                </S.ButtonWrapper>
-              </>
+                </S.SelectWrap> */}
+              </S.StampContainer>
             </Box01>
           </S.StampWrapper>
         </S.Container>

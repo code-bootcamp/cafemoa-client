@@ -1,6 +1,5 @@
-import { Collapse, Modal, Select } from "antd";
+import { Modal } from "antd";
 import styled from "@emotion/styled";
-import { BtnWrap } from "../../../commons/styles/commonStyles";
 
 export const ModalWrap = styled(Modal)`
   .ant-modal-body {
@@ -22,7 +21,6 @@ export const ModalTitle = styled.div`
 
 export const ModalContents = styled.div`
   padding-top: 32px;
-  //  text-align: center;
   white-space: pre-line;
 `;
 
@@ -41,44 +39,6 @@ export const AreaContainer = styled.div`
   padding-bottom: 10px;
   width: 100%;
 `;
-
-// export const AreaSelect = styled(Select)`
-//   width: 100%;
-
-//   .select-selector {
-//     background-color: transparent;
-//     border: none;
-//     border-radius: 100px;
-//   }
-// `;
-
-// export const AreaSelectWrap = styled.div`
-//   width: 80%;
-
-//   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-//     background-color: #f3e6d8;
-//     border: none;
-//     border-radius: 15px;
-//     padding: 14px 16px;
-//     height: auto;
-//     font-size: 20px;
-//     color: gray;
-//   }
-// `;
-
-// export const SubAreaSelectWrap = styled.div`
-//   width: 80%;
-
-//   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-//     background-color: #f3e6d8;
-//     border: none;
-//     border-radius: 15px;
-//     padding: 14px 16px;
-//     height: auto;
-//     font-size: 20px;
-//     color: gray;
-//   }
-// `;
 
 export const AreaSelectWrap = styled.div`
   width: calc(100% - 45% - 10px);
@@ -124,7 +84,6 @@ export const CafeOperation = styled.div`
 
   > p {
     margin-bottom: 0;
-    /* padding-right: 20px; */
   }
 `;
 

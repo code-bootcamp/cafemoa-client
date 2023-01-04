@@ -82,18 +82,18 @@ export default function UserMain() {
                     </div>
                     <S.MenuDetail>
                       <div>
-                        <Text size="18" weight="500" fontColor="deepBrown">
+                        <Text size="18" weight="500" fontColor="mainColor">
                           사용가능 쿠폰 &nbsp;
                         </Text>
-                        <Text size="18" weight="300" fontColor="deepBrown">
+                        <Text size="18" weight="300" fontColor="mainColor">
                           4
                         </Text>
                       </div>
                       <div>
-                        <Text size="18" weight="500" fontColor="deepBrown">
+                        <Text size="18" weight="500" fontColor="mainColor">
                           사용완료 쿠폰 &nbsp;
                         </Text>
-                        <Text size="18" weight="300" fontColor="deepBrown">
+                        <Text size="18" weight="300" fontColor="mainColor">
                           6
                         </Text>
                       </div>

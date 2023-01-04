@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
 
@@ -35,7 +36,7 @@ export const ReviewInfoHead = styled.div`
 
 export const CafeName = styled.div`
   border-radius: 20px;
-  background-color: #f3e6d8;
+  background-color: ${DEFAULT_COLOR.subColor04};
   padding: 17px 24px;
   margin-right: 32px;
   word-break: keep-all;
