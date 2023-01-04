@@ -19,7 +19,7 @@ export default function StampCheck() {
       ></HeroWrap>
       <S.StampCheckContainer>
         <S.Title>
-          <Text size="32" weight="500" fontColor="black">
+          <Text size="28" weight="500" fontColor="black">
             스탬프를 한번에 받은 회원님들을 모아봤어요!
           </Text>
         </S.Title>
@@ -27,13 +27,13 @@ export default function StampCheck() {
           {temp.map((el, idx) => (
             <S.NotificationWrapper key={idx}>
               <div>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   {el.name} &nbsp;
                 </Text>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   {el.stamp.toString()}
                 </Text>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   개를 적립하였습니다.
                 </Text>
               </div>

@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Input01 from "../../commons/input/01/Input01.index";
-import Like01 from "../../commons/like/01/Like01.index";
-import Text from "../../commons/text/01/Text01.index";
-import Textarea01 from "../../commons/textareas/01/textarea01.index";
-import Users01 from "../../commons/user/01/Users01.index";
+import Like01 from "../../../commons/like/01/Like01.index";
+import Text from "../../../commons/text/01/Text01.index";
+import Textarea01 from "../../../commons/textareas/01/textarea01.index";
+import Users01 from "../../../commons/user/01/Users01.index";
 import ReviewModal from "./CafeDetail.Modal";
 import * as S from "./CafeDetail.styles";
 import ReplyReview from "./CafeDetial.Reply";
@@ -26,17 +25,18 @@ export default function CafeDetailReview() {
   };
 
   return (
-    <S.ReviewContainer>
-      <S.ReviewBtnWrapper>
+    <>
+    <S.ReviewBtnWrapper>
         <S.ReviewWriteBtn onClick={onClickIsModalOpen} color="beige">
           <S.BtnInnerWrapper>
             <img src="/images/cafedetail/CafeDetail05.png" />
-            <Text size="20" weight="300" fontColor="deepBrown">
+            <Text size="16" weight="300" fontColor="black">
               리뷰 작성하기
             </Text>
           </S.BtnInnerWrapper>
         </S.ReviewWriteBtn>
       </S.ReviewBtnWrapper>
+    <S.ReviewContainer>
       <ReviewModalComponent
         title={`소중한 리뷰를 작성해주세요`}
         buttons={
@@ -113,7 +113,7 @@ export default function CafeDetailReview() {
           </S.BtnWrapper>
         </S.ReviewHeader>
         <S.ReviewContents>
-          <Text size="24" weight="300">
+          <Text size="18" weight="300">
             커피맛이 너무좋아요
           </Text>
         </S.ReviewContents>
@@ -129,7 +129,6 @@ export default function CafeDetailReview() {
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.ReviewImageWrapper>
         </S.ReviewImageContainer>
-        <S.ReviewColorLine></S.ReviewColorLine>
         <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
         {isReply && <ReplyReview />}
       </S.ReviewWrapper>
@@ -140,7 +139,7 @@ export default function CafeDetailReview() {
           size="md"
         />
         <S.ReviewContents>
-          <Text size="24" weight="300">
+          <Text size="18" weight="300">
             커피맛이 너무좋아요
           </Text>
         </S.ReviewContents>
@@ -156,8 +155,17 @@ export default function CafeDetailReview() {
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.ReviewImageWrapper>
         </S.ReviewImageContainer>
-        <S.ReviewColorLine></S.ReviewColorLine>
-        <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
+        {/* <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn> */}
+        <S.OwnerComment>
+          <S.CommentIcon>
+            <img src="/images/cafedetail/CafeDetail08.png" />
+          </S.CommentIcon>
+          <S.CommentContents>
+            <Text>
+              감사합니다 또 방문해주세요
+            </Text>
+          </S.CommentContents>
+        </S.OwnerComment>
       </S.ReviewWrapper>
       <S.ReviewWrapper>
         <Users01
@@ -166,7 +174,7 @@ export default function CafeDetailReview() {
           size="md"
         />
         <S.ReviewContents>
-          <Text size="24" weight="300">
+          <Text size="18" weight="300">
             커피맛이 너무좋아요
           </Text>
         </S.ReviewContents>
@@ -182,7 +190,6 @@ export default function CafeDetailReview() {
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.ReviewImageWrapper>
         </S.ReviewImageContainer>
-        <S.ReviewColorLine></S.ReviewColorLine>
       </S.ReviewWrapper>
       <S.ReviewWrapper>
         <Users01
@@ -191,7 +198,7 @@ export default function CafeDetailReview() {
           size="md"
         />
         <S.ReviewContents>
-          <Text size="24" weight="300">
+          <Text size="18" weight="300">
             커피맛이 너무좋아요
           </Text>
         </S.ReviewContents>
@@ -207,8 +214,8 @@ export default function CafeDetailReview() {
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.ReviewImageWrapper>
         </S.ReviewImageContainer>
-        <S.ReviewColorLine></S.ReviewColorLine>
       </S.ReviewWrapper>
     </S.ReviewContainer>
+  </>
   );
 }

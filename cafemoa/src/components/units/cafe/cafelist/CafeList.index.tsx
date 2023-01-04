@@ -1,14 +1,14 @@
-import HeroWrap from "../../commons/hero/HeroWrap.index";
+import HeroWrap from "../../../commons/hero/HeroWrap.index";
 import * as S from "./CafeList.styles";
-import SlickSlider from "../slider/Slider.index";
-import Card02 from "../../commons/card/02/Card02.index";
-import Select01 from "../../commons/select/01/Select01.index";
-import Tag from "../../commons/text/02/Text02.index";
-import Text from "../../commons/text/01/Text01.index";
-import Like01 from "../../commons/like/01/Like01.index";
+import SlickSlider from "./slider/Slider.index";
+import Card02 from "../../../commons/card/02/Card02.index";
+import Select01 from "../../../commons/select/01/Select01.index";
+import Tag from "../../../commons/text/02/Text02.index";
+import Text from "../../../commons/text/01/Text01.index";
+import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import { TAG_VALUES } from "../../../commons/default/default";
+import { TAG_VALUES } from "../../../../commons/default/default";
 
 const SELECT_VALUES02 = [
   { label: "서울시", value: "서울" },
@@ -73,15 +73,15 @@ export default function CafeList() {
                 <S.LikeWrapper>
                   <Like01 iconColor="red" fontColor="white" count={22} />
                 </S.LikeWrapper>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ marginTop: "8%" }}>
+                <div style={{ paddingTop: "32pxx" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ marginTop: "7%" }}>
+                  <div style={{ paddingTop: "32pxx" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
@@ -96,15 +96,15 @@ export default function CafeList() {
                 <S.LikeWrapper>
                   <Like01 iconColor="red" fontColor="white" count={22} />
                 </S.LikeWrapper>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ marginTop: "8%" }}>
+                <div style={{ paddingTop: "32px" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ marginTop: "7%" }}>
+                  <div style={{ paddingTop: "32px" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
@@ -119,15 +119,15 @@ export default function CafeList() {
                 <S.LikeWrapper>
                   <Like01 iconColor="red" fontColor="white" count={22} />
                 </S.LikeWrapper>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ marginTop: "8%" }}>
+                <div style={{ paddingTop: "32px" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ marginTop: "7%" }}>
+                  <div style={{ paddingTop: "32px" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
@@ -142,15 +142,15 @@ export default function CafeList() {
                 <S.LikeWrapper>
                   <Like01 iconColor="red" fontColor="white" count={22} />
                 </S.LikeWrapper>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ marginTop: "8%" }}>
+                <div style={{ paddingTop: "32px" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ marginTop: "7%" }}>
+                  <div style={{ paddingTop: "32px" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
@@ -165,15 +165,15 @@ export default function CafeList() {
                 <S.LikeWrapper>
                   <Like01 iconColor="red" fontColor="white" count={22} />
                 </S.LikeWrapper>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ marginTop: "8%" }}>
+                <div style={{ paddingTop: "32px" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ marginTop: "7%" }}>
+                  <div style={{ paddingTop: "32px" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
@@ -188,15 +188,15 @@ export default function CafeList() {
                 <S.LikeWrapper>
                   <Like01 iconColor="red" fontColor="white" count={22} />
                 </S.LikeWrapper>
-                <Text size="24" weight="500">
+                <Text size="20" weight="500">
                   카페명
                 </Text>
-                <div style={{ marginTop: "8%" }}>
+                <div style={{ paddingTop: "32px" }}>
                   <Text size="16" weight="300">
                     카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
                     카페소개 카페소개
                   </Text>
-                  <div style={{ marginTop: "7%" }}>
+                  <div style={{ paddingTop: "32px" }}>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>
                     <Tag size="sm">태그</Tag>

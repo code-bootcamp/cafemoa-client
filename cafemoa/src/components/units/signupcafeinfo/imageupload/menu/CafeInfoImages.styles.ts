@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 
 export const UploadImage = styled.img`
   width: 180px;
@@ -8,10 +9,15 @@ export const UploadImage = styled.img`
 `;
 
 export const UploadButton = styled.div`
-  // width: 0%;
-  background-color: #F3E6D8;
-  // margin-right: 24px;
-  padding: 13%;
+  width: 33.3333%;
+  display:flex;
+  background-color: ${DEFAULT_COLOR.subColor02};
+  margin: 20px;
+  // padding: 90px 0px; 동은님....살려주세용
+  padding: 90px;
+  // padding-left: 90px;
+  text-align: center;
+  // background: red;
 `;
 
 export const UploadFileHidden = styled.input`
@@ -38,6 +44,5 @@ export const Upload = styled.span`
 export const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  // background: red;
+  padding: 40px 0px;
 `

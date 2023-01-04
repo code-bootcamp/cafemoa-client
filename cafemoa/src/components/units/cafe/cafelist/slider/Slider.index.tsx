@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Text from "../../commons/text/01/Text01.index";
-import Tag from "../../commons/text/02/Text02.index";
+import Text from "../../../../commons/text/01/Text01.index";
+import Tag from "../../../../commons/text/02/Text02.index";
 import * as S from "./Slider.Styles";
 
 export default function SlickSlider() {
@@ -31,7 +31,7 @@ export default function SlickSlider() {
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="32" weight="500">
+              <Text size="24" weight="500">
                 코캠다방
               </Text>
             </div>
@@ -48,7 +48,7 @@ export default function SlickSlider() {
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="32" weight="500">
+              <Text size="24" weight="500">
                 스타벅스
               </Text>
             </div>
@@ -65,7 +65,7 @@ export default function SlickSlider() {
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="32" weight="500">
+              <Text size="24" weight="500">
                 투썸플레이스
               </Text>
             </div>
@@ -83,7 +83,7 @@ export default function SlickSlider() {
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="32" weight="500">
+              <Text size="24" weight="500">
                 커피빈
               </Text>
             </div>
@@ -101,7 +101,7 @@ export default function SlickSlider() {
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="32" weight="500">
+              <Text size="24" weight="500">
                 빽다방
               </Text>
             </div>
@@ -119,7 +119,7 @@ export default function SlickSlider() {
           </S.CafeContent>
           <S.CafeContent>
             <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="32" weight="500">
+              <Text size="24" weight="500">
                 메가커피
               </Text>
             </div>

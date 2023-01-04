@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import { Modal, Tabs } from "antd";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import {
   BtnWrap,
   ContainerWrap,
   MediumBtn,
-} from "../../../commons/styles/commonStyles";
+  SmallBtn,
+} from "../../../../commons/styles/commonStyles";
 
 export const DetailContainer = styled(ContainerWrap)`
   padding-top: 100px;
@@ -20,12 +22,10 @@ export const CafeImageWrapper = styled.div`
     width: 100%;
     transform: translateX(-50%);
   }
-  // text-align: center;
-  // background: yellow;
 `;
 export const CafeInfoWrapper = styled.div`
   width: 100%;
-  margin-top: 40px;
+  padding-top: 56px;
 `;
 export const CafeNameWrapper = styled.div`
   width: 100%;
@@ -38,24 +38,19 @@ export const CafeInfoFooter = styled.div`
 `;
 export const CafeAddressContainer = styled.div`
   width: 50%;
-  // background: red;
 `;
 export const TagContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  // justify-content: center;
-  // background: green;
   padding-top: 16px;
 `;
 
 export const LikeContainer = styled.div`
   width: 40%;
-  // background: yellow;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  // padding-top: 2%;
 `;
 
 export const Section = styled.div`
@@ -77,7 +72,6 @@ export const Contents = styled.div`
 `;
 export const MenuTitle = styled.div``;
 export const MenuImageWrapper = styled.div`
-  // height: 1500px;
   display: flex;
   flex-direction: row;
   margin: 40px -20px 0;
@@ -89,7 +83,7 @@ export const Menu = styled.div`
 export const OwnerTitle = styled.div``;
 export const TempDiv = styled.div`
   border-radius: 20px;
-  background-color: #f3e6d8;
+  background-color: ${DEFAULT_COLOR.subColor01};
   padding: 17px 22px;
   margin: 24px 0px 0px 16px;
 `;
@@ -122,46 +116,39 @@ export const OwnerImageWrapper = styled.div`
 // ------------------------리뷰모아 부분-------------------
 
 export const ReviewContainer = styled.div`
-  width: 100%;
-  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 export const ReviewWrapper = styled.div`
-  width: 40%;
-  display: inline-block;
-  // padding: 0% 4% % 0%;
-  margin: 0% 10% 5% 0%;
-  // background: blue;
+  width: 50%;
+  padding-right: 32px;
+  margin-bottom: 16px;
 `;
 export const ReviewHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // background: red;
 `;
 export const BtnWrapper = styled.div`
   width: 20%;
   display: flex;
-  // background: yellow;
+  padding-bottom: 50px;
 `;
 export const EditBtn = styled.span`
   width: 100%;
-  text-align: center;
-  // background: yellow;
+  text-align: right;
 `;
 export const DeleteBtn = styled.span`
   width: 100%;
-  text-align: center;
-  // background: green;
+  text-align: right;
 `;
 export const ReviewContents = styled.div`
   width: 100%;
-  margin-left: 96px;
+  padding-left: 96px;
 `;
 export const ReplyBtn = styled.div`
-  // background: red;
-  width: 15%;
-  margin-left: 450px;
-  padding-left: 8px;
+  padding-top: 16px;
+  text-align: right;
 `;
 export const ReviewColorLine = styled.div`
   width: 79%;
@@ -172,11 +159,12 @@ export const ReviewImageContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 64px;
-  // background: red;
 `;
 export const ReviewImageWrapper = styled.div`
-  width: 25%;
-  margin-left: 32px;
+  width: 33.3333%;
+  padding: 10px;
+  padding-bottom: 32px;
+  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04}
 `;
 export const ComponentsTabs = styled(Tabs)`
   margin-top: 40px;
@@ -184,7 +172,7 @@ export const ComponentsTabs = styled(Tabs)`
     display: none;
   }
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: #81564b;
+    color: ${DEFAULT_COLOR.mainColor};
     transform: scale(1);
   }
 
@@ -194,7 +182,7 @@ export const ComponentsTabs = styled(Tabs)`
 
   .ant-tabs-tab-btn {
     font-size: 20px;
-    color: #8b8b8b;
+    color: ${DEFAULT_COLOR.gray};
     transform: scale(0.8);
   }
 
@@ -202,30 +190,19 @@ export const ComponentsTabs = styled(Tabs)`
     background: none;
   }
   .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
-    border-color: white;
+    border-color: ${DEFAULT_COLOR.white};
   }
 
   .ant-tabs-top > .ant-tabs-nav::before {
-    border-color: white;
+    border-color: ${DEFAULT_COLOR.white};
   }
-
-  // .ant-tabs-content {
-  //     padding-top: 100px;
-  // }
-  // .ant-tabs-nav {
-  //     border: none;
-  //   }
-  // .ant-tabs > .ant-tabs-nav {
-  //     position: absolute;
-  // }
 `;
 export const ReviewBtnWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  // background: red;
 `;
-export const ReviewWriteBtn = styled(MediumBtn)`
+export const ReviewWriteBtn = styled(SmallBtn)`
   border-radius: 20px;
 `;
 export const BtnInnerWrapper = styled.div`
@@ -235,15 +212,31 @@ export const BtnInnerWrapper = styled.div`
   align-items: center;
 `;
 // ============================점주 답글부분=====================
+export const ReplyWrap = styled.div`
+  display: flex;
+  padding-left: 100px;
+`
 export const ReplyWrapper = styled.div`
-  width: 100%;
-  padding-left: 88px;
+  width: 70%;
 `;
-
+export const ReplySubmitBtn = styled.div`
+  width: 30%;
+  margin-left: 10px;
+  padding-top: 10px;
+`
+export const OwnerComment = styled.div`
+  display: flex;
+  padding-left: 64px;
+  padding-top: 16px;
+`
+export const CommentIcon = styled.div`
+`
+export const CommentContents = styled.div`
+  padding-left: 16px;
+`
 // ----------------------------모달 부분----------------------
 
 export const ModalWrapper = styled(Modal)`
-  // width: 1500px;
   .ant-modal-content {
   }
   .ant-modal-centered .ant-modal {
@@ -256,7 +249,7 @@ export const ModalWrapper = styled(Modal)`
 `;
 export const ModalReviewWrapper = styled.div`
   width: 100%;
-  padding: 0% 10%;
+  padding: 80px 64px;
 `;
 export const ModalReviewTitle = styled.div`
   margin-bottom: 24px;
@@ -267,8 +260,6 @@ export const ModalReviewBtnContainer = styled(BtnWrap)`
   display: flex;
   flex-direction: row;
   justify-content: flex-end; */
-  // background: red;
-  // padding: 20%;
 `;
 export const ReviewSubmitBtn = styled(MediumBtn)`
   border-radius: 20px;
@@ -283,6 +274,5 @@ export const ModalUserWrapper = styled.div`
 `;
 export const ModalInputWrapper = styled.div`
   padding-top: 24px;
-  /* padding-bottom: ; */
 `;
 export const ModalBtnWrapper = styled.div``;

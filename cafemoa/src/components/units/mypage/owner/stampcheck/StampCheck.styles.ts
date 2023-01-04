@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
   MediumBtn,
@@ -21,7 +22,7 @@ export const NotificationWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
-  background: #f3e6d8;
+  background: ${DEFAULT_COLOR.subColor02};
   padding: 16px 24px;
   margin-bottom: 40px;
   > div {
