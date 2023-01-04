@@ -8,7 +8,7 @@ import { SignUpSchema } from "./Signup.validation";
 
 export default function SignUp() {
   const { onClickVerification } = useVerification();
-  const { register, handleSubmit, setValue, watch, formState } = useForm({
+  const { register, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(SignUpSchema),
     mode: "onChange",
     defaultValues: {
@@ -21,7 +21,7 @@ export default function SignUp() {
       address: "",
     },
   });
-  const onSignUpSubmit = (data) => {
+  const onSignUpSubmit = (data: any) => {
     console.log(data);
   };
   const onClickAddress = () => {
@@ -31,7 +31,7 @@ export default function SignUp() {
     <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
       <S.ContainerInner>
         <S.TitleWrap>
-          <Text size="36" fontColor="brown">
+          <Text size="32" fontColor="subColor01">
             회원가입
           </Text>
         </S.TitleWrap>
@@ -88,7 +88,6 @@ export default function SignUp() {
             <Text size="16">주소 검색</Text>
           </S.AddrBtn>
         </S.InputWrap>
-        {console.log(formState.dirtyFields.address)}
         <S.SignUpBtnWrap>
           <S.ResetBtn type="reset" color="lightBeige">
             <Text size="24">취소</Text>

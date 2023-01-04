@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 interface ILikeStylesProps {
-  iconColor?: "black" | "red";
+  iconColor?: "black" | "red" | "white";
   fontColor?: "black" | "white";
 }
 

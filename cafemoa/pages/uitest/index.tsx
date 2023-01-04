@@ -74,7 +74,7 @@ export default function UiTest() {
   const { register, handleSubmit } = useForm();
 
   const onModalSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
   };
 
   // 태그 클릭 버튼
