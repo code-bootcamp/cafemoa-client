@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Text from "../../commons/text/01/Text01.index";
+import Text from "../../../commons/text/01/Text01.index";
 import * as S from "./CafeDetail.styles"
 
 interface IReviewModalProps {

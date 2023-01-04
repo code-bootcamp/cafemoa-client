@@ -1,12 +1,13 @@
-import HeroWrap from "../../commons/hero/HeroWrap.index";
-import Like01 from "../../commons/like/01/Like01.index";
-import Text from "../../commons/text/01/Text01.index";
-import Tag from "../../commons/text/02/Text02.index";
+import HeroWrap from "../../../commons/hero/HeroWrap.index";
+import Like01 from "../../../commons/like/01/Like01.index";
+import Text from "../../../commons/text/01/Text01.index";
+import Tag from "../../../commons/text/02/Text02.index";
 import { Image } from "antd";
 import * as S from "./CafeDetail.styles";
 import { useState } from "react";
 import CafeDetailPhoto from "./CafeDetail.Photos";
 import CafeDetailReview from "./CafeDetail.Reviews";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
 
 export default function CafeDetail() {
   const [isSelect, setIsSelect] = useState(true);
@@ -23,12 +24,12 @@ export default function CafeDetail() {
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.CafeImageWrapper>
           <S.CafeInfoWrapper>
-            <Text size="40" weight="700">
+            <Text size="32" weight="700">
               스타벅스
             </Text>
             <S.CafeInfoFooter>
               <S.CafeAddressContainer>
-                <Text size="24" weight="300">
+                <Text size="20" weight="300">
                   구로구 구로동 222-2
                 </Text>
               </S.CafeAddressContainer>
@@ -38,7 +39,7 @@ export default function CafeDetail() {
             </S.CafeInfoFooter>
           </S.CafeInfoWrapper>
           <S.OwnerContents>
-            <Text size="20" weight="500">
+            <Text size="18" weight="500">
               가맹점주 카페소개란
             </Text>
             <S.Contents>
@@ -57,7 +58,7 @@ export default function CafeDetail() {
         </S.Section>
         <S.Section>
           <S.SectionTitle>
-            <Text size="32" weight="500">
+            <Text size="28" weight="500">
               메뉴모아
             </Text>
           </S.SectionTitle>
@@ -75,7 +76,7 @@ export default function CafeDetail() {
         </S.Section>
         <S.Section>
           <S.SectionTitle>
-            <Text size="32" weight="500">
+            <Text size="28" weight="500">
               정보모아
             </Text>
           </S.SectionTitle>
@@ -84,7 +85,7 @@ export default function CafeDetail() {
               <img src="/images/cafedetail/CafeDetail03.png" />
             </div>
             <div>
-              <Text size="24" weight="500">
+              <Text size="20" weight="500">
                 공지사항
               </Text>
             </div>
@@ -100,7 +101,7 @@ export default function CafeDetail() {
               <img src="/images/cafedetail/CafeDetail03.png" />
             </div>
             <div>
-              <Text size="24" weight="500">
+              <Text size="20" weight="500">
                 운영 및 휴무
               </Text>
             </div>
@@ -129,7 +130,7 @@ export default function CafeDetail() {
             </Text>
           </S.TimeTableWrapper>
           <div>
-            <Text size="20" weight="500" fontColor="green">
+            <Text size="20" weight="500" fontColor="red">
               * 격주 월요일 정기 휴무
             </Text>
           </div>
@@ -138,7 +139,7 @@ export default function CafeDetail() {
               <img src="/images/cafedetail/CafeDetail03.png" />
             </div>
             <div>
-              <Text size="24" weight="500">
+              <Text size="20" weight="500">
                 편의 시설
               </Text>
             </div>

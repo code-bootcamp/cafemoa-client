@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import InfiniteScroll from "react-infinite-scroller";
-import { ContainerWrap, TagWrap } from "../../../commons/styles/commonStyles";
-import * as mq from "../../../commons/styles/mediaQuery";
+import { ContainerWrap, TagWrap } from "../../../../commons/styles/commonStyles";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 // --------------------------------------------------카페 상세페이지 퍼블리싱
 export const ContainerWrapper = styled(ContainerWrap)`
