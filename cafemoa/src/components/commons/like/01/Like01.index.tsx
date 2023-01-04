@@ -3,7 +3,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 interface ILikeProps {
   count?: number;
-  iconColor?: "black" | "red";
+  iconColor?: "black" | "red" | "white";
   fontColor?: "black" | "white";
 }
 

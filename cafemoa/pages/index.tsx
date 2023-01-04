@@ -1,7 +1,9 @@
+import Main from "../src/components/units/main/Main.index";
+
 export default function Home() {
   return (
     <>
-      <div>text main</div>
+      <Main />
     </>
   );
 }
