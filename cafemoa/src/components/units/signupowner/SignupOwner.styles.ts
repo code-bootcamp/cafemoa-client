@@ -81,14 +81,14 @@ export const InputWrapAdminPassword = styled.div`
         border-radius: 10px;
       }
     `}
-`
-export const BusinessBtnWrap = styled.div`
-      padding-bottom: 40px;
-      >button {
-        width: 180px;
-        border-radius: 10px;
-      }
-`
+`;
+export const CheckBoxContainer = styled.div`
+  display: flex;
+`;
+export const CheckBoxWrapper = styled.div`
+  width: 50%;
+  padding-left: 100px;
+`;
 export const EmailBtn = styled(MediumBtn)``;
 export const PhoneBtn = styled(MediumBtn)``;
 export const BusinessBtn = styled(MediumBtn)``;

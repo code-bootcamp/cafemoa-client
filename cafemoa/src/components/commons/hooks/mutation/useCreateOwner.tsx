@@ -4,7 +4,7 @@ import {
   IMutationCreateUserArgs,
 } from "../../../../commons/types/generated/types";
 
-interface IFormCreateUserData {
+interface IFormCreateOwnerData {
   name: string;
   nickname: string;
   email: string;
@@ -18,7 +18,14 @@ interface IFormCreateUserData {
 export const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
     createUserInput(createUserInput: $createUserInput) {
-      id
+      name
+      nickname
+      email
+      address
+      personalNumber
+      phoneNumber
+      password
+      profileImage
     }
   }
 `;
@@ -31,14 +38,14 @@ export const useCreateUser = () => {
 
   const createUserSubmit = async (data: IFormCreateUserData) => {
     try {
-      await createUser({
+      const result = await createUser({
         variables: {
           createUserInput: {
             ...data,
           },
         },
       });
-      alert("카페모아에서 쿠폰을 모아");
+      console.log(result.data);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
