@@ -74,7 +74,7 @@ export default function UiTest() {
   const { register, handleSubmit } = useForm();
 
   const onModalSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
   };
 
   // 태그 클릭 버튼
@@ -359,7 +359,7 @@ export default function UiTest() {
           </TestMediumBtn01>
         </div>
       </div>
-      {/* <ModalComponent
+      <ModalComponent
         title={`비밀번호 입력`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
         status="write"
@@ -370,7 +370,7 @@ export default function UiTest() {
                 취소
               </Text>
             </TestMediumBtn01>
-            <TestMediumBtn01 color="beige">
+            <TestMediumBtn01 color="beige" type="submit">
               <Text size="24">확인</Text>
             </TestMediumBtn01>
           </>
@@ -384,8 +384,8 @@ export default function UiTest() {
             register={register("password")}
           />
         </ModalFromWrap>
-      </ModalComponent> */}
-      <ModalComponent
+      </ModalComponent>
+      {/* <ModalComponent
         title={`비밀번호 입력`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
         status="success"
@@ -396,7 +396,7 @@ export default function UiTest() {
             </TestMediumBtn01>
           </>
         }
-      ></ModalComponent>
+      ></ModalComponent> */}
     </UitestWrap>
   );
 }

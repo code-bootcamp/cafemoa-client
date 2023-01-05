@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { DEFAULT_COLOR } from "../default/default";
 
 export const globalStyles = css`
   html,
@@ -35,10 +36,46 @@ export const globalStyles = css`
     text-decoration: none;
     color: #000000;
     cursor: pointer;
+    :hover {
+      color: #000000;
+    }
   }
 
   input {
     border: 0 none;
+  }
+
+  .slick-arrow {
+    width: auto;
+    height: auto;
+  }
+  .slick-next {
+    right: -80px;
+  }
+  .slick-prev {
+    left: -80px;
+  }
+
+  .slick-arrow::before {
+    color: ${DEFAULT_COLOR.mainColor};
+    font-size: 70px;
+  }
+
+  .slick-dots li button:before {
+    content: "";
+    left: 50%;
+    top: 50%;
+    margin-left: -5px;
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: ${DEFAULT_COLOR.mainColor};
+    transition: all 0.4s;
+  }
+  .slick-dots li.slick-active button:before {
+    margin-left: -10px;
+    width: 20px;
   }
 
   @font-face {

@@ -31,6 +31,11 @@ export const GetDate = (value: string) => {
   return "방금 전";
 };
 
+export const GetStamp = (value: number) => {
+  const result = value % 10;
+  return result;
+};
+
 // export const base64toFile = (base_data, filename) => {
 //   let arr = base_data.split(","),
 //     mime = arr[0].match(/:(.*?);/)[1],
