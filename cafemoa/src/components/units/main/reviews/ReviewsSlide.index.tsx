@@ -1,27 +1,18 @@
 import Link from "next/link";
 import Text from "../../../commons/text/01/Text01.index";
 import { v4 as uuidv4 } from "uuid";
-import * as S from "./TodaySlide.styles";
+import * as S from "./ReviewsSlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
 import Slider, { Settings } from "react-slick";
-import { useState } from "react";
+import Card01 from "../../../commons/card/01/Card01.index";
+import Users01 from "../../../commons/user/01/Users01.index";
 
-const NAV_SETTINGS: Settings = {
+const SETTINGS: Settings = {
   autoplay: true,
   infinite: true,
-  slidesToShow: 2,
-  arrows: false,
+  slidesToShow: 3,
+  arrows: true,
   speed: 500,
-  variableWidth: true,
-};
-
-const VIEW_SETTINGS: Settings = {
-  infinite: true,
-  arrows: false,
-  speed: 500,
-  fade: true,
-  draggable: false,
-  adaptiveHeight: true,
 };
 
 const SLIDE_TEST = [
@@ -108,75 +99,49 @@ const SLIDE_TEST = [
   },
 ];
 
-export default function TodaySlide() {
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
-
+export default function ReviewsSlide() {
   return (
-    <S.TodaySlideWrap>
-      <S.TodaySlideInfoWrap>
-        <Slider
-          {...VIEW_SETTINGS}
-          asNavFor={nav2}
-          ref={(slider1) => setNav1(slider1)}
-        >
-          {SLIDE_TEST.map((el, idx) => (
-            <Link href="/" key={uuidv4()}>
-              <a>
-                <S.ImageWrap>
-                  <img src={el.thumbNail} />
-                </S.ImageWrap>
-                <S.InfoWrap>
-                  <div>
-                    <Text size="32" fontColor="white" weight="700">
-                      {el.brandName}
-                    </Text>
-                  </div>
-                  <S.InfoContents>
-                    <Text size="16" fontColor="white" weight="500">
-                      {el.cafeinfo}
-                    </Text>
-                  </S.InfoContents>
-                  <div>
-                    <Text size="16" fontColor="white" weight="500">
-                      {el.cafeAddr}
-                    </Text>
-                  </div>
-                  <div>
-                    {el.cafeTag.map((cur, idx) => (
-                      <Tag key={idx + "asdwd"} size="sm">
-                        {cur}
-                      </Tag>
-                    ))}
-                  </div>
-                </S.InfoWrap>
-              </a>
-            </Link>
-          ))}
-        </Slider>
-      </S.TodaySlideInfoWrap>
-      <S.TodaySlideListsWrap>
-        <Slider
-          {...NAV_SETTINGS}
-          asNavFor={nav1}
-          ref={(slider2) => setNav2(slider2)}
-        >
-          {SLIDE_TEST.map((el, idx) => (
-            <S.SlideItem key={idx}>
-              <S.SlideBtn>
-                <S.ImageWrap>
-                  <img src={el.thumbNail} />
-                </S.ImageWrap>
+    <S.TodaySlideListsWrap>
+      <Slider {...SETTINGS}>
+        {SLIDE_TEST.map((el, idx) => (
+          <S.SlideItem key={idx}>
+            <S.SlideBtn>
+              <Card01 imageUrl="/images/temp/temp01.png">
                 <div>
-                  <Text size="14" fontColor="white">
-                    {el.brandName}
-                  </Text>
+                  <Users01
+                    image="/images/review/review_profile01.png"
+                    name="김덕배"
+                    size="sm"
+                  />
+                  <S.CafeName>
+                    <Text size="24" weight="500">
+                      카페모아
+                    </Text>
+                  </S.CafeName>
+                  <S.ReviewContent>
+                    <Text size="16" weight="300">
+                      정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
+                      가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
+                      먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
+                    </Text>
+                  </S.ReviewContent>
+                  <S.ReviewTag>
+                    <div>
+                      <Tag size="sm">태그</Tag>
+                      <Tag size="sm">태그</Tag>
+                    </div>
+                    <S.ReviewDate>
+                      <Text size="14" weight="300" fontColor="gray">
+                        3일 전
+                      </Text>
+                    </S.ReviewDate>
+                  </S.ReviewTag>
                 </div>
-              </S.SlideBtn>
-            </S.SlideItem>
-          ))}
-        </Slider>
-      </S.TodaySlideListsWrap>
-    </S.TodaySlideWrap>
+              </Card01>
+            </S.SlideBtn>
+          </S.SlideItem>
+        ))}
+      </Slider>
+    </S.TodaySlideListsWrap>
   );
 }

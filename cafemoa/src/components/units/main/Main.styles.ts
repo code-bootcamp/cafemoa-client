@@ -8,11 +8,17 @@ import { IMainStylesProps } from "./Main.types";
 const VisualAnimation = keyframes`
   0% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 0.8;
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.3);
-    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+`;
+const ScrollAni = keyframes`
+  0% {
+    top : 5px
+  }
+  100% {
+    top : 30px
   }
 `;
 
@@ -26,7 +32,7 @@ export const MainVisual = styled.div`
   overflow: hidden;
 `;
 
-export const VisualImage = styled.div<IMainStylesProps>`
+export const VisualImage = styled.div`
   width: 100%;
   height: 100%;
   ::before {
@@ -40,11 +46,7 @@ export const VisualImage = styled.div<IMainStylesProps>`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-image: url("/images/main/img_main_visual01.png"); */
-    background-image: ${(props) =>
-      props.imageNum !== undefined
-        ? `url("/images/main/img_main_visual0${props.imageNum}.png")`
-        : `url("/images/main/img_main_visual01.png")`};
+    background-image: url("/images/main/img_main_visual01.png");
     animation: ${VisualAnimation} 10s linear infinite alternate;
   }
   ::after {
@@ -68,15 +70,49 @@ export const VisualText = styled.div`
   transform: translate(-50%, -50%);
   text-align: center;
 `;
+export const ScrollAnimation = styled.div`
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: 30px;
+  height: 60px;
+  border-radius: 20px;
+  border: 2px solid ${DEFAULT_COLOR.white};
+  transform: translateX(-50%);
+  ::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: ${DEFAULT_COLOR.white};
+    transform: translateX(-50%);
+    animation: ${ScrollAni} 2s ease-in infinite forwards;
+  }
+`;
 export const TodayCafeWrap = styled.div`
   padding: 48px 0;
   background-color: ${DEFAULT_COLOR.subColor01};
 `;
 export const MainSection = styled.div`
   padding: 50px 0;
+  &:nth-of-type(2) {
+    padding-top: 120px;
+  }
 `;
 export const MainSectionInner = styled(ContainerWrap)`
   padding-top: 0 !important;
+`;
+export const MainWrap = styled.div`
+  > div + div {
+    padding-top: 100px;
+  }
+`;
+
+export const SectionTitle = styled.div`
+  padding-bottom: 28px;
 `;
 export const CategoryWrap = styled.div`
   margin: 0 -20px;
@@ -129,12 +165,7 @@ export const Category = styled.div<IMainStylesProps>`
   }
 `;
 
-export const ReviewListsWrap = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0 -20px;
-`;
+export const ReviewListsWrap = styled.div``;
 
 export const ReviewList = styled.li`
   display: block;
@@ -146,24 +177,4 @@ export const ReviewList = styled.li`
   ${mq.MobileM} {
     width: 100%;
   }
-`;
-
-export const CafeName = styled.div`
-  padding-top: 20px;
-`;
-
-export const ReviewContent = styled.div`
-  padding-top: 15px;
-`;
-
-export const ReviewTag = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 21px;
-  width: 100%;
-`;
-
-export const ReviewDate = styled.span`
-  margin-left: 10px;
 `;

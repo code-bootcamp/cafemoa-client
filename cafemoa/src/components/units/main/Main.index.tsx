@@ -4,27 +4,53 @@ import Text from "../../commons/text/01/Text01.index";
 import { MAIN_CATEGORY } from "./Main.category";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./Main.styles";
-import Card01 from "../../commons/card/01/Card01.index";
-import Users01 from "../../commons/user/01/Users01.index";
-import Tag from "../../commons/text/02/Text02.index";
 import TodaySlide from "./today/TodaySlide.index";
-import { useState } from "react";
-import { useInterval } from "../../commons/hooks/customs/useInterval";
+import ReviewsSlide from "./reviews/ReviewsSlide.index";
+import Member from "./authbanners/member/Member.index";
+import { useEffect, useState } from "react";
+import _ from "lodash";
 
 export default function Main() {
-  const [imageNum, setImageNum] = useState(1);
-  useInterval(() => {
-    // console.log(aaa);
-    if (imageNum === 1) {
-      setImageNum((prev) => prev + 1);
-    } else {
-      setImageNum((prev) => prev - 1);
+  const [isScroll, setIsScroll] = useState(false);
+  const handleScroll = _.debounce((event) => {
+    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
+    if (Math.floor(window.scrollY) === 0) setIsScroll(false);
+    const direction = event.deltaY > 0 ? "down" : "up";
+    if (direction === "down") {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+      setIsScroll(true);
     }
-  }, 5000);
+  }, 50);
+
+  useEffect(() => {
+    if (window.innerWidth < 1025) {
+      setIsScroll(true);
+      return;
+    } else {
+      setIsScroll(false);
+    }
+    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) {
+      setIsScroll(true);
+    }
+    window.addEventListener("wheel", handleScroll);
+    return () => window.removeEventListener("wheel", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!isScroll) {
+      document.body.style.cssText = `overflow : hidden`;
+    } else {
+      document.body.style.cssText = `overflow : auto`;
+    }
+  }, [isScroll]);
+
   return (
-    <>
+    <S.MainWrap>
       <S.MainVisual>
-        <S.VisualImage imageNum={imageNum} />
+        <S.VisualImage />
         <S.VisualText>
           <Text size="54" weight="700" fontColor="white">
             쿠폰을 모두 모아
@@ -32,15 +58,23 @@ export default function Main() {
             카페 모아
           </Text>
         </S.VisualText>
+        <S.ScrollAnimation />
       </S.MainVisual>
-      <S.MainSection></S.MainSection>
+      <S.MainSection>
+        <S.MainSectionInner>
+          {/* <NonMember /> */}
+          <Member />
+        </S.MainSectionInner>
+      </S.MainSection>
 
       {/* 태그를 모아 */}
       <S.MainSection>
         <S.MainSectionInner>
-          <Text size="32" weight="700">
-            태그로 카페를 모아
-          </Text>
+          <S.SectionTitle>
+            <Text size="32" weight="700">
+              태그로 카페를 모아
+            </Text>
+          </S.SectionTitle>
           <S.CategoryWrap>
             {MAIN_CATEGORY.map((el) => (
               <S.Category imageUrl={el.imageUrl} key={uuidv4()}>
@@ -61,9 +95,11 @@ export default function Main() {
       <S.MainSection>
         <S.TodayCafeWrap>
           <S.MainSectionInner>
-            <Text size="32" weight="700" fontColor="white">
-              오늘의 카페를 모아
-            </Text>
+            <S.SectionTitle>
+              <Text size="32" weight="700" fontColor="white">
+                오늘의 카페를 모아
+              </Text>
+            </S.SectionTitle>
             <div>
               <TodaySlide />
             </div>
@@ -74,115 +110,16 @@ export default function Main() {
       {/* 리뷰를 모아 */}
       <S.MainSection>
         <S.MainSectionInner>
-          <Text size="32" weight="700">
-            카페의 리뷰 모아
-          </Text>
+          <S.SectionTitle>
+            <Text size="32" weight="700">
+              카페의 리뷰 모아
+            </Text>
+          </S.SectionTitle>
           <S.ReviewListsWrap>
-            <S.ReviewList>
-              <Card01 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <Users01
-                    image="/images/review/review_profile01.png"
-                    name="김덕배"
-                    size="sm"
-                  />
-                  <S.CafeName>
-                    <Text size="24" weight="500">
-                      카페모아
-                    </Text>
-                  </S.CafeName>
-                  <S.ReviewContent>
-                    <Text size="16" weight="300">
-                      정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
-                      가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
-                      먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
-                    </Text>
-                  </S.ReviewContent>
-                  <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        3일 전
-                      </Text>
-                    </S.ReviewDate>
-                  </S.ReviewTag>
-                </div>
-              </Card01>
-            </S.ReviewList>
-            <S.ReviewList>
-              <Card01 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <Users01
-                    image="/images/review/review_profile01.png"
-                    name="김덕배"
-                    size="sm"
-                  />
-                  <S.CafeName>
-                    <Text size="24" weight="500">
-                      카페모아
-                    </Text>
-                  </S.CafeName>
-                  <S.ReviewContent>
-                    <Text size="16" weight="300">
-                      정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
-                      가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
-                      먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
-                    </Text>
-                  </S.ReviewContent>
-                  <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        3일 전
-                      </Text>
-                    </S.ReviewDate>
-                  </S.ReviewTag>
-                </div>
-              </Card01>
-            </S.ReviewList>
-            <S.ReviewList>
-              <Card01 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <Users01
-                    image="/images/review/review_profile01.png"
-                    name="김덕배"
-                    size="sm"
-                  />
-                  <S.CafeName>
-                    <Text size="24" weight="500">
-                      카페모아
-                    </Text>
-                  </S.CafeName>
-                  <S.ReviewContent>
-                    <Text size="16" weight="300">
-                      정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
-                      가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
-                      먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
-                    </Text>
-                  </S.ReviewContent>
-                  <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        3일 전
-                      </Text>
-                    </S.ReviewDate>
-                  </S.ReviewTag>
-                </div>
-              </Card01>
-            </S.ReviewList>
+            <ReviewsSlide />
           </S.ReviewListsWrap>
         </S.MainSectionInner>
       </S.MainSection>
-    </>
+    </S.MainWrap>
   );
 }

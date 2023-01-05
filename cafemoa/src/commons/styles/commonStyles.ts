@@ -19,6 +19,10 @@ interface IButtonColorTypes {
     bgColor: string;
     borderColor: string;
   };
+  black?: {
+    bgColor: string;
+    borderColor: string;
+  };
   [prop: string]: any;
 }
 
@@ -38,6 +42,10 @@ const BUTTON_COLOR: IButtonColorTypes = {
   brownLine: {
     bgColor: "transparent",
     borderColor: "#69473E",
+  },
+  black: {
+    bgColor: "#000000",
+    borderColor: "#000000",
   },
 };
 
