@@ -1,16 +1,24 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { stubArray } from "lodash";
-import { DefaultContext } from "react-icons/lib";
+import { Tabs } from "antd";
 import { DEFAULT_COLOR } from "../../../commons/default/default";
 import { ContainerWrap, MediumBtn } from "../../../commons/styles/commonStyles";
+import * as mq from "../../../commons/styles/mediaQuery";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  ${mq.MobileL} {
+    padding: 0 6.25%;
+  }
+  /* ${mq.MobileM} {
+    padding: 0;
+  } */
+`;
 
 export const LoginButton = styled(MediumBtn)`
   padding-top: 8px;
   padding-bottom: 8px;
 `;
+
 export const Wrapper = styled.section`
   display: flex;
   justify-content: center;
@@ -19,6 +27,9 @@ export const Wrapper = styled.section`
   height: 100vh;
   background: #ccc;
   background-size: cover;
+  ${mq.MobileL} {
+    background-color: ${DEFAULT_COLOR.subColor04};
+  }
 `;
 
 export const LoginContainer = styled.div`
@@ -32,6 +43,10 @@ export const OptionsContainer = styled.div`
   background-color: ${DEFAULT_COLOR.subColor04};
   border-radius: 3px;
   padding: 25px 0;
+
+  ${mq.MobileL} {
+    background-color: transparent;
+  }
 `;
 
 export const OptionsRegister = styled.div`
@@ -42,6 +57,10 @@ export const OptionsRegister = styled.div`
   color: ${DEFAULT_COLOR.white};
   font-weight: 300;
   padding: 50px 45px;
+
+  ${mq.MobileL} {
+    display: none;
+  }
 `;
 
 export const OptionsDetail = styled.div`
@@ -86,6 +105,59 @@ export const FormsContainer = styled.div`
       : css`
           transform: translate3d(100%, -50%, 0);
         `}
+
+  ${mq.MobileL} {
+    display: none;
+  }
+`;
+
+export const MobileLWrapper = styled.div`
+  display: none;
+
+  ${mq.MobileL} {
+    display: block;
+    background-color: ${DEFAULT_COLOR.white};
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
+
+export const MqFormsContainer = styled.div`
+  ${mq.MobileL} {
+    border-radius: 3px;
+  }
+`;
+
+export const TapWrap = styled(Tabs)`
+  .ant-tabs-nav::before {
+    display: none;
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: ${DEFAULT_COLOR.mainColor};
+    transform: scale(1);
+  }
+
+  .ant-tabs-tab + .ant-tabs-tab {
+    margin-left: 16px;
+  }
+
+  .ant-tabs-tab-btn {
+    font-size: 20px;
+    color: ${DEFAULT_COLOR.gray};
+    transform: scale(0.8);
+  }
+
+  .ant-tabs-ink-bar {
+    background: none;
+  }
+
+  .ant-tabs-content {
+    padding-top: 16px;
+  }
+
+  .ant-tabs-top > .ant-tabs-nav::before {
+    border-bottom: none;
+  }
 `;
 
 export const RegistForms = styled.div`
@@ -97,6 +169,11 @@ export const RegistForms = styled.div`
   transition: opacity 0.4s ease-in-out,
     visibility 0.4s ease-in-out transform 0.5s ease-in-out;
   transform: translate3d(0, 0, 0);
+  ${mq.MobileL} {
+    position: static;
+    padding: 100px;
+    width: 100%;
+  }
 `;
 
 export const FormTitle = styled.div`

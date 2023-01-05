@@ -5,7 +5,6 @@ import {
   MediumBtn,
   SmallBtn,
 } from "../../../../../commons/styles/commonStyles";
-import Input01 from "../../../../commons/input/01/Input01.index";
 
 export const SaveButton = styled(SmallBtn)``;
 
