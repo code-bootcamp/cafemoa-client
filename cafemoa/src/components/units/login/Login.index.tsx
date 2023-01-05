@@ -1,72 +1,15 @@
-import { Modal } from "antd";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/stores";
-import { useUserLogin } from "../../commons/hooks/mutation/useUserLogin";
-import Input02 from "../../commons/input/02/Input02.index";
 import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Login.styles";
-
-interface IFormLogin {
-  email: string;
-  password: string;
-}
+import UserLogin from "./UserLogin.index";
+import OwnerLogin from "./OwnerLogin.index";
 
 export default function Login() {
-  const router = useRouter();
-  const [, setAccessToken] = useRecoilState(accessTokenState);
   const [bounce, setBounce] = useState("right");
-  const [userLogin] = useUserLogin();
-  const { register, handleSubmit, formState } = useForm({
-    // resolver: yupResolver(ProductSchema),
-    mode: "onChange",
-  });
 
   const onCLickPartner = (dir: string) => () => {
     setBounce(dir);
   };
-  // console.log(bounce);
-
-  // 일반회원 로그인
-  const onClickUserLogin = async (data: IFormLogin) => {
-    console.log(data);
-
-    try {
-      const result = await userLogin({
-        variables: {
-          ...data,
-        },
-      });
-
-      console.log(result.data?.userLogin);
-      const accessToken = result.data?.userLogin;
-
-      if (accessToken === undefined) {
-        Modal.warning({
-          content: "로그인 후 이용해주세요.",
-        });
-        return;
-      }
-
-      setAccessToken(accessToken);
-      Modal.success({
-        content: "환영합니다! 카페모아입니다!",
-        afterClose() {
-          void router.push("/cafe");
-        },
-      });
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
-
-  // 파트너사 로그인
-  const onClickParterLogin = () => {};
-
-  // 비밀번호 찾기
-  const onClickFindPw = () => {};
 
   return (
     <S.Wrapper>
@@ -124,53 +67,34 @@ export default function Login() {
               </S.OptionsButtonWrap>
             </S.OptionsRegister>
           </S.OptionsContainer>
-
           <S.FormsContainer dir={bounce}>
             <S.RegistForms>
-              <S.FormTitle>
-                <Text size="32" weight="500">
-                  {bounce === "left" ? "파트너사 로그인" : "일반회원 로그인"}
-                </Text>
-              </S.FormTitle>
-              <form
-                onSubmit={
-                  bounce === "left"
-                    ? handleSubmit(onClickParterLogin)
-                    : handleSubmit(onClickUserLogin)
-                }
-              >
-                <div>
-                  <S.FormsField>
-                    <Input02
-                      type="text"
-                      name="email"
-                      register={register("email")}
-                    />
-                  </S.FormsField>
-                  <S.FormsField>
-                    <Input02
-                      type="password"
-                      name="password"
-                      register={register("password")}
-                    />
-                  </S.FormsField>
-                </div>
-                <S.FormsButtonsWrapper>
-                  <S.FindPassword type="button" onClick={onClickFindPw}>
-                    <Text size="16" weight="300" fontColor="gray">
-                      비밀번호를 잊으셨나요?
-                    </Text>
-                  </S.FindPassword>
-                  <S.LoginButton color="brown">
-                    <Text size="20" weight="300" fontColor="white">
-                      로그인
-                    </Text>
-                  </S.LoginButton>
-                </S.FormsButtonsWrapper>
-              </form>
+              {bounce === "left" ? <OwnerLogin /> : <UserLogin />}
             </S.RegistForms>
           </S.FormsContainer>
         </S.LoginContainer>
+
+        <S.MobileLWrapper>
+          <S.MqFormsContainer>
+            <S.RegistForms>
+              <S.TapWrap
+                defaultActiveKey="1"
+                items={[
+                  {
+                    label: "일반회원",
+                    key: "1",
+                    children: <UserLogin />,
+                  },
+                  {
+                    label: "파트너사",
+                    key: "2",
+                    children: <OwnerLogin />,
+                  },
+                ]}
+              />
+            </S.RegistForms>
+          </S.MqFormsContainer>
+        </S.MobileLWrapper>
       </S.ContainerWrapper>
     </S.Wrapper>
   );
