@@ -27,6 +27,21 @@ export default function SignUpCafeInfo() {
       adminPasswordCheck: "",
     },
   });
+
+  // prettier-ignore
+  const modules = {
+    toolbar:[
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'font': [] }],
+          [{ 'align': [] }],
+          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }, 'link'],
+          [{ 'color': ['#000000', '#e60000', '#ff9900', '#ffff00', '#008a00', '#0066cc', '#9933ff', '#ffffff', '#facccc', '#ffebcc', '#ffffcc', '#cce8cc', '#cce0f5', '#ebd6ff', '#bbbbbb', '#f06666', '#ffc266', '#ffff66', '#66b966', '#66a3e0', '#c285ff', '#888888', '#a10000', '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2', '#444444', '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466', 'custom-color'] }, { 'background': [] }],
+          ['image', 'video'],
+          ['clean']  
+        ],
+  };
+
   const onSignUpSubmit = (data) => {
     console.log(data);
   };
@@ -43,12 +58,13 @@ export default function SignUpCafeInfo() {
             카페 소개
           </Text>
         </S.ContentsTitleWrap>
-        <div style={{ paddingTop: "40px", marginBottom: "40px" }}>
+        <div style={{ padding: "40px 0px", paddingBottom: "60px" }}>
           <ReactQuill
             style={{
               width: "100%",
               height: "300px",
             }}
+            modules={modules}
           />
         </div>
         <S.ContentsTitleWrap>
@@ -56,6 +72,15 @@ export default function SignUpCafeInfo() {
             운영시간 및 휴무일
           </Text>
         </S.ContentsTitleWrap>
+        <div style={{ padding: "40px 0px", paddingBottom: "60px" }}>
+          <ReactQuill
+            style={{
+              width: "100%",
+              height: "300px",
+            }}
+            modules={modules}
+          />
+        </div>
         <S.ContentsTitleWrap>
           <Text size="20" fontColor="subColor01">
             메뉴 이미지
