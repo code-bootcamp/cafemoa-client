@@ -6,13 +6,14 @@ import { SignUpCafeInfoSchema } from "./SignupCafeInfo.validation";
 import TempCafeInfoMenuImages from "./imageupload/menu/TempCafeInfoMenuImages";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import Input02 from "../../commons/input/02/Input02.index";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 
 export default function SignUpCafeInfo() {
-  const { register, handleSubmit, watch, formState } = useForm({
+  const { register, handleSubmit, watch, setValue, formState } = useForm({
     resolver: yupResolver(SignUpCafeInfoSchema),
     mode: "onChange",
     defaultValues: {
@@ -45,6 +46,13 @@ export default function SignUpCafeInfo() {
   const onSignUpSubmit = (data) => {
     console.log(data);
   };
+  const onClickAddress = () => {
+    setValue("address", "asdadasdasd", { shouldValidate: true });
+  };
+  const onClickBusiness = () => {
+    setValue("businessName", "카페모아", { shouldValidate: true });
+    setValue("businessNumber", "13-76005083", { shouldValidate: true });
+  };
   return (
     <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
       <S.ContainerInner>
@@ -53,6 +61,48 @@ export default function SignUpCafeInfo() {
             카페정보 입력
           </Text>
         </S.TitleWrap>
+        <S.InputWrap>
+          <Input02
+            type="text"
+            name="카페 상호명"
+            register={register("cafeName")}
+          />
+        </S.InputWrap>
+        <S.BusinessBtnWrap>
+          <S.BusinessBtn type="button" color="beige" onClick={onClickBusiness}>
+            <Text size="16">사업자 인증하기</Text>
+          </S.BusinessBtn>
+        </S.BusinessBtnWrap>
+        <S.InputWrap>
+          <Input02
+            type="text"
+            name="사업자명"
+            register={register("businessName")}
+            isValid={watch("businessName").length !== 0}
+            readOnly={true}
+          />
+        </S.InputWrap>
+        <S.InputWrap>
+          <Input02
+            type="text"
+            name="사업자 등록번호"
+            register={register("businessNumber")}
+            isValid={watch("businessNumber").length !== 0}
+            readOnly={true}
+          />
+        </S.InputWrap>
+        <S.InputWrap>
+          <Input02
+            type="text"
+            name="주소"
+            register={register("address")}
+            isValid={watch("address").length !== 0}
+            readOnly={true}
+          />
+          <S.AddrBtn type="button" color="beige" onClick={onClickAddress}>
+            <Text size="16">주소 검색</Text>
+          </S.AddrBtn>
+        </S.InputWrap>
         <S.ContentsTitleWrap>
           <Text size="20" fontColor="subColor01">
             카페 소개

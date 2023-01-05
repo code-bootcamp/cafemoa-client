@@ -6,7 +6,7 @@ import {
   ContainerWrap,
   LargeBtn,
   MediumBtn,
-  SmallBtn
+  SmallBtn,
 } from "../../../commons/styles/commonStyles";
 
 interface ISignupStylesProps {
@@ -25,7 +25,7 @@ export const ContainerInner = styled.form`
 export const TitleWrap = styled.div`
   position: relative;
   padding-bottom: 24px;
-  margin-bottom: 50px;
+  margin-bottom: 56px;
   ::after {
     content: "";
     position: absolute;
@@ -83,20 +83,27 @@ export const InputWrapAdminPassword = styled.div`
         border-radius: 10px;
       }
     `}
-`
+`;
 export const ContentsTitleWrap = styled.div`
- padding-top: 20px;
- padding-bottom: 20px;
- border-bottom: 3px solid ${DEFAULT_COLOR.subColor04}
-`
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid ${DEFAULT_COLOR.subColor04};
+`;
 export const CafeImageContainer = styled.div`
- display: flex;
- flex-wrap: wrap;
-`
+  display: flex;
+  flex-wrap: wrap;
+`;
 export const CafeImageWrap = styled.div`
- width: 25%;
- padding: 10px;
-`
+  width: 25%;
+  padding: 10px;
+`;
+export const BusinessBtnWrap = styled.div`
+  padding-bottom: 40px;
+  > button {
+    width: 180px;
+    border-radius: 10px;
+  }
+`;
 export const EmailBtn = styled(MediumBtn)``;
 export const PhoneBtn = styled(MediumBtn)``;
 export const BusinessBtn = styled(MediumBtn)``;

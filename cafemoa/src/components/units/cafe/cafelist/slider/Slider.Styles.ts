@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 interface ISlideStylesProps {
   isActive: boolean;
@@ -37,6 +38,22 @@ export const SlideWrapper = styled.div<ISlideStylesProps>`
         transform: translateX(-45px) translateY(60px);
       }
     `}
+  ${mq.MobileM} {
+    ${(props) =>
+      props.isActive &&
+      css`
+        ${CafeImage} {
+          transform: scale(1.2);
+        }
+        ${CafeContent} {
+          opacity: 0;
+        }
+      `}
+    ${mq.MobileS} {
+      width: 0%;
+      height: 0%;
+    }
+  }
 `;
 
 export const StyledSlider = styled(Slider)`

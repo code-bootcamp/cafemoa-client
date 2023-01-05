@@ -15,6 +15,7 @@ export default function SignUp() {
     mode: "onChange",
     defaultValues: {
       name: "",
+      nickname: "",
       email: "",
       password: "",
       passwordCheck: "",
@@ -24,7 +25,10 @@ export default function SignUp() {
     },
   });
   const onSignUpSubmit = (data: any) => {
-    void createUserSubmit(data);
+    console.log(data);
+    const { passwordCheck, ...value } = data;
+    console.log(value);
+    void createUserSubmit(value);
     void router.push("/");
   };
   const onClickAddress = () => {
@@ -40,6 +44,9 @@ export default function SignUp() {
         </S.TitleWrap>
         <S.InputWrap>
           <Input02 type="text" name="이름" register={register("name")} />
+        </S.InputWrap>
+        <S.InputWrap>
+          <Input02 type="text" name="닉네임" register={register("nickname")} />
         </S.InputWrap>
         <S.InputWrap>
           <Input02 type="text" name="이메일" register={register("email")} />
