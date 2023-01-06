@@ -1,12 +1,13 @@
 import { gql, useQuery } from "@apollo/client";
 import _ from "lodash";
+import { useEffect, useState } from "react";
 import {
   IQuery,
   IQueryFetchCafesArgs,
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_CAFES = gql`
-  query fetchCafes($Location: String, $Tags: [String!], $page: Float!) {
+  query fetchCafes($Location: String, $Tags: [String!], $page: Int!) {
     fetchCafes(Location: $Location, Tags: $Tags, page: $page) {
       id
       cafeinfo
@@ -25,6 +26,8 @@ export const FETCH_CAFES = gql`
 `;
 
 export const useFetchCafes = () => {
+  const [tagState, setTagState] = useState<string[]>([]);
+  const [locationState, setLocationState] = useState<string>("");
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchCafes">,
     IQueryFetchCafesArgs
@@ -36,13 +39,20 @@ export const useFetchCafes = () => {
     },
   });
 
-  const getDebounce = _.debounce((tagValue, LocationValues) => {
-    void refetch({ Tags: tagValue, Location: LocationValues });
-  }, 500);
+  const getDebounce = _.debounce((tagValue) => {
+    setTagState(tagValue);
+  }, 300);
 
-  const onRefetchCafes = (tagValue: string[], LocationValues: string) => {
-    getDebounce(tagValue, LocationValues);
+  const onRefetchCafes = (Tags: string[]) => {
+    getDebounce(Tags);
   };
 
-  return { data, onRefetchCafes };
+  const onSelectLocation = (location: string) => {
+    setLocationState(location);
+  };
+
+  useEffect(() => {
+    void refetch({ Tags: tagState, Location: locationState });
+  }, [tagState, locationState]);
+  return { data, onRefetchCafes, onSelectLocation };
 };

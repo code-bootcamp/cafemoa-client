@@ -7,7 +7,7 @@ import Tag from "../../../commons/text/02/Text02.index";
 import Text from "../../../commons/text/01/Text01.index";
 import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TAG_VALUES } from "../../../../commons/default/default";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 
@@ -27,7 +27,7 @@ const SELECT_VALUES02 = [
 export default function CafeList() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
-  const { data, onRefetchCafes } = useFetchCafes();
+  const { data, onRefetchCafes, onSelectLocation } = useFetchCafes();
   console.log(selectValue);
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
@@ -37,7 +37,6 @@ export default function CafeList() {
       const idx = tagArr.indexOf(value);
       tagArr.splice(idx, 1);
       setSelectTag([...tagArr]);
-      onRefetchCafes(selectTag, "");
       return;
     }
     if (tagArr.length >= 3) {
@@ -45,9 +44,12 @@ export default function CafeList() {
     }
     tagArr.push(value);
     setSelectTag([...tagArr]);
-    onRefetchCafes(selectTag, selectValue);
   };
 
+  useEffect(() => {
+    onSelectLocation(selectValue);
+    onRefetchCafes(selectTag);
+  }, [selectValue, selectTag]);
   return (
     <>
       <HeroWrap
@@ -96,7 +98,6 @@ export default function CafeList() {
                       <Tag size="sm">{el.cafeTag[2].tagName}</Tag>
                     </div>
                   </div>
-                  <div></div>
                 </div>
               </Card02>
             </S.CardBox>
