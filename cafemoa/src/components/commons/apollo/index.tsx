@@ -24,9 +24,11 @@ export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const aaa = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
+  console.log(aaa);
   useEffect(() => {
     // const result = localStorage.getItem("accessToken") ?? "";
     void aaa.toPromise().then((newAccessToken) => {
+      console.log(newAccessToken);
       setAccessToken(newAccessToken);
     });
   }, []);

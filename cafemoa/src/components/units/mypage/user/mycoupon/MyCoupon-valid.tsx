@@ -4,12 +4,26 @@ import Text from "../../../../commons/text/01/Text01.index";
 import Input01 from "../../../../commons/input/01/Input01.index";
 import { useForm } from "react-hook-form";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+
+interface IFormOwnerPassword {
+  password: string;
+}
 
 export default function MyCouponValid() {
   const { ModalComponent, onClickIsModalOpen } = MessageModal();
 
-  const { register, handleSubmit } = useForm();
-  const onModalSubmit = (data) => {
+  const { data } = useFetchUserCoupons();
+  console.log(data);
+
+  const { register, handleSubmit } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+    },
+  });
+
+  const onModalSubmit = (data: IFormOwnerPassword) => {
     console.log(data);
   };
 
@@ -18,8 +32,7 @@ export default function MyCouponValid() {
       <ModalComponent
         title={`쿠폰 사용`}
         text={`해당 쿠폰을 사용 하시겠습니까? \n 
-        쿠폰 사용 처리를 위해서 \n 가맹주 비밀번호를 입력해주세요. `}
-        hasInput={true}
+        쿠폰 사용 처리를 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
         status="write"
         buttons={
           <>

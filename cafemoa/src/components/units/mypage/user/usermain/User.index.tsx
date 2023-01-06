@@ -2,11 +2,13 @@ import { useRouter } from "next/router";
 import { AiOutlineSetting } from "react-icons/ai";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import { useFetchMyPickLists } from "../../../../commons/hooks/queries/useFetchMyPickLists";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 import Text from "../../../../commons/text/01/Text01.index";
 import Users01 from "../../../../commons/user/01/Users01.index";
 import * as S from "./User.styles";
 
-export default function UserMain() {
+export default function UserMain(props: any) {
   const router = useRouter();
 
   const onClickMystamp = () => {
@@ -25,6 +27,11 @@ export default function UserMain() {
     void router.push("/mypage/user/myreview");
   };
 
+  const { data: myCouponData } = useFetchUserCoupons();
+  const { data: myPickData } = useFetchMyPickLists();
+
+  console.log(myCouponData);
+  console.log(myPickData);
   return (
     <>
       <HeroWrap

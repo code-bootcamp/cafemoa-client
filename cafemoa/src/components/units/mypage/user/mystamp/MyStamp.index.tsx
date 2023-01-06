@@ -5,20 +5,25 @@ import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import Select01 from "../../../../commons/select/01/Select01.index";
 import Box01 from "../../../../commons/box/01/Box01.index";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+
+const SELECT_VALUES02 = [
+  { label: "서울시", value: "서울" },
+  { label: "경기도", value: "경기" },
+  { label: "강원도", value: "강원" },
+  { label: "충청북도", value: "충북" },
+  { label: "충청남도", value: "충남" },
+  { label: "전라북도", value: "전북" },
+  { label: "전라남도", value: "전남" },
+  { label: "경상북도", value: "경북" },
+  { label: "경상남도", value: "경남" },
+  { label: "제주도", value: "제주도" },
+];
 
 export default function MyStamp() {
-  const SELECT_VALUES02 = [
-    { label: "서울시", value: "서울" },
-    { label: "경기도", value: "경기" },
-    { label: "강원도", value: "강원" },
-    { label: "충청북도", value: "충북" },
-    { label: "충청남도", value: "충남" },
-    { label: "전라북도", value: "전북" },
-    { label: "전라남도", value: "전남" },
-    { label: "경상북도", value: "경북" },
-    { label: "경상남도", value: "경남" },
-    { label: "제주도", value: "제주도" },
-  ];
+  const { data } = useFetchUserCoupons();
+  console.log(data);
+  console.log(20 % 10);
 
   return (
     <>
@@ -52,110 +57,41 @@ export default function MyStamp() {
             </S.Search>
           </S.AreaWrapper>
           <S.StampContainer>
-            <S.StampWrapper>
-              <Box01>
-                <div>
-                  <S.StampInfoWrapper>
-                    <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="subColor01">
-                        카페한번모아
-                      </Text>
-                      <Text size="16" weight="300" fontColor="gray">
-                        1/10
-                      </Text>
-                    </S.StampInfo>
-                    <S.IconWrap>
-                      <TbTrash />
-                    </S.IconWrap>
-                  </S.StampInfoWrapper>
-                  <S.Stamp>
-                    {new Array(10).fill(1).map((el, index) => (
-                      <S.IconWrap2 key={index}>
-                        <CgCoffee />
-                      </S.IconWrap2>
-                    ))}
-                  </S.Stamp>
-                </div>
-              </Box01>
-            </S.StampWrapper>
-            <S.StampWrapper>
-              <Box01>
-                <div>
-                  <S.StampInfoWrapper>
-                    <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="subColor01">
-                        카페한번모아
-                      </Text>
-                      <Text size="16" weight="300" fontColor="gray">
-                        1/10
-                      </Text>
-                    </S.StampInfo>
-                    <S.IconWrap>
-                      <TbTrash />
-                    </S.IconWrap>
-                  </S.StampInfoWrapper>
-                  <S.Stamp>
-                    {new Array(10).fill(1).map((el, index) => (
-                      <S.IconWrap2 key={index}>
-                        <CgCoffee />
-                      </S.IconWrap2>
-                    ))}
-                  </S.Stamp>
-                </div>
-              </Box01>
-            </S.StampWrapper>
-            <S.StampWrapper>
-              <Box01>
-                <div>
-                  <S.StampInfoWrapper>
-                    <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="subColor01">
-                        카페한번모아
-                      </Text>
-                      <Text size="16" weight="300" fontColor="gray">
-                        1/10
-                      </Text>
-                    </S.StampInfo>
-                    <S.IconWrap>
-                      <TbTrash />
-                    </S.IconWrap>
-                  </S.StampInfoWrapper>
-                  <S.Stamp>
-                    {new Array(10).fill(1).map((el, index) => (
-                      <S.IconWrap2 key={index}>
-                        <CgCoffee />
-                      </S.IconWrap2>
-                    ))}
-                  </S.Stamp>
-                </div>
-              </Box01>
-            </S.StampWrapper>
-            <S.StampWrapper>
-              <Box01>
-                <div>
-                  <S.StampInfoWrapper>
-                    <S.StampInfo>
-                      <Text size="24" weight="500" fontColor="subColor01">
-                        카페한번모아
-                      </Text>
-                      <Text size="16" weight="300" fontColor="gray">
-                        1/10
-                      </Text>
-                    </S.StampInfo>
-                    <S.IconWrap>
-                      <TbTrash />
-                    </S.IconWrap>
-                  </S.StampInfoWrapper>
-                  <S.Stamp>
-                    {new Array(10).fill(1).map((el, index) => (
-                      <S.IconWrap2 key={index}>
-                        <CgCoffee />
-                      </S.IconWrap2>
-                    ))}
-                  </S.Stamp>
-                </div>
-              </Box01>
-            </S.StampWrapper>
+            {data?.fetchUserCoupons.map((el) => (
+              <S.StampWrapper key={el.id}>
+                <Box01>
+                  <div>
+                    <S.StampInfoWrapper>
+                      <S.StampInfo>
+                        <Text size="24" weight="500" fontColor="subColor01">
+                          {el.cafeInform.brandName}
+                        </Text>
+                        <Text size="16" weight="300" fontColor="gray">
+                          {el.stamp % 10}/10
+                        </Text>
+                      </S.StampInfo>
+                      <S.IconWrap>
+                        <TbTrash />
+                      </S.IconWrap>
+                    </S.StampInfoWrapper>
+                    <S.Stamp>
+                      {new Array(el.stamp % 10).fill(1).map((_, index) => (
+                        <S.ValidStampWrap key={index} isStamp={true}>
+                          <CgCoffee />
+                        </S.ValidStampWrap>
+                      ))}
+                      {new Array(10 - (el.stamp % 10))
+                        .fill(1)
+                        .map((_, index) => (
+                          <S.IconWrap2 key={index} isStamp={true}>
+                            <CgCoffee key={index} />
+                          </S.IconWrap2>
+                        ))}
+                    </S.Stamp>
+                  </div>
+                </Box01>
+              </S.StampWrapper>
+            ))}
           </S.StampContainer>
         </S.Container>
       </S.ContainerWrapper>
