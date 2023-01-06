@@ -1,4 +1,3 @@
-// import { useInterval } from "../../commons/hooks/customs/useInterval";
 import Link from "next/link";
 import Text from "../../commons/text/01/Text01.index";
 import { MAIN_CATEGORY } from "./Main.category";

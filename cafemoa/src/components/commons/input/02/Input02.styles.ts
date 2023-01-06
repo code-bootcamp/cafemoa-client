@@ -30,7 +30,6 @@ export const InputWrap = styled.div<IInput02StylesProps>`
     border-bottom: 1.5px solid #69473e;
   }
   & > input:focus + label {
-    left: -6px;
     transform: translateY(-50%);
     padding: 0;
     font-size: 12px;
@@ -46,7 +45,6 @@ export const InputWrap = styled.div<IInput02StylesProps>`
         border-bottom: 1.5px solid #69473e;
       }
       & > input + label {
-        left: -6px;
         transform: translateY(-50%);
         padding: 0;
         font-size: 12px;

@@ -4,3 +4,15 @@ export interface IFormSignUpData {
   name: string;
   passwordCheck: string;
 }
+
+export interface IFormCreateUserData {
+  name: string;
+  nickname: string;
+  email: string;
+  // personalNumber: string;
+  phoneNumber: string;
+  password: string;
+  passwordCheck: string;
+  address?: string;
+  profileImage?: string;
+}
