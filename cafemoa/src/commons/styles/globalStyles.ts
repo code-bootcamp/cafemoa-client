@@ -19,6 +19,13 @@ export const globalStyles = css`
     text-align: left;
     font-size: 16px;
     cursor: pointer;
+    :disabled {
+      background-color: #8b8b8b !important;
+      color: #ffffff !important;
+      > * {
+        color: #ffffff !important;
+      }
+    }
   }
 
   ul,

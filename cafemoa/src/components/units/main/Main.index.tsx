@@ -49,7 +49,14 @@ export default function Main() {
   return (
     <S.MainWrap>
       <S.MainVisual>
-        <S.VisualImage />
+        <S.VideoWrap>
+          <S.VisualVideo
+            src="/images/main/img_main_visual.mp4"
+            autoPlay
+            muted
+            loop
+          />
+        </S.VideoWrap>
         <S.VisualText>
           <Text size="54" weight="700" fontColor="white">
             쿠폰을 모두 모아

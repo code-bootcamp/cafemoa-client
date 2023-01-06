@@ -1,10 +1,11 @@
 import Box01 from "../../../../commons/box/01/Box01.index";
 import Text from "../../../../commons/text/01/Text01.index";
-import { QRCodeSVG } from "qrcode.react";
+import { QRCode } from "react-qrcode-logo";
 import * as S from "./Member.styles";
 import { useState } from "react";
 import MemberStamp from "./Member-stamp";
 import MemberCoupon from "./Member-coupon";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 
 export default function Member() {
   const [userQrCode, setUserQrCode] = useState("https://naver.com");
@@ -18,7 +19,27 @@ export default function Member() {
       >
         <S.BannerWrap>
           <S.BannerLeft>
-            <QRCodeSVG level="M" size={400} value={userQrCode} />,
+            <QRCode
+              size={400}
+              logoImage="/images/main/img_qr.png"
+              quietZone={20}
+              fgColor={DEFAULT_COLOR.mainColor}
+              eyeColor={{
+                // top/left eye
+                outer: `${DEFAULT_COLOR.subColor01 ?? ""}`,
+                inner: `${DEFAULT_COLOR.mainColor ?? ""}`,
+              }}
+              eyeRadius={[
+                [10, 10, 0, 10], // top/left eye
+                [10, 10, 10, 0], // top/right eye
+                [10, 0, 10, 10], // bottom/left
+              ]}
+              qrStyle="dots"
+              logoWidth={230}
+              logoOpacity={0.4}
+              value={userQrCode}
+            />
+            ,
           </S.BannerLeft>
           <S.BannerRight>
             <div>

@@ -17,7 +17,7 @@ interface IFormCreateUserData {
 
 export const CREATE_USER = gql`
   mutation createUser($createUserInput: CreateUserInput!) {
-    createUserInput(createUserInput: $createUserInput) {
+    createUser(createUserInput: $createUserInput) {
       id
     }
   }
@@ -35,6 +35,7 @@ export const useCreateUser = () => {
         variables: {
           createUserInput: {
             ...data,
+            personalNumber: "",
           },
         },
       });
