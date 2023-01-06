@@ -96,6 +96,7 @@ export default function CafeList() {
                       <Tag size="sm">{el.cafeTag[2].tagName}</Tag>
                     </div>
                   </div>
+                  <div></div>
                 </div>
               </Card02>
             </S.CardBox>
