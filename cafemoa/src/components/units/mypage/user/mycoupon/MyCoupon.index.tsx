@@ -3,8 +3,11 @@ import Text from "../../../../commons/text/01/Text01.index";
 import MyCouponInvalid from "./MyCoupon-invalid";
 import MyCouponValid from "./MyCoupon-valid";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 
 export default function MyCoupon() {
+  const { data } = useFetchUserCoupons(1);
+  console.log(data);
   return (
     <>
       <HeroWrap
@@ -26,7 +29,7 @@ export default function MyCoupon() {
               {
                 label: "사용가능 쿠폰",
                 key: "1",
-                children: <MyCouponValid />,
+                children: <MyCouponValid data={data} />,
               },
               {
                 label: "사용완료 쿠폰",
