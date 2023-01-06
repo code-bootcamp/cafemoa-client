@@ -15,4 +15,6 @@ export interface IFormCreateUserData {
   passwordCheck: string;
   address?: string;
   profileImage?: string;
+  emailAccess?: string;
+  phoneAccess?: number;
 }

@@ -5,14 +5,6 @@ import { ContainerWrap } from "../../../commons/styles/commonStyles";
 import * as mq from "../../../commons/styles/mediaQuery";
 import { IMainStylesProps } from "./Main.types";
 
-const VisualAnimation = keyframes`
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-`;
 const ScrollAni = keyframes`
   0% {
     top : 5px
@@ -31,8 +23,7 @@ export const MainVisual = styled.div`
   height: calc(100vh - 100px);
   overflow: hidden;
 `;
-
-export const VisualImage = styled.div`
+export const VideoWrap = styled.div`
   width: 100%;
   height: 100%;
   ::before {
@@ -42,25 +33,27 @@ export const VisualImage = styled.div`
     top: 50%;
     width: 100%;
     height: 100%;
-    transform: translate(-50%, -50%) scale(1);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("/images/main/img_main_visual01.png");
-    animation: ${VisualAnimation} 10s linear infinite alternate;
-  }
-  ::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    transform: translate(-50%, -50%);
     background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.7) 0%,
       rgba(255, 255, 255, 0) 100%
     );
+  }
+`;
+
+export const VisualVideo = styled.video`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  min-width: 1400px;
+  transform: translate(-50%, -50%);
+  ${mq.MobileM} {
+    left: 20%;
+  }
+  ${mq.MobileS} {
+    height: 100%;
   }
 `;
 export const VisualText = styled.div`

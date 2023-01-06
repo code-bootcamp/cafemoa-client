@@ -9,7 +9,7 @@ interface IDefaultColorTypes {
   white?: string;
   gray?: string;
   lightGray?: string;
-  [prop: string]: any;
+  [key: string]: any;
 }
 
 export const DEFAULT_COLOR: IDefaultColorTypes = {

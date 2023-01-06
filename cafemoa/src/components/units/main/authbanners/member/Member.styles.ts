@@ -25,10 +25,10 @@ export const BannerLeft = styled.div`
   text-align: center;
   padding-right: 40px;
   width: 40%;
-  > svg {
-    width: 100%;
+  > canvas {
+    width: 100% !important;
     max-width: 400px;
-    height: auto;
+    height: auto !important;
   }
   ${mq.MobileM} {
   }

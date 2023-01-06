@@ -3872,6 +3872,11 @@ lodash.isboolean@^3.0.3:
   resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
   integrity sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==
 
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+
 lodash.isinteger@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
@@ -4499,10 +4504,10 @@ pvutils@^1.1.3:
   resolved "https://registry.yarnpkg.com/pvutils/-/pvutils-1.1.3.tgz#f35fc1d27e7cd3dfbd39c0826d173e806a03f5a3"
   integrity sha512-pMpnA0qRdFp32b1sJl1wOJNxZLQ2cbQx+k6tjNtZ8CpvVhNqEPRgivZ2WOUev2YMajecdH7ctUPDvEe87nariQ==
 
-qrcode.react@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/qrcode.react/-/qrcode.react-3.1.0.tgz#5c91ddc0340f768316fbdb8fff2765134c2aecd8"
-  integrity sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==
+qrcode-generator@^1.4.1:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/qrcode-generator/-/qrcode-generator-1.4.4.tgz#63f771224854759329a99048806a53ed278740e7"
+  integrity sha512-HM7yY8O2ilqhmULxGMpcHSF1EhJJ9yBj8gvDEuZ6M+KGJ0YY2hKpnXvRD+hZPLrDVck3ExIGhmPtSdcjC+guuw==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
@@ -4921,6 +4926,11 @@ react-hook-form@^7.40.0:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.41.1.tgz#0e25e231550d477c5774b7f5a4ff800485281e6a"
   integrity sha512-IHUozfwuqE+P201KIJwotMd+UCKqzIprseR8UUjz1jRupkZeubg0xyeMLIaT192zHv7vBBu9bibpNV5cIB4E9g==
 
+react-html5-qrcode-reader@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-html5-qrcode-reader/-/react-html5-qrcode-reader-1.1.1.tgz#8e1c6648d1b8817ff6b94a4cbcdc9c1128134598"
+  integrity sha512-7rdiwScjC544xYDYjL3J/VN/hNdSwvpjipe6VAicPB0zE6j5IKKVhXny0UzJawoun4ZZb82HwS7N9aYroKjh+w==
+
 react-icons@^4.7.1:
   version "4.7.1"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
@@ -4937,6 +4947,14 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-qrcode-logo@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-qrcode-logo/-/react-qrcode-logo-2.8.0.tgz#67b6febf59277f09e77417565ed9c7f84a6ff86f"
+  integrity sha512-dbEgjsg6C4tK6+oGmCRDlJ7urQAWqybaGBLJtp8Z6ZYvVUP302HBXk/F7VRk54yWTwzlHwig3VK6HMKCha2YFw==
+  dependencies:
+    lodash.isequal "^4.5.0"
+    qrcode-generator "^1.4.1"
 
 react-quill@^2.0.0:
   version "2.0.0"

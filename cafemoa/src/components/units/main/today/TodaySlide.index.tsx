@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as S from "./TodaySlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
 import Slider, { Settings } from "react-slick";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NAV_SETTINGS: Settings = {
   autoplay: true,
@@ -111,15 +111,18 @@ const SLIDE_TEST = [
 export default function TodaySlide() {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
+  const slider1 = useRef(null);
+  const slider2 = useRef(null);
+
+  useEffect(() => {
+    setNav1(slider1.current ?? undefined);
+    setNav2(slider2.current ?? undefined);
+  }, []);
 
   return (
     <S.TodaySlideWrap>
       <S.TodaySlideInfoWrap>
-        <Slider
-          {...VIEW_SETTINGS}
-          asNavFor={nav2}
-          ref={(slider1) => setNav1(slider1)}
-        >
+        <Slider {...VIEW_SETTINGS} asNavFor={nav2} ref={slider1}>
           {SLIDE_TEST.map((el, idx) => (
             <Link href="/" key={uuidv4()}>
               <a>
@@ -156,11 +159,7 @@ export default function TodaySlide() {
         </Slider>
       </S.TodaySlideInfoWrap>
       <S.TodaySlideListsWrap>
-        <Slider
-          {...NAV_SETTINGS}
-          asNavFor={nav1}
-          ref={(slider2) => setNav2(slider2)}
-        >
+        <Slider {...NAV_SETTINGS} asNavFor={nav1} ref={slider2}>
           {SLIDE_TEST.map((el, idx) => (
             <S.SlideItem key={idx}>
               <S.SlideBtn>
