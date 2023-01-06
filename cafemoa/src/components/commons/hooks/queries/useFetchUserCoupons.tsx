@@ -2,8 +2,8 @@ import { gql, useQuery } from "@apollo/client";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export const USER_COUPONS = gql`
-  query {
-    fetchUserCoupons {
+  query fetchUserCoupons($page: Int) {
+    fetchUserCoupons(page: $page) {
       id
       stamp
       expiredDate
@@ -20,7 +20,11 @@ export const USER_COUPONS = gql`
   }
 `;
 
-export const useFetchUserCoupons = () => {
-  const { data } = useQuery<Pick<IQuery, "fetchUserCoupons">>(USER_COUPONS);
+export const useFetchUserCoupons = (page) => {
+  const { data } = useQuery<Pick<IQuery, "fetchUserCoupons">>(USER_COUPONS, {
+    variables: {
+      page,
+    },
+  });
   return { data };
 };

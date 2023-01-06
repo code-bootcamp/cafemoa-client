@@ -21,9 +21,8 @@ const SELECT_VALUES02 = [
 ];
 
 export default function MyStamp() {
-  const { data } = useFetchUserCoupons();
+  const { data } = useFetchUserCoupons(1);
   console.log(data);
-  console.log(20 % 10);
 
   return (
     <>

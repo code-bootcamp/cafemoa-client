@@ -48,3 +48,12 @@ export const GetStamp = (value: number) => {
 
 //   return new File([u8arr], filename, { type: mime });
 // };
+
+export const getExpiredDate = (value: string) => {
+  const newDate = new Date(value);
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+  const date = newDate.getDate();
+
+  return `${year}. ${month}. ${date}`;
+};
