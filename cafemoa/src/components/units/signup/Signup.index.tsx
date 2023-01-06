@@ -4,16 +4,16 @@ import Text from "../../commons/text/01/Text01.index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as S from "./Signup.styles";
 import { SignUpSchema } from "./Signup.validation";
-import { useCreateUser } from "../../commons/hooks/mutation/useCreateUser";
+import { useCreateUser } from "../../commons/hooks/mutations/useCreateUser";
 import { useRouter } from "next/router";
 import Input01 from "../../commons/input/01/Input01.index";
 import { IFormCreateUserData } from "./Signup.types";
 import { MouseEvent, useEffect, useState } from "react";
 import Timer from "../../commons/timer/01/Timer.index";
-import { useEmailVerify } from "../../commons/hooks/mutation/useEmailVerify";
+import { useEmailVerify } from "../../commons/hooks/mutations/useEmailVerify";
 import { Modal } from "antd";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
-import { usePhoneVerify } from "../../commons/hooks/mutation/usePhoneVerify";
+import { usePhoneVerify } from "../../commons/hooks/mutations/usePhoneVerify";
 
 interface ICheckAuth {
   [key: string]: {
