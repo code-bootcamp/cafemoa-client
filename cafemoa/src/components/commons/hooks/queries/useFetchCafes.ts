@@ -1,7 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
-import { IQuery } from "../../../../commons/types/generated/types";
+import _ from "lodash";
+import {
+  IQuery,
+  IQueryFetchCafesArgs,
+} from "../../../../commons/types/generated/types";
 
-export const FETCH_CAFE_INFORMS = gql`
+export const FETCH_CAFES = gql`
   query fetchCafes($Location: String, $Tags: [String!], $page: Float!) {
     fetchCafes(Location: $Location, Tags: $Tags, page: $page) {
       id
@@ -21,7 +25,24 @@ export const FETCH_CAFE_INFORMS = gql`
 `;
 
 export const useFetchCafes = () => {
-  const query = useQuery<Pick<IQuery, "fetchCafeInforms">>(FETCH_CAFE_INFORMS);
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchCafes">,
+    IQueryFetchCafesArgs
+  >(FETCH_CAFES, {
+    variables: {
+      Location: "",
+      Tags: [],
+      page: 1,
+    },
+  });
 
-  return query;
+  const getDebounce = _.debounce((tagValue, LocationValues) => {
+    void refetch({ Tags: tagValue, Location: LocationValues });
+  }, 500);
+
+  const onRefetchCafes = (tagValue: string[], LocationValues: string) => {
+    getDebounce(tagValue, LocationValues);
+  };
+
+  return { data, onRefetchCafes };
 };

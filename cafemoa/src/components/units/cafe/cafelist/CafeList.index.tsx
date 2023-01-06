@@ -9,7 +9,7 @@ import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { TAG_VALUES } from "../../../../commons/default/default";
-// import { useFetchCafeInforms } from "../../../commons/hooks/queries/useFetchCafes";
+import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 
 const SELECT_VALUES02 = [
   { label: "서울시", value: "서울" },
@@ -26,8 +26,9 @@ const SELECT_VALUES02 = [
 
 export default function CafeList() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
-  // const {data} = useFetchCafeInforms();
-
+  const [selectValue, setSelectValue] = useState<string | number>("");
+  const { data, onRefetchCafes } = useFetchCafes();
+  console.log(selectValue);
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
     const tagArr = selectTag;
@@ -36,6 +37,7 @@ export default function CafeList() {
       const idx = tagArr.indexOf(value);
       tagArr.splice(idx, 1);
       setSelectTag([...tagArr]);
+      onRefetchCafes(selectTag, "");
       return;
     }
     if (tagArr.length >= 3) {
@@ -43,8 +45,9 @@ export default function CafeList() {
     }
     tagArr.push(value);
     setSelectTag([...tagArr]);
+    onRefetchCafes(selectTag, selectValue);
   };
-  // console.log(data?.fetchCafeInforms);
+
   return (
     <>
       <HeroWrap
@@ -57,7 +60,11 @@ export default function CafeList() {
       </S.SliderWrapper>
       <S.ContainerWrapper>
         <S.FilterWrapper>
-          <Select01 defaultText="지역" selectValue={SELECT_VALUES02}></Select01>
+          <Select01
+            defaultText="지역"
+            selectValue={SELECT_VALUES02}
+            setSelectValue={setSelectValue}
+          ></Select01>
         </S.FilterWrapper>
         <S.TagsWrap style={{ marginBottom: "40px" }}>
           {TAG_VALUES.map((el) => (
@@ -69,7 +76,7 @@ export default function CafeList() {
           ))}
         </S.TagsWrap>
         <S.CardsWrapper>
-          {/* {data?.fetchCafeInforms.map((el:any) => (
+          {data?.fetchCafes.map((el: any) => (
             <S.CardBox key={el.id}>
               <Card02 imageUrl="/images/temp/temp01.png">
                 <div>
@@ -92,30 +99,7 @@ export default function CafeList() {
                 </div>
               </Card02>
             </S.CardBox>
-          ))} */}
-          <S.CardBox>
-            <Card02 imageUrl="/images/temp/temp01.png">
-              <div>
-                <S.LikeWrapper>
-                  <Like01 iconColor="red" fontColor="white" count={22} />
-                </S.LikeWrapper>
-                <Text size="24" weight="500">
-                  카페명
-                </Text>
-                <div style={{ marginTop: "8%" }}>
-                  <Text size="16" weight="300">
-                    카페소개 카페소개 카페소개 카페소개 카페소개 카페소개
-                    카페소개 카페소개
-                  </Text>
-                  <div style={{ marginTop: "7%" }}>
-                    <Tag size="sm">태그</Tag>
-                    <Tag size="sm">태그</Tag>
-                    <Tag size="sm">태그</Tag>
-                  </div>
-                </div>
-              </div>
-            </Card02>
-          </S.CardBox>
+          ))}
         </S.CardsWrapper>
       </S.ContainerWrapper>
     </>
