@@ -92,13 +92,24 @@ export const Stamp = styled.div`
   flex-wrap: wrap;
 `;
 
+export const ValidStampWrap = styled.div`
+  width: 20%;
+  text-align: center;
+  font-size: 70px;
+  color: ${DEFAULT_COLOR.mainColor};
+
+  ${mq.MobileL} {
+    font-size: 54px;
+  }
+`;
+
 export const IconWrap2 = styled.div`
   width: 20%;
   text-align: center;
   font-size: 70px;
   color: ${DEFAULT_COLOR.lightGray};
+
   ${mq.MobileL} {
     font-size: 54px;
   }
-  /* margin-right: 7%; */
 `;

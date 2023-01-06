@@ -54,6 +54,7 @@ export const MypickInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 `;
 
 export const MypickCafeImg = styled.div`
@@ -69,6 +70,7 @@ export const MypickCafe = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 20px;
+  width: calc(100% - 120px);
 `;
 
 export const MypickCafeInfo = styled.div`
