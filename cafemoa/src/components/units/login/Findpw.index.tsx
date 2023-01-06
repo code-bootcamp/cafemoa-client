@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useFindUserPwd } from "../../commons/hooks/mutation/useFindUserPwd";
+import { useFindUserPwd } from "../../commons/hooks/mutations/useFindUserPwd";
 import Input02 from "../../commons/input/02/Input02.index";
 import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Findpw.styles";

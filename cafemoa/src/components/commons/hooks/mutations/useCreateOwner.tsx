@@ -36,7 +36,7 @@ export const useCreateUser = () => {
     IMutationCreateUserArgs
   >(CREATE_USER);
 
-  const createUserSubmit = async (data: IFormCreateUserData) => {
+  const createUserSubmit = async (data: IFormCreateOwnerData) => {
     try {
       const result = await createUser({
         variables: {

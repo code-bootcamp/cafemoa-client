@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
-import { useOwnerLogin } from "../../commons/hooks/mutation/useOwnerLogin";
+import { useOwnerLogin } from "../../commons/hooks/mutations/useOwnerLogin";
 import Input02 from "../../commons/input/02/Input02.index";
 import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Login.styles";
