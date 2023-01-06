@@ -11,6 +11,7 @@ interface ISelectValues {
 interface ISelectProps {
   selectValue: ISelectValues[];
   defaultText?: string;
+  setSelectValue: (value: string | number) => void;
   styles?: {
     [key: string]: string | number;
   };
@@ -27,6 +28,7 @@ export default function Select01(props: ISelectProps) {
     (value: string | number) => (event: MouseEvent<HTMLButtonElement>) => {
       setIsOpen((prev) => !prev);
       setValue(value);
+      props.setSelectValue(value);
     };
 
   return (

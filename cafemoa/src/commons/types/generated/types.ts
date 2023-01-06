@@ -28,12 +28,9 @@ export type ICafeInform = {
   cafeAddr: Scalars['String'];
   cafeTag: Array<ICafeTag>;
   cafeinfo: Scalars['String'];
-  closedDay: Scalars['String'];
   id: Scalars['String'];
-  lat: Scalars['Float'];
   like: Scalars['Int'];
-  lng: Scalars['Float'];
-  operatingTime: Scalars['String'];
+  operatingInfo: Scalars['String'];
   owner: IOwner;
   ownerNum: Scalars['String'];
   thumbNail: Scalars['String'];
@@ -45,11 +42,8 @@ export type ICafeInformInput = {
   cafeTag: Array<Scalars['String']>;
   cafe_imageUrl: Array<Scalars['String']>;
   cafeinfo: Scalars['String'];
-  closedDay: Scalars['String'];
-  lat: Scalars['Float'];
-  lng: Scalars['Float'];
   menu_imageUrl: Array<Scalars['String']>;
-  operatingTime: Scalars['String'];
+  operatingInfo: Scalars['String'];
   ownerNum: Scalars['String'];
 };
 
@@ -384,7 +378,7 @@ export type IQuery = {
   fetchCafeInformWithTag: Array<ICafeInform>;
   fetchCafeInforms: Array<ICafeInform>;
   fetchCafeMenuImage: Array<ICafeMenuImage>;
-  fetchCafeWithLocationAndTag: Array<ICafeInform>;
+  fetchCafes: Array<ICafeInform>;
   fetchCategory: Array<ICategory>;
   fetchComment: IComment;
   fetchCommentImage: ICommentImage;
@@ -401,7 +395,7 @@ export type IQuery = {
   fetchMyPickLists: Array<IPickList>;
   fetchOwner: IOwner;
   fetchOwnerComment: IOwnerComment;
-  fetchOwnerCommentByCommentID: IOwnerComment;
+  fetchOwnerCommentByCommentID: Scalars['String'];
   fetchOwners: Array<IOwner>;
   fetchStamps: Array<IStampHistory>;
   fetchUser: IUser;
@@ -441,9 +435,10 @@ export type IQueryFetchCafeMenuImageArgs = {
 };
 
 
-export type IQueryFetchCafeWithLocationAndTagArgs = {
+export type IQueryFetchCafesArgs = {
   Location?: InputMaybe<Scalars['String']>;
   Tags?: InputMaybe<Array<Scalars['String']>>;
+  page: Scalars['Float'];
 };
 
 
@@ -527,11 +522,8 @@ export type IUpdateCafeInform = {
   cafeTag: Array<Scalars['String']>;
   cafe_imageUrl?: InputMaybe<Array<Scalars['String']>>;
   cafeinfo?: InputMaybe<Scalars['String']>;
-  closedDay?: InputMaybe<Scalars['String']>;
-  lat?: InputMaybe<Scalars['Float']>;
-  lng?: InputMaybe<Scalars['Float']>;
   menu_imageUrl?: InputMaybe<Array<Scalars['String']>>;
-  operatingTime?: InputMaybe<Scalars['String']>;
+  operatingInfo?: InputMaybe<Scalars['String']>;
   ownerNum?: InputMaybe<Scalars['String']>;
 };
 
