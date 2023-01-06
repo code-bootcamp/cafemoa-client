@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useFetchBestCafe } from "../../../../commons/hooks/queries/useFetchBestCafes";
 import Text from "../../../../commons/text/01/Text01.index";
 import Tag from "../../../../commons/text/02/Text02.index";
 import * as S from "./Slider.Styles";
 
 export default function SlickSlider() {
+  const { data } = useFetchBestCafe();
   const [activeIdx, setActiveIdx] = useState(0);
   const settings = {
     infinite: true,
@@ -11,6 +13,7 @@ export default function SlickSlider() {
     slidesToShow: 3,
     speed: 500,
   };
+  console.log(data?.fetchBestCafe);
   return (
     <div>
       <S.StyledSlider {...settings} afterChange={(idx) => setActiveIdx(idx)}>
