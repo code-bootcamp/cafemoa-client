@@ -15,13 +15,11 @@ export default function Input02(props: IInputProps) {
   const [isValid, setIsValid] = useState<boolean>(false);
   const onChangeData = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
-    console.log(value.length);
     if (value.length > 0) {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-    console.log(!isValid);
   };
   // const onInputData = (event: ChangeEvent<HTMLInputElement>) => {
   //   const { value } = event.currentTarget;

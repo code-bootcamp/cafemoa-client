@@ -4,12 +4,28 @@ import Text from "../../commons/text/01/Text01.index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as S from "./Signup.styles";
 import { SignUpSchema } from "./Signup.validation";
-import { useCreateUser } from "../../commons/hooks/mutation/useCreateUser";
-import { useRouter } from "next/router";
+// import { useCreateUser } from "../../commons/hooks/mutation/useCreateUser";
+// import { useRouter } from "next/router";
+import Input01 from "../../commons/input/01/Input01.index";
+import { IFormCreateUserData } from "./Signup.types";
+import { useState } from "react";
+import { useAuthTimer } from "../../commons/hooks/customs/useInterval";
+
+const CHECK_AUTH = {
+  email: {
+    checking: false,
+    checkAccect: false,
+  },
+  phone: {
+    checking: false,
+    checkAccect: false,
+  },
+};
 
 export default function SignUp() {
-  const router = useRouter();
-  const { createUserSubmit } = useCreateUser();
+  // const router = useRouter();
+  // const { createUserSubmit } = useCreateUser();
+  const [isSignAuth, setIsSignAuth] = useState({ ...CHECK_AUTH });
   const { register, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(SignUpSchema),
     mode: "onChange",
@@ -17,23 +33,28 @@ export default function SignUp() {
       name: "",
       nickname: "",
       email: "",
+      address: "",
+      phoneNumber: "",
       password: "",
       passwordCheck: "",
-      resident: "",
-      phone: "",
-      address: "",
+      profileImage: "",
     },
   });
-  const onSignUpSubmit = (data: any) => {
-    console.log(data);
+  const onSignUpSubmit = (data: IFormCreateUserData) => {
     const { passwordCheck, ...value } = data;
     console.log(value);
-    void createUserSubmit(value);
-    void router.push("/");
+    // void createUserSubmit(value);
+    // void router.push("/");
   };
   const onClickAddress = () => {
     setValue("address", "asdadasdasd", { shouldValidate: true });
+
+    setIsSignAuth((prev) => prev);
   };
+  console.log(isSignAuth);
+
+  const onClick = () => {};
+
   return (
     <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
       <S.ContainerInner>
@@ -43,25 +64,70 @@ export default function SignUp() {
           </Text>
         </S.TitleWrap>
         <S.InputWrap>
-          <Input02 type="text" name="이름" register={register("name")} />
-        </S.InputWrap>
-        <S.InputWrap>
-          <Input02 type="text" name="닉네임" register={register("nickname")} />
-        </S.InputWrap>
-        <S.InputWrap>
           <Input02 type="text" name="이메일" register={register("email")} />
           <S.EmailBtn type="button" color="beige">
             <Text size="16">인증 요청</Text>
           </S.EmailBtn>
         </S.InputWrap>
+        {!isSignAuth.email.checking && (
+          <S.InputWrap size="sm">
+            <Input01
+              type="text"
+              placeHolder="인증번호"
+              register={register("phoneNumber")}
+            >
+              <S.Timer>
+                <Text size="14" fontColor="red">
+                  {useAuthTimer(onClick, 5).countText}
+                </Text>
+              </S.Timer>
+            </Input01>
+            <S.PhoneBtn type="button" color="beige">
+              <Text size="16">인증 확인</Text>
+            </S.PhoneBtn>
+          </S.InputWrap>
+        )}
+
+        <S.InputWrap>
+          <Input02 type="text" name="이름" register={register("name")} />
+        </S.InputWrap>
+
+        <S.InputWrap>
+          <Input02 type="text" name="닉네임" register={register("nickname")} />
+        </S.InputWrap>
+
+        <S.InputWrap>
+          <Input02
+            type="text"
+            name="핸드폰 번호"
+            register={register("phoneNumber")}
+          />
+          <S.PhoneBtn type="button" color="beige">
+            <Text size="16">인증 요청</Text>
+          </S.PhoneBtn>
+        </S.InputWrap>
+        {isSignAuth.phone.checking && (
+          <S.InputWrap size="sm">
+            <Input01
+              type="text"
+              // name="핸드폰 인증번호"
+              placeHolder="인증번호"
+              register={register("phoneNumber")}
+            />
+            <S.PhoneBtn type="button" color="beige">
+              <Text size="16">인증 확인</Text>
+            </S.PhoneBtn>
+          </S.InputWrap>
+        )}
+
         <S.InputWrap>
           <Input02
             type="password"
             name="비밀번호"
             register={register("password")}
-            // isValid={}
           />
         </S.InputWrap>
+
         <S.InputWrap>
           <Input02
             type="password"
@@ -69,23 +135,7 @@ export default function SignUp() {
             register={register("passwordCheck")}
           />
         </S.InputWrap>
-        <S.InputWrap>
-          <Input02
-            type="text"
-            name="주민등록번호 앞 6자리"
-            register={register("resident")}
-          />
-        </S.InputWrap>
-        <S.InputWrap>
-          <Input02
-            type="text"
-            name="핸드폰 번호"
-            register={register("phone")}
-          />
-          <S.PhoneBtn type="button" color="beige">
-            <Text size="16">인증 요청</Text>
-          </S.PhoneBtn>
-        </S.InputWrap>
+
         <S.InputWrap>
           <Input02
             type="text"
