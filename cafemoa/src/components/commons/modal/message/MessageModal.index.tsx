@@ -13,10 +13,11 @@ interface IErrorModalProps {
   buttons?: JSX.Element;
 }
 
-export default function MessageModal() {
+export default function MessageModal(userPhone) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  console.log(userPhone);
   const onClickIsModalOpen = () => {
+    console.log(userPhone);
     setIsModalOpen((prev) => !prev);
   };
 

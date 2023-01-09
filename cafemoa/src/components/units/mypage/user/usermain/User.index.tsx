@@ -3,7 +3,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import { useFetchMyPickLists } from "../../../../commons/hooks/queries/useFetchMyPickLists";
-import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserStamps";
 import Text from "../../../../commons/text/01/Text01.index";
 import Users01 from "../../../../commons/user/01/Users01.index";
 import * as S from "./User.styles";

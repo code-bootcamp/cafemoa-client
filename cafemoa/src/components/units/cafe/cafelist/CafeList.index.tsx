@@ -7,12 +7,13 @@ import Tag from "../../../commons/text/02/Text02.index";
 import Text from "../../../commons/text/01/Text01.index";
 import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { TAG_VALUES } from "../../../../commons/default/default";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
+import { useRouter } from "next/router";
 
 const SELECT_VALUES02 = [
-  { label: "서울시", value: "서울" },
+  { label: "서울특별시", value: "서울" },
   { label: "경기도", value: "경기" },
   { label: "강원도", value: "강원" },
   { label: "충청북도", value: "충북" },
@@ -21,14 +22,23 @@ const SELECT_VALUES02 = [
   { label: "전라남도", value: "전남" },
   { label: "경상북도", value: "경북" },
   { label: "경상남도", value: "경남" },
+  { label: "광주광역시", value: "광주" },
+  { label: "대구광역시", value: "대구" },
+  { label: "대전광역시", value: "대전" },
+  { label: "부산광역시", value: "부산" },
+  { label: "세종특별자치시", value: "세종" },
+  { label: "울산광역시", value: "울산" },
+  { label: "인천광역시", value: "인천" },
   { label: "제주도", value: "제주도" },
+  { label: "전체", value: "" },
 ];
 
 export default function CafeList() {
+  const router = useRouter();
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { data, onRefetchCafes, onSelectLocation } = useFetchCafes();
-  console.log(selectValue);
+  // console.log(selectValue);
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
     const tagArr = selectTag;
@@ -50,6 +60,10 @@ export default function CafeList() {
     onSelectLocation(selectValue);
     onRefetchCafes(selectTag);
   }, [selectValue, selectTag]);
+
+  const onClickMoveToDetail = (event: MouseEvent<HTMLDivElement>) => {
+    void router.push(`/cafe/${event.currentTarget.id}`);
+  };
   return (
     <>
       <HeroWrap
@@ -79,7 +93,7 @@ export default function CafeList() {
         </S.TagsWrap>
         <S.CardsWrapper>
           {data?.fetchCafes.map((el: any) => (
-            <S.CardBox key={el.id}>
+            <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}>
               <Card02 imageUrl="/images/temp/temp01.png">
                 <div>
                   <S.LikeWrapper>
@@ -93,9 +107,9 @@ export default function CafeList() {
                       {el.cafeinfo}
                     </Text>
                     <div style={{ paddingTop: "32px" }}>
-                      <Tag size="sm">{el.cafeTag[0].tagName}</Tag>
-                      <Tag size="sm">{el.cafeTag[1].tagName}</Tag>
-                      <Tag size="sm">{el.cafeTag[2].tagName}</Tag>
+                      <Tag size="sm">{el.cafeTag[0]?.tagName}</Tag>
+                      <Tag size="sm">{el.cafeTag[1]?.tagName}</Tag>
+                      <Tag size="sm">{el.cafeTag[2]?.tagName}</Tag>
                     </div>
                   </div>
                 </div>
