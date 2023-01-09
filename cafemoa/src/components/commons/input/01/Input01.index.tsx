@@ -14,42 +14,9 @@ interface IInputProps {
   styles?: {
     [key: string]: string | number;
   };
-  setInputValue: (value: string) => void;
 }
 
-interface IInput2Props {
-  type: "text" | "password";
-  register?: UseFormRegisterReturn;
-  textAlign?: "left" | "center";
-  placeHolder?: string;
-  error?: string;
-  children?: JSX.Element;
-  styles?: {
-    [key: string]: string | number;
-  };
-  inputRef?: React.ForwardedRef<HTMLInputElement>;
-}
-
-export function Input01(props: IInputProps) {
-  const onChangeInputValue = (event: ChangeEvent<HTMLInputElement>) => {
-    props.setInputValue(event.currentTarget.value);
-  };
-
-  const _styles = { ...props.styles };
-  return (
-    <S.InputWrap textAlign={props.textAlign} style={_styles}>
-      <input
-        type={props.type}
-        placeholder={props.placeHolder}
-        {...props.register}
-        onChange={onChangeInputValue}
-      />
-      {props.children}
-    </S.InputWrap>
-  );
-}
-
-export function Input02(props: IInput2Props) {
+export default function Input01(props: IInputProps) {
   const _styles = { ...props.styles };
   return (
     <S.InputWrap textAlign={props.textAlign} style={_styles}>
