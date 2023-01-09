@@ -4,7 +4,7 @@ import Text from "../../../../commons/text/01/Text01.index";
 import Input01 from "../../../../commons/input/01/Input01.index";
 import { useForm } from "react-hook-form";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
-import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserStamps";
 import { getExpiredDate } from "../../../../../commons/libraries/utill";
 
 interface IFormOwnerPassword {

@@ -5,7 +5,7 @@ import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import Select01 from "../../../../commons/select/01/Select01.index";
 import Box01 from "../../../../commons/box/01/Box01.index";
-import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import { useFetchUserStamps } from "../../../../commons/hooks/queries/useFetchUserStamps";
 
 const SELECT_VALUES02 = [
   { label: "서울시", value: "서울" },
@@ -21,7 +21,7 @@ const SELECT_VALUES02 = [
 ];
 
 export default function MyStamp() {
-  const { data } = useFetchUserCoupons(1);
+  const { data } = useFetchUserStamps();
   console.log(data);
 
   return (
@@ -56,7 +56,7 @@ export default function MyStamp() {
             </S.Search>
           </S.AreaWrapper>
           <S.StampContainer>
-            {data?.fetchUserCoupons.map((el) => (
+            {data?.fetchUserStamps.map((el) => (
               <S.StampWrapper key={el.id}>
                 <Box01>
                   <div>
@@ -66,7 +66,7 @@ export default function MyStamp() {
                           {el.cafeInform.brandName}
                         </Text>
                         <Text size="16" weight="300" fontColor="gray">
-                          {el.stamp % 10}/10
+                          {el.count}/10
                         </Text>
                       </S.StampInfo>
                       <S.IconWrap>
@@ -74,18 +74,16 @@ export default function MyStamp() {
                       </S.IconWrap>
                     </S.StampInfoWrapper>
                     <S.Stamp>
-                      {new Array(el.stamp % 10).fill(1).map((_, index) => (
-                        <S.ValidStampWrap key={index} isStamp={true}>
+                      {new Array(el.count).fill(1).map((_, index) => (
+                        <S.ValidStampWrap key={index}>
                           <CgCoffee />
                         </S.ValidStampWrap>
                       ))}
-                      {new Array(10 - (el.stamp % 10))
-                        .fill(1)
-                        .map((_, index) => (
-                          <S.IconWrap2 key={index} isStamp={true}>
-                            <CgCoffee key={index} />
-                          </S.IconWrap2>
-                        ))}
+                      {new Array(10 - el.count).fill(1).map((_, index) => (
+                        <S.IconWrap2 key={index}>
+                          <CgCoffee key={index} />
+                        </S.IconWrap2>
+                      ))}
                     </S.Stamp>
                   </div>
                 </Box01>

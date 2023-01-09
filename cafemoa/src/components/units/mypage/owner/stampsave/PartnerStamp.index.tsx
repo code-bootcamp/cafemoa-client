@@ -2,12 +2,15 @@ import * as S from "./PartnerStamp.styles";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import Box01 from "../../../../commons/box/01/Box01.index";
-import Input01 from "../../../../commons/input/01/Input01.index";
+import { Input01, Input02 } from "../../../../commons/input/01/Input01.index";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
 import { useForm } from "react-hook-form";
 import { SearchOutlined } from "@ant-design/icons";
 import { Pagination } from "antd";
 import Select01 from "../../../../commons/select/01/Select01.index";
+import { useEffect, useRef, useState } from "react";
+import { fetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
+import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -23,15 +26,53 @@ const SELECT_VALUES01 = [
 ];
 
 export default function PartnerStamp() {
-  const { ModalComponent, onClickIsModalOpen } = MessageModal();
+  const [createStamp] = useCreateStamp();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [selectValue, setSelectValue] = useState<string | number>("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [userPhone, setUserPhone] = useState<string>("");
+  const { data, onRefetchUsers } = fetchCouponAddUsers();
+  console.log(data);
+  const { ModalComponent, onClickIsModalOpen } = MessageModal(userPhone);
+  const { register, handleSubmit } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+    },
+  });
 
-  const { register, handleSubmit } = useForm();
-  const onModalSubmit = (data) => {
-    console.log(data);
+  const onStampSave = () => {
+    inputRef.current?.click();
+    // const password = inputRef.current?.value;
+    // console.log(selectValue, password);
   };
 
-  const onStampSave = () => {};
+  const onClickStampSave = (data) => {
+    console.log(data);
+    try {
+      // const result = createStamp({
+      //   variables: {
+      //     createCouponInput: {
+      //       phoneNumber: "01012371234",
+      //       cafeId: "67788c8f-0e22-4b3a-a042-6bb1ed68d545",
+      //       count: selectValue,
+      //       password : data
+      //     },
+      //   },
+      // });
+      // console.log(result);
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
+    }
+  };
 
+  useEffect(() => {
+    onRefetchUsers(inputValue);
+  }, [inputValue]);
+
+  useEffect(() => {
+    setUserPhone(data?.fetchCouponAddUsers.phoneNumber);
+  }, [data]);
   return (
     <>
       <ModalComponent
@@ -45,19 +86,20 @@ export default function PartnerStamp() {
                 취소
               </Text>
             </S.ModalButton>
-            <S.ModalButton color="beige">
+            <S.ModalButton type="submit" color="beige" onClick={onStampSave}>
               <Text size="24">확인</Text>
             </S.ModalButton>
           </>
         }
       >
-        <S.ModalFromWrap onSubmit={handleSubmit(onModalSubmit)}>
-          <Input01
+        <S.ModalFromWrap onSubmit={handleSubmit(onClickStampSave)}>
+          <Input02
             type="text"
             textAlign="center"
             placeHolder="가맹주 비밀번호 입력"
             register={register("password")}
           />
+          <input type="submit" hidden ref={inputRef} />
         </S.ModalFromWrap>
       </ModalComponent>
 
@@ -77,7 +119,11 @@ export default function PartnerStamp() {
             <Box01 styles={{ padding: "40px 50px" }}>
               <S.StampContainer>
                 <S.UserWrapper>
-                  <Input01 type="text" placeHolder="이름">
+                  <Input01
+                    type="text"
+                    placeHolder="이름"
+                    setInputValue={setInputValue}
+                  >
                     <S.InputIconWrap>
                       <SearchOutlined />
                     </S.InputIconWrap>
@@ -86,54 +132,37 @@ export default function PartnerStamp() {
                     <Select01
                       defaultText="적립스탬프 갯수"
                       selectValue={SELECT_VALUES01}
+                      setSelectValue={setSelectValue}
                     />
                   </S.StampSelect>
                 </S.UserWrapper>
                 <S.StampTable>
                   <ul>
                     <S.Name>이름</S.Name>
+                    <S.Name>닉네임</S.Name>
                     <S.PhoneEnd>전화번호 뒷자리</S.PhoneEnd>
                     <S.SaveStamp></S.SaveStamp>
                   </ul>
-                  <ul>
-                    <S.Name>김예은</S.Name>
-                    <S.PhoneEnd>1234</S.PhoneEnd>
-                    <S.SaveStamp>
-                      <S.SaveButton color="beige" onClick={onClickIsModalOpen}>
-                        <Text size="14">적립 </Text>
-                      </S.SaveButton>
-                    </S.SaveStamp>
-                  </ul>
-                  <ul>
-                    <S.Name>김예은</S.Name>
-                    <S.PhoneEnd>5678</S.PhoneEnd>
-                    <S.SaveStamp>
-                      <S.SaveButton color="beige">
-                        <Text size="14">적립 </Text>
-                      </S.SaveButton>
-                    </S.SaveStamp>
-                  </ul>
-                  <ul>
-                    <S.Name>김예은</S.Name>
-                    <S.PhoneEnd>0956</S.PhoneEnd>
-                    <S.SaveStamp>
-                      <S.SaveButton color="beige">
-                        <Text size="14">적립 </Text>
-                      </S.SaveButton>
-                    </S.SaveStamp>
-                  </ul>
+                  {data?.fetchCouponAddUsers.map((el) => (
+                    <ul key={el.id}>
+                      <S.Name>{el.name}</S.Name>
+                      <S.Name>{el.nickname}</S.Name>
+                      <S.PhoneEnd>{el.phoneNumber.slice(7)}</S.PhoneEnd>
+                      <S.SaveStamp>
+                        <S.SaveButton
+                          color="beige"
+                          onClick={onClickIsModalOpen}
+                        >
+                          <Text size="14">적립 </Text>
+                        </S.SaveButton>
+                      </S.SaveStamp>
+                    </ul>
+                  ))}
                 </S.StampTable>
+
                 <S.PageWrapper>
                   <Pagination defaultCurrent={1} total={50} />
                 </S.PageWrapper>
-                {/* <S.Label>
-                  <Text size="20" weight="500" fontColor="deepBrown">
-                    적립 스탬프 갯수
-                  </Text>
-                </S.Label>
-                <S.SelectWrap>
-                  <Select01 selectValue={SELECT_VALUES01} />
-                </S.SelectWrap> */}
               </S.StampContainer>
             </Box01>
           </S.StampWrapper>
