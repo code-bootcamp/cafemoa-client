@@ -1,6 +1,4 @@
-import { ChangeEvent } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { CgPlayStopR } from "react-icons/cg";
 
 import * as S from "./Input01.styles";
 

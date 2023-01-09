@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 import CafeSearchModal from "../../../units/cafesearch/CafeSearchModal.index";
 import Text from "../../text/01/Text01.index";
 import { AiOutlineUser } from "react-icons/ai";
+import { infoUserState } from "../../../../commons/stores";
+import { useRecoilState } from "recoil";
 
 const GNB_MENUS = [
   {
@@ -22,6 +24,9 @@ const GNB_MENUS = [
 
 export default function HeaderLayout() {
   const [isDrawerOpen, setiIsDrawerOpen] = useState<boolean>(false);
+  const [infoUser] = useRecoilState(infoUserState);
+  console.log(infoUser);
+
   const onClickDrawer = () => {
     setiIsDrawerOpen((prev) => !prev);
   };
@@ -66,11 +71,20 @@ export default function HeaderLayout() {
             <S.MenuBtn onClick={onClickDrawer}>
               <RiMenu3Fill />
             </S.MenuBtn>
-            <Link href={"/login"}>
+            <Link
+              href={
+                infoUser === undefined
+                  ? "/login"
+                  : `/mypage/user/${infoUser?.fetchUser?.id}`
+              }
+            >
               <S.MyPageBtn>
                 <AiOutlineUser />
-                {/* <Text size="14">로그인</Text> */}
-                <Text size="14">김동은 님</Text>
+                <Text size="14">
+                  {infoUser === undefined
+                    ? "로그인"
+                    : `${infoUser?.fetchUser?.name ?? ""}님`}
+                </Text>
               </S.MyPageBtn>
             </Link>
           </S.Utiles>

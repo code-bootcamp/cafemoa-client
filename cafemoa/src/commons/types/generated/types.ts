@@ -30,6 +30,7 @@ export type ICafeInform = {
   cafeMenuImage: Array<ICafeMenuImage>;
   cafeTag: Array<ICafeTag>;
   cafeinfo: Scalars['String'];
+  detailAddr: Scalars['String'];
   id: Scalars['String'];
   like: Scalars['Int'];
   operatingInfo: Scalars['String'];
@@ -44,6 +45,7 @@ export type ICafeInformInput = {
   cafeTag: Array<Scalars['String']>;
   cafe_imageUrl: Array<Scalars['String']>;
   cafeinfo: Scalars['String'];
+  detailAddr?: InputMaybe<Scalars['String']>;
   menu_imageUrl: Array<Scalars['String']>;
   operatingInfo: Scalars['String'];
   ownerNum: Scalars['String'];
@@ -153,8 +155,8 @@ export type IMutation = {
   ownerLogout: Scalars['String'];
   restoreAccessToken: Scalars['String'];
   restoreOwnerAccessToken: Scalars['String'];
-  sendTokenToOwnerEmail: Scalars['Int'];
-  sendTokenToSMS: Scalars['Int'];
+  sendTokenToOwnerEmail: Scalars['String'];
+  sendTokenToSMS: Scalars['String'];
   updateCafeInform: ICafeInform;
   updateComment: IComment;
   updateOwner: IOwner;
@@ -287,7 +289,7 @@ export type IMutationSendTokenToSmsArgs = {
 
 
 export type IMutationUpdateCafeInformArgs = {
-  CafeInformID: Scalars['String'];
+  cafeInformID: Scalars['String'];
   updateCafeInform: IUpdateCafeInform;
 };
 
@@ -389,11 +391,8 @@ export type IQuery = {
   fetchCategory: Array<ICategory>;
   fetchComment: IComment;
   fetchCommentBycafeID: Array<IComment>;
-  fetchCommentImage: ICommentImage;
   fetchCommentImages: Array<ICommentImage>;
   fetchCommentImagesbyID: Array<ICommentImage>;
-  fetchCommentWithTag: Array<IComment>;
-  fetchCommentmWithLocation: Array<IComment>;
   fetchComments: Array<IComment>;
   fetchCommentsAll: Array<IComment>;
   fetchCouponAddUsers: Array<IUser>;
@@ -475,24 +474,8 @@ export type IQueryFetchCommentBycafeIdArgs = {
 };
 
 
-export type IQueryFetchCommentImageArgs = {
-  commentId: Scalars['String'];
-};
-
-
 export type IQueryFetchCommentImagesbyIdArgs = {
   commentId: Scalars['String'];
-};
-
-
-export type IQueryFetchCommentWithTagArgs = {
-  Tags: Array<Scalars['String']>;
-};
-
-
-export type IQueryFetchCommentmWithLocationArgs = {
-  Location: Scalars['String'];
-  page?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -510,7 +493,12 @@ export type IQueryFetchCommentsAllArgs = {
 
 export type IQueryFetchCouponAddUsersArgs = {
   page?: InputMaybe<Scalars['Int']>;
-  phone: Scalars['String'];
+  phone?: InputMaybe<Scalars['String']>;
+};
+
+
+export type IQueryFetchDeletedCouponArgs = {
+  page?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -601,6 +589,7 @@ export type IUpdateCafeInform = {
   cafeTag?: InputMaybe<Array<Scalars['String']>>;
   cafe_imageUrl?: InputMaybe<Array<Scalars['String']>>;
   cafeinfo?: InputMaybe<Scalars['String']>;
+  detailAddr?: InputMaybe<Scalars['String']>;
   menu_imageUrl?: InputMaybe<Array<Scalars['String']>>;
   operatingInfo?: InputMaybe<Scalars['String']>;
   ownerNum?: InputMaybe<Scalars['String']>;
@@ -616,6 +605,7 @@ export type IUpdateOwnerCommentInput = {
 };
 
 export type IUpdateUserInput = {
+  address?: InputMaybe<Scalars['String']>;
   detailAddress?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;

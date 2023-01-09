@@ -6,7 +6,7 @@ import * as S from "./SignupUser.styles";
 import { SignUpSchema } from "./SignupUser.validation";
 import { useCreateUser } from "../../../commons/hooks/mutations/useCreateUser";
 import { useRouter } from "next/router";
-import Input01 from "../../../commons/input/01/Input01.index";
+// import Input01 from "../../../commons/input/01/Input01.index";
 import { IFormCreateUserData } from "./SignupUser.types";
 import { MouseEvent, useEffect, useState } from "react";
 import Timer from "../../../commons/timer/01/Timer.index";
@@ -14,6 +14,7 @@ import { useEmailVerify } from "../../../commons/hooks/mutations/useEmailVerify"
 import { Modal } from "antd";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { usePhoneVerify } from "../../../commons/hooks/mutations/usePhoneVerify";
+import Input01 from "../../../commons/input/01/Input01.index";
 
 interface ICheckAuth {
   [key: string]: {
@@ -40,7 +41,7 @@ const CHECK_AUTH: ICheckAuth = {
   },
 };
 
-export default function SignUpUser(props) {
+export default function SignUpUser() {
   const router = useRouter();
   const { createUserSubmit } = useCreateUser();
   const [authOpt, setAuthOpt] = useState<string>("");
@@ -49,7 +50,7 @@ export default function SignUpUser(props) {
   const { phoneVerifySubmit, accessNum: phoneAccessNum } = usePhoneVerify();
   const [isSignAuth, setIsSignAuth] = useState({ ...CHECK_AUTH });
   const { register, handleSubmit, setValue, getValues, watch, formState } =
-    useForm({
+    useForm<IFormCreateUserData>({
       resolver: yupResolver(SignUpSchema),
       mode: "onChange",
       defaultValues: {
@@ -57,7 +58,8 @@ export default function SignUpUser(props) {
         name: "",
         nickname: "",
         address: "",
-        phoneNumber: "",
+        detailAddress: "",
+        phone: "",
         password: "",
         profileImage: "",
         passwordCheck: "",
@@ -67,9 +69,10 @@ export default function SignUpUser(props) {
     });
   const addressString = watch("address");
 
-  const onSignUpSubmit = (data: IFormCreateUserData) => {
+  const submitSignUp = (data: IFormCreateUserData) => {
     const { passwordCheck, emailAccess, phoneAccess, ...value } = data;
     if (!isSignAuth.email.checkAccect) {
+      console.log("sss");
       Modal.warning({
         content: "이메일 인증을 완료해주세요.",
       });
@@ -114,7 +117,7 @@ export default function SignUpUser(props) {
       }
       if (authOption === "phone") {
         const phoneData = {
-          phone: getValues("phoneNumber"),
+          phone: getValues("phone"),
         };
         void phoneVerifySubmit(phoneData);
       }
@@ -130,7 +133,7 @@ export default function SignUpUser(props) {
       }
       console.log(authOption, phoneAccessNum);
       if (authOption === "phone") {
-        if (Number(getValues("phoneAccess")) === phoneAccessNum) {
+        if (getValues("phoneAccess") === phoneAccessNum) {
           temp[authOption].checkAccect = true;
         }
       }
@@ -154,7 +157,7 @@ export default function SignUpUser(props) {
 
   return (
     <>
-      <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
+      <S.ContainerWrapper onSubmit={handleSubmit(submitSignUp)}>
         <S.ContainerInner>
           <S.TitleWrap>
             <Text size="32" fontColor="subColor01">
@@ -229,8 +232,9 @@ export default function SignUpUser(props) {
             <Input02
               type="text"
               name="핸드폰 번호"
-              errorMsg={formState.errors.phoneNumber?.message}
-              register={register("phoneNumber")}
+              errorMsg={formState.errors.phone?.message}
+              readOnly={isSignAuth.phone.checkAccect}
+              register={register("phone")}
             />
             <S.PhoneBtn
               type="button"
@@ -243,7 +247,7 @@ export default function SignUpUser(props) {
               </Text>
             </S.PhoneBtn>
           </S.InputWrap>
-          {isSignAuth.phone.checking && (
+          {isSignAuth.phone.checking && !isSignAuth.phone.checkAccect && (
             <S.InputWrap size="sm">
               <Input01
                 type="text"
@@ -301,11 +305,21 @@ export default function SignUpUser(props) {
               <Text size="16">주소 검색</Text>
             </S.AddrBtn>
           </S.InputWrap>
+
+          <S.InputWrap>
+            <Input02
+              type="text"
+              name="상세 주소"
+              errorMsg={formState.errors.detailAddress?.message}
+              register={register("detailAddress")}
+            />
+          </S.InputWrap>
+
           <S.SignUpBtnWrap>
             <S.ResetBtn type="reset" color="lightBeige">
               <Text size="24">취소</Text>
             </S.ResetBtn>
-            <S.SubmitBtn color="brown">
+            <S.SubmitBtn type="submit" color="brown">
               <Text size="24" fontColor="white">
                 회원가입
               </Text>

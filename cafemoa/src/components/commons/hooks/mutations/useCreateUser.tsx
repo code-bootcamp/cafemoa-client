@@ -9,8 +9,7 @@ interface IFormCreateUserData {
   nickname: string;
   email: string;
   address: string;
-  personalNumber: string;
-  phoneNumber: string;
+  phone: string;
   password: string;
   profileImage: string;
 }
@@ -35,7 +34,6 @@ export const useCreateUser = () => {
         variables: {
           createUserInput: {
             ...data,
-            personalNumber: "",
           },
         },
       });
