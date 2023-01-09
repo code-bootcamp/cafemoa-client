@@ -1,42 +1,42 @@
 import * as S from "./MyCoupon.styles";
 import Text from "../../../../commons/text/01/Text01.index";
 import { BiCoffeeTogo } from "react-icons/bi";
+import { useFetchDeletedCoupon } from "../../../../commons/hooks/queries/useFetchDeletedCoupon";
+import { getExpiredDate } from "../../../../../commons/libraries/utill";
 
 export default function MyCouponInvalid() {
+  const { data } = useFetchDeletedCoupon();
+  console.log(data);
+
   return (
     <S.ValidWrapper>
-      <S.ValidBox>
-        <S.UsedCouponBoxWrapper>
-          <S.UsedCoupon>
-            <S.Div>
-              <Text size="28" weight="500" fontColor="mainColor">
-                카페모아 구로디지털점
-              </Text>
-              <S.CoffeeImgWrap>
-                <BiCoffeeTogo />
-              </S.CoffeeImgWrap>
-            </S.Div>
-            <S.Div>
-              <Text size="24" weight="300" fontColor="mainColor">
-                아메리카노 1잔 무료 쿠폰
-              </Text>
-            </S.Div>
-            <S.Div>
-              <Text size="20" weight="500" fontColor="mainColor">
-                유효기간 : ~ 2022.01.31
-              </Text>
-            </S.Div>
-            <S.BtnWrapper>
-              <S.CouponUseBtn color="beige">
-                <Text size="16" fontColor="mainColor">
-                  쿠폰 사용
+      {data?.fetchDeletedCoupon.map((el) => (
+        <S.ValidBox key={el.id}>
+          <S.UsedCouponBoxWrapper>
+            <S.UsedCoupon>
+              <S.Div>
+                <Text size="28" weight="500" fontColor="mainColor">
+                  {el.cafeInform.brandName}
                 </Text>
-              </S.CouponUseBtn>
-            </S.BtnWrapper>
-          </S.UsedCoupon>
-          <S.CouponImg src="/images/mycoupon/mycoupon.png" />
-        </S.UsedCouponBoxWrapper>
-      </S.ValidBox>
+                <S.CoffeeImgWrap>
+                  <BiCoffeeTogo />
+                </S.CoffeeImgWrap>
+              </S.Div>
+              <S.Div>
+                <Text size="24" weight="300" fontColor="mainColor">
+                  아메리카노 1잔 무료 쿠폰
+                </Text>
+              </S.Div>
+              <S.Div>
+                <Text size="20" weight="500" fontColor="mainColor">
+                  {/* 유효기간 :~ {getExpiredDate(el.expired)} */}
+                </Text>
+              </S.Div>
+              <S.InvalidCouponImg src="/images/mycoupon/mycoupon.png" />
+            </S.UsedCoupon>
+          </S.UsedCouponBoxWrapper>
+        </S.ValidBox>
+      ))}
     </S.ValidWrapper>
   );
 }

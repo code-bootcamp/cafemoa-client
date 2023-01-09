@@ -4,25 +4,44 @@ import Text from "../../../../commons/text/01/Text01.index";
 import Input01 from "../../../../commons/input/01/Input01.index";
 import { useForm } from "react-hook-form";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
-import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserStamps";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 import { getExpiredDate } from "../../../../../commons/libraries/utill";
+import { useRef } from "react";
+import { useUseCoupon } from "../../../../commons/hooks/mutations/useUseCoupon";
 
-interface IFormOwnerPassword {
+interface IFormUseCouponData {
   password: string;
+  couponId: string;
 }
 
-export default function MyCouponValid(props) {
-  const { ModalComponent, onClickIsModalOpen } = MessageModal();
+export default function MyCouponValid() {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const { register, handleSubmit } = useForm({
+  const { useCouponSubmit } = useUseCoupon();
+  const { data } = useFetchUserCoupons();
+  console.log(data);
+  const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
+  const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
     defaultValues: {
       password: "",
+      couponId: "",
     },
   });
 
-  const onModalSubmit = (data: IFormOwnerPassword) => {
+  const onClickCoupon = (couponId: string) => () => {
+    setValue("couponId", couponId);
+    setIsModalOpen(true);
+  };
+
+  const onUseCoupon = () => {
+    inputRef.current?.click();
+  };
+
+  const submitUseCoupon = (data: IFormUseCouponData) => {
     console.log(data);
+    const { ...value } = data;
+    void useCouponSubmit(value);
   };
 
   return (
@@ -39,126 +58,62 @@ export default function MyCouponValid(props) {
                 취소
               </Text>
             </S.ModalButton>
-            <S.ModalButton color="beige">
+            <S.ModalButton type="submit" color="beige" onClick={onUseCoupon}>
               <Text size="24">확인</Text>
             </S.ModalButton>
           </>
         }
       >
-        <S.ModalFromWrap onSubmit={handleSubmit(onModalSubmit)}>
+        <S.ModalFromWrap onSubmit={handleSubmit(submitUseCoupon)}>
           <Input01
             type="text"
             textAlign="center"
             placeHolder="가맹주 비밀번호 입력"
             register={register("password")}
           />
+          <input type="submit" hidden ref={inputRef} />
         </S.ModalFromWrap>
       </ModalComponent>
 
       <S.ValidWrapper>
-        {props.data?.fetchUserCoupons.map((el) => (
-          <>aaa</>
-          // {(el.stamp / 10).map((acc)=>(
-
-          // <S.ValidBox key={el.id}>
-          //   <S.BoxWrapper>
-          //     <S.CouponDetail>
-          //       <S.Div>
-          //         <Text size="28" weight="500" fontColor="mainColor">
-          //           {el.cafeInform.brandName}
-          //         </Text>
-          //         <S.CoffeeImgWrap>
-          //           <BiCoffeeTogo />
-          //         </S.CoffeeImgWrap>
-          //       </S.Div>
-          //       <S.Div>
-          //         <Text size="24" weight="300" fontColor="mainColor">
-          //           아메리카노 1잔 무료 쿠폰
-          //         </Text>
-          //       </S.Div>
-          //       <S.Div>
-          //         <Text size="20" weight="500" fontColor="mainColor">
-          //           유효기간 : ~ {getExpiredDate(el.expiredDate)}
-          //         </Text>
-          //       </S.Div>
-          //       <S.BtnWrapper>
-          //         <S.CouponUseBtn color="beige" onClick={onClickIsModalOpen}>
-          //           <Text size="16" fontColor="mainColor">
-          //             쿠폰 사용
-          //           </Text>
-          //         </S.CouponUseBtn>
-          //       </S.BtnWrapper>
-          //     </S.CouponDetail>
-          //     <S.CouponImg src="/images/mycoupon/mycoupon.png" />
-          //   </S.BoxWrapper>
-          // </S.ValidBox>
-          //  ))}
+        {data?.fetchUserCoupons.map((el) => (
+          <S.ValidBox key={el.id}>
+            <S.BoxWrapper>
+              <S.CouponDetail>
+                <S.Div>
+                  <Text size="28" weight="500" fontColor="mainColor">
+                    {el.cafeInform.brandName}
+                  </Text>
+                  <S.CoffeeImgWrap>
+                    <BiCoffeeTogo />
+                  </S.CoffeeImgWrap>
+                </S.Div>
+                <S.Div>
+                  <Text size="24" weight="300" fontColor="mainColor">
+                    아메리카노 1잔 무료 쿠폰
+                  </Text>
+                </S.Div>
+                <S.Div>
+                  <Text size="20" weight="500" fontColor="mainColor">
+                    유효기간 : ~ {getExpiredDate(el.expiredDate)}
+                  </Text>
+                </S.Div>
+                <S.BtnWrapper>
+                  <S.CouponUseBtn
+                    color="beige"
+                    type="button"
+                    onClick={onClickCoupon(el.id)}
+                  >
+                    <Text size="16" fontColor="mainColor">
+                      쿠폰 사용
+                    </Text>
+                  </S.CouponUseBtn>
+                </S.BtnWrapper>
+              </S.CouponDetail>
+              <S.CouponImg src="/images/mycoupon/mycoupon.png" />
+            </S.BoxWrapper>
+          </S.ValidBox>
         ))}
-
-        {/* <S.ValidBox>
-          <S.BoxWrapper>
-            <S.CouponDetail>
-              <S.Div>
-                <Text size="28" weight="500" fontColor="mainColor">
-                  카페모아 구로디지털점
-                </Text>
-                <S.CoffeeImgWrap>
-                  <BiCoffeeTogo />
-                </S.CoffeeImgWrap>
-              </S.Div>
-              <S.Div>
-                <Text size="24" weight="300" fontColor="mainColor">
-                  아메리카노 1잔 무료 쿠폰
-                </Text>
-              </S.Div>
-              <S.Div>
-                <Text size="20" weight="500" fontColor="mainColor">
-                  유효기간 : ~ 2022.01.31
-                </Text>
-              </S.Div>
-              <S.BtnWrapper>
-                <S.CouponUseBtn color="beige">
-                  <Text size="16" fontColor="mainColor">
-                    쿠폰 사용
-                  </Text>
-                </S.CouponUseBtn>
-              </S.BtnWrapper>
-            </S.CouponDetail>
-            <S.CouponImg src="/images/mycoupon/mycoupon.png" />
-          </S.BoxWrapper>
-        </S.ValidBox>
-        <S.ValidBox>
-          <S.BoxWrapper>
-            <S.CouponDetail>
-              <S.Div>
-                <Text size="28" weight="500" fontColor="mainColor">
-                  카페모아 구로디지털점
-                </Text>
-                <S.CoffeeImgWrap>
-                  <BiCoffeeTogo />
-                </S.CoffeeImgWrap>
-              </S.Div>
-              <S.Div>
-                <Text size="24" weight="300" fontColor="mainColor">
-                  아메리카노 1잔 무료 쿠폰
-                </Text>
-              </S.Div>
-              <S.Div>
-                <Text size="20" weight="500" fontColor="mainColor">
-                  유효기간 : ~ 2022.01.31
-                </Text>
-              </S.Div>
-              <S.BtnWrapper>
-                <S.CouponUseBtn color="beige" onClick={onClickIsModalOpen}>
-                  <Text size="16" fontColor="mainColor">
-                    쿠폰 사용
-                  </Text>
-                </S.CouponUseBtn>
-              </S.BtnWrapper>
-            </S.CouponDetail>
-            <S.CouponImg src="/images/mycoupon/mycoupon.png" />
-          </S.BoxWrapper>
-        </S.ValidBox> */}
       </S.ValidWrapper>
     </>
   );

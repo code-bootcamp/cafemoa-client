@@ -66,7 +66,7 @@ export const UsedCouponBoxWrapper = styled.div`
     background-image: url("/images/mycoupon/mycoupon_used.png");
     background-repeat: no-repeat;
     background-color: transparent;
-    background-position: right 140px center;
+    background-position: right 190px center;
     z-index: 99;
   }
   ${mq.MobileS} {
@@ -124,8 +124,23 @@ export const BtnWrapper = styled.div`
 
 export const CouponImg = styled.img`
   position: absolute;
-  right: 28px;
-  top: 62px;
+  right: 30px;
+  top: 73px;
+  width: 28px;
+  ${mq.MobileS} {
+    right: initial;
+    top: initial;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg) scale(0.6);
+    bottom: -64px;
+  }
+`;
+
+export const InvalidCouponImg = styled.img`
+  position: absolute;
+  right: 32px;
+  top: 41px;
+  width: 23px;
   ${mq.MobileS} {
     right: initial;
     top: initial;
