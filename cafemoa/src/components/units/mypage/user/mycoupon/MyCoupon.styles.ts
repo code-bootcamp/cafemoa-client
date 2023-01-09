@@ -49,6 +49,11 @@ export const BoxWrapper = styled.div`
   background-color: ${DEFAULT_COLOR.subColor04};
   padding-right: 90px;
   border-radius: 10px;
+
+  ${mq.MobileS} {
+    padding-right: 0;
+    padding-bottom: 64px;
+  }
 `;
 
 export const UsedCouponBoxWrapper = styled.div`
@@ -73,7 +78,8 @@ export const UsedCouponBoxWrapper = styled.div`
     padding-right: 0;
     padding-bottom: 64px;
     ::before {
-      background-position: center;
+      background-position: right 20px top 20px;
+      background-size: 72px;
     }
   }
 `;
@@ -132,7 +138,7 @@ export const CouponImg = styled.img`
     top: initial;
     left: 50%;
     transform: translateX(-50%) rotate(90deg) scale(0.6);
-    bottom: -64px;
+    bottom: -50px;
   }
 `;
 
@@ -142,11 +148,12 @@ export const InvalidCouponImg = styled.img`
   top: 41px;
   width: 23px;
   ${mq.MobileS} {
+    width: 28px;
     right: initial;
     top: initial;
     left: 50%;
     transform: translateX(-50%) rotate(90deg) scale(0.6);
-    bottom: -64px;
+    bottom: -50px;
   }
 `;
 
