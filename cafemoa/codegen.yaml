@@ -1,4 +1,4 @@
-schema: http://backkim.shop/graphql
+schema: https://backkim.shop/graphql
 generates:
   ./src/commons/types/generated/types.ts:
     plugins:
