@@ -9,12 +9,12 @@ export interface IFormCreateUserData {
   name: string;
   nickname: string;
   email: string;
-  // personalNumber: string;
-  phoneNumber: string;
+  phone: string;
   password: string;
   passwordCheck: string;
-  address?: string;
-  profileImage?: string;
+  address: string;
+  detailAddress: string;
+  profileImage: string;
   emailAccess?: string;
-  phoneAccess?: number;
+  phoneAccess?: string;
 }

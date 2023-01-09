@@ -16,7 +16,7 @@ export const PHONE_VERIFY = gql`
 `;
 
 export const usePhoneVerify = () => {
-  const [accessNum, setAccessNum] = useState<number>();
+  const [accessNum, setAccessNum] = useState<string>();
   const [sendTokenToSMS] = useMutation<
     Pick<IMutation, "sendTokenToSMS">,
     IMutationSendTokenToSmsArgs

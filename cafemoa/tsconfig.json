@@ -15,14 +15,10 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "pages/23-06-funtion-with-return-funtion/index.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": [
     // 여기 영역에있는 파일들은 체킹 X
-    "node_modules"
+    "node_modules",
+    "/src/types/generted/types.ts"
   ]
 }

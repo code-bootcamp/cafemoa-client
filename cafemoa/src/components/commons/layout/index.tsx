@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import * as mq from "../../../commons/styles/mediaQuery";
+import { useFetchUser } from "../hooks/queries/useFetchUser";
 import FooterLayout from "./footer/Footer.index";
 import HeaderLayout from "./header/Header.index";
 
@@ -8,6 +9,7 @@ interface ILayoutProps {
 }
 
 export default function Layout(props: ILayoutProps) {
+  useFetchUser();
   return (
     <>
       <HeaderLayout />
@@ -16,6 +18,7 @@ export default function Layout(props: ILayoutProps) {
     </>
   );
 }
+
 const Contents = styled.div`
   overflow: hidden;
   padding-top: 100px;

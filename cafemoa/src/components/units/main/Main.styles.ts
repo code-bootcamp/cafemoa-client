@@ -39,9 +39,10 @@ export const VideoWrap = styled.div`
     transform: translate(-50%, -50%);
     background-image: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.1) 0%,
       rgba(255, 255, 255, 0) 100%
     );
+    z-index: 1;
   }
 `;
 
@@ -50,7 +51,7 @@ export const VisualVideo = styled.video`
   left: 50%;
   top: 50%;
   width: 100%;
-  min-width: 1400px;
+  min-width: 1920px;
   transform: translate(-50%, -50%);
   ${mq.MobileM} {
     left: 20%;
