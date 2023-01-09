@@ -33,6 +33,7 @@
     "react-html5-qrcode-reader": "^1.1.1",
     "react-icons": "^4.7.1",
     "react-infinite-scroller": "^1.2.6",
+    "react-qr-reader": "^3.0.0-beta-1",
     "react-qrcode-logo": "^2.8.0",
     "react-quill": "^2.0.0",
     "react-slick": "^0.29.0",
