@@ -15,7 +15,7 @@ export const COUPON_ADD_USERS = gql`
 `;
 
 export const fetchCouponAddUsers = () => {
-  const [nameState, setNameState] = useState<string>("");
+  const [phoneState, setPhoneState] = useState<string>("");
 
   const { data, refetch } = useQuery<Pick<IQuery, "fetchCouponAddUsers">>(
     COUPON_ADD_USERS,
@@ -26,18 +26,18 @@ export const fetchCouponAddUsers = () => {
     }
   );
 
-  const getDebounce = _.debounce((name) => {
-    setNameState(name);
+  const getDebounce = _.debounce((phone) => {
+    setPhoneState(phone);
   }, 300);
 
-  const onRefetchUsers = (name: string) => {
-    console.log(name);
-    getDebounce(name);
+  const onRefetchUsers = (phone: string) => {
+    console.log(phone);
+    getDebounce(phone);
   };
 
   useEffect(() => {
-    void refetch({ phone: nameState });
-  }, [nameState]);
+    void refetch({ phone: phoneState });
+  }, [phoneState]);
 
   return { data, onRefetchUsers };
 };

@@ -2,8 +2,8 @@ import { gql, useMutation } from "@apollo/client";
 import { IMutation } from "../../../../commons/types/generated/types";
 
 export const CREATE_STAMP = gql`
-  mutation createStamp($createCouponInput: CreateStampInput!) {
-    createStamp(createCouponInput: $createCouponInput) {
+  mutation createStamp($createStampInput: CreateStampInput!) {
+    createStamp(createStampInput: $createStampInput) {
       id
       count
       user {
