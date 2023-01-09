@@ -1,24 +1,32 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { ReactNode } from "react";
 import {
   BtnWrap,
   ContainerWrap,
   LargeBtn,
   MediumBtn,
-} from "../../../commons/styles/commonStyles";
+  SmallBtn,
+} from "../../../../commons/styles/commonStyles";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 interface ISignupStylesProps {
-  children?: JSX.Element[] | JSX.Element;
+  children?: ReactNode;
+  size?: string;
 }
 
 export const ContainerWrapper = styled(ContainerWrap)`
-  padding-top: 100px;
+  padding-top: 0;
 `;
 export const ContainerInner = styled.form`
-  padding: 100px 6.25%;
-  max-width: 920px;
+  padding: 40px 100px;
+  max-width: 540px;
   margin: 0 auto;
-  box-shadow: 0 0 20px 0;
+  background-color: #ffffff;
+  box-shadow: 0 0 12px -4px;
+  ${mq.MobileL} {
+    padding: 50px 100px;
+  }
 `;
 export const TitleWrap = styled.div`
   position: relative;
@@ -34,27 +42,41 @@ export const TitleWrap = styled.div`
     background-color: #69473e;
   }
 `;
-export const InputWrap = styled.div`
+export const InputWrap = styled.div<ISignupStylesProps>`
   display: flex;
+  padding-bottom: 20px;
+  justify-content: space-between;
   > div {
     width: 100%;
   }
-  padding-bottom: 40px;
-  justify-content: space-between;
-  ${(props: ISignupStylesProps) =>
+  ${(props) =>
     props.children !== undefined &&
     Array.isArray(props.children) &&
     css`
       > div {
-        width: calc(100% - 156px);
+        width: calc(100% - 116px);
         > input {
           padding-top: 16px;
           padding-bottom: 16px;
         }
       }
       > button {
-        width: 140px;
+        width: 100px;
         border-radius: 10px;
+      }
+    `}
+  ${(props) =>
+    props.size === "sm" &&
+    css`
+      > div {
+        margin-bottom: 0;
+      }
+      > div > input {
+        font-size: 14px;
+        padding: 8px;
+      }
+      > button {
+        padding: 4px 16px;
       }
     `}
 `;
@@ -89,13 +111,20 @@ export const CheckBoxWrapper = styled.div`
   width: 50%;
   padding-left: 100px;
 `;
-export const EmailBtn = styled(MediumBtn)``;
-export const PhoneBtn = styled(MediumBtn)``;
-export const BusinessBtn = styled(MediumBtn)``;
-export const AddrBtn = styled(MediumBtn)``;
-export const ResetBtn = styled(LargeBtn)``;
-export const SubmitBtn = styled(LargeBtn)``;
+export const Timer = styled.div`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+export const EmailBtn = styled(SmallBtn)``;
+export const PhoneBtn = styled(SmallBtn)``;
+export const BusinessBtn = styled(SmallBtn)``;
+export const AddrBtn = styled(SmallBtn)``;
+export const ResetBtn = styled(MediumBtn)``;
+export const SubmitBtn = styled(MediumBtn)``;
 export const SignUpBtnWrap = styled(BtnWrap)`
+  margin-top: 36px;
   > button {
     margin: 0 8px;
     width: calc(50% - 16px);

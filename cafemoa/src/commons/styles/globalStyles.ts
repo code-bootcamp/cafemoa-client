@@ -4,7 +4,7 @@ import { DEFAULT_COLOR } from "../default/default";
 export const globalStyles = css`
   html,
   body {
-    font-family: "GmarketSans", sans-serif !important;
+    font-family: "NotoSansKR", sans-serif !important;
     line-height: 1.25;
   }
   * {
@@ -86,30 +86,30 @@ export const globalStyles = css`
   }
 
   @font-face {
-    font-family: "GmarketSans";
-    src: url("/fonts/GmarketSansLight.woff2") format("woff2"),
-      url("/fonts/GmarketSansLight.woff") format("woff"),
-      url("/fonts/GmarketSansLight.ttf") format("truetype");
+    font-family: "NotoSansKR";
+    src: url("/fonts/NotoSansKR-Regular-Alphabetic.woff2") format("woff2"),
+      url("/fonts/NotoSansKR-Regular-Alphabetic.woff") format("woff"),
+      url("/fonts/NotoSansKR-Regular-Alphabetic.ttf") format("truetype");
     font-weight: 300;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: "GmarketSans";
-    src: url("/fonts/GmarketSansMedium.woff2") format("woff2"),
-      url("/fonts/GmarketSansMedium.woff") format("woff"),
-      url("/fonts/GmarketSansMedium.ttf") format("truetype");
+    font-family: "NotoSansKR";
+    src: url("/fonts/NotoSansKR-Medium-Alphabetic.woff2") format("woff2"),
+      url("/fonts/NotoSansKR-Medium-Alphabetic.woff") format("woff"),
+      url("/fonts/NotoSansKR-Medium-Alphabetic.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: "GmarketSans";
-    src: url("/fonts/GmarketSansBold.woff2") format("woff2"),
-      url("/fonts/GmarketSansBold.woff") format("woff"),
-      url("/fonts/GmarketSansBold.ttf") format("truetype");
+    font-family: "NotoSansKR";
+    src: url("/fonts/NotoSansKR-Bold-Alphabetic.woff2") format("woff2"),
+      url("/fonts/NotoSansKR-Bold-Alphabetic.woff") format("woff"),
+      url("/fonts/NotoSansKR-Bold-Alphabetic.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
