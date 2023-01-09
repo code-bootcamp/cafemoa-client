@@ -2,7 +2,7 @@ import * as S from "./PartnerStamp.styles";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import Box01 from "../../../../commons/box/01/Box01.index";
-import { Input01, Input02 } from "../../../../commons/input/01/Input01.index";
+import Input02 from "../../../../commons/input/01/Input01.index";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
 import { useForm } from "react-hook-form";
 import { SearchOutlined } from "@ant-design/icons";
@@ -29,22 +29,21 @@ export default function PartnerStamp() {
   const [createStamp] = useCreateStamp();
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectValue, setSelectValue] = useState<string | number>("");
-  const [inputValue, setInputValue] = useState<string>("");
   const [userPhone, setUserPhone] = useState<string>("");
   const { data, onRefetchUsers } = fetchCouponAddUsers();
   console.log(data);
   const { ModalComponent, onClickIsModalOpen } = MessageModal(userPhone);
-  const { register, handleSubmit } = useForm({
+  const { register, watch, handleSubmit } = useForm({
     mode: "onChange",
     defaultValues: {
+      phone: "",
       password: "",
     },
   });
+  const searchValue = watch("phone");
 
   const onStampSave = () => {
     inputRef.current?.click();
-    // const password = inputRef.current?.value;
-    // console.log(selectValue, password);
   };
 
   const onClickStampSave = (data) => {
@@ -67,12 +66,12 @@ export default function PartnerStamp() {
   };
 
   useEffect(() => {
-    onRefetchUsers(inputValue);
-  }, [inputValue]);
+    onRefetchUsers(searchValue);
+  }, [searchValue]);
 
-  useEffect(() => {
-    setUserPhone(data?.fetchCouponAddUsers.phoneNumber);
-  }, [data]);
+  // useEffect(() => {
+  //   setUserPhone(data?.fetchCouponAddUsers.phone);
+  // }, [data]);
   return (
     <>
       <ModalComponent
@@ -119,15 +118,15 @@ export default function PartnerStamp() {
             <Box01 styles={{ padding: "40px 50px" }}>
               <S.StampContainer>
                 <S.UserWrapper>
-                  <Input01
+                  <Input02
                     type="text"
-                    placeHolder="이름"
-                    setInputValue={setInputValue}
+                    placeHolder="핸드폰번호뒷자리"
+                    register={register("phone")}
                   >
                     <S.InputIconWrap>
                       <SearchOutlined />
                     </S.InputIconWrap>
-                  </Input01>
+                  </Input02>
                   <S.StampSelect>
                     <Select01
                       defaultText="적립스탬프 갯수"
@@ -147,7 +146,7 @@ export default function PartnerStamp() {
                     <ul key={el.id}>
                       <S.Name>{el.name}</S.Name>
                       <S.Name>{el.nickname}</S.Name>
-                      <S.PhoneEnd>{el.phoneNumber.slice(7)}</S.PhoneEnd>
+                      <S.PhoneEnd>{el.phone.slice(7)}</S.PhoneEnd>
                       <S.SaveStamp>
                         <S.SaveButton
                           color="beige"

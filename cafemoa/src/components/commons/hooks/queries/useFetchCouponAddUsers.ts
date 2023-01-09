@@ -4,12 +4,12 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 
 export const COUPON_ADD_USERS = gql`
-  query fetchCouponAddUsers($name: String!) {
-    fetchCouponAddUsers(name: $name) {
+  query fetchCouponAddUsers($phone: String) {
+    fetchCouponAddUsers(phone: $phone) {
       id
       name
       nickname
-      phoneNumber
+      phone
     }
   }
 `;
@@ -21,7 +21,7 @@ export const fetchCouponAddUsers = () => {
     COUPON_ADD_USERS,
     {
       variables: {
-        name: "",
+        phone: "",
       },
     }
   );
@@ -31,11 +31,12 @@ export const fetchCouponAddUsers = () => {
   }, 300);
 
   const onRefetchUsers = (name: string) => {
+    console.log(name);
     getDebounce(name);
   };
 
   useEffect(() => {
-    void refetch({ name: nameState });
+    void refetch({ phone: nameState });
   }, [nameState]);
 
   return { data, onRefetchUsers };
