@@ -7,14 +7,7 @@ export const FETCH_BEST_CAFE = gql`
       id
       cafeinfo
       like
-      cafeTag {
-        tagName
-        cafInform {
-          cafeTag {
-            tagName
-          }
-        }
-      }
+      brandName
     }
   }
 `;

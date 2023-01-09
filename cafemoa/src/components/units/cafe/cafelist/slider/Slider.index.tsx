@@ -13,17 +13,30 @@ export default function SlickSlider() {
     slidesToShow: 3,
     speed: 500,
   };
-  console.log(data?.fetchBestCafe);
   return (
     <div>
       <S.StyledSlider {...settings} afterChange={(idx) => setActiveIdx(idx)}>
-        <S.SlideWrapper isActive={activeIdx === 5}>
-          {/* {data.fetchCafe.images.map((el,idx) => (
-                <S.SlideWrapper isActive={activeIdx === idx}>
-                <S.CafeImage><img src= {el} /></S.CafeImage>
-                <S.CafeContent>샬라샬라샬라</S.CafeContent>
-            </S.SlideWrapper>
-            ))} */}
+        {data?.fetchBestCafe.map((el, idx) => (
+          <S.SlideWrapper key={idx} isActive={activeIdx === idx - 1}>
+            <S.CafeImage>
+              <img src="/images/cafelist/Cafe2.jpeg" />
+            </S.CafeImage>
+            {/* <S.CafeImage><img src= {el} /></S.CafeImage> */}
+            <S.CafeContent>
+              <Tag size="md">태그</Tag>
+              <Tag size="md">태그</Tag>
+              <Tag size="md">태그</Tag>
+            </S.CafeContent>
+            <S.CafeContent>
+              <div style={{ marginTop: 30, marginLeft: 0 }}>
+                <Text size="24" weight="500">
+                  {el.brandName}
+                </Text>
+              </div>
+            </S.CafeContent>
+          </S.SlideWrapper>
+        ))}
+        {/* <S.SlideWrapper isActive={activeIdx === 5}>
           <S.CafeImage>
             <img src="/images/cafelist/Cafe1.jpeg" />
           </S.CafeImage>
@@ -127,7 +140,7 @@ export default function SlickSlider() {
               </Text>
             </div>
           </S.CafeContent>
-        </S.SlideWrapper>
+        </S.SlideWrapper> */}
       </S.StyledSlider>
     </div>
   );

@@ -4,13 +4,20 @@ import Text from "../../../commons/text/01/Text01.index";
 import Tag from "../../../commons/text/02/Text02.index";
 import { Image } from "antd";
 import * as S from "./CafeDetail.styles";
-import { useState } from "react";
 import CafeDetailPhoto from "./CafeDetail.Photos";
 import CafeDetailReview from "./CafeDetail.Reviews";
-import { DEFAULT_COLOR } from "../../../../commons/default/default";
+import { useFetchCafeInform } from "../../../commons/hooks/queries/useFetchCafeInform";
+import { useFetchCafeMenuImage } from "../../../commons/hooks/queries/useFetchCafeMenuImage";
+import { usePickCafe } from "../../../commons/hooks/mutations/usePickCafe";
 
 export default function CafeDetail() {
-  const [isSelect, setIsSelect] = useState(true);
+  const { data } = useFetchCafeInform();
+  const { cafeMenuImage } = useFetchCafeMenuImage();
+  const { PickCafeSubmit } = usePickCafe();
+  /* eslint-disable */
+  const sanitizeHtml = require("sanitize-html");
+  console.log(cafeMenuImage?.fetchCafeMenuImage);
+  // console.log(data?.fetchCafeInform.id);
   return (
     <>
       <HeroWrap
@@ -21,38 +28,44 @@ export default function CafeDetail() {
       <S.DetailContainer>
         <S.Section>
           <S.CafeImageWrapper>
+            {/* <img src={`https://storage.googleapis.com/${data?.fetchCafeInform.thumbNail}`} /> */}
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.CafeImageWrapper>
           <S.CafeInfoWrapper>
             <Text size="32" weight="700">
-              스타벅스
+              {data?.fetchCafeInform.brandName}
             </Text>
             <S.CafeInfoFooter>
               <S.CafeAddressContainer>
                 <Text size="20" weight="300">
-                  구로구 구로동 222-2
+                  {data?.fetchCafeInform.cafeAddr}
                 </Text>
               </S.CafeAddressContainer>
-              <S.LikeContainer>
-                <Like01 iconColor="red" fontColor="black" count={22} />
+              <S.LikeContainer
+                id={data?.fetchCafeInform.id}
+                onClick={PickCafeSubmit}
+              >
+                <Like01
+                  iconColor="red"
+                  fontColor="black"
+                  count={data?.fetchCafeInform.like}
+                />
               </S.LikeContainer>
             </S.CafeInfoFooter>
           </S.CafeInfoWrapper>
           <S.OwnerContents>
-            <Text size="18" weight="500">
+            {/* <Text size="18" weight="500">
               가맹점주 카페소개란
-            </Text>
+            </Text> */}
             <S.Contents>
               <Text size="16" weight="500">
-                가맹점주 카페소개란 가맹점주 카페소개란 가맹점주 카페소개란
-                가맹점주 카페소개란 가맹점주 카페소개란 가맹점주 카페소개란
-                가맹점주 카페소개란 가맹점주 카페소개란 가맹점주 카페소개란
+                {data?.fetchCafeInform.cafeinfo}
               </Text>
             </S.Contents>
             <S.TagContainer>
-              <Tag size="md">좀 많이 긴 태그</Tag>
-              <Tag size="md">좀 많이 긴 태그</Tag>
-              <Tag size="md">좀 많이 긴 태그</Tag>
+              <Tag size="md">{data?.fetchCafeInform.cafeTag[0].tagName}</Tag>
+              <Tag size="md">{data?.fetchCafeInform.cafeTag[1].tagName}</Tag>
+              <Tag size="md">{data?.fetchCafeInform.cafeTag[2].tagName}</Tag>
             </S.TagContainer>
           </S.OwnerContents>
         </S.Section>
@@ -63,6 +76,11 @@ export default function CafeDetail() {
             </Text>
           </S.SectionTitle>
           <S.MenuImageWrapper>
+            {/* {cafeMenuImage?.fetchCafeMenuImage.map((el) => (
+              <S.Menu key={el.id}>
+                <Image src={`https://storage.googleapis.com/${el.menu_imageUrl}`} />
+              </S.Menu>
+            ))} */}
             <S.Menu>
               <Image src="/images/cafedetail/CafeDetail02.jpeg" />
             </S.Menu>
@@ -106,8 +124,18 @@ export default function CafeDetail() {
               </Text>
             </div>
           </S.SubTitleWrapper>
-          <S.TimeTableWrapper>
-            <Text size="16" weight="500">
+          <S.TimeTableWrapper
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(
+                data?.fetchCafeInform.operatingInfo.replace(
+                  /(?:\r\n|\r|\n|p)/g,
+                  "<br />"
+                ),
+                { allowedTags: ["p", "br", "n"] }
+              ),
+            }}
+          >
+            {/* <Text size="16" weight="500">
               Sunday : 10:00 ~ 22:00
             </Text>
             <Text size="16" weight="500">
@@ -127,7 +155,8 @@ export default function CafeDetail() {
             </Text>
             <Text size="16" weight="500">
               Saturday : 10:00 ~ 22:00
-            </Text>
+            </Text> */}
+            {/* {data?.fetchCafeInform.operatingInfo} */}
           </S.TimeTableWrapper>
           <div>
             <Text size="20" weight="500" fontColor="red">

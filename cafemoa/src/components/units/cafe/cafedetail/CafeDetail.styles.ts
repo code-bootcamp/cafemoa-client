@@ -107,11 +107,12 @@ export const OwnerImageContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 export const OwnerImageWrapper = styled.div`
   width: 24%;
   display: inline-block;
+  padding-top: 20px;
 `;
 // ------------------------리뷰모아 부분-------------------
 
@@ -164,7 +165,7 @@ export const ReviewImageWrapper = styled.div`
   width: 33.3333%;
   padding: 10px;
   padding-bottom: 32px;
-  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04}
+  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04};
 `;
 export const ComponentsTabs = styled(Tabs)`
   margin-top: 40px;
@@ -215,7 +216,7 @@ export const BtnInnerWrapper = styled.div`
 export const ReplyWrap = styled.div`
   display: flex;
   padding-left: 100px;
-`
+`;
 export const ReplyWrapper = styled.div`
   width: 70%;
 `;
@@ -223,17 +224,16 @@ export const ReplySubmitBtn = styled.div`
   width: 30%;
   margin-left: 10px;
   padding-top: 10px;
-`
+`;
 export const OwnerComment = styled.div`
   display: flex;
   padding-left: 64px;
   padding-top: 16px;
-`
-export const CommentIcon = styled.div`
-`
+`;
+export const CommentIcon = styled.div``;
 export const CommentContents = styled.div`
   padding-left: 16px;
-`
+`;
 // ----------------------------모달 부분----------------------
 
 export const ModalWrapper = styled(Modal)`

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Text from "../../../commons/text/01/Text01.index";
-import * as S from "./CafeDetail.styles"
+import * as S from "./CafeDetail.styles";
 
 interface IReviewModalProps {
-    title: string;
-    children?: JSX.Element;
-    buttons?: JSX.Element;
-  }
+  title: string;
+  children?: JSX.Element;
+  buttons?: JSX.Element;
+}
 
 export default function ReviewModal() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -15,16 +15,16 @@ export default function ReviewModal() {
   const onClickIsModalOpen = () => {
     setIsModalOpen((prev) => !prev);
   };
-  
+
   const onClickEditModalOpen = () => {
     setIsEdit(true);
     setIsModalOpen((prev) => !prev);
-  }
-  
+  };
+
   const onCLickCancel = () => {
     setIsEdit(false);
     setIsModalOpen((prev) => !prev);
-  }
+  };
 
   const ReviewModalComponent = (props: IReviewModalProps) => {
     return (
@@ -42,12 +42,21 @@ export default function ReviewModal() {
             <S.ModalReviewTitle>
               <Text size="18">{props.title}</Text>
             </S.ModalReviewTitle>
-              <div>{props.children}</div>
-            <S.ModalReviewBtnContainer>{props.buttons}</S.ModalReviewBtnContainer>
+            <div>{props.children}</div>
+            <S.ModalReviewBtnContainer>
+              {props.buttons}
+            </S.ModalReviewBtnContainer>
           </S.ModalReviewWrapper>
         </S.ModalWrapper>
       </>
     );
   };
-  return { ReviewModalComponent, onClickIsModalOpen, setIsModalOpen, onClickEditModalOpen, onCLickCancel, isEdit };
+  return {
+    ReviewModalComponent,
+    onClickIsModalOpen,
+    setIsModalOpen,
+    onClickEditModalOpen,
+    onCLickCancel,
+    isEdit,
+  };
 }
