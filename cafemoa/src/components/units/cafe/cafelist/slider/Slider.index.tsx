@@ -13,6 +13,7 @@ export default function SlickSlider() {
     slidesToShow: 3,
     speed: 500,
   };
+  console.log(data?.fetchBestCafe);
   return (
     <div>
       <S.StyledSlider {...settings} afterChange={(idx) => setActiveIdx(idx)}>
@@ -23,9 +24,12 @@ export default function SlickSlider() {
             </S.CafeImage>
             {/* <S.CafeImage><img src= {el} /></S.CafeImage> */}
             <S.CafeContent>
-              <Tag size="md">태그</Tag>
-              <Tag size="md">태그</Tag>
-              <Tag size="md">태그</Tag>
+              {el.cafeTag?.map((el, idx) => (
+                <Tag key={idx} size="md">
+                  {el.tagName}
+                </Tag>
+              ))}
+              {/* <Tag size="md">태그</Tag> */}
             </S.CafeContent>
             <S.CafeContent>
               <div style={{ marginTop: 30, marginLeft: 0 }}>

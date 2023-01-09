@@ -9,7 +9,7 @@ export const UploadImage = styled.img`
 `;
 
 export const UploadButton = styled.div`
-  // width: 0%;
+  // width:0%;
   background-color: ${DEFAULT_COLOR.subColor02};
   // margin-right: 24px;
   padding: 90px;
@@ -22,7 +22,7 @@ export const UploadFileHidden = styled.input`
 export const Cross = styled.span`
   width: 14px;
   height: 14px;
-`
+`;
 export const Upload = styled.span`
   width: 56px;
   height: 30.56px;
@@ -33,12 +33,12 @@ export const Upload = styled.span`
   font-weight: 500;
   font-size: 16px;
   line-height: 23px;
-  color: #4F4F4F;
+  color: #4f4f4f;
   margin-top: 15px;
-`
+`;
 export const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 40px 0px;
-`
+`;

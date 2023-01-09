@@ -9,7 +9,7 @@ export default function ReplyReview() {
         <Input01 placeHolder="20글자 이내로 작성해주세요." type="text" />
       </S.ReplyWrapper>
       <S.ReplySubmitBtn>
-        <Text size="16" >답글등록</Text>
+        <Text size="16">답글등록</Text>
       </S.ReplySubmitBtn>
     </S.ReplyWrap>
   );

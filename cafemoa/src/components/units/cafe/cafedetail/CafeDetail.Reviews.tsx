@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-// import { useFetchUserComments } from "../../../commons/hooks/queries/useFetchUserComments";
 import Like01 from "../../../commons/like/01/Like01.index";
 import Text from "../../../commons/text/01/Text01.index";
 import Textarea01 from "../../../commons/textareas/01/textarea01.index";
@@ -10,13 +9,14 @@ import ReviewModal from "./CafeDetail.Modal";
 import ReviewImageUpload from "./imageupload/CafeDetail.ReviewImages";
 import * as S from "./CafeDetail.styles";
 import ReplyReview from "./CafeDetial.Reply";
-import TempCafeDetailReviewImages from "./imageupload/TempCafeDetail.ReviewImages";
 import { v4 as uuidv4 } from "uuid";
 import { useCreateComment } from "../../../commons/hooks/mutations/useCreateComment";
 import { IFormCreateComment } from "./CafeDetail.Review.types";
+import { useFetchCommentByCafeID } from "../../../commons/hooks/queries/useFetchCommentByCafeID";
+import TempCafeDetailReviewImages from "./imageupload/TempCafeDetail.ReviewImages";
 
 export default function CafeDetailReview() {
-  // const { data } = useFetchCommentByCafeID();
+  const { data } = useFetchCommentByCafeID();
   const { createCommentSubmit } = useCreateComment();
   const {
     ReviewModalComponent,
@@ -40,9 +40,8 @@ export default function CafeDetailReview() {
     const newimageUrls = [...fileUrls];
     newimageUrls[index] = fileUrl;
     setFileUrls(newimageUrls);
+    setValue("images", fileUrls);
   };
-
-  setValue("images", fileUrls);
 
   const onModalSubmit = (data: IFormCreateComment) => {
     void createCommentSubmit(data);
@@ -51,12 +50,13 @@ export default function CafeDetailReview() {
   const onClickReply = () => {
     setIsReply((prev) => !prev);
   };
-  useEffect(() => {
-    if (data?.fetchCommentBycafeID?.commentImage?.image_url?.length) {
-      setFileUrls([...data?.fetchCommentBycafeID?.commentImage?.image_url]);
-    }
-  }, [data]);
 
+  // useEffect(() => {
+  //   if (data?.fetchCommentBycafeID.commentImage.image_url.length) {
+  //     setFileUrls([...data?.fetchCommentBycafeID?.commentImage?.image_url]);
+  //   }
+  // }, [data]);
+  console.log(data);
   return (
     <>
       <S.ReviewBtnWrapper>
@@ -125,7 +125,7 @@ export default function CafeDetailReview() {
             </Text>
           </S.ModalReviewFromWrap>
         </ReviewModalComponent>
-        {/* {data?.fetchCommentBycafeID.map((el) => (
+        {data?.fetchCommentBycafeID.map((el) => (
           <S.ReviewWrapper key={el.id}>
             <S.ReviewHeader>
               <Users01
@@ -153,30 +153,28 @@ export default function CafeDetailReview() {
             </S.ReviewContents>
             <Like01 iconColor="red" count={el.like} fontColor="black"></Like01>
             <S.ReviewImageContainer>
-              {el.commentImage.image_url[0] && ( 
-                <S.ReviewImageWrapper>
-                  <img src={`https://storage.googleapis.com/${el.commentImage.image_url[0]}`}/>
-                </S.ReviewImageWrapper>)}
-              {el.commentImage.image_url[1] && ( 
-                <S.ReviewImageWrapper>
-                  <img src={`https://storage.googleapis.com/${el.commentImage.image_url[1]}`}/>
-                </S.ReviewImageWrapper>)}
-              {el.commentImage.image_url[2] && ( 
-                <S.ReviewImageWrapper>
-                  <img src={`https://storage.googleapis.com/${el.commentImage.image_url[2]`}/>
-            </S.ReviewImageWrapper>)} 
+              {el.commentImage.map((el, idx) => (
+                // <S.ReviewImageWrapper key={idx}>
+                //   <img
+                //     src={`https://storage.googleapis.com/${el.image_url}`}
+                //   />
+                // </S.ReviewImageWrapper>
+                <S.ReviewImageWrapper key={idx}>
+                  {el.image_url}
+                </S.ReviewImageWrapper>
+              ))}
             </S.ReviewImageContainer>
             <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
             {isReply && <ReplyReview />}
           </S.ReviewWrapper>
-        ))} */}
+        ))}
         {/* 아래는 목업용으로 날릴 예정 */}
         {/* 아래는 목업용으로 날릴 예정 */}
         {/* 아래는 목업용으로 날릴 예정 */}
         {/* 아래는 목업용으로 날릴 예정 */}
         {/* 아래는 목업용으로 날릴 예정 */}
         {/* 아래는 목업용으로 날릴 예정 */}
-        <S.ReviewWrapper>
+        {/* <S.ReviewWrapper>
           <S.ReviewHeader>
             <Users01
               image="/images/cafedetail/CafeDetail04.jpeg"
@@ -239,7 +237,7 @@ export default function CafeDetailReview() {
               <img src="/images/cafedetail/CafeDetail01.jpeg" />
             </S.ReviewImageWrapper>
           </S.ReviewImageContainer>
-          {/* <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn> */}
+          <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
           <S.OwnerComment>
             <S.CommentIcon>
               <img src="/images/cafedetail/CafeDetail08.png" />
@@ -296,7 +294,7 @@ export default function CafeDetailReview() {
               <img src="/images/cafedetail/CafeDetail01.jpeg" />
             </S.ReviewImageWrapper>
           </S.ReviewImageContainer>
-        </S.ReviewWrapper>
+        </S.ReviewWrapper> */}
       </S.ReviewContainer>
     </>
   );

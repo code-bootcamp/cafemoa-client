@@ -7,8 +7,8 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_CAFES = gql`
-  query fetchCafes($Location: String, $Tags: [String!], $page: Int!) {
-    fetchCafes(Location: $Location, Tags: $Tags, page: $page) {
+  query fetchCafes($location: String, $tags: [String!], $page: Int) {
+    fetchCafes(location: $location, tags: $tags, page: $page) {
       id
       cafeinfo
       operatingInfo
@@ -33,8 +33,8 @@ export const useFetchCafes = () => {
     IQueryFetchCafesArgs
   >(FETCH_CAFES, {
     variables: {
-      Location: "",
-      Tags: [],
+      location: "",
+      tags: [],
       page: 1,
     },
   });
@@ -43,8 +43,8 @@ export const useFetchCafes = () => {
     setTagState(tagValue);
   }, 300);
 
-  const onRefetchCafes = (Tags: string[]) => {
-    getDebounce(Tags);
+  const onRefetchCafes = (tags: string[]) => {
+    getDebounce(tags);
   };
 
   const onSelectLocation = (location: string) => {
@@ -52,7 +52,7 @@ export const useFetchCafes = () => {
   };
 
   useEffect(() => {
-    void refetch({ Tags: tagState, Location: locationState });
+    void refetch({ tags: tagState, location: locationState });
   }, [tagState, locationState]);
   return { data, onRefetchCafes, onSelectLocation };
 };
