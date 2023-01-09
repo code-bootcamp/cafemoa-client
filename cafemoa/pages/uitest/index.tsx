@@ -128,21 +128,8 @@ export default function UiTest() {
           <Text size="32" weight="300">
             32px
           </Text>
-          <Text size="36" weight="300">
-            36px
-          </Text>
-          <Text size="42" weight="300">
-            42px
-          </Text>
           <Text size="54" weight="300">
             54px
-          </Text>
-          <Text size="72" weight="300">
-            72px
-          </Text>
-          <Text size="80" weight="300">
-            80px
-            <br />
           </Text>
         </div>
         <div>
@@ -169,20 +156,8 @@ export default function UiTest() {
           <Text size="32" weight="500">
             32px
           </Text>
-          <Text size="36" weight="500">
-            36px
-          </Text>
-          <Text size="42" weight="500">
-            42px
-          </Text>
           <Text size="54" weight="500">
             54px
-          </Text>
-          <Text size="72" weight="500">
-            72px
-          </Text>
-          <Text size="80" weight="500">
-            80px
           </Text>
         </div>
         <div>
@@ -209,20 +184,8 @@ export default function UiTest() {
           <Text size="32" weight="700">
             32px
           </Text>
-          <Text size="36" weight="700">
-            36px
-          </Text>
-          <Text size="42" weight="700">
-            42px
-          </Text>
           <Text size="54" weight="700">
             54px
-          </Text>
-          <Text size="72" weight="700">
-            72px
-          </Text>
-          <Text size="80" weight="700">
-            80px
           </Text>
         </div>
       </div>
@@ -367,21 +330,21 @@ export default function UiTest() {
           </Text>
           <br />
           <TestMediumBtn01 color="brown">
-            <Text size="28" fontColor="white">
+            <Text size="16" fontColor="white">
               테스트
             </Text>
           </TestMediumBtn01>
           <TestMediumBtn01 color="beige">
-            <Text size="28">테스트</Text>
+            <Text size="16">테스트</Text>
           </TestMediumBtn01>
           <TestMediumBtn01 color="lightBeige">
-            <Text size="28">테스트</Text>
+            <Text size="16">테스트</Text>
           </TestMediumBtn01>
           <TestMediumBtn01 color="brownLine">
-            <Text size="28">테스트</Text>
+            <Text size="16">테스트</Text>
           </TestMediumBtn01>
           <TestLargeBtn01>
-            <Text size="28">테스트</Text>
+            <Text size="16">테스트</Text>
           </TestLargeBtn01>
           <br />
           <br />
@@ -399,16 +362,15 @@ export default function UiTest() {
       <ModalComponent
         title={`비밀번호 입력`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        hasInput={true}
         status="write"
         buttons={
           <>
-            {/* <TestMediumBtn01 color="lightBeige">
+            <TestMediumBtn01 color="lightBeige">
               <Text size="24" fontColor="gray">
                 취소
               </Text>
-            </TestMediumBtn01> */}
-            <TestMediumBtn01 color="beige">
+            </TestMediumBtn01>
+            <TestMediumBtn01 color="beige" type="submit">
               <Text size="24">확인</Text>
             </TestMediumBtn01>
           </>
@@ -426,7 +388,14 @@ export default function UiTest() {
       {/* <ModalComponent
         title={`비밀번호 입력`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        hasInput={true}
+        status="success"
+        buttons={
+          <>
+            <TestMediumBtn01 color="beige">
+              <Text size="16">확인</Text>
+            </TestMediumBtn01>
+          </>
+        }
       ></ModalComponent> */}
     </UitestWrap>
   );

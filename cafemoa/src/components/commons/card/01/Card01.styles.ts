@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 export const CardImgWrap = styled.div`
   position: relative;
@@ -7,9 +9,14 @@ export const CardImgWrap = styled.div`
   }
 `;
 export const CardInfoWrap = styled.div`
-  padding: 24px 24px 32px;
+  padding: 24px 24px 48px;
+
+  ${mq.MobileL} {
+    padding: 16px 16px 32px;
+  }
 `;
 export const CardWrapper = styled.div`
+  position: relative;
   width: 100%;
-  border: 1px solid #000000;
+  border: 1px solid ${DEFAULT_COLOR.black};
 `;

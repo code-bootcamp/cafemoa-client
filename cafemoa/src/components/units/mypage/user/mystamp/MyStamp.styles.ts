@@ -1,53 +1,62 @@
 import styled from "@emotion/styled";
-import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
+import {
+  ContainerWrap,
+  SmallBtn,
+} from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
 `;
 
 export const TitleWrapper = styled.div`
-  padding-bottom: 113px;
+  padding-bottom: 56px;
 `;
 
 export const AreaWrapper = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
   width: 100%;
-  padding-bottom: 113px;
+  padding-bottom: 40px;
 `;
 
 export const MainArea = styled.div`
-  width: 15%;
+  min-width: 150px;
   margin-right: 2%;
 `;
 
 export const SubArea = styled.div`
-  width: 15%;
+  min-width: 150px;
   margin-right: 2%;
 `;
 
-export const Search = styled.button`
-  border-radius: 10px;
-  background-color: #f3e6d8;
-  padding: 17px 22px;
-  color: #8b8b8b;
-`;
+export const Search = styled(SmallBtn)``;
 
-export const UL = styled.ul`
+export const StampContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
   margin: 0 -30px;
+
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
-export const LI = styled.li`
+export const StampWrapper = styled.li`
   display: block;
-  width: 50%;
   padding: 0 30px 70px;
+  width: 50%;
+  ${mq.MobileM} {
+    width: 100%;
+  }
 `;
 
 export const StampInfoWrapper = styled.div`
@@ -55,36 +64,52 @@ export const StampInfoWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* padding-bottom: 20px; */
   padding: 20px 0px 30px;
 `;
 
 export const StampInfo = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  width: 30%;
+  width: calc(100% - 30px);
+  > span + span {
+    margin-left: 8px;
+  }
 `;
 
 export const IconWrap = styled.div`
   font-size: 30px;
-  color: gray;
+  color: ${DEFAULT_COLOR.gray};
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 70%;
+  width: 30px;
 `;
 
-export const StampWrapper = styled.div`
+export const Stamp = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding-left: 9%;
+`;
+
+export const ValidStampWrap = styled.div`
+  width: 20%;
+  text-align: center;
+  font-size: 70px;
+  color: ${DEFAULT_COLOR.mainColor};
+
+  ${mq.MobileL} {
+    font-size: 54px;
+  }
 `;
 
 export const IconWrap2 = styled.div`
+  width: 20%;
+  text-align: center;
   font-size: 70px;
-  color: lightgray;
-  margin-right: 7%;
+  color: ${DEFAULT_COLOR.lightGray};
+
+  ${mq.MobileL} {
+    font-size: 54px;
+  }
 `;

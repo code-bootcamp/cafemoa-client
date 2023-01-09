@@ -1,30 +1,15 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Input02 from "../../commons/input/02/Input02.index";
 import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Login.styles";
+import UserLogin from "./UserLogin.index";
+import OwnerLogin from "./OwnerLogin.index";
 
 export default function Login() {
   const [bounce, setBounce] = useState("right");
 
-  const { register, handleSubmit, formState } = useForm({
-    // resolver: yupResolver(ProductSchema),
-    mode: "onChange",
-  });
-
-  const onCLickPartner = (dir) => (event) => {
+  const onCLickPartner = (dir: string) => () => {
     setBounce(dir);
   };
-  // console.log(bounce);
-
-  // 일반회원 로그인
-  const userLogin = () => {};
-
-  // 파트너사 로그인
-  const parterLogin = () => {};
-
-  // 비밀번호 찾기
-  const onClickFindPw = () => {};
 
   return (
     <S.Wrapper>
@@ -33,7 +18,7 @@ export default function Login() {
           <S.OptionsContainer>
             <S.OptionsRegister>
               <div>
-                <Text size="28" weight="300" fontColor="deepBrown">
+                <Text size="32" weight="500" fontColor="mainColor">
                   카페모아 <br />
                   파트너이신가요?
                 </Text>
@@ -49,7 +34,7 @@ export default function Login() {
                   color="brownLine"
                   onClick={onCLickPartner("left")}
                 >
-                  <Text size="20" fontColor="deepBrown" weight="300">
+                  <Text size="20" fontColor="mainColor" weight="300">
                     파트너사 로그인
                   </Text>
                 </S.LoginButton>
@@ -58,7 +43,7 @@ export default function Login() {
 
             <S.OptionsRegister>
               <div>
-                <Text size="28" weight="300" fontColor="deepBrown">
+                <Text size="32" weight="500" fontColor="mainColor">
                   카페모아 <br />
                   고객이신가요?
                 </Text>
@@ -75,52 +60,41 @@ export default function Login() {
                   color="brownLine"
                   onClick={onCLickPartner("right")}
                 >
-                  <Text size="20" fontColor="deepBrown" weight="300">
+                  <Text size="20" fontColor="mainColor" weight="300">
                     일반회원 로그인
                   </Text>
                 </S.LoginButton>
               </S.OptionsButtonWrap>
             </S.OptionsRegister>
           </S.OptionsContainer>
-
           <S.FormsContainer dir={bounce}>
             <S.RegistForms>
-              <S.FormTitle>
-                <Text size="32" weight="500">
-                  {bounce === "left" ? "파트너사 로그인" : "일반회원 로그인"}
-                </Text>
-              </S.FormTitle>
-              <form
-                onSubmit={
-                  bounce === "left"
-                    ? handleSubmit(parterLogin)
-                    : handleSubmit(userLogin)
-                }
-              >
-                <div>
-                  <S.FormsField>
-                    <Input02 type="text" {...register("email")} />
-                  </S.FormsField>
-                  <S.FormsField>
-                    <Input02 type="password" {...register("password")} />
-                  </S.FormsField>
-                </div>
-                <S.FormsButtonsWrapper>
-                  <S.FindPassword type="button" onClick={onClickFindPw}>
-                    <Text size="16" weight="300" fontColor="gray">
-                      비밀번호를 잊으셨나요?
-                    </Text>
-                  </S.FindPassword>
-                  <S.LoginButton color="brown">
-                    <Text size="20" weight="300" fontColor="white">
-                      로그인
-                    </Text>
-                  </S.LoginButton>
-                </S.FormsButtonsWrapper>
-              </form>
+              {bounce === "left" ? <OwnerLogin /> : <UserLogin />}
             </S.RegistForms>
           </S.FormsContainer>
         </S.LoginContainer>
+
+        <S.MobileLWrapper>
+          <S.MqFormsContainer>
+            <S.RegistForms>
+              <S.TapWrap
+                defaultActiveKey="1"
+                items={[
+                  {
+                    label: "일반회원",
+                    key: "1",
+                    children: <UserLogin />,
+                  },
+                  {
+                    label: "파트너사",
+                    key: "2",
+                    children: <OwnerLogin />,
+                  },
+                ]}
+              />
+            </S.RegistForms>
+          </S.MqFormsContainer>
+        </S.MobileLWrapper>
       </S.ContainerWrapper>
     </S.Wrapper>
   );

@@ -16,5 +16,7 @@ export default function Layout(props: ILayoutProps) {
   );
 }
 const Contents = styled.div`
+  overflow: hidden;
   padding-top: 100px;
+  padding-bottom: 100px;
 `;

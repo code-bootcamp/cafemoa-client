@@ -4,16 +4,16 @@ interface IInputStylesProps {
   textAlign?: string;
 }
 
-export const InputWrap = styled.div`
+export const InputWrap = styled.div<IInputStylesProps>`
   position: relative;
   margin-bottom: 16px;
   & > input {
-    padding: 14px 16px;
+    padding: 8px 16px;
     width: 100%;
-    font-size: 24px;
+    font-size: 16px;
     background-color: #f3e6d8;
     border-radius: 10px;
-    text-align: ${(props: IInputStylesProps) =>
+    text-align: ${(props) =>
       props.textAlign !== undefined ? props.textAlign : "left"};
   }
   & > input:read-only {

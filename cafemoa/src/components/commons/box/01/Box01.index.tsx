@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import * as S from "./Box01.styles";
 
 interface IBoxProps {
-  children: JSX.Element;
+  children: ReactNode;
   styles?: {
     [key: string]: string | number;
   };

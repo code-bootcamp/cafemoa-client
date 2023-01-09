@@ -1,30 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-
-interface IDefaultColorTypes {
-  black?: string;
-  white?: string;
-  gray?: string;
-  beige?: string;
-  deepBeige?: string;
-  lightBeige?: string;
-  green?: string;
-  brown?: string;
-  deepBrown?: string;
-  [prop: string]: any;
-}
-
-export const DEFAULT_COLOR: IDefaultColorTypes = {
-  black: "#000",
-  white: "#ffffff",
-  gray: "#8B8B8B",
-  beige: "#F5E9DF",
-  deepBeige: "#F3E6D8",
-  lightBeige: "#F6F5F1",
-  green: "#5A7B2F",
-  brown: "#69473E",
-  deepBrown: "#81564B",
-};
+import * as mq from "./mediaQuery";
 
 interface IButtonColorTypes {
   beige?: {
@@ -40,6 +16,10 @@ interface IButtonColorTypes {
     borderColor: string;
   };
   brownLine?: {
+    bgColor: string;
+    borderColor: string;
+  };
+  black?: {
     bgColor: string;
     borderColor: string;
   };
@@ -63,6 +43,10 @@ const BUTTON_COLOR: IButtonColorTypes = {
     bgColor: "transparent",
     borderColor: "#69473E",
   },
+  black: {
+    bgColor: "#000000",
+    borderColor: "#000000",
+  },
 };
 
 export const ContainerWrap = styled.div`
@@ -70,6 +54,9 @@ export const ContainerWrap = styled.div`
   padding: 0 6.25%;
   max-width: 1640px;
   width: 100%;
+  ${mq.MobileL} {
+    padding-top: 56px;
+  }
 `;
 
 export const BtnWrap = styled.div`
@@ -81,6 +68,13 @@ export const BtnWrap = styled.div`
   margin-right: -12px;
   padding-left: 12px;
   padding-right: 12px;
+  ${mq.MobileL} {
+    margin-top: 36px;
+    margin-left: -6px;
+    margin-right: -6px;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
 `;
 
 export const LargeBtn = styled.button`
@@ -108,22 +102,24 @@ export const MediumBtn = styled.button`
       background-color: ${BUTTON_COLOR[props.color].bgColor};
       border-color: ${BUTTON_COLOR[props.color].borderColor};
     `}
+  ${mq.MobileL} {
+    padding: 16px;
+  }
 `;
 
-// export const SmallBtn = styled.button`
-//   padding: 14px 16px;
-//   border-width: 1px;
-//   border-style: solid;
-//   border-color: #bdbdbd;
-//   transition: all 0.2s;
-//   ${(props) =>
-//     props.color !== undefined &&
-//     css`
-//       background-color: ${BUTTON_COLOR[props.color].bgColor};
-//       color: ${BUTTON_COLOR[props.color].color};
-//       border-color: ${BUTTON_COLOR[props.color].borderColor};
-//     `}
-// `;
+export const SmallBtn = styled.button`
+  padding: 8px 16px;
+  border-width: ${(props) => (props.color === "brownLine" ? "3px" : "1px")};
+  border-style: solid;
+  border-color: #bdbdbd;
+  transition: all 0.2s;
+  ${(props) =>
+    props.color !== undefined &&
+    css`
+      background-color: ${BUTTON_COLOR[props.color].bgColor};
+      border-color: ${BUTTON_COLOR[props.color].borderColor};
+    `}
+`;
 
 export const EllipsisOne = styled.div`
   overflow: hidden;
@@ -144,7 +140,9 @@ export const EllipsisTwo = styled.div`
 `;
 
 export const TagWrap = styled.div`
-  position: relative;
+  position: sticky;
+  left: 0;
+  top: 100px;
   padding: 0 16px 18px;
   max-width: max-content;
   display: flex;

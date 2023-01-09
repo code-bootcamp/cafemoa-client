@@ -1,8 +1,4 @@
-import { Modal } from "antd";
-
-const { confirm } = Modal;
-
-export const GetDate = (value) => {
+export const GetDate = (value: string) => {
   const WriteDate = new Date(value);
   const NowDate = new Date();
   const DateNum = Number(NowDate) - Number(WriteDate);
@@ -35,41 +31,9 @@ export const GetDate = (value) => {
   return "방금 전";
 };
 
-export const PriceReg = (value) => {
-  if (value === undefined || value === null) return;
-  const regExp = /\B(?=(\d{3})+(?!\d))/g;
-  const result = String(value).replace(regExp, ",");
-
+export const GetStamp = (value: number) => {
+  const result = value % 10;
   return result;
-};
-
-export const SuccessModal = (text) => {
-  Modal.success({
-    content: text,
-  });
-};
-
-export const ErrorModal = (title, text) => {
-  Modal.error({
-    title: title,
-    content: text,
-  });
-};
-
-export const onClickDeleteConfirm = (text, clickFunc) => {
-  confirm({
-    title: "삭제",
-    content: text,
-    okText: "계속",
-    okType: "danger",
-    cancelText: "취소",
-    onOk() {
-      clickFunc();
-    },
-    onCancel() {
-      console.log("Cancel");
-    },
-  });
 };
 
 // export const base64toFile = (base_data, filename) => {
@@ -84,3 +48,12 @@ export const onClickDeleteConfirm = (text, clickFunc) => {
 
 //   return new File([u8arr], filename, { type: mime });
 // };
+
+export const getExpiredDate = (value: string) => {
+  const newDate = new Date(value);
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+  const date = newDate.getDate();
+
+  return `${year}. ${month}. ${date}`;
+};

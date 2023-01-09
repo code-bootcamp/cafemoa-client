@@ -9,7 +9,7 @@ export default function MyCouponInvalid() {
         <S.UsedCouponBoxWrapper>
           <S.UsedCoupon>
             <S.Div>
-              <Text size="28" weight="500" fontColor="deepBrown">
+              <Text size="28" weight="500" fontColor="mainColor">
                 카페모아 구로디지털점
               </Text>
               <S.CoffeeImgWrap>
@@ -17,18 +17,18 @@ export default function MyCouponInvalid() {
               </S.CoffeeImgWrap>
             </S.Div>
             <S.Div>
-              <Text size="24" weight="300" fontColor="deepBrown">
+              <Text size="24" weight="300" fontColor="mainColor">
                 아메리카노 1잔 무료 쿠폰
               </Text>
             </S.Div>
             <S.Div>
-              <Text size="20" weight="500" fontColor="deepBrown">
+              <Text size="20" weight="500" fontColor="mainColor">
                 유효기간 : ~ 2022.01.31
               </Text>
             </S.Div>
             <S.BtnWrapper>
               <S.CouponUseBtn color="beige">
-                <Text size="16" fontColor="deepBrown">
+                <Text size="16" fontColor="mainColor">
                   쿠폰 사용
                 </Text>
               </S.CouponUseBtn>

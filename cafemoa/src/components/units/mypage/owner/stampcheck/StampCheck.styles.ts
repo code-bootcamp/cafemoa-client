@@ -1,14 +1,16 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
   MediumBtn,
 } from "../../../../../commons/styles/commonStyles";
 
-export const StampCheckContainer = styled(ContainerWrap)``;
+export const StampCheckContainer = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 export const Title = styled.div`
   width: 100%;
-  padding-top: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 56px;
 `;
 export const NotificationContainer = styled.div`
   width: 100%;
@@ -20,12 +22,18 @@ export const NotificationWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   border-radius: 10px;
-  background: #f3e6d8;
-  padding: 2% 0% 2% 2%;
-  margin-bottom: 3%;
+  background: ${DEFAULT_COLOR.subColor02};
+  padding: 16px 24px;
+  margin-bottom: 40px;
+  > div {
+    width: calc(100% - 72px);
+  }
+  > button {
+    width: 72px;
+  }
 `;
 export const ConfirmBtn = styled(MediumBtn)`
   border-radius: 15px;
   padding: 10px;
-  margin-right: 4%;
+  text-align: center;
 `;

@@ -1,8 +1,14 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const InputWrap = styled.div`
+interface IInput02StylesProps {
+  isVaild?: boolean;
+}
+
+export const InputWrap = styled.div<IInput02StylesProps>`
   position: relative;
-  margin-bottom: 16px;
+  font-size: 16px;
+
   & > input {
     padding: 14px 0;
     width: 100%;
@@ -19,17 +25,31 @@ export const InputWrap = styled.div`
     transform: translateY(1rem);
     transition: cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
   }
-  & > input:focus,
-  & > input:valid {
+  & > input:focus {
     outline: none;
     border-bottom: 1.5px solid #69473e;
   }
-  & > input:focus + label,
-  & > input:valid + label {
-    left: -6px;
-    transform: translateY(-50%) scale(0.8);
-    background-color: #ffffff;
+  & > input:focus + label {
+    transform: translateY(-50%);
     padding: 0;
+    font-size: 12px;
+    background-color: #ffffff;
     color: #69473e;
   }
+
+  ${(props) =>
+    props.isVaild === true &&
+    css`
+      & > input {
+        outline: none;
+        border-bottom: 1.5px solid #69473e;
+      }
+      & > input + label {
+        transform: translateY(-50%);
+        padding: 0;
+        font-size: 12px;
+        background-color: #ffffff;
+        color: #69473e;
+      }
+    `}
 `;

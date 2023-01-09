@@ -1,4 +1,4 @@
-schema: http://backend10.codebootcamp.co.kr/graphql
+schema: http://backkim.shop/graphql
 generates:
   ./src/commons/types/generated/types.ts:
     plugins:

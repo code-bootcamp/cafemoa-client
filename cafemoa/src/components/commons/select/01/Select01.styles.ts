@@ -6,26 +6,28 @@ interface ISelectStylesProps {
   isValue: boolean;
 }
 
-export const SelectWrap = styled.div`
+export const SelectWrap = styled.div<ISelectStylesProps>`
   position: relative;
   display: block;
   > div {
     position: relative;
-    .anticon {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform-origin: top;
-      transform: translateY(-50%);
-      transition: all 0.2s;
-    }
     > button {
-      padding: 16px;
+      padding: 8px 16px;
       display: block;
       width: 100%;
+      /* height: 100%; */
       background-color: #f3e6d8;
-      font-size: 20px;
+      font-size: 16px;
       border-radius: 10px;
+
+      .anticon {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform-origin: top;
+        transform: translateY(-50%);
+        transition: all 0.2s;
+      }
     }
   }
   > ul {
@@ -51,7 +53,7 @@ export const SelectWrap = styled.div`
       background-color: #f3e6d8;
     }
   }
-  ${(props: ISelectStylesProps) =>
+  ${(props) =>
     props.isOpen &&
     css`
       > ul {
@@ -59,11 +61,11 @@ export const SelectWrap = styled.div`
         visibility: visible;
       }
 
-      > div > .anticon {
+      > div > button > .anticon {
         transform: rotateX(180deg) translateY(-50%);
       }
     `}
-  ${(props: ISelectStylesProps) =>
+  ${(props) =>
     !props.isValue &&
     css`
       > div > button {

@@ -1,30 +1,40 @@
 import styled from "@emotion/styled";
-import { ContainerWrap } from "../../../commons/styles/commonStyles";
+import { ContainerWrap, TagWrap } from "../../../commons/styles/commonStyles";
+import * as mq from "../../../commons/styles/mediaQuery";
 
-export const ContainerWrapper = styled(ContainerWrap)``;
+export const ContainerWrapper = styled(ContainerWrap)`
+  padding-top: 100px;
+`;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 142px;
 `;
 
-export const TagWrapper = styled.div`
-  position: relative;
-  padding-bottom: 157px;
+export const TagWrapper = styled(TagWrap)`
+  padding: 0 0 16px;
+  > button + button {
+    margin-left: 16px;
+  }
 `;
 
-export const UL = styled.ul`
+export const ReviewListsWrap = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0 -8px;
+  margin: 0 -20px;
 `;
 
-export const LI = styled.li`
+export const ReviewList = styled.li`
   display: block;
   width: 33.3%;
-  padding: 0 8px;
+  padding: 20px;
+  ${mq.MobileL} {
+    width: 50%;
+  }
+  ${mq.MobileM} {
+    width: 100%;
+  }
 `;
 
 export const CafeName = styled.div`
