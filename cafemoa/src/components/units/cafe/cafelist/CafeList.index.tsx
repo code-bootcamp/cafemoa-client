@@ -11,8 +11,11 @@ import { MouseEvent, useEffect, useState } from "react";
 import { TAG_VALUES } from "../../../../commons/default/default";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Masonry from "react-masonry-component";
 
 const SELECT_VALUES02 = [
+  { label: "전체", value: "" },
   { label: "서울특별시", value: "서울" },
   { label: "경기도", value: "경기" },
   { label: "강원도", value: "강원" },
@@ -30,7 +33,6 @@ const SELECT_VALUES02 = [
   { label: "울산광역시", value: "울산" },
   { label: "인천광역시", value: "인천" },
   { label: "제주도", value: "제주도" },
-  { label: "전체", value: "" },
 ];
 
 export default function CafeList() {
@@ -61,9 +63,9 @@ export default function CafeList() {
     onRefetchCafes(selectTag);
   }, [selectValue, selectTag]);
 
-  const onClickMoveToDetail = (event: MouseEvent<HTMLDivElement>) => {
-    void router.push(`/cafe/${event.currentTarget.id}`);
-  };
+  // const onClickMoveToDetail = (event: MouseEvent<HTMLDivElement>) => {
+  //   void router.push(`/cafe/${event.currentTarget.id}`);
+  // };
   return (
     <>
       <HeroWrap
@@ -92,32 +94,43 @@ export default function CafeList() {
           ))}
         </S.TagsWrap>
         <S.CardsWrapper>
-          {data?.fetchCafes.map((el: any) => (
-            <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}>
-              <Card02 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <S.LikeWrapper>
-                    <Like01 iconColor="red" fontColor="white" count={el.like} />
-                  </S.LikeWrapper>
-                  <Text size="20" weight="500">
-                    {el.brandName}
-                  </Text>
-                  <div style={{ paddingTop: "32px" }}>
-                    <Text size="16" weight="300">
-                      {el.cafeinfo}
-                    </Text>
-                    <div style={{ paddingTop: "32px" }}>
-                      {el.cafeTag?.map((el, idx) => (
-                        <Tag key={idx} size="sm">
-                          {el.tagName}
-                        </Tag>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Card02>
-            </S.CardBox>
-          ))}
+          <Masonry>
+            {data?.fetchCafes.map((el: any) => (
+              <S.CardBox id={el.id} key={el.id}>
+                <Link href={`/cafe/${String(el.id)}`}>
+                  <a>
+                    {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
+                    <Card02 imageUrl="/images/temp/temp01.png">
+                      <div>
+                        <S.LikeWrapper>
+                          <Like01
+                            iconColor="red"
+                            fontColor="white"
+                            count={el.like}
+                          />
+                        </S.LikeWrapper>
+                        <Text size="20" weight="500">
+                          {el.brandName}
+                        </Text>
+                        <div style={{ paddingTop: "8px" }}>
+                          <Text size="16" weight="300">
+                            {el.cafeinfo}
+                          </Text>
+                          <S.DetailTagWrap>
+                            {el.cafeTag?.map((el, idx) => (
+                              <Tag key={idx} size="sm">
+                                {el.tagName}
+                              </Tag>
+                            ))}
+                          </S.DetailTagWrap>
+                        </div>
+                      </div>
+                    </Card02>
+                  </a>
+                </Link>
+              </S.CardBox>
+            ))}
+          </Masonry>
         </S.CardsWrapper>
       </S.ContainerWrapper>
     </>

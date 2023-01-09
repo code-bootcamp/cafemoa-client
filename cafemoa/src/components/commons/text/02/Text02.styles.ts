@@ -36,6 +36,7 @@ export const Word = styled.span<ITagStyleProps>`
   border-radius: 50px;
   background-color: #f3e6d8;
   font-weight: 500;
+  margin-top: 4px;
   ::before {
     content: "# ";
   }
