@@ -22,6 +22,9 @@ export const MainVisual = styled.div`
   width: 100%;
   height: calc(100vh - 100px);
   overflow: hidden;
+  ${mq.MobileM} {
+    height: calc(100vh - 72px);
+  }
 `;
 export const VideoWrap = styled.div`
   width: 100%;

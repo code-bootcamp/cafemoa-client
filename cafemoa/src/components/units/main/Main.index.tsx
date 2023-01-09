@@ -44,6 +44,9 @@ export default function Main() {
     } else {
       document.body.style.cssText = `overflow : auto`;
     }
+    return () => {
+      document.body.style.cssText = `overflow : auto`;
+    };
   }, [isScroll]);
 
   return (

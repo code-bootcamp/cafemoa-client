@@ -4,7 +4,21 @@ import * as S from "./Header.styles";
 import { RiMenu3Fill } from "react-icons/ri";
 import { Drawer } from "antd";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import CafeSearchModal from "../../../units/cafesearch/CafeSearchModal.index";
+import Text from "../../text/01/Text01.index";
+import { AiOutlineUser } from "react-icons/ai";
+
+const GNB_MENUS = [
+  {
+    path: "/cafe",
+    label: "카페모아",
+  },
+  {
+    path: "/review",
+    label: "리뷰모아",
+  },
+];
 
 export default function HeaderLayout() {
   const [isDrawerOpen, setiIsDrawerOpen] = useState<boolean>(false);
@@ -34,6 +48,17 @@ export default function HeaderLayout() {
               </a>
             </Link>
           </S.Logo>
+          <S.MenuWrap>
+            {GNB_MENUS.map((el) => (
+              <Link href={el.path} key={uuidv4()}>
+                <a>
+                  <Text size="20" weight="700">
+                    {el.label}
+                  </Text>
+                </a>
+              </Link>
+            ))}
+          </S.MenuWrap>
           <S.Utiles>
             <S.SearchBtn onClick={onClickIsModalOpen}>
               <SearchOutlined />
@@ -41,6 +66,13 @@ export default function HeaderLayout() {
             <S.MenuBtn onClick={onClickDrawer}>
               <RiMenu3Fill />
             </S.MenuBtn>
+            <Link href={"/login"}>
+              <S.MyPageBtn>
+                <AiOutlineUser />
+                {/* <Text size="14">로그인</Text> */}
+                <Text size="14">김동은 님</Text>
+              </S.MyPageBtn>
+            </Link>
           </S.Utiles>
         </S.HeaderInner>
       </S.HeaderWrap>
@@ -49,12 +81,20 @@ export default function HeaderLayout() {
         placement="right"
         open={isDrawerOpen}
         onClose={onClose}
-        width={500}
+        width={320}
         key="right"
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {GNB_MENUS.map((el) => (
+          <div key={uuidv4()}>
+            <Link href={el.path}>
+              <a>
+                <Text size="20" weight="700">
+                  {el.label}
+                </Text>
+              </a>
+            </Link>
+          </div>
+        ))}
       </Drawer>
     </>
   );

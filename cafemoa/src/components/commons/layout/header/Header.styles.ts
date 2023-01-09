@@ -1,6 +1,7 @@
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { ContainerWrap } from "../../../../commons/styles/commonStyles";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 // interface IHeroProps {
 //   imageUrl: string;
@@ -23,9 +24,15 @@ export const HeaderInner = styled.div`
   max-width: 1640px;
   padding: 0 6.25%;
   height: 100px;
+  ${mq.MobileM} {
+    height: 72px;
+  }
 `;
 export const Logo = styled.h1`
   width: 200px;
+  ${mq.MobileM} {
+    width: 140px;
+  }
 `;
 export const Utiles = styled.div`
   > * + * {
@@ -36,4 +43,29 @@ export const Utiles = styled.div`
   }
 `;
 export const SearchBtn = styled.button``;
-export const MenuBtn = styled.button``;
+export const MenuBtn = styled.button`
+  display: none;
+  ${mq.MobileM} {
+    display: inline-block;
+  }
+`;
+export const MyPageBtn = styled.a`
+  display: inline-flex;
+  align-items: flex-end;
+  ${mq.MobileM} {
+    display: none;
+  }
+`;
+export const MenuWrap = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  > a {
+    display: inline-block;
+    padding: 0 8px;
+  }
+  ${mq.MobileM} {
+    display: none;
+  }
+`;
