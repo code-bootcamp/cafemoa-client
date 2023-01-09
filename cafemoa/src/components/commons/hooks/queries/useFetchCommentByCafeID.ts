@@ -1,6 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchCommentBycafeIdArgs,
+} from "../../../../commons/types/generated/types";
 
 export const FETCH_COMMENT_BY_CAFE_ID = gql`
   query fetchCommentBycafeID($cafeID: String!) {
@@ -23,11 +26,11 @@ export const FETCH_COMMENT_BY_CAFE_ID = gql`
   }
 `;
 
-export const useFetchCommentBycafeID = () => {
+export const useFetchCommentByCafeID = () => {
   const router = useRouter();
   const { data } = useQuery<
     Pick<IQuery, "fetchCommentBycafeID">,
-    IQueryFetchCommentBycafeIDArgs
+    IQueryFetchCommentBycafeIdArgs
   >(FETCH_COMMENT_BY_CAFE_ID, {
     variables: {
       cafeID: router.query.cafeInformID,

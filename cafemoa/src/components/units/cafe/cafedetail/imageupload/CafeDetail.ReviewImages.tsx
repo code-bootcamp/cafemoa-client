@@ -1,29 +1,19 @@
-import { useMutation } from "@apollo/client";
 import { ChangeEvent, useRef } from "react";
-import { checkValidationImage } from "./CafeDetail.ReviewImages.validation";
-import { UPLOAD_FILE } from "./CafeDetail.ReivewImages.queries";
-import { Modal } from "antd";
 import * as S from "./CafeDetail.ReviewImages.styles";
+import { useUploadFile } from "../../../../commons/hooks/mutations/useUploadFile";
 
 export default function ReviewImageUpload(props) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [uploadFile] = useMutation(UPLOAD_FILE);
+  const { SubmitUploadFile } = useUploadFile();
 
   const onClickUpload = () => {
     fileRef.current?.click();
   };
 
   const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = checkValidationImage(event.target.files?.[0]);
     if (!file) return;
-
-    try {
-      const result = await uploadFile({ variables: { file } });
-      props.onChangeFileUrls(result.data.uploadFile.url, props.index);
-      console.log(result.data.uploadFile);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
+    void SubmitUploadFile();
+    props.onChangeFileUrls(result.data.uploadFile.url, props.index);
   };
 
   return (
@@ -34,17 +24,16 @@ export default function ReviewImageUpload(props) {
           src={`https://storage.googleapis.com/${props.fileUrl}`}
         />
       ) : (
-        <S.UploadButton type="button" onClick={onClickUpload}>
-          <S.Cross>+</S.Cross>
-          <br />
-          <S.Upload>Upload</S.Upload>
-        </S.UploadButton>
+        <S.ImageWrapper>
+          <S.UploadButton type="button" onClick={onClickUpload}>
+            <img src="/images/cafedetail/CafeDetail07.png" />
+            {/* <S.Cross>+</S.Cross>
+            <br />
+            <S.Upload>Upload</S.Upload> */}
+          </S.UploadButton>
+        </S.ImageWrapper>
       )}
-      <S.UploadFileHidden
-        type="file"
-        ref={props.fileRef}
-        onChange={onChangeFile}
-      />
+      <S.UploadFileHidden type="file" ref={fileRef} onChange={onChangeFile} />
     </>
   );
 }

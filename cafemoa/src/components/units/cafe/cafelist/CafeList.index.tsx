@@ -107,9 +107,11 @@ export default function CafeList() {
                       {el.cafeinfo}
                     </Text>
                     <div style={{ paddingTop: "32px" }}>
-                      <Tag size="sm">{el.cafeTag[0]?.tagName}</Tag>
-                      <Tag size="sm">{el.cafeTag[1]?.tagName}</Tag>
-                      <Tag size="sm">{el.cafeTag[2]?.tagName}</Tag>
+                      {el.cafeTag?.map((el, idx) => (
+                        <Tag key={idx} size="sm">
+                          {el.tagName}
+                        </Tag>
+                      ))}
                     </div>
                   </div>
                 </div>
