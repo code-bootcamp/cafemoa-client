@@ -1,11 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { ChangeEvent, useRef } from "react";
-import { checkValidationImage } from "./Uploads02.validation";
-import { UPLOAD_FILE } from "./Uploads02.queries";
+import { checkValidationImage } from "./CafeDetail.ReviewImages.validation";
+import { UPLOAD_FILE } from "./CafeDetail.ReivewImages.queries";
 import { Modal } from "antd";
-import * as S from "./Uploads02.styles";
+import * as S from "./CafeDetail.ReviewImages.styles";
 
-export default function ReveiwImageUpload(props) {
+export default function ReviewImageUpload(props) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
@@ -36,7 +36,7 @@ export default function ReveiwImageUpload(props) {
       ) : (
         <S.UploadButton type="button" onClick={onClickUpload}>
           <S.Cross>+</S.Cross>
-          <br/>
+          <br />
           <S.Upload>Upload</S.Upload>
         </S.UploadButton>
       )}
