@@ -9,15 +9,18 @@ import ReviewModal from "./CafeDetail.Modal";
 import ReviewImageUpload from "./imageupload/CafeDetail.ReviewImages";
 import * as S from "./CafeDetail.styles";
 import ReplyReview from "./CafeDetial.Reply";
-import { v4 as uuidv4 } from "uuid";
 import { useCreateComment } from "../../../commons/hooks/mutations/useCreateComment";
 import { IFormCreateComment } from "./CafeDetail.Review.types";
 import { useFetchCommentByCafeID } from "../../../commons/hooks/queries/useFetchCommentByCafeID";
-import TempCafeDetailReviewImages from "./imageupload/TempCafeDetail.ReviewImages";
+import { useFetchOwnerComment } from "../../../commons/hooks/queries/useFetchOwnerComment";
+// import TempCafeDetailReviewImages from "./imageupload/TempCafeDetail.ReviewImages";
 
 export default function CafeDetailReview() {
   const { data } = useFetchCommentByCafeID();
+  const { OwnerData } = useFetchOwnerComment();
   const { createCommentSubmit } = useCreateComment();
+  const [isReply, setIsReply] = useState(false);
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
   const {
     ReviewModalComponent,
     onClickIsModalOpen,
@@ -33,17 +36,15 @@ export default function CafeDetailReview() {
       images: ["", "", ""],
     },
   });
-  const [isReply, setIsReply] = useState(false);
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const onChangeFileUrls = (fileUrl: string, index: number) => {
-    const newimageUrls = [...fileUrls];
-    newimageUrls[index] = fileUrl;
-    setFileUrls(newimageUrls);
-    setValue("images", fileUrls);
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   };
 
   const onModalSubmit = (data: IFormCreateComment) => {
+    setValue("images", fileUrls);
     void createCommentSubmit(data);
   };
 
@@ -97,14 +98,11 @@ export default function CafeDetailReview() {
         >
           {/* <S.ModalReviewFromWrap> */}
           <S.ModalReviewFromWrap onSubmit={handleSubmit(onModalSubmit)}>
-            {fileUrls.map((el, index) => (
-              <ReviewImageUpload
-                key={uuidv4()}
-                index={index}
-                fileUrl={el}
-                onChangeFileUrls={onChangeFileUrls}
-              />
-            ))}
+            <ReviewImageUpload
+              defaultUrls={data?.fetchCommentBycafeID.commentImage}
+              onChangeFileUrls={onChangeFileUrls}
+            />
+
             {/* <TempCafeDetailReviewImages /> */}
             <S.ModalUserWrapper>
               <Users01
@@ -165,7 +163,9 @@ export default function CafeDetailReview() {
               ))}
             </S.ReviewImageContainer>
             <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
-            {isReply && <ReplyReview />}
+            {/* {OwnerData?.fetchOwnerComment.content && isReply && <ReplyReview/>} */}
+            {/* {isReply && <ReplyReview />} */}
+            {/* <ViewReply></ViewReply> */}
           </S.ReviewWrapper>
         ))}
         {/* 아래는 목업용으로 날릴 예정 */}

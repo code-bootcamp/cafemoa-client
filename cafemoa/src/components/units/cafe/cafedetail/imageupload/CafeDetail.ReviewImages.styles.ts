@@ -2,10 +2,14 @@ import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 
 export const UploadImage = styled.img`
-  width: 180px;
-  height: 180px;
-  margin-right: 24px;
-  cursor: pointer;
+  // width: 180px;
+  // height: 180px;
+  // margin-right: 24px;
+  // cursor: pointer;
+  // width:0%;
+  background-color: ${DEFAULT_COLOR.subColor02};
+  // margin-right: 24px;
+  padding: 120px;
 `;
 
 export const UploadButton = styled.div`

@@ -1,39 +1,70 @@
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import * as S from "./CafeDetail.ReviewImages.styles";
-import { useUploadFile } from "../../../../commons/hooks/mutations/useUploadFile";
+// import { v4 as uuidv4 } from "uuid";
 
-export default function ReviewImageUpload(props) {
-  const fileRef = useRef<HTMLInputElement>(null);
-  const { SubmitUploadFile } = useUploadFile();
+interface IUploadProps {
+  defaultUrls?: string[];
+  onChangeFileUrls: (fileUrl: File, index: number) => void;
+}
 
-  const onClickUpload = () => {
-    fileRef.current?.click();
-  };
+export default function ReviewImageUpload(props: IUploadProps) {
+  const [imgUrl, setImgUrl] = useState<string[]>(["", "", ""]);
+  useEffect(() => {
+    if (!props?.defaultUrls) return;
+    const tempImgUrl = [...imgUrl];
+    tempImgUrl.map((el, idx) => {
+      if (props?.defaultUrls[idx] !== undefined) {
+        tempImgUrl[
+          idx
+        ] = `https://storage.googleapis.com/${props?.defaultUrls[idx].image_url}`;
+      } else {
+        tempImgUrl[idx] = "";
+      }
+    });
+    setImgUrl(tempImgUrl);
+  }, [props.defaultUrls]);
 
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    if (!file) return;
-    void SubmitUploadFile();
-    props.onChangeFileUrls(result.data.uploadFile.url, props.index);
-  };
+  const onChangeFile =
+    (idx: number) => async (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file === undefined) return;
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (event) => {
+        if (typeof event.target?.result === "string") {
+          const tempImgUrls = [...imgUrl];
+          tempImgUrls[idx] = event.target?.result;
+          setImgUrl(tempImgUrls);
+          props.onChangeFileUrls(file, idx);
+        }
+      };
+    };
 
   return (
     <>
-      {props.fileUrl ? (
-        <S.UploadImage
-          onClick={onClickUpload}
-          src={`https://storage.googleapis.com/${props.fileUrl}`}
-        />
-      ) : (
-        <S.ImageWrapper>
-          <S.UploadButton type="button" onClick={onClickUpload}>
-            <img src="/images/cafedetail/CafeDetail07.png" />
-            {/* <S.Cross>+</S.Cross>
-            <br />
-            <S.Upload>Upload</S.Upload> */}
-          </S.UploadButton>
-        </S.ImageWrapper>
-      )}
-      <S.UploadFileHidden type="file" ref={fileRef} onChange={onChangeFile} />
+      <S.ImageWrapper>
+        <S.UploadImage>
+          {/* <img src={"/images/cafedetail/CafeDetail07.png"} /> */}
+        </S.UploadImage>
+        <S.UploadImage>
+          {/* <img src="/images/cafedetail/CafeDetail07.png" /> */}
+        </S.UploadImage>
+        <S.UploadImage>
+          {/* <img src="/images/cafedetail/CafeDetail07.png" /> */}
+        </S.UploadImage>
+        {/* {imgUrl?.map((el, idx) => (
+          <S.UploadImage key={uuidv4()}>
+            {el !== "" ? (
+              <img src={el} />
+            ) : (
+              // <img src="/images/cafedetail/CafeDetail07.png" />
+              <span>aaa</span>
+            )}
+            <input type="file" onChange={onChangeFile(idx)} />
+          </S.UploadImage>
+        ))} */}
+      </S.ImageWrapper>
     </>
   );
 }
