@@ -57,7 +57,7 @@ export default function CafeDetailReview() {
   //     setFileUrls([...data?.fetchCommentBycafeID?.commentImage?.image_url]);
   //   }
   // }, [data]);
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <S.ReviewBtnWrapper>
