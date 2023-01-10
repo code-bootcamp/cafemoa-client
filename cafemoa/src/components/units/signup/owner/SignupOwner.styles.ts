@@ -54,15 +54,18 @@ export const InputWrap = styled.div<ISignupStylesProps>`
     Array.isArray(props.children) &&
     css`
       > div {
-        width: calc(100% - 116px);
         > input {
           padding-top: 16px;
           padding-bottom: 16px;
         }
       }
       > button {
-        width: 100px;
+        width: 140px;
         border-radius: 10px;
+        text-align: center;
+      }
+      > div + * {
+        margin-left: 16px;
       }
     `}
   ${(props) =>
@@ -106,6 +109,8 @@ export const InputWrapAdminPassword = styled.div`
 `;
 export const CheckBoxContainer = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 export const CheckBoxWrapper = styled.div`
   width: 50%;

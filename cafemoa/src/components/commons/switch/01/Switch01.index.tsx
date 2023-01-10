@@ -1,9 +1,16 @@
 import { ChangeEvent } from "react";
+// import { UseFormRegisterReturn } from "react-hook-form";
 import * as S from "./Switch01.styles";
 
-export default function Switch01() {
+interface ISwitchProps {
+  // register?: UseFormRegisterReturn;
+  onSetValue: (value: boolean) => void;
+}
+
+export default function Switch01(props: ISwitchProps) {
   const onChangeSwitch = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.currentTarget.checked);
+    // props.setValue("", event.currentTarget.checked);
+    props.onSetValue(event.currentTarget.checked);
   };
 
   return (
