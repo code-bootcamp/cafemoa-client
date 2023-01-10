@@ -75,7 +75,7 @@ export default function HeaderLayout() {
               href={
                 infoUser === undefined
                   ? "/login"
-                  : `/mypage/user/${infoUser?.fetchUser?.id}`
+                  : `/mypage/user/${String(infoUser?.fetchUser?.id)}`
               }
             >
               <S.MyPageBtn>

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import Text from "../../text/01/Text01.index";
 import * as S from "./Input02.styles";
@@ -10,6 +10,7 @@ interface IInputProps {
   name: string;
   readOnly?: boolean;
   isValid?: boolean;
+  children?: ReactNode;
 }
 
 export default function Input02(props: IInputProps) {
@@ -52,6 +53,9 @@ export default function Input02(props: IInputProps) {
         <Text size="14" fontColor="red">
           {props.errorMsg}
         </Text>
+      </div>
+      <div style={{ marginTop: "4px", wordBreak: "keep-all" }}>
+        {props.children}
       </div>
     </S.InputWrap>
   );

@@ -19,6 +19,6 @@
   "exclude": [
     // 여기 영역에있는 파일들은 체킹 X
     "node_modules",
-    "/src/types/generted/types.ts"
+    "src/commons/types/generated"
   ]
 }

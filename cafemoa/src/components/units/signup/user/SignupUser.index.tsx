@@ -98,11 +98,10 @@ export default function SignUpUser() {
       if (phoneAccessNum === undefined) return;
       temp[authOpt].checking = true;
     }
-    // if (authOpt === "phone"){
-    //   if (emailErrorMsg === undefined) return;
-    //   temp[authOpt].checking = true;
-    // }
     setIsSignAuth(temp);
+    return () => {
+      setIsSignAuth(CHECK_AUTH);
+    };
   }, [authOpt, emailAccessNum, phoneAccessNum]);
 
   const onClickVerify =
