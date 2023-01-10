@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import SignUpOwner from "./owner/SignupOwner.index";
 import * as S from "./Signup.styles";
@@ -31,24 +32,20 @@ const CHECK_AUTH: ICheckAuth = {
 };
 
 export default function SignUp() {
+  const router = useRouter();
   const [state, setState] = useState(true);
-  const userRef = useRef(null);
-  const ownerRef = useRef(null);
-  const nodeRef = state ? userRef : ownerRef;
-  const onClickTab = (bool: boolean) => () => {
-    setState(bool);
-  };
-  console.log(state);
+  // const userRef = useRef(null);
+  // const ownerRef = useRef(null);
+  // const nodeRef = state ? userRef : ownerRef;
+  useEffect(() => {
+    if (router.query.type === undefined) return;
+    setState(router.query.type === "user");
+  }, [router]);
   return (
     <S.SignUpWrap>
       <S.SignUpInner>
         <S.SignUpFormWrap>
-          <S.SignUpTabWrap>
-            <button onClick={onClickTab(true)}>일반 회원</button>
-            <button onClick={onClickTab(false)}>가맹주 회원</button>
-          </S.SignUpTabWrap>
-
-          <SwitchTransition mode="out-in">
+          {/* <SwitchTransition mode="out-in">
             <CSSTransition
               key={state ? "userForm" : "ownerForm"}
               nodeRef={nodeRef}
@@ -62,7 +59,8 @@ export default function SignUp() {
                 {state ? <SignUpUser /> : <SignUpOwner />}
               </S.TransitionWrap>
             </CSSTransition>
-          </SwitchTransition>
+          </SwitchTransition> */}
+          {state ? <SignUpUser /> : <SignUpOwner />}
         </S.SignUpFormWrap>
       </S.SignUpInner>
     </S.SignUpWrap>

@@ -8,7 +8,7 @@ import MemberCoupon from "./Member-coupon";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 
 export default function Member() {
-  const [userQrCode, setUserQrCode] = useState("https://naver.com");
+  const [userQrCode, setUserQrCode] = useState("01012341234");
 
   return (
     <>

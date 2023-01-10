@@ -9,6 +9,7 @@ import { useEmailVerify } from "../../../commons/hooks/mutations/useEmailVerify"
 import { usePhoneVerify } from "../../../commons/hooks/mutations/usePhoneVerify";
 import Input01 from "../../../commons/input/01/Input01.index";
 import Timer from "../../../commons/timer/01/Timer.index";
+import Switch01 from "../../../commons/switch/01/switch01.index";
 
 interface ICheckAuth {
   [key: string]: {
@@ -233,7 +234,7 @@ export default function SignUpOwner() {
           />
         </S.InputWrap>
         <S.CheckBoxContainer>
-          <S.CheckBoxWrapper>
+          {/* <S.CheckBoxWrapper>
             <input type="checkbox" name="ismain" value={"Y"} />
             <Text size="16" fontColor="mainColor">
               카페모아 메인화면 보기
@@ -244,7 +245,8 @@ export default function SignUpOwner() {
             <Text size="16" fontColor="mainColor">
               카페모아 메인화면 안보기
             </Text>
-          </S.CheckBoxWrapper>
+          </S.CheckBoxWrapper> */}
+          <Switch01 />
         </S.CheckBoxContainer>
         <S.SignUpBtnWrap>
           <S.ResetBtn type="reset" color="lightBeige">
