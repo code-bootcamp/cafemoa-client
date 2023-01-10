@@ -119,6 +119,7 @@ export const OwnerImageWrapper = styled.div`
 export const ReviewContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 24px;
 `;
 export const ReviewWrapper = styled.div`
   width: 50%;

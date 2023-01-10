@@ -16,19 +16,22 @@ export const useUploadFile = () => {
     IMutationUploadFileArgs
   >(UPLOAD_FILE);
 
-  const SubmitUploadFile = async () => {
-    try {
-      await uploadFile({
-        variables: {
-          files: [],
-        },
-      });
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
+  // const SubmitUploadFile = async () => {
+  //   try {
+  //     await uploadFile({
+  //       variables: {
+  //         files: [],
+  //       },
+  //     });
+  //   } catch (error) {
+  //     if (error instanceof Error) alert(error.message);
+  //   }
+  // };
 
+  // return {
+  //   SubmitUploadFile,
+  // };
   return {
-    SubmitUploadFile,
+    uploadFile,
   };
 };
