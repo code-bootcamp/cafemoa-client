@@ -13,8 +13,9 @@ export const FETCH_CAFE_INFORM = gql`
       operatingInfo
       cafeAddr
       like
-      ownerNum
       brandName
+      cafeImage
+      cafeMenuImage
       cafeTag {
         id
         tagName

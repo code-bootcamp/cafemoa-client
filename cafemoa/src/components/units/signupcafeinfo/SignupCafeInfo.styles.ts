@@ -7,6 +7,7 @@ import {
   LargeBtn,
   MediumBtn,
   SmallBtn,
+  TagWrap,
 } from "../../../commons/styles/commonStyles";
 
 interface ISignupStylesProps {
@@ -41,6 +42,9 @@ export const InputWrap = styled.div`
   > div {
     width: 100%;
   }
+  > button {
+    text-align: center;
+  }
   padding-bottom: 40px;
   justify-content: space-between;
   ${(props: ISignupStylesProps) =>
@@ -55,7 +59,7 @@ export const InputWrap = styled.div`
         }
       }
       > button {
-        width: 140px;
+        width: 128px;
         border-radius: 10px;
       }
     `}
@@ -102,6 +106,21 @@ export const BusinessBtnWrap = styled.div`
   > button {
     width: 180px;
     border-radius: 10px;
+    text-align: center;
+  }
+`;
+export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px 0px;
+`;
+export const TagsWrap = styled.div`
+  margin-top: 16px;
+  padding: 0 0 16px;
+  > button {
+    margin-right: 8px;
+    margin-top: 8px;
   }
 `;
 export const EmailBtn = styled(MediumBtn)``;
