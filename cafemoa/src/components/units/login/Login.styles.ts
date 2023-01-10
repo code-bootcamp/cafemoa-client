@@ -191,7 +191,7 @@ export const FormsButtonsWrapper = styled.div`
   margin-top: 35px;
 `;
 
-export const FindPassword = styled.button`
+export const FindPassword = styled.a`
   color: ${DEFAULT_COLOR.gray};
   text-decoration: underline;
   transition: color 0.2s ease-in-out;

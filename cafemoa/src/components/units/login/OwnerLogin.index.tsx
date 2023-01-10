@@ -1,10 +1,12 @@
 import { Modal } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
 import { useOwnerLogin } from "../../commons/hooks/mutations/useOwnerLogin";
 import Input02 from "../../commons/input/02/Input02.index";
+import Link01 from "../../commons/link/01/Link01.index";
 import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Login.styles";
 import { IFormLogin } from "./Login.types";
@@ -55,10 +57,6 @@ export default function OwnerLogin() {
     }
   };
 
-  const onClickFindPW = () => {
-    void router.push("/login/findpw");
-  };
-
   return (
     <>
       <S.FormTitle>
@@ -80,11 +78,16 @@ export default function OwnerLogin() {
           </S.FormsField>
         </div>
         <S.FormsButtonsWrapper>
-          <S.FindPassword type="button" onClick={onClickFindPW}>
+          <Link01 href="/login/findpw">
             <Text size="16" weight="300" fontColor="gray">
               비밀번호를 잊으셨나요?
             </Text>
-          </S.FindPassword>
+          </Link01>
+          <Link01 href={{ pathname: "/signup", query: { type: "owner" } }}>
+            <Text size="16" weight="300" fontColor="gray">
+              파트너 회원가입
+            </Text>
+          </Link01>
           <S.LoginButton color="brown">
             <Text size="20" weight="300" fontColor="white">
               로그인

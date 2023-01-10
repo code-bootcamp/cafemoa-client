@@ -13,7 +13,8 @@ export const HeaderWrap = styled.div`
   top: 0;
   width: 100%;
   background-color: #ffffff;
-  border-bottom: 1px solid #69473e;
+  /* border-bottom: 1px solid #69473e; */
+  box-shadow: 0px 0px 10px 0;
   z-index: 100;
 `;
 export const HeaderInner = styled.div`
