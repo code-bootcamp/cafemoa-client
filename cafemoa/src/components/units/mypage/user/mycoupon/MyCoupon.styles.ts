@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Tabs } from "antd";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
@@ -68,7 +69,14 @@ export const UsedCouponBoxWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("/images/mycoupon/mycoupon_used.png");
+    ${(props) =>
+      props?.expired
+        ? css`
+            background-image: url("/images/mycoupon/mycoupon_expired.png");
+          `
+        : css`
+            background-image: url("/images/mycoupon/mycoupon_used.png");
+          `}
     background-repeat: no-repeat;
     background-color: transparent;
     background-position: right 190px center;
@@ -145,7 +153,7 @@ export const CouponImg = styled.img`
 export const InvalidCouponImg = styled.img`
   position: absolute;
   right: 32px;
-  top: 41px;
+  top: 55px;
   width: 23px;
   ${mq.MobileS} {
     width: 28px;

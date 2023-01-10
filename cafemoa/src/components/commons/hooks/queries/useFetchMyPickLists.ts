@@ -1,6 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchMyPickListsArgs,
+} from "../../../../commons/types/generated/types";
 
 export const MY_PICK_LISTS = gql`
   query fetchMyPickLists($page: Int, $Location: String) {
@@ -27,15 +30,15 @@ export const MY_PICK_LISTS = gql`
 
 export const useFetchMyPickLists = () => {
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch } = useQuery<Pick<IQuery, "fetchMyPickLists">>(
-    MY_PICK_LISTS,
-    {
-      variables: {
-        page: 1,
-        Location: "",
-      },
-    }
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchMyPickLists">,
+    IQueryFetchMyPickListsArgs
+  >(MY_PICK_LISTS, {
+    variables: {
+      page: 1,
+      Location: "",
+    },
+  });
 
   const onSelectLocation = (location: string) => {
     if (location === "전체") {

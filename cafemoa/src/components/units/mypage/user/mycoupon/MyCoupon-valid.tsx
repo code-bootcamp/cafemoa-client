@@ -8,6 +8,7 @@ import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchU
 import { getExpiredDate } from "../../../../../commons/libraries/utill";
 import { useRef } from "react";
 import { useUseCoupon } from "../../../../commons/hooks/mutations/useUseCoupon";
+import { Modal } from "antd";
 
 interface IFormUseCouponData {
   password: string;
@@ -17,9 +18,9 @@ interface IFormUseCouponData {
 export default function MyCouponValid() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { useCouponSubmit } = useUseCoupon();
   const { data } = useFetchUserCoupons();
   console.log(data);
+  const { useCouponSubmit } = useUseCoupon();
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
@@ -36,12 +37,11 @@ export default function MyCouponValid() {
 
   const onUseCoupon = () => {
     inputRef.current?.click();
+    setIsModalOpen(false);
   };
-
-  const submitUseCoupon = (data: IFormUseCouponData) => {
+  const submitUseCoupon = async (data: IFormUseCouponData) => {
     console.log(data);
-    const { ...value } = data;
-    void useCouponSubmit(value);
+    void useCouponSubmit(data);
   };
 
   return (

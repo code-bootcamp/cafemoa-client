@@ -7,12 +7,13 @@ interface ILinkProps {
   href: string | UrlObject;
   children: ReactNode;
   as?: string;
+  active?: boolean;
 }
 
 export default function Link01(props: ILinkProps) {
   return (
     <Link href={props.href} as={props.as}>
-      <S.LinkWrap>
+      <S.LinkWrap active={props.active}>
         <S.LinkBorder />
         {props.children}
       </S.LinkWrap>

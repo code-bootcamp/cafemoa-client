@@ -6,6 +6,8 @@ import {
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Container = styled.div`

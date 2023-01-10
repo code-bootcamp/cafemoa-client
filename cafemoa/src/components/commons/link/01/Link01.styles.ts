@@ -1,5 +1,10 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
+
+interface ILinkStylesProps {
+  active?: boolean;
+}
 
 export const LinkBorder = styled.span`
   position: absolute;
@@ -13,7 +18,7 @@ export const LinkBorder = styled.span`
   background-color: ${DEFAULT_COLOR.gray};
 `;
 
-export const LinkWrap = styled.a`
+export const LinkWrap = styled.a<ILinkStylesProps>`
   position: relative;
   padding-right: 20px;
   ::before {
@@ -51,4 +56,23 @@ export const LinkWrap = styled.a`
     transform-origin: bottom left;
     background-color: ${DEFAULT_COLOR.mainColor};
   }
+  ${(props) =>
+    props.active !== undefined &&
+    props.active &&
+    css`
+      > span {
+        color: ${DEFAULT_COLOR.mainColor};
+      }
+      ::before {
+        background-color: ${DEFAULT_COLOR.mainColor};
+      }
+      ::after {
+        border-color: ${DEFAULT_COLOR.mainColor};
+      }
+      > ${LinkBorder} {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+        background-color: ${DEFAULT_COLOR.mainColor};
+      }
+    `}
 `;

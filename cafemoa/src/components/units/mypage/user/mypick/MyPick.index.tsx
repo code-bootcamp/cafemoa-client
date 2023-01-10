@@ -6,7 +6,10 @@ import Like01 from "../../../../commons/like/01/Like01.index";
 import Select01 from "../../../../commons/select/01/Select01.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import Tag from "../../../../commons/text/02/Text02.index";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
+import { useRouter } from "next/router";
 import * as S from "./MyPick.styles";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "전체" },
@@ -30,10 +33,15 @@ const SELECT_VALUES02 = [
 ];
 
 export default function MyPick() {
+  const router = useRouter();
+  console.log(router.asPath);
+  // const isMyPick = router.asPath.includes("mypick");
   const [selectValue, setSelectValue] = useState<string | number>("");
   console.log(selectValue);
   const { data, onSelectLocation } = useFetchMyPickLists();
   console.log(data);
+
+  const [value, setValue] = useState<string | number>("내 스탬프 모아");
 
   useEffect(() => {
     onSelectLocation(selectValue);
@@ -47,6 +55,11 @@ export default function MyPick() {
         subject="마이페이지 마이페이지 마이페이지"
       ></HeroWrap>
       <S.ContainerWrapper>
+        <div>
+          <MypageSidebarLayout>
+            <SidebarMenuLayout asPath={router.asPath} />
+          </MypageSidebarLayout>
+        </div>
         <S.Container>
           <S.TitleWrapper>
             <Text size="32" weight="500">
