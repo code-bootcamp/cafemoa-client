@@ -1,8 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import {
   IMutation,
   IMutationUseCouponArgs,
 } from "../../../../commons/types/generated/types";
+import { USER_COUPONS } from "../queries/useFetchUserCoupons";
 
 interface IFormUseCouponData {
   password: string;
@@ -13,15 +15,6 @@ export const USE_COUPON = gql`
   mutation useCoupon($couponId: String!, $password: String!) {
     useCoupon(couponId: $couponId, password: $password) {
       id
-      expired
-      user {
-        id
-        name
-      }
-      cafeInform {
-        id
-        brandName
-      }
     }
   }
 `;
@@ -39,13 +32,20 @@ export const useUseCoupon = () => {
         variables: {
           ...data,
         },
+        refetchQueries: [
+          {
+            query: USER_COUPONS,
+          },
+        ],
       });
-      console.log(result.data);
+      console.log(result);
+      Modal.success({
+        content: "쿠폰 사용처리 되었습니다!",
+      });
+      return;
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) console.log(error.message);
     }
   };
-  return {
-    useCouponSubmit,
-  };
+  return { useCouponSubmit };
 };

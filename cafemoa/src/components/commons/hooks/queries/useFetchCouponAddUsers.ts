@@ -1,5 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchCouponAddUsersArgs,
+} from "../../../../commons/types/generated/types";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
@@ -17,14 +20,14 @@ export const COUPON_ADD_USERS = gql`
 export const fetchCouponAddUsers = () => {
   const [phoneState, setPhoneState] = useState<string>("");
 
-  const { data, refetch } = useQuery<Pick<IQuery, "fetchCouponAddUsers">>(
-    COUPON_ADD_USERS,
-    {
-      variables: {
-        phone: "",
-      },
-    }
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchCouponAddUsers">,
+    IQueryFetchCouponAddUsersArgs
+  >(COUPON_ADD_USERS, {
+    variables: {
+      phone: "",
+    },
+  });
 
   const getDebounce = _.debounce((phone) => {
     setPhoneState(phone);

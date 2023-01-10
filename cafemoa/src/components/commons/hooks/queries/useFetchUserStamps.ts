@@ -1,9 +1,13 @@
 import { gql, useQuery } from "@apollo/client";
-import { IQuery } from "../../../../commons/types/generated/types";
+import { useEffect, useState } from "react";
+import {
+  IQuery,
+  IQueryFetchUserStampsArgs,
+} from "../../../../commons/types/generated/types";
 
 export const USER_STAMPS = gql`
-  query fetchUserStamps {
-    fetchUserStamps {
+  query fetchUserStamps($page: Int, $location: String) {
+    fetchUserStamps(page: $page, location: $location) {
       id
       count
       user {
@@ -14,12 +18,34 @@ export const USER_STAMPS = gql`
         id
         brandName
         cafeinfo
+        cafeAddr
       }
     }
   }
 `;
 
 export const useFetchUserStamps = () => {
-  const { data } = useQuery<Pick<IQuery, "fetchUserStamps">>(USER_STAMPS);
-  return { data };
+  const [locationState, setLocationState] = useState<string>("");
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchUserStamps">,
+    IQueryFetchUserStampsArgs
+  >(USER_STAMPS, {
+    variables: {
+      page: 1,
+      location: "",
+    },
+  });
+  const onSelectLocation = (location: string) => {
+    console.log(location);
+    if (location === "전체") {
+      setLocationState("");
+    } else {
+      setLocationState(location);
+    }
+  };
+
+  useEffect(() => {
+    void refetch({ location: locationState });
+  }, [locationState]);
+  return { data, onSelectLocation };
 };

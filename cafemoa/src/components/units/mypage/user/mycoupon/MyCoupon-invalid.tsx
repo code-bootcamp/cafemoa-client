@@ -12,7 +12,7 @@ export default function MyCouponInvalid() {
     <S.ValidWrapper>
       {data?.fetchDeletedCoupon.map((el) => (
         <S.ValidBox key={el.id}>
-          <S.UsedCouponBoxWrapper>
+          <S.UsedCouponBoxWrapper expired={el.expired}>
             <S.UsedCoupon>
               <S.Div>
                 <Text size="28" weight="500" fontColor="mainColor">
@@ -29,9 +29,10 @@ export default function MyCouponInvalid() {
               </S.Div>
               <S.Div>
                 <Text size="20" weight="500" fontColor="mainColor">
-                  {/* 유효기간 :~ {getExpiredDate(el.expired)} */}
+                  유효기간 : ~ {getExpiredDate(el.expiredDate)}
                 </Text>
               </S.Div>
+
               <S.InvalidCouponImg src="/images/mycoupon/mycoupon.png" />
             </S.UsedCoupon>
           </S.UsedCouponBoxWrapper>

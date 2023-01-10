@@ -35,7 +35,6 @@ export type ICafeInform = {
   like: Scalars['Int'];
   operatingInfo: Scalars['String'];
   owner: IOwner;
-  ownerNum: Scalars['String'];
   thumbNail: Scalars['String'];
 };
 
@@ -45,10 +44,9 @@ export type ICafeInformInput = {
   cafeTag: Array<Scalars['String']>;
   cafe_imageUrl: Array<Scalars['String']>;
   cafeinfo: Scalars['String'];
-  detailAddr?: InputMaybe<Scalars['String']>;
+  detailAddr: Scalars['String'];
   menu_imageUrl: Array<Scalars['String']>;
   operatingInfo: Scalars['String'];
-  ownerNum: Scalars['String'];
 };
 
 export type ICafeMenuImage = {
@@ -123,6 +121,7 @@ export type IDeletedCoupon = {
   __typename?: 'DeletedCoupon';
   cafeInform: ICafeInform;
   expired: Scalars['Boolean'];
+  expiredDate: Scalars['String'];
   id: Scalars['String'];
   user: IUser;
 };
@@ -142,8 +141,8 @@ export type IMutation = {
   deleteCafeMenuImage: Scalars['Boolean'];
   deleteCategory: Scalars['Boolean'];
   deleteComment: Scalars['String'];
+  deleteCommentImage: Scalars['String'];
   deleteOwner: Scalars['Boolean'];
-  deleteOwnerComment: Scalars['Boolean'];
   deleteStamp: Scalars['String'];
   deleteUnusualStamp: Scalars['Int'];
   deleteUser: Scalars['Boolean'];
@@ -236,8 +235,8 @@ export type IMutationDeleteCommentArgs = {
 };
 
 
-export type IMutationDeleteOwnerCommentArgs = {
-  ownerCommentId: Scalars['String'];
+export type IMutationDeleteCommentImageArgs = {
+  commentImageID: Scalars['String'];
 };
 
 
@@ -339,6 +338,7 @@ export type IOwner = {
   is_cafeInform: Scalars['Boolean'];
   is_main: Scalars['Boolean'];
   name: Scalars['String'];
+  ownerNum: Scalars['String'];
   phone: Scalars['String'];
 };
 
@@ -356,6 +356,7 @@ export type IOwnerInput = {
   email: Scalars['String'];
   is_main: Scalars['Boolean'];
   name: Scalars['String'];
+  ownerNum: Scalars['String'];
   ownerPassword: Scalars['String'];
   password: Scalars['String'];
   phone: Scalars['String'];
@@ -365,6 +366,7 @@ export type IOwnerUpdateInput = {
   email?: InputMaybe<Scalars['String']>;
   is_main?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
+  ownerNum?: InputMaybe<Scalars['String']>;
   ownerPassword?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   phone?: InputMaybe<Scalars['String']>;
@@ -402,7 +404,6 @@ export type IQuery = {
   fetchMyPickLists: Array<IPickList>;
   fetchOwner: IOwner;
   fetchOwnerComment: Array<IOwnerComment>;
-  fetchOwnerComment1: IOwnerComment;
   fetchOwnerCommentByCommentID: Scalars['String'];
   fetchOwnerLoggedIn: IOwner;
   fetchOwners: Array<IOwner>;
@@ -497,19 +498,13 @@ export type IQueryFetchCouponAddUsersArgs = {
 };
 
 
-export type IQueryFetchDeletedCouponArgs = {
-  page?: InputMaybe<Scalars['Int']>;
-};
-
-
 export type IQueryFetchMyCafesArgs = {
   page?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type IQueryFetchMyOwnerCommentsArgs = {
-  OwnerID: Scalars['String'];
-  page: Scalars['Int'];
+  page?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -525,12 +520,7 @@ export type IQueryFetchOwnerArgs = {
 
 
 export type IQueryFetchOwnerCommentArgs = {
-  page: Scalars['Int'];
-};
-
-
-export type IQueryFetchOwnerComment1Args = {
-  ownercommentId: Scalars['String'];
+  page?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -570,6 +560,7 @@ export type IStamp = {
   cafeInform: ICafeInform;
   count: Scalars['Int'];
   id: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
   user: IUser;
 };
 
