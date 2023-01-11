@@ -9,6 +9,7 @@ export const CardImgWrap = styled.div`
   }
 `;
 export const CardInfoWrap = styled.div`
+  position: relative;
   padding: 24px 24px 48px;
 
   ${mq.MobileL} {

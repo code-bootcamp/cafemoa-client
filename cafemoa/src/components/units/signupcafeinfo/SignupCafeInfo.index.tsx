@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import CafeInformMenuImage from "./imageupload/menu/SignupCafeInfoMenuImage.index";
 import { TAG_VALUES } from "../../../commons/default/default";
 import Tag from "../../commons/text/02/Text02.index";
+import Uploads01 from "../../commons/uploads/01/Upload01.index";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
@@ -24,14 +25,14 @@ interface ISignUpCafeInfoProps {
 }
 
 export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [filesList, setFilesList] = useState(["", "", ""]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectTag, setSelectTag] = useState<string[]>([]);
 
   const onChangeFileUrls = (fileUrl: string, index: number) => {
-    const newFileUrls = [...fileUrls];
+    const newFileUrls = [...filesList];
     newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
+    setFilesList(newFileUrls);
   };
 
   const { register, handleSubmit, watch, setValue, formState } = useForm({
@@ -194,16 +195,8 @@ export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
             </Text>
           </S.ContentsTitleWrap>
           <S.ImageWrapper>
-            {fileUrls.map((el, index) => (
-              <CafeInformMenuImage
-                key={uuidv4()}
-                index={index}
-                fileUrl={el}
-                onChangeFileUrls={onChangeFileUrls}
-              />
-            ))}
+            <Uploads01 onChangeFileUrls={onChangeFileUrls} maxLength={3} />
           </S.ImageWrapper>
-          {/* <TempCafeInfoMenuImages /> */}
           <S.ContentsTitleWrap>
             <Text size="20" fontColor="subColor01">
               카페 사진

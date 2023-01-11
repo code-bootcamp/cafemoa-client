@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 
-export const InputFileWrap = styled.div``;
+export const InputFileWrap = styled.div`
+  display: flex;
+  flex-direction: space-between;
+`;
 
 export const InputFile = styled.div`
   position: relative;
