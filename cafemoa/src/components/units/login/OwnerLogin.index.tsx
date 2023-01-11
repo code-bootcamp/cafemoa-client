@@ -38,13 +38,6 @@ export default function OwnerLogin() {
       console.log(result.data?.ownerLogin);
       const accessToken = result.data?.ownerLogin;
 
-      if (accessToken === undefined) {
-        Modal.warning({
-          content: "로그인 후 이용해주세요.",
-        });
-        return;
-      }
-
       setAccessToken(accessToken);
       Modal.success({
         content: "환영합니다 가맹주님! 카페모아입니다!",
