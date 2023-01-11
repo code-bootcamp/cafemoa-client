@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Tabs } from "antd";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
@@ -10,6 +11,8 @@ export const SaveButton = styled(SmallBtn)``;
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const ModalButton = styled(MediumBtn)``;
@@ -28,6 +31,7 @@ export const StampButton = styled(MediumBtn)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 350px);
 `;
 
 export const TitleWrapper = styled.div`
@@ -113,4 +117,60 @@ export const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   padding-top: 40px;
+`;
+
+export const QrReader = styled.div`
+  margin-bottom: 30px;
+`;
+
+export const QrWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 100%;
+`;
+
+export const QrUserWrapper = styled.div`
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+`;
+
+export const QrSaveStamp = styled.div`
+  width: 30%;
+  margin-left: 10px;
+`;
+
+export const TapWrap = styled(Tabs)`
+  .ant-tabs-nav::before {
+    display: none;
+  }
+  .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: ${DEFAULT_COLOR.mainColor};
+    transform: scale(1);
+  }
+
+  .ant-tabs-tab + .ant-tabs-tab {
+    margin-left: 16px;
+  }
+
+  .ant-tabs-tab-btn {
+    font-size: 20px;
+    color: ${DEFAULT_COLOR.gray};
+    transform: scale(0.8);
+  }
+
+  .ant-tabs-ink-bar {
+    background: none;
+  }
+
+  .ant-tabs-content {
+    padding-top: 56px;
+  }
+
+  .ant-tabs-top > .ant-tabs-nav::before {
+    border-bottom: none;
+  }
 `;
