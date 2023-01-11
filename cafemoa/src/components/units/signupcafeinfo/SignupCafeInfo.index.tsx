@@ -11,23 +11,30 @@ import dynamic from "next/dynamic";
 import Input02 from "../../commons/input/02/Input02.index";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { v4 as uuidv4 } from "uuid";
-import CafeInformMenuImage from "./imageupload/menu/SignupCafeInfoMenuImage.index";
 import { TAG_VALUES } from "../../../commons/default/default";
 import Tag from "../../commons/text/02/Text02.index";
 import Uploads01 from "../../commons/uploads/01/Upload01.index";
+import { useCreateCafeInform } from "../../commons/hooks/mutations/useCreateCafeInform";
+import { useUploadFile } from "../../commons/hooks/mutations/useUploadFile";
+import { useFetchMyCafes } from "../../commons/hooks/queries/useFetchMyCafes";
+import { useUpdateCafeInform } from "../../commons/hooks/mutations/useUpdateCafeInform";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
 });
 
-interface ISignUpCafeInfoProps {
-  data?: Pick<IQuery, "fetchCafeInform">;
-}
+// interface ISignUpCafeInfoProps {
+//   data?: Pick<IQuery, "fetchCafeInform">;
+// }
 
-export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
+export default function SignUpCafeInfo() {
   const [filesList, setFilesList] = useState(["", "", ""]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectTag, setSelectTag] = useState<string[]>([]);
+  const { CreatecafeInformSubmit } = useCreateCafeInform();
+  const { UpdateCafeInformSubmit } = useUpdateCafeInform();
+  const { mycafedata } = useFetchMyCafes();
+  const { uploadFile } = useUploadFile();
 
   const onChangeFileUrls = (fileUrl: string, index: number) => {
     const newFileUrls = [...filesList];
@@ -65,19 +72,17 @@ export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
   };
 
   const onSignUpSubmit = async (data) => {
-    setValue("cafeImage", fileUrls);
     const results = await Promise.all(
-      files.map(async (file) => await uploadFile({ variables: { file } }))
+      filesList.map(async (files) => await uploadFile({ variables: { files } }))
     );
-    const resultUrls = results.map((el) =>
-      el !== undefined ? el.data?.uploadFile.url : ""
-    );
-    setValue("cafeImage", resultUrls);
-    setValue("cafeTag", selectTag);
+    // const resultUrls = results.map((el) =>
+    //   el !== undefined ? el.data?.uploadFile.url : ""
+    // );
+    setValue("cafeMenuImage", filesList);
     if (!props.isEdit) {
-      void createSubmit(data, resultUrls);
+      void CreatecafeInformSubmit(data);
     } else {
-      void updateSubmit(props.useditemId, data, resultUrls);
+      void UpdateCafeInformSubmit(mycafedata?.fetchMyCafes.id, data);
     }
   };
 
@@ -104,11 +109,6 @@ export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
     setSelectTag([...tagArr]);
     setValue("cafeTag", selectTag);
   };
-  console.log(selectTag);
-  // useEffect(() => {
-  //   onSelectLocation(selectValue);
-  //   onRefetchCafes(selectTag);
-  // }, [selectValue, selectTag]);
   return (
     <>
       <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
@@ -171,7 +171,6 @@ export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
                 height: "300px",
               }}
               modules={modules}
-              defaultValue={props.data?.fetchCafeInform.cafeinfo}
             />
           </div>
           <S.ContentsTitleWrap>
@@ -186,7 +185,6 @@ export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
                 height: "300px",
               }}
               modules={modules}
-              defaultValue={props.data?.fetchCafeInform.operatingInfo}
             />
           </div>
           <S.ContentsTitleWrap>

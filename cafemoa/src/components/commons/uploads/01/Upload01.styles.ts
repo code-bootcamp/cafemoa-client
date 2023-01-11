@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
 
 export const InputFileWrap = styled.div`
   display: flex;
-  flex-direction: space-between;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 export const InputFile = styled.div`
@@ -10,11 +12,11 @@ export const InputFile = styled.div`
   display: inline-block;
   width: 180px;
   height: 180px;
-  margin-right: 24px;
+  // margin-right: 24px;
   margin-bottom: 24px;
   text-align: center;
   padding: 18px;
-  background-color: #bdbdbd;
+  background-color: ${DEFAULT_COLOR.subColor02};
   & > span {
     position: absolute;
     left: 50%;

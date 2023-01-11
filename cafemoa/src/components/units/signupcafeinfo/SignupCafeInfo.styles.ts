@@ -110,9 +110,6 @@ export const BusinessBtnWrap = styled.div`
   }
 `;
 export const ImageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   padding: 40px 0px;
 `;
 export const TagsWrap = styled.div`
