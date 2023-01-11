@@ -19,17 +19,37 @@ const FETCH_USER = gql`
     }
   }
 `;
+const FETCH_OWNER_LOGGEDIN = gql`
+  query fetchOwnerLoggedIn {
+    fetchOwnerLoggedIn {
+      id
+      name
+      email
+      phone
+      is_main
+      is_cafeInform
+      ownerNum
+      brandName
+    }
+  }
+`;
 
 export const useFetchUser = () => {
-  const { data } = useQuery<Pick<IQuery, "fetchUser">>(FETCH_USER);
+  const { data: user } = useQuery<Pick<IQuery, "fetchUser">>(FETCH_USER);
+  const { data: owner } =
+    useQuery<Pick<IQuery, "fetchOwnerLoggedIn">>(FETCH_OWNER_LOGGEDIN);
   const [, setInfoUser] = useRecoilState(infoUserState);
-
   useEffect(() => {
-    if (data === undefined) return;
-    setInfoUser(data);
-  }, [data]);
+    if (user !== undefined) {
+      setInfoUser(user);
+    }
+    if (owner !== undefined) {
+      setInfoUser(owner);
+    }
+  }, [user, owner]);
 
   return {
-    data,
+    user,
+    owner,
   };
 };

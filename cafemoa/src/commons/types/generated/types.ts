@@ -529,7 +529,6 @@ export type IQueryFetchStampArgs = {
 
 
 export type IQueryFetchUnusualStampsArgs = {
-  cafeId: Scalars['String'];
   page?: InputMaybe<Scalars['Int']>;
 };
 
