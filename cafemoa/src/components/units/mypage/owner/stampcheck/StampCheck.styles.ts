@@ -37,3 +37,8 @@ export const ConfirmBtn = styled(MediumBtn)`
   padding: 10px;
   text-align: center;
 `;
+export const ModalButton = styled(MediumBtn)``;
+
+export const ModalFromWrap = styled.form`
+  padding-top: 32px;
+`;
