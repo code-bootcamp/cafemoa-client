@@ -13,7 +13,7 @@ import { IFormLogin } from "./Login.types";
 
 export default function OwnerLogin() {
   const router = useRouter();
-  const [userLogin] = useOwnerLogin();
+  const [ownerLogin] = useOwnerLogin();
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const { register, handleSubmit } = useForm({
@@ -29,7 +29,7 @@ export default function OwnerLogin() {
     console.log(data);
 
     try {
-      const result = await userLogin({
+      const result = await ownerLogin({
         variables: {
           ...data,
         },

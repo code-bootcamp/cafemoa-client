@@ -17,6 +17,10 @@ export default function UserLogin() {
   const { register, handleSubmit, formState } = useForm({
     // resolver: yupResolver(ProductSchema),
     mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onClickUserLogin = async (data: IFormLogin) => {

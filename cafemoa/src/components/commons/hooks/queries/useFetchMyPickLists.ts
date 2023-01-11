@@ -15,13 +15,15 @@ export const MY_PICK_LISTS = gql`
       }
       cafeInform {
         id
-        brandName
         cafeinfo
         cafeAddr
         like
         cafeTag {
           id
           tagName
+        }
+        owner {
+          brandName
         }
       }
     }

@@ -93,7 +93,7 @@ export default function MyPick() {
                     <S.MypickCafe>
                       <S.MypickCafeInfo>
                         <Text size="24" weight="500" fontColor="subColor01">
-                          {el.cafeInform.brandName}
+                          {el.cafeInform.owner.brandName}
                         </Text>
                         <Like01
                           iconColor="red"

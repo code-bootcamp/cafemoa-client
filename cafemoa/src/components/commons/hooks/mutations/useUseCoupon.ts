@@ -4,6 +4,7 @@ import {
   IMutation,
   IMutationUseCouponArgs,
 } from "../../../../commons/types/generated/types";
+import { DELETED_COUPON } from "../queries/useFetchDeletedCoupon";
 import { USER_COUPONS } from "../queries/useFetchUserCoupons";
 
 interface IFormUseCouponData {
@@ -35,6 +36,9 @@ export const useUseCoupon = () => {
         refetchQueries: [
           {
             query: USER_COUPONS,
+          },
+          {
+            query: DELETED_COUPON,
           },
         ],
       });
