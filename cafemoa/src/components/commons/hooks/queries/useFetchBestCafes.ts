@@ -7,7 +7,9 @@ export const FETCH_BEST_CAFE = gql`
       id
       cafeinfo
       like
-      brandName
+      owner {
+        brandName
+      }
       cafeTag {
         id
         tagName

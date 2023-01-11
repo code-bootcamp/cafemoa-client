@@ -7,13 +7,16 @@ import {
 
 export const StampCheckContainer = styled(ContainerWrap)`
   padding-top: 100px;
+  display: flex;
+  flex-direction: row;
 `;
 export const Title = styled.div`
-  width: 100%;
-  margin-bottom: 56px;
+  padding-bottom: 56px;
 `;
 export const NotificationContainer = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 350px);
 `;
 export const NotificationWrapper = styled.div`
   width: 100%;

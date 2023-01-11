@@ -9,6 +9,7 @@ export default function SlickSlider() {
   const [activeIdx, setActiveIdx] = useState(0);
   const settings = {
     infinite: true,
+    autoplay: true,
     centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
@@ -22,129 +23,22 @@ export default function SlickSlider() {
             <S.CafeImage>
               <img src="/images/cafelist/Cafe2.jpeg" />
             </S.CafeImage>
-            {/* <S.CafeImage><img src= {el} /></S.CafeImage> */}
             <S.CafeContent>
               {el.cafeTag?.map((el, idx) => (
                 <Tag key={idx} size="md">
                   {el.tagName}
                 </Tag>
               ))}
-              {/* <Tag size="md">태그</Tag> */}
             </S.CafeContent>
             <S.CafeContent>
               <div style={{ marginTop: 30, marginLeft: 0 }}>
                 <Text size="24" weight="500">
-                  {el.brandName}
+                  {el.owner.brandName}
                 </Text>
               </div>
             </S.CafeContent>
           </S.SlideWrapper>
         ))}
-        {/* <S.SlideWrapper isActive={activeIdx === 5}>
-          <S.CafeImage>
-            <img src="/images/cafelist/Cafe1.jpeg" />
-          </S.CafeImage>
-          <S.CafeContent>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-          </S.CafeContent>
-          <S.CafeContent>
-            <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="24" weight="500">
-                코캠다방
-              </Text>
-            </div>
-          </S.CafeContent>
-        </S.SlideWrapper>
-        <S.SlideWrapper isActive={activeIdx === 0}>
-          <S.CafeImage>
-            <img src="/images/cafelist/Cafe2.jpeg" />
-          </S.CafeImage>
-          <S.CafeContent>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-          </S.CafeContent>
-          <S.CafeContent>
-            <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="24" weight="500">
-                스타벅스
-              </Text>
-            </div>
-          </S.CafeContent>
-        </S.SlideWrapper>
-        <S.SlideWrapper isActive={activeIdx === 1}>
-          <S.CafeImage>
-            <img src="/images/cafelist/Cafe3.jpeg" />
-          </S.CafeImage>
-          <S.CafeContent>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-          </S.CafeContent>
-          <S.CafeContent>
-            <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="24" weight="500">
-                투썸플레이스
-              </Text>
-            </div>
-          </S.CafeContent>
-        </S.SlideWrapper>
-        <S.SlideWrapper isActive={activeIdx === 2}>
-          <S.CafeImage>
-            <img src="/images/cafelist/Cafe1.jpeg" />
-          </S.CafeImage>
-          <S.CafeContent>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-
-            <Tag size="md">태그</Tag>
-          </S.CafeContent>
-          <S.CafeContent>
-            <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="24" weight="500">
-                커피빈
-              </Text>
-            </div>
-          </S.CafeContent>
-        </S.SlideWrapper>
-        <S.SlideWrapper isActive={activeIdx === 3}>
-          <S.CafeImage>
-            <img src="/images/cafelist/Cafe1.jpeg" />
-          </S.CafeImage>
-          <S.CafeContent>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-
-            <Tag size="md">태그</Tag>
-          </S.CafeContent>
-          <S.CafeContent>
-            <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="24" weight="500">
-                빽다방
-              </Text>
-            </div>
-          </S.CafeContent>
-        </S.SlideWrapper>
-        <S.SlideWrapper isActive={activeIdx === 4}>
-          <S.CafeImage>
-            <img src="/images/cafelist/Cafe1.jpeg" />
-          </S.CafeImage>
-          <S.CafeContent>
-            <Tag size="md">태그</Tag>
-            <Tag size="md">태그</Tag>
-
-            <Tag size="md">태그</Tag>
-          </S.CafeContent>
-          <S.CafeContent>
-            <div style={{ marginTop: 30, marginLeft: 0 }}>
-              <Text size="24" weight="500">
-                메가커피
-              </Text>
-            </div>
-          </S.CafeContent>
-        </S.SlideWrapper> */}
       </S.StyledSlider>
     </div>
   );

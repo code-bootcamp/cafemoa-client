@@ -11,6 +11,7 @@ import { useFetchCommentsAll } from "../../commons/hooks/queries/useFetchComment
 import Select01 from "../../commons/select/01/Select01.index";
 import Link from "next/link";
 import Masonry from "react-masonry-component";
+import { GetDate } from "../../../commons/libraries/utill";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "" },
@@ -92,11 +93,13 @@ export default function ReviewList() {
                     <a>
                       <Card01 imageUrl="/images/temp/temp01.png">
                         <div>
-                          <Users01
-                            image="/images/review/review_profile01.png"
-                            name={el.user.nickname}
-                            size="sm"
-                          />
+                          <S.UserWrapper>
+                            <Users01
+                              image="/images/review/review_profile01.png"
+                              name={el.user.nickname}
+                              size="sm"
+                            />
+                          </S.UserWrapper>
                           <S.CafeName>
                             <Text size="24" weight="500">
                               {el.cafeinfo.owner.brandName}
@@ -109,16 +112,16 @@ export default function ReviewList() {
                           </S.ReviewContent>
                           <S.ReviewTag>
                             {el.cafeinfo.cafeTag.map((el, idx) => (
-                              <div key={idx}>
-                                <Tag size="sm">{el.tagName}</Tag>
-                              </div>
+                              <Tag key={idx} size="sm">
+                                {el.tagName}
+                              </Tag>
                             ))}
-                            <S.ReviewDate>
-                              <Text size="14" weight="300" fontColor="gray">
-                                3일 전
-                              </Text>
-                            </S.ReviewDate>
                           </S.ReviewTag>
+                          <S.ReviewDate>
+                            <Text size="14" weight="300" fontColor="gray">
+                              {GetDate(el.time)}
+                            </Text>
+                          </S.ReviewDate>
                         </div>
                       </Card01>
                     </a>

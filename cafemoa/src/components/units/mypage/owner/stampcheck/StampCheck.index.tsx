@@ -7,6 +7,9 @@ import Input01 from "../../../../commons/input/01/Input01.index";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./StampCheck.styles";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/owner/MypageSidebar.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/owner/sidebarMenu/SidebarMenu.index";
+import { useRouter } from "next/router";
 
 interface IFormDeleteUnusualStampData {
   ownerpassword: string;
@@ -14,6 +17,7 @@ interface IFormDeleteUnusualStampData {
 }
 
 export default function StampCheck() {
+  const router = useRouter();
   const { data } = useFetchUnusualStamps();
   const { deleteUnusualStampSubmit } = useDeleteUnusualStamp();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -46,12 +50,17 @@ export default function StampCheck() {
         subject="마이페이지 마이페이지 마이페이지 마이페이지 마이페이지 마이페이지 마이페이지"
       ></HeroWrap>
       <S.StampCheckContainer>
-        <S.Title>
-          <Text size="28" weight="500" fontColor="black">
-            스탬프를 한번에 받은 회원님들을 모아봤어요!
-          </Text>
-        </S.Title>
+        <div>
+          <MypageSidebarLayout>
+            <SidebarMenuLayout asPath={router.asPath} />
+          </MypageSidebarLayout>
+        </div>
         <S.NotificationContainer>
+          <S.Title>
+            <Text size="28" weight="500" fontColor="black">
+              스탬프를 한번에 받은 회원님들을 모아봤어요!
+            </Text>
+          </S.Title>
           {data?.fetchUnusualStamps.map((el) => (
             <S.NotificationWrapper key={el.id}>
               <div>
