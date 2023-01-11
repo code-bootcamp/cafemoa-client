@@ -2,10 +2,10 @@ import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import {
   IMutation,
-  IMutationCreatecafeInformArgs,
+  IMutationUpdateCafeInformArgs,
 } from "../../../../commons/types/generated/types";
 
-interface IFormCreateCafeInformData {
+interface IFormUpdateCafeInformData {
   cafeinfo: string;
   operatingInfo: string;
   cafeAddr: string;
@@ -15,9 +15,15 @@ interface IFormCreateCafeInformData {
   cafe_imageUrl: string[];
 }
 
-export const CREATE_CAFE_INFORM = gql`
-  mutation CreatecafeInform($cafeInformInput: CafeInformInput!) {
-    CreatecafeInform(cafeInformInput: $cafeInformInput) {
+export const UPDATE_CAFE_INFORM = gql`
+  mutation updateCafeInform(
+    $cafeInformInput: CafeInformInput!
+    $cafeInformID: String!
+  ) {
+    updateCafeInform(
+      cafeInformInput: $cafeInformInput
+      cafeInformID: $cafeInformID
+    ) {
       id
       cafeinfo
       operatingInfo
@@ -37,18 +43,19 @@ export const CREATE_CAFE_INFORM = gql`
   }
 `;
 
-export const useCreateCafeInform = () => {
+export const useUpdateCafeInform = () => {
   const router = useRouter();
-  const [CreatecafeInform] = useMutation<
-    Pick<IMutation, "CreatecafeInform">,
-    IMutationCreatecafeInformArgs
-  >(CREATE_CAFE_INFORM);
+  const [updateCafeInform] = useMutation<
+    Pick<IMutation, "updateCafeInform">,
+    IMutationUpdateCafeInformArgs
+  >(UPDATE_CAFE_INFORM);
 
-  const CreatecafeInformSubmit = async (data: IFormCreateCafeInformData) => {
+  const UpdateCafeInformSubmit = async (cafeInformID, data) => {
     try {
-      const result = await CreatecafeInform({
+      const result = await updateCafeInform({
         variables: {
-          cafeInformInput: {
+          cafeInformID,
+          updateCafeInform: {
             ...data,
           },
         },
@@ -59,6 +66,6 @@ export const useCreateCafeInform = () => {
     }
   };
   return {
-    CreatecafeInformSubmit,
+    UpdateCafeInformSubmit,
   };
 };
