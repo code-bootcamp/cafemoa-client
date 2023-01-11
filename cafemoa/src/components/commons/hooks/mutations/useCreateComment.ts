@@ -27,6 +27,9 @@ export const CREATE_COMMENT = gql`
         name
         nickname
       }
+      commentImage {
+        image_url
+      }
     }
   }
 `;

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Like01 from "../../../commons/like/01/Like01.index";
 import Text from "../../../commons/text/01/Text01.index";
@@ -13,14 +13,20 @@ import { useCreateComment } from "../../../commons/hooks/mutations/useCreateComm
 import { IFormCreateComment } from "./CafeDetail.Review.types";
 import { useFetchCommentByCafeID } from "../../../commons/hooks/queries/useFetchCommentByCafeID";
 import { useFetchOwnerComment } from "../../../commons/hooks/queries/useFetchOwnerComment";
-// import TempCafeDetailReviewImages from "./imageupload/TempCafeDetail.ReviewImages";
+import Uploads01 from "../../../commons/uploads/01/Upload01.index";
+import { infoUserState } from "../../../../commons/stores";
+import { useRecoilState } from "recoil";
 
 export default function CafeDetailReview() {
   const { data } = useFetchCommentByCafeID();
   const { OwnerData } = useFetchOwnerComment();
   const { createCommentSubmit } = useCreateComment();
   const [isReply, setIsReply] = useState(false);
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+  const [filesList, setFilesList] = useState(["", "", ""]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [infoUser] = useRecoilState(infoUserState);
+  const userName = infoUser?.fetchUser?.name;
+  const ownerbrandName = infoUser?.fetchOwnerLoggedIn?.brandName;
   const {
     ReviewModalComponent,
     onClickIsModalOpen,
@@ -33,14 +39,14 @@ export default function CafeDetailReview() {
     mode: "onChange",
     defaultValues: {
       reply: "",
-      images: ["", "", ""],
+      commentImage: ["", "", ""],
     },
   });
 
   const onChangeFileUrls = (fileUrl: string, index: number) => {
-    const newFileUrls = [...fileUrls];
+    const newFileUrls = [...filesList];
     newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
+    setFilesList(newFileUrls);
   };
 
   const onModalSubmit = (data: IFormCreateComment) => {
@@ -48,16 +54,18 @@ export default function CafeDetailReview() {
     void createCommentSubmit(data);
   };
 
+  const onReplysubmit = () => {
+    inputRef.current?.click();
+  };
+
+  const onReplyUpdate = () => {
+    // inputRef.current?.click();
+  };
+
   const onClickReply = () => {
     setIsReply((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //   if (data?.fetchCommentBycafeID.commentImage.image_url.length) {
-  //     setFileUrls([...data?.fetchCommentBycafeID?.commentImage?.image_url]);
-  //   }
-  // }, [data]);
-  // console.log(data);
   return (
     <>
       <S.ReviewBtnWrapper>
@@ -81,7 +89,10 @@ export default function CafeDetailReview() {
                 </Text>
               </S.ReviewCancelBtn>
               <S.ModalBtnWrapper>
-                <S.ReviewSubmitBtn color="brown">
+                <S.ReviewSubmitBtn
+                  onClick={isEdit ? onReplyUpdate : onReplysubmit}
+                  color="brown"
+                >
                   {isEdit ? (
                     <Text size="16" fontColor="white">
                       수정하기
@@ -96,18 +107,12 @@ export default function CafeDetailReview() {
             </>
           }
         >
-          {/* <S.ModalReviewFromWrap> */}
           <S.ModalReviewFromWrap onSubmit={handleSubmit(onModalSubmit)}>
-            <ReviewImageUpload
-              defaultUrls={data?.fetchCommentBycafeID.commentImage}
-              onChangeFileUrls={onChangeFileUrls}
-            />
-
-            {/* <TempCafeDetailReviewImages /> */}
+            <Uploads01 onChangeFileUrls={onChangeFileUrls} maxLength={3} />
             <S.ModalUserWrapper>
               <Users01
                 image="/images/cafedetail/CafeDetail04.jpeg"
-                name="원두학살자"
+                name={userName}
                 size="sm"
               />
             </S.ModalUserWrapper>
@@ -116,11 +121,11 @@ export default function CafeDetailReview() {
                 placeHolder="고객님의 의견을 자유롭게 적어주세요"
                 register={register("reply")}
               />
-              {/* <Input01 type="text" textAlign="center" /> */}
             </S.ModalInputWrapper>
             <Text size="16" weight="300" fontColor="gray">
               * 작성하신 리뷰는 작성 후 3일이내 수정 가능합니다.
             </Text>
+            <input type="submit" hidden ref={inputRef} />
           </S.ModalReviewFromWrap>
         </ReviewModalComponent>
         {data?.fetchCommentBycafeID.map((el) => (
@@ -168,133 +173,6 @@ export default function CafeDetailReview() {
             {/* <ViewReply></ViewReply> */}
           </S.ReviewWrapper>
         ))}
-        {/* 아래는 목업용으로 날릴 예정 */}
-        {/* 아래는 목업용으로 날릴 예정 */}
-        {/* 아래는 목업용으로 날릴 예정 */}
-        {/* 아래는 목업용으로 날릴 예정 */}
-        {/* 아래는 목업용으로 날릴 예정 */}
-        {/* 아래는 목업용으로 날릴 예정 */}
-        {/* <S.ReviewWrapper>
-          <S.ReviewHeader>
-            <Users01
-              image="/images/cafedetail/CafeDetail04.jpeg"
-              name="원두학살자"
-              size="md"
-            />
-            <S.BtnWrapper>
-              <S.EditBtn onClick={onClickEditModalOpen}>
-                <Text size="16" weight="300" fontColor="black">
-                  수정
-                </Text>
-              </S.EditBtn>
-              <S.DeleteBtn>
-                <Text size="16" weight="300" fontColor="black">
-                  삭제
-                </Text>
-              </S.DeleteBtn>
-            </S.BtnWrapper>
-          </S.ReviewHeader>
-          <S.ReviewContents>
-            <Text size="18" weight="300">
-              커피맛이 너무좋아요
-            </Text>
-          </S.ReviewContents>
-          <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-          <S.ReviewImageContainer>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-          </S.ReviewImageContainer>
-          <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
-          {isReply && <ReplyReview />}
-        </S.ReviewWrapper>
-        <S.ReviewWrapper>
-          <Users01
-            image="/images/cafedetail/CafeDetail04.jpeg"
-            name="원두학살자"
-            size="md"
-          />
-          <S.ReviewContents>
-            <Text size="18" weight="300">
-              커피맛이 너무좋아요
-            </Text>
-          </S.ReviewContents>
-          <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-          <S.ReviewImageContainer>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-          </S.ReviewImageContainer>
-          <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
-          <S.OwnerComment>
-            <S.CommentIcon>
-              <img src="/images/cafedetail/CafeDetail08.png" />
-            </S.CommentIcon>
-            <S.CommentContents>
-              <Text>감사합니다 또 방문해주세요</Text>
-            </S.CommentContents>
-          </S.OwnerComment>
-        </S.ReviewWrapper>
-        <S.ReviewWrapper>
-          <Users01
-            image="/images/cafedetail/CafeDetail04.jpeg"
-            name="원두학살자"
-            size="md"
-          />
-          <S.ReviewContents>
-            <Text size="18" weight="300">
-              커피맛이 너무좋아요
-            </Text>
-          </S.ReviewContents>
-          <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-          <S.ReviewImageContainer>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-          </S.ReviewImageContainer>
-        </S.ReviewWrapper>
-        <S.ReviewWrapper>
-          <Users01
-            image="/images/cafedetail/CafeDetail04.jpeg"
-            name="원두학살자"
-            size="md"
-          />
-          <S.ReviewContents>
-            <Text size="18" weight="300">
-              커피맛이 너무좋아요
-            </Text>
-          </S.ReviewContents>
-          <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-          <S.ReviewImageContainer>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-            <S.ReviewImageWrapper>
-              <img src="/images/cafedetail/CafeDetail01.jpeg" />
-            </S.ReviewImageWrapper>
-          </S.ReviewImageContainer>
-        </S.ReviewWrapper> */}
       </S.ReviewContainer>
     </>
   );

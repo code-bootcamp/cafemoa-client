@@ -6,8 +6,8 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_UNUSUAL_STAMPS = gql`
-  query fetchUnusualStamps($cafeId: String!) {
-    fetchUnusualStamps(cafeId: $cafeId) {
+  query fetchUnusualStamps {
+    fetchUnusualStamps {
       id
       count
       user {
@@ -26,14 +26,9 @@ export const FETCH_UNUSUAL_STAMPS = gql`
 `;
 
 export const useFetchUnusualStamps = () => {
-  const router = useRouter();
   const { data } = useQuery<
     Pick<IQuery, "fetchUnusualStamps">,
     IQueryFetchUnusualStampsArgs
-  >(FETCH_UNUSUAL_STAMPS, {
-    variables: {
-      cafeId: router.query.cafeId,
-    },
-  });
+  >(FETCH_UNUSUAL_STAMPS);
   return { data };
 };

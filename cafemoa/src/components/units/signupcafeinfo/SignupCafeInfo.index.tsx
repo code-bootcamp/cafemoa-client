@@ -5,7 +5,6 @@ import * as S from "./SignupCafeInfo.styles";
 import { SignUpCafeInfoSchema } from "./SignupCafeInfo.validation";
 import { useState } from "react";
 import { Modal } from "antd";
-import { IQuery } from "../../../commons/types/generated/types";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import Input02 from "../../commons/input/02/Input02.index";

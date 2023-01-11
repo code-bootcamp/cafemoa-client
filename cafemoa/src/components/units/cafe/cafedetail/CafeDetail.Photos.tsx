@@ -1,12 +1,12 @@
-import { useFetchCafeImage } from "../../../commons/hooks/queries/useFetchCafeImage";
+import { useFetchCafeInform } from "../../../commons/hooks/queries/useFetchCafeInform";
 import * as S from "./CafeDetail.styles";
 
 export default function CafeDetailPhoto() {
-  //   const { data } = useFetchCafeImage();
+  const { data } = useFetchCafeInform();
   return (
     <>
       <S.OwnerImageContainer>
-        {/* {data?.fetchCafeImage.map((el) => (
+        {/* {data?.fetchCafeInform.cafeImage.map((el) => (
           <S.OwnerImageWrapper key={el.id}>
             <img src={`https://storage.googleapis.com/${el.cafe_image}`} />
           </S.OwnerImageWrapper>
