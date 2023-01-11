@@ -10,6 +10,7 @@ import Text from "../../text/01/Text01.index";
 import { AiOutlineUser } from "react-icons/ai";
 import { infoUserState } from "../../../../commons/stores";
 import { useRecoilState } from "recoil";
+import { useUserLogout } from "../../hooks/mutations/useUserLogout";
 
 const GNB_MENUS = [
   {
@@ -25,6 +26,7 @@ const GNB_MENUS = [
 export default function HeaderLayout() {
   const [isDrawerOpen, setiIsDrawerOpen] = useState<boolean>(false);
   const [infoUser] = useRecoilState(infoUserState);
+  const { userLogoutSubmit } = useUserLogout();
   console.log(infoUser);
 
   const onClickDrawer = () => {
@@ -87,6 +89,11 @@ export default function HeaderLayout() {
                 </Text>
               </S.MyPageBtn>
             </Link>
+            {infoUser !== undefined && (
+              <S.LogoutBtn onClick={userLogoutSubmit}>
+                <Text size="14">로그아웃</Text>
+              </S.LogoutBtn>
+            )}
           </S.Utiles>
         </S.HeaderInner>
       </S.HeaderWrap>

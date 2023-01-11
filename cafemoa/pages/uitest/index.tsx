@@ -20,6 +20,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import MessageModal from "../../src/components/commons/modal/message/MessageModal.index";
 import { useForm } from "react-hook-form";
+import Uploads01 from "../../src/components/commons/uploads/01/Upload01.index";
+import Uploads02 from "../../src/components/commons/uploads/02/Upload02.index";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -92,6 +94,14 @@ export default function UiTest() {
     }
     tagArr.push(value);
     setSelectTag([...tagArr]);
+  };
+
+  // 이미지 01
+  const [files, setFiles] = useState<File[]>([]);
+  const onChangeFileUrls = (fileUrl: File, index: number) => {
+    const newFileUrls = [...files];
+    newFileUrls[index] = fileUrl;
+    setFiles(newFileUrls);
   };
 
   return (
@@ -397,6 +407,24 @@ export default function UiTest() {
           </>
         }
       ></ModalComponent> */}
+
+      <br />
+      <br />
+      <Uploads01
+        // defaultUrls={props.data?.fetchUseditem?.images}
+        maxLength={1}
+        defaultUrls={["", ""]}
+        onChangeFileUrls={onChangeFileUrls}
+      />
+      <br />
+      <br />
+      <Uploads02
+        // defaultUrls={props.data?.fetchUseditem?.images}
+        maxLength={3}
+        defaultUrls={["", ""]}
+        onChangeFileUrls={onChangeFileUrls}
+        cropShape="rect"
+      />
     </UitestWrap>
   );
 }

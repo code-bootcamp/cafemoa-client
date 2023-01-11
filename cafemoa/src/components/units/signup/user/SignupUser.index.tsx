@@ -15,6 +15,8 @@ import { Modal } from "antd";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { usePhoneVerify } from "../../../commons/hooks/mutations/usePhoneVerify";
 import Input01 from "../../../commons/input/01/Input01.index";
+import Uploads02 from "../../../commons/uploads/02/Upload02.index";
+import { useUploadFile } from "../../../commons/hooks/mutations/useUploadFile";
 
 interface ICheckAuth {
   [key: string]: {
@@ -46,6 +48,8 @@ export default function SignUpUser() {
   const { createUserSubmit } = useCreateUser();
   const [authOpt, setAuthOpt] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [filesList, setFilesList] = useState<File[]>([]);
+  const { uploadFile } = useUploadFile();
   const { emailVerifySubmit, accessNum: emailAccessNum } = useEmailVerify();
   const { phoneVerifySubmit, accessNum: phoneAccessNum } = usePhoneVerify();
   const [isSignAuth, setIsSignAuth] = useState({ ...CHECK_AUTH });
@@ -69,22 +73,28 @@ export default function SignUpUser() {
     });
   const addressString = watch("address");
 
-  const submitSignUp = (data: IFormCreateUserData) => {
+  const submitSignUp = async (data: IFormCreateUserData) => {
     const { passwordCheck, emailAccess, phoneAccess, ...value } = data;
-    if (!isSignAuth.email.checkAccect) {
-      console.log("sss");
-      Modal.warning({
-        content: "이메일 인증을 완료해주세요.",
-      });
-      return;
-    }
-    if (!isSignAuth.phone.checkAccect) {
-      Modal.warning({
-        content: "휴대폰 인증을 완료해주세요.",
-      });
-      return;
-    }
-    void createUserSubmit(value);
+    // if (!isSignAuth.email.checkAccect) {
+    //   console.log("sss");
+    //   Modal.warning({
+    //     content: "이메일 인증을 완료해주세요.",
+    //   });
+    //   return;
+    // }
+    // if (!isSignAuth.phone.checkAccect) {
+    //   Modal.warning({
+    //     content: "휴대폰 인증을 완료해주세요.",
+    //   });
+    //   return;
+    // }
+
+    const results = await Promise.all(
+      filesList.map(async (files) => await uploadFile({ variables: { files } }))
+    );
+    console.log(results[0].data?.uploadFile[0]);
+
+    void createUserSubmit(value, results[0].data?.uploadFile[0]);
     void router.push("/");
   };
 
@@ -154,6 +164,12 @@ export default function SignUpUser() {
     toggleModal();
   };
 
+  const onChangeFileUrls = (fileUrl: File, index: number) => {
+    const newFileUrls = [...filesList];
+    newFileUrls[index] = fileUrl;
+    setFilesList(newFileUrls);
+  };
+
   return (
     <>
       <S.ContainerWrapper onSubmit={handleSubmit(submitSignUp)}>
@@ -163,6 +179,14 @@ export default function SignUpUser() {
               회원가입
             </Text>
           </S.TitleWrap>
+          <S.ProfileImageWrap>
+            <Uploads02
+              onChangeFileUrls={onChangeFileUrls}
+              maxLength={1}
+              cropShape="round"
+            />
+          </S.ProfileImageWrap>
+
           <S.InputWrap>
             <Input02
               type="text"
