@@ -28,12 +28,13 @@ export const useCreateUser = () => {
     IMutationCreateUserArgs
   >(CREATE_USER);
 
-  const createUserSubmit = async (data: IFormCreateUserData) => {
+  const createUserSubmit = async (data: IFormCreateUserData, files: string) => {
     try {
       await createUser({
         variables: {
           createUserInput: {
             ...data,
+            profileImage: files,
           },
         },
       });

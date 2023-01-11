@@ -36,6 +36,8 @@ export const Logo = styled.h1`
   }
 `;
 export const Utiles = styled.div`
+  display: flex;
+  align-items: flex-start;
   > * + * {
     margin-left: 16px;
   }
@@ -53,6 +55,13 @@ export const MenuBtn = styled.button`
 export const MyPageBtn = styled.a`
   display: inline-flex;
   align-items: flex-end;
+  ${mq.MobileM} {
+    display: none;
+  }
+`;
+export const LogoutBtn = styled.button`
+  display: inline-flex;
+  align-self: center;
   ${mq.MobileM} {
     display: none;
   }

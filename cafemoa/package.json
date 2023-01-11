@@ -29,6 +29,7 @@
     "react": "17.0.2",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "17.0.2",
+    "react-easy-crop": "^4.6.3",
     "react-hook-form": "^7.40.0",
     "react-html5-qrcode-reader": "^1.1.1",
     "react-icons": "^4.7.1",

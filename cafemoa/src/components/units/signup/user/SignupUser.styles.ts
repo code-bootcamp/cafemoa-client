@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import {
   BtnWrap,
   ContainerWrap,
@@ -41,6 +42,17 @@ export const TitleWrap = styled.div`
     background-color: #69473e;
   }
 `;
+
+export const ProfileImageWrap = styled.div`
+  margin-bottom: 32px;
+  > div > div {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid ${DEFAULT_COLOR.gray};
+    overflow: hidden;
+  }
+`;
+
 export const InputWrap = styled.div<ISignupStylesProps>`
   display: flex;
   padding-bottom: 20px;
