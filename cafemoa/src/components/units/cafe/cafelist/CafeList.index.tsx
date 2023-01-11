@@ -7,10 +7,9 @@ import Tag from "../../../commons/text/02/Text02.index";
 import Text from "../../../commons/text/01/Text01.index";
 import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TAG_VALUES } from "../../../../commons/default/default";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Masonry from "react-masonry-component";
 
@@ -36,7 +35,6 @@ const SELECT_VALUES02 = [
 ];
 
 export default function CafeList() {
-  const router = useRouter();
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { data, onRefetchCafes, onSelectLocation } = useFetchCafes();
@@ -110,7 +108,7 @@ export default function CafeList() {
                           />
                         </S.LikeWrapper>
                         <Text size="20" weight="500">
-                          {el.brandName}
+                          {el.owner.brandName}
                         </Text>
                         <div style={{ paddingTop: "8px" }}>
                           <Text size="16" weight="300">

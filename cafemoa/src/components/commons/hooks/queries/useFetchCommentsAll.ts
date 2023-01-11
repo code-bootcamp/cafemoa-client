@@ -3,40 +3,44 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import {
   IQuery,
-  IQueryFetchCafesArgs,
+  IQueryFetchCommentsAllArgs,
 } from "../../../../commons/types/generated/types";
 
-export const FETCH_CAFES = gql`
-  query fetchCafes($location: String, $tags: [String!]) {
-    fetchCafes(location: $location, tags: $tags) {
+export const FETCH_COMMENTS_ALL = gql`
+  query fetchCommentsAll($location: String, $tags: [String!]) {
+    fetchCommentsAll(location: $location, tags: $tags) {
       id
-      cafeinfo
-      operatingInfo
+      reply
       like
-      cafeAddr
-      like
-      owner {
-        brandName
+      time
+      user {
+        name
+        nickname
+        profileImage
       }
-      cafeTag {
-        id
-        tagName
+      cafeinfo {
+        owner {
+          brandName
+        }
+        cafeTag {
+          id
+          tagName
+        }
       }
-      cafeImage {
-        id
-        cafe_image
+      commentImage {
+        image_url
       }
     }
   }
 `;
 
-export const useFetchCafes = () => {
+export const useFetchCommentsAll = () => {
   const [tagState, setTagState] = useState<string[]>([]);
   const [locationState, setLocationState] = useState<string>("");
   const { data, refetch } = useQuery<
-    Pick<IQuery, "fetchCafes">,
-    IQueryFetchCafesArgs
-  >(FETCH_CAFES, {
+    Pick<IQuery, "fetchCommentsAll">,
+    IQueryFetchCommentsAllArgs
+  >(FETCH_COMMENTS_ALL, {
     variables: {
       location: "",
       tags: [],
@@ -47,7 +51,7 @@ export const useFetchCafes = () => {
     setTagState(tagValue);
   }, 300);
 
-  const onRefetchCafes = (tags: string[]) => {
+  const onRefetchComments = (tags: string[]) => {
     getDebounce(tags);
   };
 
@@ -58,5 +62,5 @@ export const useFetchCafes = () => {
   useEffect(() => {
     void refetch({ tags: tagState, location: locationState });
   }, [tagState, locationState]);
-  return { data, onRefetchCafes, onSelectLocation };
+  return { data, onRefetchComments, onSelectLocation };
 };

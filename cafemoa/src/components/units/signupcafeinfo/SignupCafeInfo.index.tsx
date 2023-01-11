@@ -71,7 +71,8 @@ export default function SignUpCafeInfo(props: ISignUpCafeInfoProps) {
     const resultUrls = results.map((el) =>
       el !== undefined ? el.data?.uploadFile.url : ""
     );
-    setValue("images", resultUrls);
+    setValue("cafeImage", resultUrls);
+    setValue("cafeTag", selectTag);
     if (!props.isEdit) {
       void createSubmit(data, resultUrls);
     } else {
