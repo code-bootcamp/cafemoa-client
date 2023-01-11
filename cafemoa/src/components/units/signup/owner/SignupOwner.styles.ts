@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 import {
   BtnWrap,
   ContainerWrap,
-  LargeBtn,
   MediumBtn,
   SmallBtn,
 } from "../../../../commons/styles/commonStyles";

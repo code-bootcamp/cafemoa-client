@@ -5,10 +5,10 @@ export interface IFormCreateOwnerData {
   password: string;
   passwordCheck: string;
   ownerNum: string;
-  adminPassword: string;
-  adminPasswordCheck: string;
-  is_main?: boolean;
-  brand?: string;
+  ownerPassword: string;
+  ownerPasswordCheck: string;
+  is_main: boolean;
+  brandName: string;
   opening?: string;
   emailAccess?: string;
   phoneAccess?: string;
