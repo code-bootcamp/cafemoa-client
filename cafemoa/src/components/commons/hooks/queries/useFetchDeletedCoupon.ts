@@ -1,8 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import {
-  IQuery,
-  IQueryFetchDeletedCouponArgs,
-} from "../../../../commons/types/generated/types";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 export const DELETED_COUPON = gql`
   query fetchDeletedCoupon {
@@ -16,16 +13,15 @@ export const DELETED_COUPON = gql`
       }
       cafeInform {
         id
-        brandName
+        owner {
+          brandName
+        }
       }
     }
   }
 `;
 
 export const useFetchDeletedCoupon = () => {
-  const { data } = useQuery<
-    Pick<IQuery, "fetchDeletedCoupon">,
-    IQueryFetchDeletedCouponArgs
-  >(DELETED_COUPON);
+  const { data } = useQuery<Pick<IQuery, "fetchDeletedCoupon">>(DELETED_COUPON);
   return { data };
 };

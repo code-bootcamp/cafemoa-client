@@ -16,7 +16,7 @@ export default function MyCouponInvalid() {
             <S.UsedCoupon>
               <S.Div>
                 <Text size="28" weight="500" fontColor="mainColor">
-                  {el.cafeInform.brandName}
+                  {el.cafeInform.owner.brandName}
                 </Text>
                 <S.CoffeeImgWrap>
                   <BiCoffeeTogo />

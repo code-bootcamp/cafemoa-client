@@ -8,7 +8,6 @@ import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchU
 import { getExpiredDate } from "../../../../../commons/libraries/utill";
 import { useRef } from "react";
 import { useUseCoupon } from "../../../../commons/hooks/mutations/useUseCoupon";
-import { Modal } from "antd";
 
 interface IFormUseCouponData {
   password: string;
@@ -82,7 +81,7 @@ export default function MyCouponValid() {
               <S.CouponDetail>
                 <S.Div>
                   <Text size="28" weight="500" fontColor="mainColor">
-                    {el.cafeInform.brandName}
+                    {el.cafeInform.owner.brandName}
                   </Text>
                   <S.CoffeeImgWrap>
                     <BiCoffeeTogo />

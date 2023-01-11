@@ -123,7 +123,7 @@ export default function MyStamp() {
                     <S.StampInfoWrapper>
                       <S.StampInfo>
                         <Text size="24" weight="500" fontColor="subColor01">
-                          {el.cafeInform.brandName}
+                          {el.cafeInform.owner.brandName}
                         </Text>
                         <Text size="16" weight="300" fontColor="gray">
                           {el.count}/10

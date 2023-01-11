@@ -15,8 +15,11 @@ export const USER_COUPONS = gql`
       }
       cafeInform {
         id
-        brandName
         cafeinfo
+        owner {
+          name
+          brandName
+        }
       }
     }
   }

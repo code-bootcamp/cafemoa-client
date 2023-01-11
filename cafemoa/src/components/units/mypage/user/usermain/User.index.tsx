@@ -24,7 +24,13 @@ export default function UserMain() {
   const { data: myInvalidCouponData } = useFetchDeletedCoupon();
   const { data: myPickData } = useFetchMyPickLists();
 
+  console.log(allStamps);
+  console.log(myValidCouponData);
+  console.log(myInvalidCouponData);
+  console.log(myPickData);
+
   const stampLength = allStamps?.fetchStamps.filter((el) => el?.count !== 0);
+
   const validStampLength = myValidCouponData?.fetchUserCoupons.length;
   const invalidStampLength = myInvalidCouponData?.fetchDeletedCoupon.length;
   const pickLength = myPickData?.fetchMyPickLists.length;
