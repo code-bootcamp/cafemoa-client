@@ -13,6 +13,8 @@ import { IFormCreateOwnerData } from "./SignupOwner.types";
 import Switch01 from "../../../commons/switch/01/Switch01.index";
 import { Modal } from "antd";
 import { useBusinessCheck } from "../../../commons/hooks/customs/useBusinessCheck";
+import { useCreateOwner } from "../../../commons/hooks/mutations/useCreateOwner";
+import { useRouter } from "next/router";
 
 interface ICheckAuth {
   [key: string]: {
@@ -48,11 +50,13 @@ const CHECK_AUTH: ICheckAuth = {
 };
 
 export default function SignUpOwner() {
+  const router = useRouter();
   const [authOpt, setAuthOpt] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { ownerEmailVerifySubmit, accessNum: emailAccessNum } =
     useOwnerEmailVerify();
   const { phoneVerifySubmit, accessNum: phoneAccessNum } = usePhoneVerify();
+  const { createOwnerSubmit } = useCreateOwner();
   const { checkBusinessSubmit, businessCheck } = useBusinessCheck();
   const [isSignAuth, setIsSignAuth] = useState({ ...CHECK_AUTH });
   const { register, handleSubmit, setValue, getValues, setFocus, formState } =
@@ -66,26 +70,24 @@ export default function SignUpOwner() {
         password: "",
         passwordCheck: "",
         ownerNum: "",
-        adminPassword: "",
-        adminPasswordCheck: "",
+        ownerPassword: "",
+        ownerPasswordCheck: "",
         is_main: false,
-        brand: "",
+        brandName: "",
         opening: "",
         emailAccess: "",
         phoneAccess: "",
       },
     });
-  // const ownerNumText = getValues("ownerNum");
-  // const brandText = getValues("brand");
-  // const openingText = getValues("opening");
 
-  const onSignUpSubmit = (data) => {
+  const onSignUpSubmit = (data: IFormCreateOwnerData) => {
     console.log(data);
     const {
       passwordCheck,
       emailAccess,
       phoneAccess,
-      adminPasswordCheck,
+      ownerPasswordCheck,
+      opening,
       ...value
     } = data;
     if (!isSignAuth.email.checkAccect) {
@@ -100,18 +102,19 @@ export default function SignUpOwner() {
       });
       return;
     }
-    if (!businessCheck) {
+    if (businessCheck !== "01") {
       Modal.warning({
         content: "사업자 등록을 완료해주세요.",
       });
       return;
     }
-    console.log(value);
+    void createOwnerSubmit(value);
+    void router.push("/");
   };
 
   const onClickBusiness = () => {
     const getName = getValues("name");
-    const getBrand = getValues("brand");
+    const getBrandName = getValues("brandName");
     const getOpening = getValues("opening");
     const getOwnerNum = getValues("ownerNum");
 
@@ -122,8 +125,8 @@ export default function SignUpOwner() {
       });
       return;
     }
-    if (getBrand === "") {
-      setFocus("brand");
+    if (getBrandName === "") {
+      setFocus("brandName");
       Modal.warning({
         content: "상호를 작성해주세요.",
       });
@@ -149,7 +152,7 @@ export default function SignUpOwner() {
           b_no: getOwnerNum,
           start_dt: getOpening,
           p_nm: getName,
-          b_nm: getBrand,
+          b_nm: getBrandName,
         },
       ],
     };
@@ -340,7 +343,7 @@ export default function SignUpOwner() {
         </S.InputWrap>
 
         <S.InputWrap>
-          <Input02 type="text" name="상호" register={register("brand")} />
+          <Input02 type="text" name="상호" register={register("brandName")} />
           <Input02
             type="text"
             name="개업 년 월 일"
@@ -370,8 +373,8 @@ export default function SignUpOwner() {
           <Input02
             type="password"
             name="관리자 비밀번호"
-            errorMsg={formState.errors.adminPassword?.message}
-            register={register("adminPassword")}
+            errorMsg={formState.errors.ownerPassword?.message}
+            register={register("ownerPassword")}
           >
             <Text size="14" fontColor="red">
               *관리자 비밀번호는 변경이 불가능하오니, 신중히 결정해주세요
@@ -382,8 +385,8 @@ export default function SignUpOwner() {
           <Input02
             type="password"
             name="관리자 비밀번호 확인"
-            errorMsg={formState.errors.adminPasswordCheck?.message}
-            register={register("adminPasswordCheck")}
+            errorMsg={formState.errors.ownerPasswordCheck?.message}
+            register={register("ownerPasswordCheck")}
           />
         </S.InputWrap>
         <S.CheckBoxContainer>

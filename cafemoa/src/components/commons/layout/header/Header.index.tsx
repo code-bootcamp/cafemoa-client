@@ -11,6 +11,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { infoUserState } from "../../../../commons/stores";
 import { useRecoilState } from "recoil";
 import { useUserLogout } from "../../hooks/mutations/useUserLogout";
+import { IoMdExit } from "react-icons/io";
 
 const GNB_MENUS = [
   {
@@ -90,8 +91,8 @@ export default function HeaderLayout() {
               </S.MyPageBtn>
             </Link>
             {infoUser !== undefined && (
-              <S.LogoutBtn onClick={userLogoutSubmit}>
-                <Text size="14">로그아웃</Text>
+              <S.LogoutBtn title="로그아웃" onClick={userLogoutSubmit}>
+                <IoMdExit />
               </S.LogoutBtn>
             )}
           </S.Utiles>

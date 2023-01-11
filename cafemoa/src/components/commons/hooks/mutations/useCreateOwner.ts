@@ -1,46 +1,43 @@
 import { gql, useMutation } from "@apollo/client";
 import {
   IMutation,
-  IMutationCreateUserArgs,
+  IMutationCreateOwnerArgs,
 } from "../../../../commons/types/generated/types";
 
-interface IFormCreateOwnerData {
+export interface IFormCreateOwnerData {
   name: string;
-  nickname: string;
   email: string;
-  address: string;
-  personalNumber: string;
-  phoneNumber: string;
+  phone: string;
   password: string;
-  profileImage: string;
+  ownerNum: string;
+  ownerPassword: string;
+  is_main: boolean;
+  brandName: string;
 }
 
-export const CREATE_USER = gql`
-  mutation createUser($createUserInput: CreateUserInput!) {
-    createUserInput(createUserInput: $createUserInput) {
+export const CREATE_OWNER = gql`
+  mutation CreateOwner($createOwnerInput: OwnerInput!) {
+    CreateOwner(createOwnerInput: $createOwnerInput) {
       name
-      nickname
       email
-      address
-      personalNumber
-      phoneNumber
-      password
-      profileImage
+      phone
+      is_main
+      brandName
     }
   }
 `;
 
-export const useCreateUser = () => {
-  const [createUser] = useMutation<
-    Pick<IMutation, "createUser">,
-    IMutationCreateUserArgs
-  >(CREATE_USER);
+export const useCreateOwner = () => {
+  const [CreateOwner] = useMutation<
+    Pick<IMutation, "CreateOwner">,
+    IMutationCreateOwnerArgs
+  >(CREATE_OWNER);
 
-  const createUserSubmit = async (data: IFormCreateOwnerData) => {
+  const createOwnerSubmit = async (data: IFormCreateOwnerData) => {
     try {
-      const result = await createUser({
+      const result = await CreateOwner({
         variables: {
-          createUserInput: {
+          createOwnerInput: {
             ...data,
           },
         },
@@ -51,6 +48,6 @@ export const useCreateUser = () => {
     }
   };
   return {
-    createUserSubmit,
+    createOwnerSubmit,
   };
 };
