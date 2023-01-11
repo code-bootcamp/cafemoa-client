@@ -35,13 +35,10 @@ const SELECT_VALUES02 = [
 export default function MyPick() {
   const router = useRouter();
   console.log(router.asPath);
-  // const isMyPick = router.asPath.includes("mypick");
   const [selectValue, setSelectValue] = useState<string | number>("");
   console.log(selectValue);
   const { data, onSelectLocation } = useFetchMyPickLists();
   console.log(data);
-
-  const [value, setValue] = useState<string | number>("내 스탬프 모아");
 
   useEffect(() => {
     onSelectLocation(selectValue);

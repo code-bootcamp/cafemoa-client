@@ -13,6 +13,7 @@ export const ContainerWrapper = styled(ContainerWrap)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 350px);
 `;
 
 export const TitleWrapper = styled.div`

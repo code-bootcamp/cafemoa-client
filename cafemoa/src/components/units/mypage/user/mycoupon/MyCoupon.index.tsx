@@ -3,9 +3,12 @@ import Text from "../../../../commons/text/01/Text01.index";
 import MyCouponInvalid from "./MyCoupon-invalid";
 import MyCouponValid from "./MyCoupon-valid";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
-import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import { useRouter } from "next/router";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 
 export default function MyCoupon() {
+  const router = useRouter();
   return (
     <>
       <HeroWrap
@@ -14,6 +17,11 @@ export default function MyCoupon() {
         subject="마이페이지 마이페이지 마이페이지"
       ></HeroWrap>
       <S.ContainerWrapper>
+        <div>
+          <MypageSidebarLayout>
+            <SidebarMenuLayout asPath={router.asPath} />
+          </MypageSidebarLayout>
+        </div>
         <S.Container>
           <S.TitleWrapper>
             <Text size="32" weight="500">

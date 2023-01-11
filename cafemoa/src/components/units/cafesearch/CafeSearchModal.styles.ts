@@ -22,6 +22,7 @@ export const ModalTitle = styled.div`
 export const ModalContents = styled.div`
   padding-top: 32px;
   white-space: pre-line;
+  width: 100%;
 `;
 
 export const InputIconWrap = styled.div`

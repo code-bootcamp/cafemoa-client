@@ -8,6 +8,10 @@ import Box01 from "../../../../commons/box/01/Box01.index";
 import { useFetchUserStamps } from "../../../../commons/hooks/queries/useFetchUserStamps";
 import { useEffect, useState } from "react";
 import { useDeleteStamp } from "../../../../commons/hooks/mutations/useDeleteStamp";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
+import { useRouter } from "next/router";
+import MessageModal from "../../../../commons/modal/message/MessageModal.index";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "전체" },
@@ -31,28 +35,61 @@ const SELECT_VALUES02 = [
 ];
 
 export default function MyStamp() {
+  const router = useRouter();
+  const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
+  const [stampId, setStampId] = useState("");
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { deleteStampSubmit } = useDeleteStamp();
   const { data, onSelectLocation } = useFetchUserStamps();
   console.log(data);
 
   const onClickDeleteCoupon = (data: string) => () => {
-    console.log(data);
-    void deleteStampSubmit(data);
+    setStampId(data);
+    setIsModalOpen(true);
   };
 
+  const submitDeleteStamp = () => {
+    setIsModalOpen(false);
+    void deleteStampSubmit(stampId);
+  };
   useEffect(() => {
     onSelectLocation(selectValue);
   }, [selectValue]);
 
   return (
     <>
+      <ModalComponent
+        title={`스탬프 삭제`}
+        text={`해당 스탬프를 삭제 하시겠습니까?`}
+        status="write"
+        buttons={
+          <>
+            <S.ModalButton color="lightBeige" onClick={onClickIsModalOpen}>
+              <Text size="24" fontColor="gray">
+                취소
+              </Text>
+            </S.ModalButton>
+            <S.ModalButton
+              type="submit"
+              color="beige"
+              onClick={submitDeleteStamp}
+            >
+              <Text size="24">확인</Text>
+            </S.ModalButton>
+          </>
+        }
+      ></ModalComponent>
       <HeroWrap
         imageUrl="/images/review/review_hero01.png"
         title="마이모아"
         subject="마이페이지 마이페이지 마이페이지"
       ></HeroWrap>
       <S.ContainerWrapper>
+        <div>
+          <MypageSidebarLayout>
+            <SidebarMenuLayout asPath={router.asPath} />
+          </MypageSidebarLayout>
+        </div>
         <S.Container>
           <S.TitleWrapper>
             <Text size="32" weight="500">

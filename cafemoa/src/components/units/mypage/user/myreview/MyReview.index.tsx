@@ -1,10 +1,14 @@
+import { useRouter } from "next/router";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 import Like01 from "../../../../commons/like/01/Like01.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./MyReview.styles";
 
 export default function MyReview() {
+  const router = useRouter();
   return (
     <>
       <HeroWrap
@@ -13,6 +17,11 @@ export default function MyReview() {
         subject="마이페이지 마이페이지 마이페이지"
       ></HeroWrap>
       <S.ContainerWrapper>
+        <div>
+          <MypageSidebarLayout>
+            <SidebarMenuLayout asPath={router.asPath} />
+          </MypageSidebarLayout>
+        </div>
         <S.Container>
           <S.TitleWrapper>
             <Text size="32" weight="500">
