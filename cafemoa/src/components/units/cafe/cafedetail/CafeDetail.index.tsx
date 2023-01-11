@@ -12,12 +12,9 @@ import { usePickCafe } from "../../../commons/hooks/mutations/usePickCafe";
 
 export default function CafeDetail() {
   const { data } = useFetchCafeInform();
-  const { cafeMenuImage } = useFetchCafeMenuImage();
   const { PickCafeSubmit } = usePickCafe();
   /* eslint-disable */
   const sanitizeHtml = require("sanitize-html");
-  console.log(cafeMenuImage?.fetchCafeMenuImage);
-  // console.log(data?.fetchCafeInform.id);
   return (
     <>
       <HeroWrap
@@ -33,7 +30,7 @@ export default function CafeDetail() {
           </S.CafeImageWrapper>
           <S.CafeInfoWrapper>
             <Text size="32" weight="700">
-              {data?.fetchCafeInform.brandName}
+              {data?.fetchCafeInform.owner.brandName}
             </Text>
             <S.CafeInfoFooter>
               <S.CafeAddressContainer>
@@ -76,7 +73,7 @@ export default function CafeDetail() {
             </Text>
           </S.SectionTitle>
           <S.MenuImageWrapper>
-            {/* {cafeMenuImage?.fetchCafeMenuImage.map((el) => (
+            {/* {data?.fetchCafeInform.cafeMenuImage.map((el) => (
               <S.Menu key={el.id}>
                 <Image src={`https://storage.googleapis.com/${el.menu_imageUrl}`} />
               </S.Menu>
