@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./CafeSearchModal.styles";
 import Text from "../../commons/text/01/Text01.index";
 import Input01 from "../../commons/input/01/Input01.index";
 import { SearchOutlined } from "@ant-design/icons";
 import Select01 from "../../commons/select/01/Select01.index";
-import { Collapse, Select } from "antd";
+import { Collapse } from "antd";
+import { useFetchCafeInform } from "../../commons/hooks/queries/useFetchCafeInform";
 const { Panel } = Collapse;
 
 interface ISearchModalProps {
@@ -36,10 +37,15 @@ const SELECT_VALUES02 = [
 
 export default function CafeSearchModal() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  const [, setSelectValue] = useState<string | number>("");
+  // const { data, onSelectLocation } = useFetchCafeInform();
   const onClickIsModalOpen = () => {
     setIsModalOpen((prev) => !prev);
   };
+
+  // useEffect(() => {
+  //   onSelectLocation(selectValue);
+  // }, [selectValue]);
 
   const ModalComponent = (props: ISearchModalProps) => {
     return (
@@ -66,14 +72,12 @@ export default function CafeSearchModal() {
             >
               <S.AreaContainer>
                 <S.AreaSelectWrap>
-                  <Select01 defaultText="지역" selectValue={SELECT_VALUES02} />
-                </S.AreaSelectWrap>
-                <S.SubAreaSelectWrap>
                   <Select01
-                    defaultText="시/군/구"
+                    defaultText="지역"
                     selectValue={SELECT_VALUES02}
+                    setSelectValue={setSelectValue}
                   />
-                </S.SubAreaSelectWrap>
+                </S.AreaSelectWrap>
               </S.AreaContainer>
               <div style={{ width: "100%" }}>
                 <Input01 type="text" placeHolder="구로">

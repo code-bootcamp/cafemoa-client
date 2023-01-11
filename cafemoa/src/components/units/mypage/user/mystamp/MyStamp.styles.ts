@@ -2,17 +2,23 @@ import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
   ContainerWrap,
+  MediumBtn,
   SmallBtn,
 } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
 
+export const ModalButton = styled(MediumBtn)``;
+
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 350px);
 `;
 
 export const TitleWrapper = styled.div`
@@ -84,6 +90,7 @@ export const IconWrap = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 30px;
+  cursor: pointer;
 `;
 
 export const Stamp = styled.div`

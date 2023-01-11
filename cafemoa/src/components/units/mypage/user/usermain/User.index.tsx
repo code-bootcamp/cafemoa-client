@@ -4,29 +4,30 @@ import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../commons/stores";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import { useFetchDeletedCoupon } from "../../../../commons/hooks/queries/useFetchDeletedCoupon";
+import { useFetchMyPickLists } from "../../../../commons/hooks/queries/useFetchMyPickLists";
+import { useFetchStamps } from "../../../../commons/hooks/queries/useFetchStamps";
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 import Text from "../../../../commons/text/01/Text01.index";
 import Users01 from "../../../../commons/user/01/Users01.index";
 import * as S from "./User.styles";
 
-export default function UserMain(props: any) {
+export default function UserMain() {
   const [infoUser] = useRecoilState(infoUserState);
   console.log(infoUser?.fetchUser);
   const userId = infoUser?.fetchUser?.id;
   const mainRegion = infoUser?.fetchUser?.address?.split(" ");
   console.log(mainRegion);
 
-  // const { data: myStampData } = useFetchUserStamps();
+  const { data: allStamps } = useFetchStamps();
+  const { data: myValidCouponData } = useFetchUserCoupons();
+  const { data: myInvalidCouponData } = useFetchDeletedCoupon();
+  const { data: myPickData } = useFetchMyPickLists();
 
-  const stampLength = props.allStamps?.fetchStamps.filter(
-    (el) => el?.count !== 0
-  );
-  const validStampLength = props.myValidCouponData?.fetchUserCoupons.length;
-  const invalidStampLength =
-    props.myInvalidCouponData?.fetchDeletedCoupon.length;
-  const pickLength = props.myPickData?.fetchMyPickLists.length;
-  // console.log(myValidCouponData);
-  // console.log(myInvalidCouponData);
-  // console.log(myPickData);
+  const stampLength = allStamps?.fetchStamps.filter((el) => el?.count !== 0);
+  const validStampLength = myValidCouponData?.fetchUserCoupons.length;
+  const invalidStampLength = myInvalidCouponData?.fetchDeletedCoupon.length;
+  const pickLength = myPickData?.fetchMyPickLists.length;
   return (
     <>
       <HeroWrap
