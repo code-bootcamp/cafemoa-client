@@ -4,69 +4,7 @@ import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./Member.styles";
 import Link from "next/link";
 import { RiCoupon3Line } from "react-icons/ri";
-
-const SLIDE_TEST = [
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 하나모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 두개모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 세개모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 네개모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 다섯개모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 여섯모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 일곱모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 여덟개모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 아홉개모아",
-    },
-  },
-  {
-    date: "2022/12/24",
-    cafeInform: {
-      brandName: "카페 열개모아",
-    },
-  },
-];
+import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 
 const SETTINGS: Settings = {
   infinite: true,
@@ -78,6 +16,7 @@ const SETTINGS: Settings = {
 };
 
 export default function MemberCoupon() {
+  const { data } = useFetchUserCoupons();
   return (
     <S.SlideWrap>
       <div style={{ textAlign: "right", marginBottom: "8px" }}>
@@ -88,15 +27,15 @@ export default function MemberCoupon() {
         </Link>
       </div>
       <Slider {...SETTINGS}>
-        {SLIDE_TEST?.map((el, idx) => (
+        {data?.fetchUserCoupons?.map((el, idx) => (
           <S.SlideItem key={idx}>
             <Box01 styles={{ padding: "16px", display: "flex" }}>
               <S.BoxIconWrap>
                 <RiCoupon3Line />
               </S.BoxIconWrap>
               <S.BoxTextWrap>
-                <S.CafeName>{el.cafeInform.brandName}</S.CafeName>
-                <div>유효기간 {el.date}</div>
+                <S.CafeName>{el.cafeInform.owner.brandName}</S.CafeName>
+                <div>유효기간 ~ {el.expiredDate}</div>
               </S.BoxTextWrap>
             </Box01>
           </S.SlideItem>

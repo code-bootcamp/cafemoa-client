@@ -24,7 +24,7 @@ export const BannerLeft = styled.div`
 export const BannerRight = styled.div``;
 export const BannerBtnWrap = styled(BtnWrap)`
   margin-top: 0;
-  > button {
+  > a {
     width: calc(50% - 24px);
     margin: 0 12px;
     max-width: 320px;
@@ -37,5 +37,5 @@ export const BannerBtnWrap = styled(BtnWrap)`
     margin-top: 32px;
   }
 `;
-export const SignUpBtn = styled(MediumBtn)``;
-export const SignInBtn = styled(MediumBtn)``;
+export const SignUpBtn = styled(MediumBtn.withComponent("a"))``;
+export const SignInBtn = styled(MediumBtn.withComponent("a"))``;

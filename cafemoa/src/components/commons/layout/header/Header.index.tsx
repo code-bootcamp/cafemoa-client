@@ -28,7 +28,6 @@ export default function HeaderLayout() {
   const [isDrawerOpen, setiIsDrawerOpen] = useState<boolean>(false);
   const [infoUser] = useRecoilState(infoUserState);
   const { userLogoutSubmit } = useUserLogout();
-  console.log(infoUser);
 
   const onClickDrawer = () => {
     setiIsDrawerOpen((prev) => !prev);
@@ -86,7 +85,9 @@ export default function HeaderLayout() {
                 <Text size="14">
                   {infoUser === undefined
                     ? "로그인"
-                    : `${infoUser?.fetchUser?.name ?? ""}님`}
+                    : infoUser?.fetchUser !== undefined
+                    ? `${infoUser?.fetchUser?.name ?? ""}님`
+                    : `${infoUser?.fetchOwnerLoggedIn?.name ?? ""}님`}
                 </Text>
               </S.MyPageBtn>
             </Link>

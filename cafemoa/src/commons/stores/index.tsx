@@ -9,7 +9,7 @@ export const accessTokenState = atom({
 
 interface IUser {
   fetchUser?: IQuery["fetchUser"];
-  fetchOwner?: IQuery["fetchOwnerLoggedIn"];
+  fetchOwnerLoggedIn?: IQuery["fetchOwnerLoggedIn"];
 }
 
 export const infoUserState = atom<IUser>({

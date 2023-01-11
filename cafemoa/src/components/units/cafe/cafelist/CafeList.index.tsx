@@ -7,11 +7,12 @@ import Tag from "../../../commons/text/02/Text02.index";
 import Text from "../../../commons/text/01/Text01.index";
 import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TAG_VALUES } from "../../../../commons/default/default";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 import Link from "next/link";
 import Masonry from "react-masonry-component";
+import { useRouter } from "next/router";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "" },
@@ -35,9 +36,11 @@ const SELECT_VALUES02 = [
 ];
 
 export default function CafeList() {
+  const router = useRouter();
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { data, onRefetchCafes, onSelectLocation } = useFetchCafes();
+  const tagBtnRef = useRef<HTMLButtonElement>(null);
   // console.log(selectValue);
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
@@ -57,9 +60,18 @@ export default function CafeList() {
   };
 
   useEffect(() => {
-    onSelectLocation(selectValue);
+    onSelectLocation(String(selectValue));
     onRefetchCafes(selectTag);
   }, [selectValue, selectTag]);
+
+  useEffect(() => {
+    if (router.query?.tag === undefined || tagBtnRef === null) return;
+    const tagBtn = tagBtnRef?.current;
+    if (tagBtn !== null) {
+      tagBtn.focus();
+      tagBtn.click();
+    }
+  }, [router.query?.tag]);
 
   // const onClickMoveToDetail = (event: MouseEvent<HTMLDivElement>) => {
   //   void router.push(`/cafe/${event.currentTarget.id}`);
@@ -84,7 +96,11 @@ export default function CafeList() {
         </S.FilterWrapper>
         <S.TagsWrap style={{ marginBottom: "40px" }}>
           {TAG_VALUES.map((el) => (
-            <button key={uuidv4()} onClick={onClickTag(el)}>
+            <button
+              key={uuidv4()}
+              onClick={onClickTag(el)}
+              ref={el === router.query?.tag ? tagBtnRef : null}
+            >
               <Tag size="md" isActive={selectTag.includes(el)}>
                 {el}
               </Tag>
@@ -93,7 +109,7 @@ export default function CafeList() {
         </S.TagsWrap>
         <S.CardsWrapper>
           <Masonry>
-            {data?.fetchCafes.map((el: any) => (
+            {data?.fetchCafes.map((el) => (
               <S.CardBox id={el.id} key={el.id}>
                 <Link href={`/cafe/${String(el.id)}`}>
                   <a>
@@ -115,8 +131,8 @@ export default function CafeList() {
                             {el.cafeinfo}
                           </Text>
                           <S.DetailTagWrap>
-                            {el.cafeTag?.map((el, idx) => (
-                              <Tag key={idx} size="sm">
+                            {el.cafeTag?.map((el) => (
+                              <Tag key={uuidv4()} size="sm">
                                 {el.tagName}
                               </Tag>
                             ))}

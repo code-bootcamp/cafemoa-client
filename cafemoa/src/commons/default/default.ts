@@ -29,9 +29,9 @@ export const DEFAULT_COLOR: IDefaultColorTypes = {
 // 태그 정리된 값
 export const TAG_VALUES = [
   "스터디",
-  "힐링",
+  "루프탑",
   "사진맛집",
-  "뷰좋은",
+  "뷰맛집",
   "데이트카페",
   "애견동반",
   "키즈존",
@@ -44,7 +44,7 @@ export const TAG_VALUES = [
   "테라스카페",
   "창고형카페",
   "가성비갑",
-  "분위기좋은",
+  "분위기있는",
   "모임하기좋은",
   "브런치",
 ];
