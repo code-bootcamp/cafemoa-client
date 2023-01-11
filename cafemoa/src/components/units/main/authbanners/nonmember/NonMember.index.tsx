@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./NonMember.styles";
@@ -21,12 +22,16 @@ export default function NonMember() {
           </S.BannerLeft>
           <S.BannerRight>
             <S.BannerBtnWrap>
-              <S.SignUpBtn color="black">
-                <Text fontColor="white">회원가입</Text>
-              </S.SignUpBtn>
-              <S.SignInBtn>
-                <Text fontColor="black">로그인</Text>
-              </S.SignInBtn>
+              <Link href="/signup">
+                <S.SignUpBtn color="black">
+                  <Text fontColor="white">회원가입</Text>
+                </S.SignUpBtn>
+              </Link>
+              <Link href="/login">
+                <S.SignInBtn>
+                  <Text fontColor="black">로그인</Text>
+                </S.SignInBtn>
+              </Link>
             </S.BannerBtnWrap>
           </S.BannerRight>
         </S.BannerWrap>

@@ -6,6 +6,5 @@ export interface IMainStylesProps {
 
 export interface IMainCategory {
   label: string;
-  path: string;
   imageUrl: string;
 }

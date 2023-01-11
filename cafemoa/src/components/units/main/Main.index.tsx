@@ -8,9 +8,13 @@ import ReviewsSlide from "./reviews/ReviewsSlide.index";
 import Member from "./authbanners/member/Member.index";
 import { useEffect, useState } from "react";
 import _ from "lodash";
+import { infoUserState } from "../../../commons/stores";
+import { useRecoilState } from "recoil";
+import NonMember from "./authbanners/nonmember/NonMember.index";
 
 export default function Main() {
   const [isScroll, setIsScroll] = useState(false);
+  const [infoUser] = useRecoilState(infoUserState);
   const handleScroll = _.debounce((event) => {
     if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
     if (Math.floor(window.scrollY) === 0) setIsScroll(false);
@@ -71,8 +75,7 @@ export default function Main() {
       </S.MainVisual>
       <S.MainSection>
         <S.MainSectionInner>
-          {/* <NonMember /> */}
-          <Member />
+          {infoUser?.fetchUser === undefined ? <NonMember /> : <Member />}
         </S.MainSectionInner>
       </S.MainSection>
 
@@ -87,7 +90,10 @@ export default function Main() {
           <S.CategoryWrap>
             {MAIN_CATEGORY.map((el) => (
               <S.Category imageUrl={el.imageUrl} key={uuidv4()}>
-                <Link href="/">
+                <Link
+                  href={{ pathname: "/cafe", query: { tag: el.label } }}
+                  as="/cafe"
+                >
                   <a>
                     <Text size="24" fontColor="white" weight="700">
                       {el.label}
