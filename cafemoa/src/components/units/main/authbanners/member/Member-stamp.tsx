@@ -6,9 +6,14 @@ import * as S from "./Member.styles";
 import Link from "next/link";
 import { GetStamp } from "../../../../../commons/libraries/utill";
 import { useFetchUserStamps } from "../../../../commons/hooks/queries/useFetchUserStamps";
+import Link01 from "../../../../commons/link/01/Link01.index";
+
+interface IMemberStampProps {
+  infoUserId?: string;
+}
 
 const SETTINGS: Settings = {
-  infinite: true,
+  infinite: false,
   slidesToShow: 2,
   slidesToScroll: 2,
   dots: true,
@@ -16,16 +21,17 @@ const SETTINGS: Settings = {
   speed: 500,
 };
 
-export default function MemberStamp() {
+export default function MemberStamp(props: IMemberStampProps) {
   const { data } = useFetchUserStamps();
   return (
     <S.SlideWrap>
       <div style={{ textAlign: "right", marginBottom: "8px" }}>
-        <Link href="/">
-          <a>
-            <Text size="14">자세히 보기</Text>
-          </a>
-        </Link>
+        <Link01
+          href={`mypage/user/${String(props.infoUserId)}/mystamp`}
+          size="sm"
+        >
+          <Text size="14">자세히 보기</Text>
+        </Link01>
       </div>
       <Slider {...SETTINGS}>
         {data?.fetchUserStamps?.map((el, idx) => (

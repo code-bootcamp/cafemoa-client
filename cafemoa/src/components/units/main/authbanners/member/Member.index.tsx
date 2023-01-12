@@ -64,12 +64,14 @@ export default function Member() {
                 {
                   label: "스탬프",
                   key: "1",
-                  children: <MemberStamp />,
+                  children: <MemberStamp infoUserId={infoUser.fetchUser?.id} />,
                 },
                 {
                   label: "쿠폰",
                   key: "2",
-                  children: <MemberCoupon />,
+                  children: (
+                    <MemberCoupon infoUserId={infoUser.fetchUser?.id} />
+                  ),
                 },
               ]}
             />

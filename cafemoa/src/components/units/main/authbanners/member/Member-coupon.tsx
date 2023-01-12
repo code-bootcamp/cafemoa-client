@@ -5,9 +5,14 @@ import * as S from "./Member.styles";
 import Link from "next/link";
 import { RiCoupon3Line } from "react-icons/ri";
 import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import Link01 from "../../../../commons/link/01/Link01.index";
+
+interface IMemberCouponProps {
+  infoUserId?: string;
+}
 
 const SETTINGS: Settings = {
-  infinite: true,
+  infinite: false,
   slidesToShow: 2,
   slidesToScroll: 2,
   dots: true,
@@ -15,16 +20,17 @@ const SETTINGS: Settings = {
   speed: 500,
 };
 
-export default function MemberCoupon() {
+export default function MemberCoupon(props: IMemberCouponProps) {
   const { data } = useFetchUserCoupons();
   return (
     <S.SlideWrap>
       <div style={{ textAlign: "right", marginBottom: "8px" }}>
-        <Link href="/">
-          <a>
-            <Text size="14">자세히 보기</Text>
-          </a>
-        </Link>
+        <Link01
+          href={`mypage/user/${String(props.infoUserId)}/mycoupon`}
+          size="sm"
+        >
+          <Text size="14">자세히 보기</Text>
+        </Link01>
       </div>
       <Slider {...SETTINGS}>
         {data?.fetchUserCoupons?.map((el, idx) => (

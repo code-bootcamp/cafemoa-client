@@ -58,5 +58,5 @@ export const useFetchCafes = () => {
   useEffect(() => {
     void refetch({ tags: tagState, location: locationState });
   }, [tagState, locationState]);
-  return { data, onRefetchCafes, onSelectLocation };
+  return { data, onRefetchCafes, onSelectLocation, refetch };
 };

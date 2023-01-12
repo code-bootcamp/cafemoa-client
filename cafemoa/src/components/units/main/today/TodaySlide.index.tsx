@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Text from "../../../commons/text/01/Text01.index";
-import { v4 as uuidv4 } from "uuid";
 import * as S from "./TodaySlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
 import Slider, { Settings } from "react-slick";
 import { useEffect, useRef, useState } from "react";
+import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
+import axios from "axios";
+import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
 
 const NAV_SETTINGS: Settings = {
   autoplay: true,
@@ -24,91 +26,8 @@ const VIEW_SETTINGS: Settings = {
   adaptiveHeight: true,
 };
 
-const SLIDE_TEST = [
-  {
-    thumbNail: "/images/temp/temp04.png",
-    brandName: "카페명이야~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp03.png",
-    brandName: "카페모아",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까?ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ ",
-    cafeTag: ["태그", "맞아", "카페"],
-  },
-  {
-    thumbNail: "/images/temp/temp01.png",
-    brandName: "카페명적기~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr:
-      "경기도 어디일까? ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅋㅇ륲ㅋㄴ아ㅓ픀ㄴ아ㅓ픀나어퓬카어ㅠㅏㅋㄴ",
-    cafeTag: ["태그"],
-  },
-  {
-    thumbNail: "/images/temp/temp02.png",
-    brandName: "카페명 너무 길면 어떡해? 두줄처리? 한줄처리?",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ㄴㅇㅁㄴㅇㅁㄴㅇㅁ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp03.png",
-    brandName: "10개가 이렇게 많아?",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아", "스터디"],
-  },
-  {
-    thumbNail: "/images/temp/temp01.png",
-    brandName: "카페 그만 적을까~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그"],
-  },
-  {
-    thumbNail: "/images/temp/temp04.png",
-    brandName: "이제 6번째인가..?~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp03.png",
-    brandName: "이제 얼마 안남았어~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp04.png",
-    brandName: "그만그만,,,, 제발~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp02.png",
-    brandName: "마지막이야 ~~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-];
-
 export default function TodaySlide() {
+  const { data, refetch } = useFetchCafes();
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
   const slider1 = useRef(null);
@@ -119,12 +38,23 @@ export default function TodaySlide() {
     setNav2(slider2.current ?? undefined);
   }, []);
 
+  useEffect(() => {
+    void getRandomDday();
+  }, []);
+
+  useEffect(() => {
+    const todayTag = JSON.parse(localStorage.getItem("todayTag") ?? "{}").tag;
+    void refetch({ tags: todayTag });
+    console.log(todayTag);
+  }, []);
+  console.log(data);
+
   return (
     <S.TodaySlideWrap>
       <S.TodaySlideInfoWrap>
         <Slider {...VIEW_SETTINGS} asNavFor={nav2} ref={slider1}>
-          {SLIDE_TEST.map((el, idx) => (
-            <Link href="/" key={uuidv4()}>
+          {data?.fetchCafes.map((el) => (
+            <Link href="/" key={el.id}>
               <a>
                 <S.ImageWrap>
                   <img src={el.thumbNail} />
@@ -132,7 +62,7 @@ export default function TodaySlide() {
                 <S.InfoWrap>
                   <div>
                     <Text size="32" fontColor="white" weight="700">
-                      {el.brandName}
+                      {el.owner.brandName}
                     </Text>
                   </div>
                   <S.InfoContents>
@@ -146,9 +76,9 @@ export default function TodaySlide() {
                     </Text>
                   </div>
                   <div>
-                    {el.cafeTag.map((cur, idx) => (
-                      <Tag key={idx + "asdwd"} size="sm">
-                        {cur}
+                    {el.cafeTag?.map((cur, idx) => (
+                      <Tag key={cur.id} size="sm">
+                        {cur.tagName}
                       </Tag>
                     ))}
                   </div>
@@ -160,7 +90,7 @@ export default function TodaySlide() {
       </S.TodaySlideInfoWrap>
       <S.TodaySlideListsWrap>
         <Slider {...NAV_SETTINGS} asNavFor={nav1} ref={slider2}>
-          {SLIDE_TEST.map((el, idx) => (
+          {data?.fetchCafes.map((el, idx) => (
             <S.SlideItem key={idx}>
               <S.SlideBtn>
                 <S.ImageWrap>
@@ -168,7 +98,7 @@ export default function TodaySlide() {
                 </S.ImageWrap>
                 <div>
                   <Text size="14" fontColor="white">
-                    {el.brandName}
+                    {el.owner.brandName}
                   </Text>
                 </div>
               </S.SlideBtn>

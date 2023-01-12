@@ -4,6 +4,7 @@ import { DEFAULT_COLOR } from "../../../../commons/default/default";
 
 interface ILinkStylesProps {
   active?: boolean;
+  size?: string;
 }
 
 export const LinkBorder = styled.span`
@@ -21,6 +22,7 @@ export const LinkBorder = styled.span`
 export const LinkWrap = styled.a<ILinkStylesProps>`
   position: relative;
   padding-right: 20px;
+  padding-bottom: 4px;
   ::before {
     content: "";
     position: absolute;
@@ -56,6 +58,18 @@ export const LinkWrap = styled.a<ILinkStylesProps>`
     transform-origin: bottom left;
     background-color: ${DEFAULT_COLOR.mainColor};
   }
+  ${(props) =>
+    props.size === "sm" &&
+    css`
+      ::before {
+        top: 8px;
+      }
+      ::after {
+        top: 5px;
+        width: 7px;
+        height: 7px;
+      }
+    `}
   ${(props) =>
     props.active !== undefined &&
     props.active &&

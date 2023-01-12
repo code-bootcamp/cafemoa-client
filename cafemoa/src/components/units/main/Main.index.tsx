@@ -6,7 +6,7 @@ import * as S from "./Main.styles";
 import TodaySlide from "./today/TodaySlide.index";
 import ReviewsSlide from "./reviews/ReviewsSlide.index";
 import Member from "./authbanners/member/Member.index";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import _ from "lodash";
 import { infoUserState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
@@ -15,7 +15,8 @@ import NonMember from "./authbanners/nonmember/NonMember.index";
 export default function Main() {
   const [isScroll, setIsScroll] = useState(false);
   const [infoUser] = useRecoilState(infoUserState);
-  const handleScroll = _.debounce((event) => {
+
+  const handleScroll = _.throttle((event) => {
     if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
     if (Math.floor(window.scrollY) === 0) setIsScroll(false);
     const direction = event.deltaY > 0 ? "down" : "up";
@@ -26,7 +27,7 @@ export default function Main() {
       });
       setIsScroll(true);
     }
-  }, 50);
+  }, 1000);
 
   useEffect(() => {
     if (window.innerWidth < 1025) {
