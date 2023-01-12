@@ -5,9 +5,9 @@ import {
   IMutationCreateCommentArgs,
 } from "../../../../commons/types/generated/types";
 
-interface IFormCreateOwnerData {
+interface IFormCreateCommentData {
   reply: string;
-  images: string[];
+  commentImage?: string[];
 }
 
 export const CREATE_COMMENT = gql`
@@ -41,7 +41,7 @@ export const useCreateComment = () => {
     IMutationCreateCommentArgs
   >(CREATE_COMMENT);
 
-  const createCommentSubmit = async (data: IFormCreateOwnerData) => {
+  const createCommentSubmit = async (data: IFormCreateCommentData) => {
     try {
       const result = await createComment({
         variables: {

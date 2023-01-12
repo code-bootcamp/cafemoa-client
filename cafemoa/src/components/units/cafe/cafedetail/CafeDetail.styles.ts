@@ -124,7 +124,8 @@ export const ReviewContainer = styled.div`
 export const ReviewWrapper = styled.div`
   width: 50%;
   padding-right: 32px;
-  margin-bottom: 16px;
+  margin-bottom: 64px;
+  // margin-right: 4px;
 `;
 export const ReviewHeader = styled.div`
   display: flex;
@@ -146,10 +147,11 @@ export const DeleteBtn = styled.span`
 `;
 export const ReviewContents = styled.div`
   width: 100%;
-  padding-left: 96px;
+  display: flex;
+  padding-left: 2px;
 `;
 export const ReplyBtn = styled.div`
-  padding-top: 16px;
+  padding-top: 8px;
   text-align: right;
 `;
 export const ReviewColorLine = styled.div`
@@ -161,12 +163,12 @@ export const ReviewImageContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 64px;
+  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04};
 `;
 export const ReviewImageWrapper = styled.div`
   width: 33.3333%;
   padding: 10px;
   padding-bottom: 32px;
-  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04};
 `;
 export const ComponentsTabs = styled(Tabs)`
   margin-top: 40px;
@@ -237,26 +239,15 @@ export const CommentContents = styled.div`
 `;
 // ----------------------------모달 부분----------------------
 
-export const ModalWrapper = styled(Modal)`
-  .ant-modal-content {
-  }
-  .ant-modal-centered .ant-modal {
-  }
-  .ant-modal-body {
-    // width: fit-content
-  }
-  .ant-modal-body {
-  }
+export const ReviewWriteWrapper = styled.div`
+  width: calc(100% - 100px);
+  padding: 40px 100px;
 `;
-export const ModalReviewWrapper = styled.div`
-  width: 100%;
-  padding: 80px 64px;
-`;
-export const ModalReviewTitle = styled.div`
+export const ReviewWriteTitle = styled.div`
   margin-bottom: 24px;
 `;
 export const ModalReviewContents = styled.div``;
-export const ModalReviewBtnContainer = styled(BtnWrap)`
+export const ReviewWriteBtnContainer = styled(BtnWrap)`
   /* width: 100%;
   display: flex;
   flex-direction: row;
@@ -269,11 +260,11 @@ export const ReviewCancelBtn = styled(MediumBtn)`
   border-radius: 20px;
   margin-right: 3%;
 `;
-export const ModalReviewFromWrap = styled.form``;
-export const ModalUserWrapper = styled.div`
+export const ReviewWriteFromWrap = styled.form``;
+export const ReviewWriteUserWrapper = styled.div`
   padding-top: 24px;
 `;
-export const ModalInputWrapper = styled.div`
+export const ReviewWriteInputWrapper = styled.div`
   padding-top: 24px;
 `;
 export const ModalBtnWrapper = styled.div``;
