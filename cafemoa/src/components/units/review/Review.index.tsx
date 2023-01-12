@@ -38,6 +38,8 @@ export default function ReviewList() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { data, onRefetchComments, onSelectLocation } = useFetchCommentsAll();
+  console.log(data?.fetchCommentsAll?.user?.profileImage);
+
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
     const tagArr = selectTag;
@@ -95,7 +97,7 @@ export default function ReviewList() {
                         <div>
                           <S.UserWrapper>
                             <Users01
-                              image="/images/review/review_profile01.png"
+                              image={`https://storage.googleapis.com/${el.user.profileImage}`}
                               name={el.user.nickname}
                               size="sm"
                             />

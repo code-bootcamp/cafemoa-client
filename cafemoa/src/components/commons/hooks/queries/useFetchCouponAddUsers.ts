@@ -17,7 +17,7 @@ export const COUPON_ADD_USERS = gql`
   }
 `;
 
-export const fetchCouponAddUsers = () => {
+export const useFetchCouponAddUsers = () => {
   const [phoneState, setPhoneState] = useState<string>("");
 
   const { data, refetch } = useQuery<

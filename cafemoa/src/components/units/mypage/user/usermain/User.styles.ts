@@ -4,11 +4,14 @@ import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
+  width: calc(100% - 350px);
   ${mq.MobileL} {
     flex-direction: column;
   }
@@ -46,7 +49,7 @@ export const UserMainArea = styled.div`
 `;
 
 export const MenuWrapper = styled.div`
-  width: calc(100% - 300px);
+  // width: calc(100% - 300px);
 
   ${mq.MobileL} {
     width: 100%;

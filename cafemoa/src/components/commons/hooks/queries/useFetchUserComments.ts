@@ -1,25 +1,30 @@
 import { gql, useQuery } from "@apollo/client";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchUserCommentsArgs,
+} from "../../../../commons/types/generated/types";
 
 export const FETCH_USER_COMMENTS = gql`
   query fetchUserComments {
     fetchUserComments {
       id
       reply
-      like
       time
-      user {
+      cafeinfo {
         id
-        name
-        nickname
-        profileImage
+        like
+        owner {
+          brandName
+        }
       }
     }
   }
 `;
 
 export const useFetchUserComments = () => {
-  const { data } =
-    useQuery<Pick<IQuery, "fetchUserComments">>(FETCH_USER_COMMENTS);
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUserComments">,
+    IQueryFetchUserCommentsArgs
+  >(FETCH_USER_COMMENTS);
   return { data };
 };

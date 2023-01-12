@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../../commons/stores";
 import Link01 from "../../../../link/01/Link01.index";
 import Text from "../../../../text/01/Text01.index";
+import { v4 as uuidv4 } from "uuid";
 import * as S from "./SidebarMenu.styles";
 
 const MYPAGE_MENU = [
@@ -13,7 +13,11 @@ const MYPAGE_MENU = [
   { label: "내 리뷰 모아", path: "myreview" },
 ];
 
-export default function SidebarMenuLayout(props) {
+interface ISidebarData {
+  asPath: string;
+}
+
+export default function SidebarMenuLayout(props: ISidebarData) {
   const [activeLink, setActivedLink] = useState<string>();
   const [infoUser] = useRecoilState(infoUserState);
   const userId = infoUser?.fetchUser?.id;
@@ -29,7 +33,7 @@ export default function SidebarMenuLayout(props) {
         {MYPAGE_MENU.map((el, idx) => (
           <Link01
             href={`/mypage/user/${String(userId)}/${el.path}`}
-            key={idx}
+            key={uuidv4()}
             active={activeLink?.includes(el.path)}
           >
             <Text size="18" weight="500">

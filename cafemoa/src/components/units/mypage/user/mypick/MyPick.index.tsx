@@ -34,7 +34,6 @@ const SELECT_VALUES02 = [
 
 export default function MyPick() {
   const router = useRouter();
-  console.log(router.asPath);
   const [selectValue, setSelectValue] = useState<string | number>("");
   console.log(selectValue);
   const { data, onSelectLocation } = useFetchMyPickLists();
