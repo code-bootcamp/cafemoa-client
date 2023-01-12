@@ -7,10 +7,18 @@ import { IMainStylesProps } from "./Main.types";
 
 const ScrollAni = keyframes`
   0% {
-    top : 5px
+    top: 5px;
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    top: 30px;
+    opacity: 0;
   }
   100% {
-    top : 30px
+    opacity: 0;
   }
 `;
 
@@ -81,9 +89,9 @@ export const ScrollAnimation = styled.div`
     position: absolute;
     left: 50%;
     top: 5px;
-    width: 15px;
+    width: 8px;
     height: 15px;
-    border-radius: 100%;
+    border-radius: 10px;
     background-color: ${DEFAULT_COLOR.white};
     transform: translateX(-50%);
     animation: ${ScrollAni} 2s ease-in infinite forwards;

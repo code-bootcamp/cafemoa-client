@@ -118,4 +118,7 @@ export const BoxTextWrap = styled.div`
 export const CafeName = styled(EllipsisOne)``;
 export const SlideWrap = styled.div`
   margin: 0 -8px;
+  .slick-track {
+    margin-left: 0;
+  }
 `;

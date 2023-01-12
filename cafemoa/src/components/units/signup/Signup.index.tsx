@@ -3,22 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import SignUpOwner from "./owner/SignupOwner.index";
 import * as S from "./Signup.styles";
+import { ICheckAuth, ISignUpProps } from "./Signup.types";
 import SignUpUser from "./user/SignupUser.index";
 // import { v4 as uuidv4 } from "uuid";
-
-interface ICheckAuth {
-  [key: string]: {
-    [key: string]: boolean;
-  };
-  email: {
-    checking: boolean;
-    checkAccect: boolean;
-  };
-  phone: {
-    checking: boolean;
-    checkAccect: boolean;
-  };
-}
 
 const CHECK_AUTH: ICheckAuth = {
   email: {
@@ -31,12 +18,9 @@ const CHECK_AUTH: ICheckAuth = {
   },
 };
 
-export default function SignUp() {
+export default function SignUp(props: ISignUpProps) {
   const router = useRouter();
   const [state, setState] = useState(true);
-  // const userRef = useRef(null);
-  // const ownerRef = useRef(null);
-  // const nodeRef = state ? userRef : ownerRef;
   useEffect(() => {
     if (router.query.type === undefined) return;
     setState(router.query.type === "user");
@@ -45,21 +29,6 @@ export default function SignUp() {
     <S.SignUpWrap>
       <S.SignUpInner>
         <S.SignUpFormWrap>
-          {/* <SwitchTransition mode="out-in">
-            <CSSTransition
-              key={state ? "userForm" : "ownerForm"}
-              nodeRef={nodeRef}
-              timeout={500}
-              addEndListener={(node, done) =>
-                nodeRef?.current?.addEventListener("transitionend", done, false)
-              }
-              classNames="fade"
-            >
-              <S.TransitionWrap ref={nodeRef}>
-                {state ? <SignUpUser /> : <SignUpOwner />}
-              </S.TransitionWrap>
-            </CSSTransition>
-          </SwitchTransition> */}
           {state ? <SignUpUser /> : <SignUpOwner />}
         </S.SignUpFormWrap>
       </S.SignUpInner>

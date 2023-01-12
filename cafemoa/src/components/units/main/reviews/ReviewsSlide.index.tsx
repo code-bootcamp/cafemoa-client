@@ -6,6 +6,8 @@ import Tag from "../../../commons/text/02/Text02.index";
 import Slider, { Settings } from "react-slick";
 import Card01 from "../../../commons/card/01/Card01.index";
 import Users01 from "../../../commons/user/01/Users01.index";
+import { GetDate } from "../../../../commons/libraries/utill";
+import { useFetchCommentsAll } from "../../../commons/hooks/queries/useFetchCommentsAll";
 
 const SETTINGS: Settings = {
   autoplay: true,
@@ -100,42 +102,43 @@ const SLIDE_TEST = [
 ];
 
 export default function ReviewsSlide() {
+  const { data } = useFetchCommentsAll();
+  console.log(data);
   return (
     <S.TodaySlideListsWrap>
       <Slider {...SETTINGS}>
-        {SLIDE_TEST.map((el, idx) => (
+        {data?.fetchCommentsAll.map((el, idx) => (
           <S.SlideItem key={idx}>
             <S.SlideBtn>
               <Card01 imageUrl="/images/temp/temp01.png">
                 <div>
                   <Users01
                     image="/images/review/review_profile01.png"
-                    name="김덕배"
+                    name={el.user.nickname}
                     size="sm"
                   />
                   <S.CafeName>
                     <Text size="24" weight="500">
-                      카페모아
+                      {el.cafeinfo.owner.brandName}
                     </Text>
                   </S.CafeName>
                   <S.ReviewContent>
                     <Text size="16" weight="300">
-                      정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
-                      가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
-                      먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
+                      {el.reply}
                     </Text>
                   </S.ReviewContent>
                   <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        3일 전
-                      </Text>
-                    </S.ReviewDate>
+                    {el.cafeinfo.cafeTag.map((el, idx) => (
+                      <Tag key={idx} size="sm">
+                        {el.tagName}
+                      </Tag>
+                    ))}
                   </S.ReviewTag>
+                  <S.ReviewDate>
+                    <Text size="14" weight="300" fontColor="gray">
+                      {GetDate(el.time)}
+                    </Text>
+                  </S.ReviewDate>
                 </div>
               </Card01>
             </S.SlideBtn>

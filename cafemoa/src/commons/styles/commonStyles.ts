@@ -130,7 +130,7 @@ export const EllipsisOne = styled.div`
 export const EllipsisTwo = styled.div`
   display: -webkit-box;
   line-height: 1.2;
-  height: 2.4em;
+  height: 2.5em;
   word-break: break-word;
   overflow: hidden;
   white-space: normal;
