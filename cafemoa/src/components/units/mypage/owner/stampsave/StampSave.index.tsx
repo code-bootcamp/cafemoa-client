@@ -1,12 +1,11 @@
 import * as S from "./StampSave.styles";
-import styled from "@emotion/styled";
 import Text from "../../../../commons/text/01/Text01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import { useRouter } from "next/router";
-import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
-import SidebarMenuLayout from "../../../../commons/layout/mypage/user/SidebarMenu/SidebarMenu.index";
 import StampSaveByQr from "./StampSaveByQr";
 import StampSaveByPhone from "./StampSaveByPhone";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/owner/MypageSidebar.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/owner/sidebarMenu/SidebarMenu.index";
 
 export default function StampSave() {
   const router = useRouter();

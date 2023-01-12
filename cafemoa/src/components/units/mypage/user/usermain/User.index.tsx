@@ -1,39 +1,43 @@
 import Link from "next/link";
-import { AiOutlineSetting } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../commons/stores";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import { useFetchDeletedCoupon } from "../../../../commons/hooks/queries/useFetchDeletedCoupon";
 import { useFetchMyPickLists } from "../../../../commons/hooks/queries/useFetchMyPickLists";
-import { useFetchStamps } from "../../../../commons/hooks/queries/useFetchStamps";
+import { useFetchUserComments } from "../../../../commons/hooks/queries/useFetchUserComments";
 import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import { useFetchUserStamps } from "../../../../commons/hooks/queries/useFetchUserStamps";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
 import Text from "../../../../commons/text/01/Text01.index";
-import Users01 from "../../../../commons/user/01/Users01.index";
 import * as S from "./User.styles";
 
 export default function UserMain() {
   const [infoUser] = useRecoilState(infoUserState);
-  console.log(infoUser?.fetchUser);
+  // console.log(infoUser?.fetchUser);
   const userId = infoUser?.fetchUser?.id;
   const mainRegion = infoUser?.fetchUser?.address?.split(" ");
-  console.log(mainRegion);
-
-  const { data: allStamps } = useFetchStamps();
+  // console.log(mainRegion);
+  const { data: allStamps } = useFetchUserStamps();
   const { data: myValidCouponData } = useFetchUserCoupons();
   const { data: myInvalidCouponData } = useFetchDeletedCoupon();
   const { data: myPickData } = useFetchMyPickLists();
+  const { data: myReviewData } = useFetchUserComments();
 
   console.log(allStamps);
   console.log(myValidCouponData);
-  console.log(myInvalidCouponData);
-  console.log(myPickData);
+  // console.log(myInvalidCouponData);
+  // console.log(myPickData);
+  // console.log(myReviewData);
 
-  const stampLength = allStamps?.fetchStamps.filter((el) => el?.count !== 0);
+  const stampLength = allStamps?.fetchUserStamps?.filter(
+    (el) => el?.count !== 0
+  );
 
   const validStampLength = myValidCouponData?.fetchUserCoupons.length;
   const invalidStampLength = myInvalidCouponData?.fetchDeletedCoupon.length;
   const pickLength = myPickData?.fetchMyPickLists.length;
+  const reviewLength = myReviewData?.fetchUserComments.length;
   return (
     <>
       <HeroWrap
@@ -42,10 +46,25 @@ export default function UserMain() {
         subject="마이페이지 마이페이지 마이페이지"
       ></HeroWrap>
       <S.ContainerWrapper>
+        <div>
+          <MypageSidebarLayout>
+            <S.UserMainArea>
+              <Text size="24" weight="500">
+                내가 활동하는 지역은 <br />
+                {mainRegion !== undefined &&
+                  `${mainRegion[0]} ${mainRegion[1]}`}
+                입니다.
+              </Text>
+            </S.UserMainArea>
+          </MypageSidebarLayout>
+        </div>
         <S.Container>
-          <S.ProfileWrapper>
+          {/* <S.ProfileWrapper>
             <button>
-              <Users01 size="lg">
+              <Users01
+                size="lg"
+                image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
+              >
                 <>
                   <S.SettingIcon>
                     <AiOutlineSetting />
@@ -66,7 +85,7 @@ export default function UserMain() {
                 입니다.
               </Text>
             </S.UserMainArea>
-          </S.ProfileWrapper>
+          </S.ProfileWrapper> */}
           <S.MenuWrapper>
             <S.BoxContainer>
               <S.BoxWrapper>
@@ -155,7 +174,7 @@ export default function UserMain() {
                         </div>
                         <S.MenuDetail>
                           <Text size="18" weight="300">
-                            작성한 리뷰가 5개 있습니다.
+                            작성한 리뷰가 {reviewLength}개 있습니다.
                           </Text>
                         </S.MenuDetail>
                       </S.MypageButton>

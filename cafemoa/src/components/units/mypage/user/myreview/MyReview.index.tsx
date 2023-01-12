@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
+import {
+  GetDate,
+  getExpiredDate,
+} from "../../../../../commons/libraries/utill";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import { useFetchUserComments } from "../../../../commons/hooks/queries/useFetchUserComments";
 import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
 import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 import Like01 from "../../../../commons/like/01/Like01.index";
@@ -9,6 +14,9 @@ import * as S from "./MyReview.styles";
 
 export default function MyReview() {
   const router = useRouter();
+  const { data } = useFetchUserComments();
+  console.log(data);
+
   return (
     <>
       <HeroWrap
@@ -29,92 +37,36 @@ export default function MyReview() {
             </Text>
           </S.TitleWrapper>
           <div>
-            <S.ReviewContentWrapper>
-              <Box01>
-                <div>
-                  <S.ReviewInfoWrapper>
-                    <S.ReviewInfoHead>
-                      <S.CafeName>
-                        <Text size="20" weight="500" fontColor="subColor01">
-                          카페모아 구로디지털점
-                        </Text>
-                      </S.CafeName>
-                    </S.ReviewInfoHead>
-                    <S.LikeCount>
-                      <Like01 iconColor="black" count={22} />
-                    </S.LikeCount>
-                  </S.ReviewInfoWrapper>
-                  <S.Review>
-                    <Text size="18" weight="300">
-                      댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
-                    </Text>
-                  </S.Review>
-                  <S.DateWrap>
-                    <Text size="14" weight="300" fontColor="gray">
-                      2022.12.27
-                    </Text>
-                  </S.DateWrap>
-                </div>
-              </Box01>
-            </S.ReviewContentWrapper>
-
-            <S.ReviewContentWrapper>
-              <Box01>
-                <div>
-                  <S.ReviewInfoWrapper>
-                    <S.ReviewInfoHead>
-                      <S.CafeName>
-                        <Text size="20" weight="500" fontColor="subColor01">
-                          카페모아 구로디지털점
-                        </Text>
-                      </S.CafeName>
-                    </S.ReviewInfoHead>
-                    <S.LikeCount>
-                      <Like01 iconColor="black" count={22} />
-                    </S.LikeCount>
-                  </S.ReviewInfoWrapper>
-                  <S.Review>
-                    <Text size="18" weight="300">
-                      댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
-                    </Text>
-                  </S.Review>
-                  <S.DateWrap>
-                    <Text size="14" weight="300" fontColor="gray">
-                      2022.12.27
-                    </Text>
-                  </S.DateWrap>
-                </div>
-              </Box01>
-            </S.ReviewContentWrapper>
-
-            <S.ReviewContentWrapper>
-              <Box01>
-                <div>
-                  <S.ReviewInfoWrapper>
-                    <S.ReviewInfoHead>
-                      <S.CafeName>
-                        <Text size="20" weight="500" fontColor="subColor01">
-                          카페모아 구로디지털점
-                        </Text>
-                      </S.CafeName>
-                    </S.ReviewInfoHead>
-                    <S.LikeCount>
-                      <Like01 iconColor="black" count={22} />
-                    </S.LikeCount>
-                  </S.ReviewInfoWrapper>
-                  <S.Review>
-                    <Text size="18" weight="300">
-                      댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글
-                    </Text>
-                  </S.Review>
-                  <S.DateWrap>
-                    <Text size="14" weight="300" fontColor="gray">
-                      2022.12.27
-                    </Text>
-                  </S.DateWrap>
-                </div>
-              </Box01>
-            </S.ReviewContentWrapper>
+            {data?.fetchUserComments.map((el) => (
+              <S.ReviewContentWrapper key={el.id}>
+                <Box01>
+                  <div>
+                    <S.ReviewInfoWrapper>
+                      <S.ReviewInfoHead>
+                        <S.CafeName>
+                          <Text size="20" weight="500" fontColor="subColor01">
+                            {el.cafeinfo.owner.brandName}
+                          </Text>
+                        </S.CafeName>
+                      </S.ReviewInfoHead>
+                      <S.LikeCount>
+                        <Like01 iconColor="black" count={el.cafeinfo.like} />
+                      </S.LikeCount>
+                    </S.ReviewInfoWrapper>
+                    <S.Review>
+                      <Text size="18" weight="300">
+                        {el.reply}
+                      </Text>
+                    </S.Review>
+                    <S.DateWrap>
+                      <Text size="14" weight="300" fontColor="gray">
+                        {GetDate(el.time)}
+                      </Text>
+                    </S.DateWrap>
+                  </div>
+                </Box01>
+              </S.ReviewContentWrapper>
+            ))}
           </div>
         </S.Container>
       </S.ContainerWrapper>

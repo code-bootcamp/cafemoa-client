@@ -1,19 +1,23 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../../commons/stores";
 import Link01 from "../../../../link/01/Link01.index";
 import Text from "../../../../text/01/Text01.index";
 import * as S from "./SidebarMenu.styles";
+import { v4 as uuidv4 } from "uuid";
 
 const MYPAGE_MENU = [
   { label: "카페 정보 수정", path: "asd" },
   { label: "내 개인정보 수정", path: "asd" },
   { label: "적립 회원 점검", path: "ownercheck" },
-  { label: "적립 페이지", path: "stampsave" },
+  { label: "스탬프 적립", path: "stampsave" },
 ];
 
-export default function SidebarMenuLayout(props) {
+interface ISidebarData {
+  asPath: string;
+}
+
+export default function SidebarMenuLayout(props: ISidebarData) {
   const [activeLink, setActivedLink] = useState<string>();
   const [infoUser] = useRecoilState(infoUserState);
   const ownerId = infoUser?.fetchOwnerLoggedIn?.id;
@@ -28,7 +32,7 @@ export default function SidebarMenuLayout(props) {
         {MYPAGE_MENU.map((el, idx) => (
           <Link01
             href={`/mypage/owner/${String(ownerId)}/${el.path}`}
-            key={idx}
+            key={uuidv4()}
             active={activeLink?.includes(el.path)}
           >
             <Text size="18" weight="500">

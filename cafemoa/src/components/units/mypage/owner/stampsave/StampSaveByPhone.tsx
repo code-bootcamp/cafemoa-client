@@ -7,10 +7,11 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import Select01 from "../../../../commons/select/01/Select01.index";
 import { useEffect, useRef, useState } from "react";
-import { fetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
+import { useFetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
 import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
 import Input01 from "../../../../commons/input/01/Input01.index";
 import { useRouter } from "next/router";
+import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -36,8 +37,11 @@ export default function StampSaveByPhone() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [createStamp] = useCreateStamp();
-  const { data, onRefetchUsers } = fetchCouponAddUsers();
+  const { data, onRefetchUsers } = useFetchCouponAddUsers();
+  const { mycafedata } = useFetchMyCafes();
   console.log(data);
+  console.log(mycafedata);
+
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
   const { register, setValue, watch, handleSubmit } = useForm({
