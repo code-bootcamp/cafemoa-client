@@ -47,6 +47,7 @@
     "recoil": "^0.7.6",
     "sanitize-html": "^2.8.1",
     "slick-carousel": "^1.8.1",
+    "swiper": "^8.4.5",
     "uuid": "^9.0.0",
     "yarn": "^1.22.19",
     "yup": "^0.32.11",

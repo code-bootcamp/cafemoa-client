@@ -18,7 +18,9 @@ export const ImageWrap = styled.div`
     transform: translateX(-50%);
   }
 `;
-export const InfoWrap = styled.div``;
+export const InfoWrap = styled.div`
+  background-color: ${DEFAULT_COLOR.subColor01};
+`;
 
 export const TodaySlideWrap = styled.div`
   padding-top: 20px;
@@ -39,16 +41,18 @@ export const TodaySlideInfoWrap = styled.div`
 export const TodaySlideListsWrap = styled.div`
   width: 61.43%;
   margin-top: 40px;
-  .slick-track {
+  .swiper-wrapper {
     margin-left: -45%;
-  }
-  .slick-slide {
-    padding: 0 10px;
-    width: 3%;
+    .swiper-slide {
+      width: calc(45% - 40px);
+    }
   }
   ${ImageWrap} {
     margin-bottom: 8px;
   }
+`;
+export const TagWrap = styled.div`
+  height: 60px;
 `;
 export const SlideItem = styled.div``;
 export const InfoTitle = styled(EllipsisTwo)`
