@@ -5,17 +5,13 @@ import MessageModal from "../../../../commons/modal/message/MessageModal.index";
 import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { useEffect, useRef, useState } from "react";
-import { fetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
-import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
 import Input01 from "../../../../commons/input/01/Input01.index";
 import { useRouter } from "next/router";
-import TestQr from "../../../../../../pages/mypage/owner/stampsave/test";
-import {
-  useHtml5QrCodeScanner,
-  useAvailableDevices,
-} from "react-html5-qrcode-reader";
+import { useHtml5QrCodeScanner } from "react-html5-qrcode-reader";
 import { SearchOutlined } from "@ant-design/icons";
 import Select01 from "../../../../commons/select/01/Select01.index";
+import { useFetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
+import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -35,13 +31,15 @@ interface IStampSaveData {
   phone: string;
   selectPhone: string;
 }
-const html5QrCodeScannerFile = "/html5-qrcode.min.js"; // <-- this file is in /public.
+
+const html5QrCodeScannerFile = "/html5-qrcode.min.js";
+
 export default function StampSaveByQr() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [createStamp] = useCreateStamp();
-  const { data, onRefetchUsers } = fetchCouponAddUsers();
+  const { data, onRefetchUsers } = useFetchCouponAddUsers();
   console.log(data);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
@@ -93,22 +91,18 @@ export default function StampSaveByQr() {
   }, [searchValue]);
 
   const { Html5QrcodeScanner } = useHtml5QrCodeScanner(html5QrCodeScannerFile);
-  const { devices, error } = useAvailableDevices(html5QrCodeScannerFile);
-  const onScanSuccess = (decodedText, decodedResult) => {
-    // Handle on success condition with the decoded text or result.
+  console.log(Html5QrcodeScanner);
+  const onScanSuccess = (decodedText: string, decodedResult: string) => {
     console.log(`Scan result: ${decodedText}`, decodedResult);
-    // ...
     Html5QrcodeScanner.clear();
-    // ^ this will stop the scanner (video feed) and clear the scan area.
   };
 
   useEffect(() => {
     if (Html5QrcodeScanner) {
-      // Creates anew instance of `HtmlQrcodeScanner` and renders the block.
       const html5QrcodeScanner = new Html5QrcodeScanner(
         "reader",
         { fps: 10, qrbox: { width: 250, height: 250 } },
-        /* verbose= */ false
+        false
       );
       html5QrcodeScanner.render(onScanSuccess);
     }
