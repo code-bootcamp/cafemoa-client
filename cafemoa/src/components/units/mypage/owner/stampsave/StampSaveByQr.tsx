@@ -134,6 +134,9 @@ export default function StampSaveByQr() {
       );
       if (!isModalOpen) {
         html5QrcodeScanner.render(onScanSuccess);
+        if (searchValue !== "") {
+          Html5QrcodeScanner.clear();
+        }
       }
     }
   }, [Html5QrcodeScanner]);
