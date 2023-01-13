@@ -1,7 +1,6 @@
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Modal } from "antd";
-import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import { MediumBtn } from "../../../../commons/styles/commonStyles";
 import * as mq from "../../../../commons/styles/mediaQuery";
 

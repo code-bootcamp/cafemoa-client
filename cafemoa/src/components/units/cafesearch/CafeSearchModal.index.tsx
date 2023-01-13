@@ -5,19 +5,12 @@ import Input01 from "../../commons/input/01/Input01.index";
 import { SearchOutlined } from "@ant-design/icons";
 import Select01 from "../../commons/select/01/Select01.index";
 import { Collapse } from "antd";
-import { useFetchCafeInform } from "../../commons/hooks/queries/useFetchCafeInform";
 import { useForm } from "react-hook-form";
-import { useFetchCafeByBrandName } from "../../commons/hooks/queries/useFetchCafeByBrandName";
+import { useFetchCafesWithOption } from "../../commons/hooks/queries/usefetchCafesWithOption";
 const { Panel } = Collapse;
 
-interface ISearchModalProps {
-  title: string;
-  text: string;
-  status: "write" | "success" | "warning";
-  hasInput?: boolean;
-}
-
 const SELECT_VALUES02 = [
+  { label: "전체", value: "" },
   { label: "서울특별시", value: "서울" },
   { label: "경기도", value: "경기" },
   { label: "강원도", value: "강원" },
@@ -42,7 +35,7 @@ export default function CafeSearchModal() {
 
   const [selectValue, setSelectValue] = useState<string | number>("");
   console.log(selectValue);
-  const { data, onRefetchCafe } = useFetchCafeByBrandName();
+  const { data, onRefetchCafe, onSelectLocation } = useFetchCafesWithOption();
   console.log(data);
   const { register, watch } = useForm({
     mode: "onChange",
@@ -53,8 +46,9 @@ export default function CafeSearchModal() {
   const searchValue = watch("cafeSearch");
 
   useEffect(() => {
+    onSelectLocation(String(selectValue));
     onRefetchCafe(searchValue);
-  }, [searchValue]);
+  }, [searchValue, selectValue]);
 
   return (
     <>
@@ -81,7 +75,7 @@ export default function CafeSearchModal() {
           <S.CafeSearchWrap>
             <Input01
               type="text"
-              placeHolder="구로"
+              placeHolder="스타벅스"
               register={register("cafeSearch")}
             >
               <S.InputIconWrap>
@@ -91,7 +85,7 @@ export default function CafeSearchModal() {
           </S.CafeSearchWrap>
         </div>
         <S.ModalContents>
-          {data?.fetchCafeInformsByBrandName.map((el) => (
+          {data?.fetchCafesWithNameAndLocation.map((el) => (
             <S.ContentWrapper key={el.id}>
               <S.SearchCafeInfo>
                 <Text size="20" weight="500" fontColor="mainColor">

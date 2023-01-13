@@ -1,5 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import { IQuery } from "../../../../commons/types/generated/types";
+import {
+  IQuery,
+  IQueryFetchMyCafesArgs,
+} from "../../../../commons/types/generated/types";
 
 export const FETCH_MY_CAFES = gql`
   query fetchMyCafes {
@@ -24,7 +27,10 @@ export const FETCH_MY_CAFES = gql`
 `;
 
 export const useFetchMyCafes = () => {
-  const { data } = useQuery<Pick<IQuery, "fetchMyCafes">>(FETCH_MY_CAFES);
+  const { data } = useQuery<
+    Pick<IQuery, "fetchMyCafes">,
+    IQueryFetchMyCafesArgs
+  >(FETCH_MY_CAFES);
   const mycafedata = data;
   return { mycafedata };
 };

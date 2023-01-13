@@ -8,8 +8,8 @@ import * as S from "./Owner.styles";
 
 export default function OwnerMyPage() {
   const [infoUser] = useRecoilState(infoUserState);
-  console.log(infoUser?.fetchUser);
-  const ownerId = infoUser?.fetchUser?.id;
+  // console.log(infoUser?.fetchOwnerLoggedIn);
+  const ownerId = infoUser?.fetchOwnerLoggedIn?.id;
   // ownerId의 useRecoilState로 변경필요함
 
   return (

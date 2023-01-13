@@ -10,6 +10,7 @@ import * as S from "./StampCheck.styles";
 import MypageSidebarLayout from "../../../../commons/layout/mypage/owner/MypageSidebar.index";
 import SidebarMenuLayout from "../../../../commons/layout/mypage/owner/sidebarMenu/SidebarMenu.index";
 import { useRouter } from "next/router";
+import { getStampSaveDate } from "../../../../../commons/libraries/utill";
 
 interface IFormDeleteUnusualStampData {
   ownerpassword: string;
@@ -65,10 +66,13 @@ export default function StampCheck() {
             <S.NotificationWrapper key={el.id}>
               <div>
                 <Text size="20" weight="500">
-                  {el.user.name} &nbsp;
+                  {el.user.name}님이&nbsp;
+                </Text>
+                <Text size="20" weight="300">
+                  {getStampSaveDate(el.createdAt)}
                 </Text>
                 <Text size="20" weight="500">
-                  {el.count.toString()}
+                  에 스탬프&nbsp;{el.count.toString()}
                 </Text>
                 <Text size="20" weight="500">
                   개를 적립하였습니다.
