@@ -22,7 +22,6 @@ export default function CafeDetailReview(props) {
   const { data } = useFetchCommentByCafeID();
   const [isReview, setIsReview] = useState(false);
   const [commentId, setCommentId] = useState("");
-  const [cafeId, setCafeId] = useState("");
   const [deleteComment] = useDeleteComment();
   const [infoUser] = useRecoilState(infoUserState);
   const ownerbrandName = infoUser?.fetchOwnerLoggedIn?.brandName;
@@ -31,11 +30,6 @@ export default function CafeDetailReview(props) {
   const onClickOpenReivewWrite = () => {
     setIsReview((prev) => !prev);
   };
-
-  useEffect(() => {
-    setCafeId(router.query.cafeInformID);
-  }, []);
-
   // useEffect로 commentId 리팩토링
   return (
     <>
@@ -53,7 +47,7 @@ export default function CafeDetailReview(props) {
         {isReview && (
           <ReviewWrite
             isEdit={isEdit}
-            cafeInformId={props.cafeInformId}
+            cafeInformId={String(router.query.cafeInformID)}
             commentId={commentId}
             onClickOpenReivewWrite={onClickOpenReivewWrite}
           />
@@ -65,9 +59,9 @@ export default function CafeDetailReview(props) {
               setIsEdit={setIsEdit}
               setIsReview={setIsReview}
               el={el}
-              cafeId={cafeId}
+              cafeId={router.query.cafeInformID}
             />
-            <OwnerComment el={el} cafe={cafeId} />
+            <OwnerComment el={el} cafe={router.query.cafeInformID} />
           </Fragment>
           // <S.ReviewWrapper key={el.id}>
           //   <S.ReviewHeader>

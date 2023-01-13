@@ -13,6 +13,7 @@ import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 import Link from "next/link";
 import Masonry from "react-masonry-component";
 import { useRouter } from "next/router";
+import InfiniteScrollWrap from "../../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "" },
@@ -39,8 +40,10 @@ export default function CafeList() {
   const router = useRouter();
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
-  const { data, onRefetchCafes, onSelectLocation } = useFetchCafes();
+  const { data, onRefetchCafes, onSelectLocation, onHandleMore } =
+    useFetchCafes();
   const tagBtnRef = useRef<HTMLButtonElement>(null);
+
   // console.log(selectValue);
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
@@ -108,43 +111,45 @@ export default function CafeList() {
           ))}
         </S.TagsWrap>
         <S.CardsWrapper>
-          <Masonry>
-            {data?.fetchCafes.map((el) => (
-              <S.CardBox id={el.id} key={el.id}>
-                <Link href={`/cafe/${String(el.id)}`}>
-                  <a>
-                    {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
-                    <Card02 imageUrl="/images/temp/temp01.png">
-                      <div>
-                        <S.LikeWrapper>
-                          <Like01
-                            iconColor="red"
-                            fontColor="white"
-                            count={el.like}
-                          />
-                        </S.LikeWrapper>
-                        <Text size="20" weight="500">
-                          {el.owner.brandName}
-                        </Text>
-                        <div style={{ paddingTop: "8px" }}>
-                          <Text size="16" weight="300">
-                            {el.cafeinfo}
+          <InfiniteScrollWrap onHandleMore={onHandleMore}>
+            <Masonry>
+              {data?.fetchCafes.map((el) => (
+                <S.CardBox id={el.id} key={el.id}>
+                  <Link href={`/cafe/${String(el.id)}`}>
+                    <a>
+                      {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
+                      <Card02 imageUrl="/images/temp/temp01.png">
+                        <div>
+                          <S.LikeWrapper>
+                            <Like01
+                              iconColor="red"
+                              fontColor="white"
+                              count={el.like}
+                            />
+                          </S.LikeWrapper>
+                          <Text size="20" weight="500">
+                            {el.owner.brandName}
                           </Text>
-                          <S.DetailTagWrap>
-                            {el.cafeTag?.map((el) => (
-                              <Tag key={uuidv4()} size="sm">
-                                {el.tagName}
-                              </Tag>
-                            ))}
-                          </S.DetailTagWrap>
+                          <div style={{ paddingTop: "8px" }}>
+                            <Text size="16" weight="300">
+                              {el.cafeinfo}
+                            </Text>
+                            <S.DetailTagWrap>
+                              {el.cafeTag?.map((el) => (
+                                <Tag key={uuidv4()} size="sm">
+                                  {el.tagName}
+                                </Tag>
+                              ))}
+                            </S.DetailTagWrap>
+                          </div>
                         </div>
-                      </div>
-                    </Card02>
-                  </a>
-                </Link>
-              </S.CardBox>
-            ))}
-          </Masonry>
+                      </Card02>
+                    </a>
+                  </Link>
+                </S.CardBox>
+              ))}
+            </Masonry>
+          </InfiniteScrollWrap>
         </S.CardsWrapper>
       </S.ContainerWrapper>
     </>

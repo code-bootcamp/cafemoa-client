@@ -12,10 +12,15 @@ interface IUserProps {
 }
 
 export default function Users01(props: IUserProps) {
+  console.log(props.image, "props.image");
   return (
     <S.UserWrap size={props.size} alignItem={props.alignItem ?? ""}>
       <S.UserImageWrap>
-        {props.image !== undefined ? <img src={props.image} /> : <BiUser />}
+        {props.image !== undefined && props.image !== "" ? (
+          <img src={props.image} />
+        ) : (
+          <BiUser />
+        )}
       </S.UserImageWrap>
       {props.name !== undefined && <S.UserName>{props.name}</S.UserName>}
       {props.children}

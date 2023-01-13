@@ -32,7 +32,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
   const { createCommentSubmit } = useCreateComment();
   const { updateCommentSubmit } = useUpdateComment();
   const { uploadFile } = useUploadFile();
-  const [filesList, setFilesList] = useState(["", "", ""]);
+  const [filesList, setFilesList] = useState<File[]>([]);
   const [infoUser] = useRecoilState(infoUserState);
   const userName = infoUser?.fetchUser?.name;
   const { register, handleSubmit } = useForm({
@@ -42,8 +42,9 @@ export default function ReviewWrite(props: IReviewWriteProps) {
       reply: "",
     },
   });
-  const onChangeFileUrls = (fileUrl: string, index: number) => {
+  const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...filesList];
+    console.log(newFileUrls);
     newFileUrls[index] = fileUrl;
     setFilesList(newFileUrls);
   };
@@ -52,24 +53,16 @@ export default function ReviewWrite(props: IReviewWriteProps) {
   };
   const onReplySubmit = async (data: any) => {
     try {
-      // const result = await uploadFile({ variables: { files: filesList } });
-      // console.log(result);
-      // console.log("start 111111111");
       const results = await Promise.all(
         filesList.map(
-          async (files) => await uploadFile({ variables: { files } })
+          async (files: any) => await uploadFile({ variables: { files } })
         )
       );
-      // console.log("resultUrls 2222222222");
+      console.log(results);
       const resultUrls = results.map((el) =>
         el !== undefined ? el.data?.uploadFile : ""
       );
-      // console.log(resultUrls);
-      // const resultUrlsFlat = resultUrls.flat();
-      // console.log("3333333");
       if (!props.isEdit) {
-        console.log(data);
-        console.log(resultUrls);
         void createCommentSubmit(data, props.cafeInformId, resultUrls);
       } else {
         void updateCommentSubmit(data, props.commentId, resultUrls);

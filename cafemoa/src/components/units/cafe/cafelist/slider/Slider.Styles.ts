@@ -5,55 +5,27 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import * as mq from "../../../../../commons/styles/mediaQuery";
 
-interface ISlideStylesProps {
-  isActive: boolean;
-}
-
 export const CafeImage = styled.div`
   width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
   transition: all 0.5s;
+  overflow: hidden;
+  > img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `;
 export const CafeContent = styled.div`
-  width: 100%;
   opacity: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-left: 50px;
-  // background: red;
-  transform: translateX(-45px) translateY(100px);
-  transition: all 0.8s;
+  transform: translateY(40px) scale(0.8);
+  transition: all 0.5s;
 `;
-export const SlideWrapper = styled.div<ISlideStylesProps>`
+export const SlideWrapper = styled.div`
   width: 100%;
   height: 100%;
-  ${(props) =>
-    props.isActive &&
-    css`
-      ${CafeImage} {
-        transform: scale(1.2);
-      }
-      ${CafeContent} {
-        opacity: 1;
-        transform: translateX(-45px) translateY(60px);
-      }
-    `}
-  ${mq.MobileM} {
-    ${(props) =>
-      props.isActive &&
-      css`
-        ${CafeImage} {
-          transform: scale(1.2);
-        }
-        ${CafeContent} {
-          opacity: 0;
-        }
-      `}
-    ${mq.MobileS} {
-      width: 0%;
-      height: 0%;
-    }
-  }
 `;
 
 export const StyledSlider = styled(Slider)`
@@ -87,5 +59,35 @@ export const StyledSlider = styled(Slider)`
   .slick-dots {
     position: relative;
     bottom: -380px;
+  }
+`;
+
+export const SwiperWrap = styled.div`
+  .swiper {
+    overflow: visible;
+  }
+  .swiper-slide {
+    max-width: 33.3333%;
+    transform: scale(0.8);
+    ${mq.MobileM} {
+      max-width: 100%;
+      padding: 24px;
+      transform: scale(1);
+    }
+  }
+  .swiper-slide.swiper-slide-active {
+    /* max-width: 50%; */
+    transform: scale(1.1);
+    transition: all 0.5s;
+    ${CafeImage} {
+    }
+    ${CafeContent} {
+      transform: translateY(0) scale(0.8);
+      opacity: 1;
+    }
+
+    ${mq.MobileM} {
+      transform: scale(1);
+    }
   }
 `;
