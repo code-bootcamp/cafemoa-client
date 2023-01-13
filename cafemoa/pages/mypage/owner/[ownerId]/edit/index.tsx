@@ -1,5 +1,5 @@
 import SignUpWrite from "../../../../../src/components/units/signup/SignupWrite.index";
 
 export default function SignUpPage() {
-  return <SignUpWrite isEdit={true} isUser={true} />;
+  return <SignUpWrite isEdit={true} isUser={false} />;
 }

@@ -6,7 +6,6 @@ import * as S from "./SignupUser.styles";
 import { SignUpSchema } from "./SignupUser.validation";
 import { useCreateUser } from "../../../commons/hooks/mutations/useCreateUser";
 import { useRouter } from "next/router";
-// import Input01 from "../../../commons/input/01/Input01.index";
 import { IFormCreateUserData } from "./SignupUser.types";
 import { MouseEvent, useEffect, useState } from "react";
 import Timer from "../../../commons/timer/01/Timer.index";
@@ -17,6 +16,8 @@ import { usePhoneVerify } from "../../../commons/hooks/mutations/usePhoneVerify"
 import Input01 from "../../../commons/input/01/Input01.index";
 import Uploads02 from "../../../commons/uploads/02/Upload02.index";
 import { useUploadFile } from "../../../commons/hooks/mutations/useUploadFile";
+import { ISignUpProps } from "../SignupWrite.types";
+import { useUpdateUser } from "../../../commons/hooks/mutations/useUpdateUser";
 
 interface ICheckAuth {
   [key: string]: {
@@ -43,9 +44,10 @@ const CHECK_AUTH: ICheckAuth = {
   },
 };
 
-export default function SignUpUser() {
+export default function SignUpUser(props: ISignUpProps) {
   const router = useRouter();
   const { createUserSubmit } = useCreateUser();
+  const { updateUserSubmit } = useUpdateUser();
   const [authOpt, setAuthOpt] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [filesList, setFilesList] = useState<File[]>([]);
@@ -53,48 +55,60 @@ export default function SignUpUser() {
   const { emailVerifySubmit, accessNum: emailAccessNum } = useEmailVerify();
   const { phoneVerifySubmit, accessNum: phoneAccessNum } = usePhoneVerify();
   const [isSignAuth, setIsSignAuth] = useState({ ...CHECK_AUTH });
-  const { register, handleSubmit, setValue, getValues, watch, formState } =
-    useForm<IFormCreateUserData>({
-      resolver: yupResolver(SignUpSchema),
-      mode: "onChange",
-      defaultValues: {
-        email: "",
-        name: "",
-        nickname: "",
-        address: "",
-        detailAddress: "",
-        phone: "",
-        password: "",
-        profileImage: "",
-        passwordCheck: "",
-        emailAccess: "",
-        phoneAccess: "",
-      },
-    });
-  const addressString = watch("address");
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    watch,
+    reset,
+    formState,
+  } = useForm<IFormCreateUserData>({
+    resolver: yupResolver(SignUpSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      name: "",
+      nickname: "",
+      address: "",
+      detailAddress: "",
+      phone: "",
+      password: "",
+      profileImage: "",
+      passwordCheck: "",
+      emailAccess: "",
+      phoneAccess: "",
+    },
+  });
 
   const submitSignUp = async (data: IFormCreateUserData) => {
     const { passwordCheck, emailAccess, phoneAccess, ...value } = data;
-    // if (!isSignAuth.email.checkAccect) {
-    //   console.log("sss");
-    //   Modal.warning({
-    //     content: "이메일 인증을 완료해주세요.",
-    //   });
-    //   return;
-    // }
-    // if (!isSignAuth.phone.checkAccect) {
-    //   Modal.warning({
-    //     content: "휴대폰 인증을 완료해주세요.",
-    //   });
-    //   return;
-    // }
+    if (!isSignAuth.email.checkAccect) {
+      console.log("sss");
+      Modal.warning({
+        content: "이메일 인증을 완료해주세요.",
+      });
+      return;
+    }
+    if (!isSignAuth.phone.checkAccect) {
+      Modal.warning({
+        content: "휴대폰 인증을 완료해주세요.",
+      });
+      return;
+    }
 
     const results = await Promise.all(
-      filesList.map(async (files) => await uploadFile({ variables: { files } }))
+      filesList.map(
+        async (files: any) => await uploadFile({ variables: { files } })
+      )
     );
     console.log(results[0].data?.uploadFile[0]);
-
-    void createUserSubmit(value, results[0].data?.uploadFile[0]);
+    if (props.isEdit) {
+      const { email, name, nickname, phone, ...updateValue } = value;
+      void updateUserSubmit(updateValue, results[0].data?.uploadFile[0] ?? "");
+    } else {
+      void createUserSubmit(value, results[0].data?.uploadFile[0] ?? "");
+    }
     void router.push("/");
   };
 
@@ -113,6 +127,32 @@ export default function SignUpUser() {
       setIsSignAuth(CHECK_AUTH);
     };
   }, [authOpt, emailAccessNum, phoneAccessNum]);
+
+  useEffect(() => {
+    if (props.isEdit === undefined) return;
+    const temp = { ...isSignAuth };
+    temp.email.checkAccect = props.isEdit;
+    temp.phone.checkAccect = props.isEdit;
+    setIsSignAuth(temp);
+
+    if (props.infoUser !== undefined) {
+      const resetData = {
+        email: props.infoUser?.fetchUser?.email,
+        name: props.infoUser?.fetchUser?.name,
+        nickname: props.infoUser?.fetchUser?.nickname,
+        address: props.infoUser?.fetchUser?.address,
+        detailAddress: props.infoUser?.fetchUser?.detailAddress,
+        phone: props.infoUser?.fetchUser?.phone,
+        password: "",
+        profileImage: props.infoUser?.fetchUser?.profileImage,
+      };
+      reset({ ...resetData });
+    }
+
+    return () => {
+      setIsSignAuth(CHECK_AUTH);
+    };
+  }, [props.isEdit, props.infoUser]);
 
   const onClickVerify =
     (authOption: string) => async (event: MouseEvent<HTMLButtonElement>) => {
@@ -172,6 +212,7 @@ export default function SignUpUser() {
 
   return (
     <>
+      {console.log(props.infoUser)}
       <S.ContainerWrapper onSubmit={handleSubmit(submitSignUp)}>
         <S.ContainerInner>
           <S.TitleWrap>
@@ -182,6 +223,7 @@ export default function SignUpUser() {
           <S.ProfileImageWrap>
             <Uploads02
               onChangeFileUrls={onChangeFileUrls}
+              defaultUrls={props.infoUser?.fetchUser?.profileImage}
               maxLength={1}
               cropShape="round"
             />
@@ -193,6 +235,7 @@ export default function SignUpUser() {
               name="이메일"
               register={register("email")}
               errorMsg={formState.errors.email?.message}
+              isValid={watch("email")?.length > 0}
               readOnly={isSignAuth.email.checkAccect}
             />
             <S.EmailBtn
@@ -238,6 +281,7 @@ export default function SignUpUser() {
               type="text"
               name="이름"
               errorMsg={formState.errors.name?.message}
+              isValid={watch("name")?.length > 0}
               register={register("name")}
             />
           </S.InputWrap>
@@ -247,6 +291,7 @@ export default function SignUpUser() {
               type="text"
               name="닉네임"
               errorMsg={formState.errors.nickname?.message}
+              isValid={watch("nickname")?.length > 0}
               register={register("nickname")}
             />
           </S.InputWrap>
@@ -257,6 +302,7 @@ export default function SignUpUser() {
               name="핸드폰 번호"
               errorMsg={formState.errors.phone?.message}
               readOnly={isSignAuth.phone.checkAccect}
+              isValid={watch("phone")?.length > 0}
               register={register("phone")}
             />
             <S.PhoneBtn
@@ -303,6 +349,7 @@ export default function SignUpUser() {
               type="password"
               name="비밀번호"
               errorMsg={formState.errors.password?.message}
+              isValid={watch("password")?.length > 0}
               register={register("password")}
             />
           </S.InputWrap>
@@ -312,6 +359,7 @@ export default function SignUpUser() {
               type="password"
               name="비밀번호 확인"
               errorMsg={formState.errors.passwordCheck?.message}
+              isValid={watch("passwordCheck")?.length > 0}
               register={register("passwordCheck")}
             />
           </S.InputWrap>
@@ -321,7 +369,7 @@ export default function SignUpUser() {
               type="text"
               name="주소"
               register={register("address")}
-              isValid={addressString.length !== 0}
+              isValid={watch("address")?.length > 0}
               readOnly={true}
             />
             <S.AddrBtn type="button" color="beige" onClick={toggleModal}>
@@ -335,6 +383,7 @@ export default function SignUpUser() {
               name="상세 주소"
               errorMsg={formState.errors.detailAddress?.message}
               register={register("detailAddress")}
+              isValid={watch("detailAddress")?.length > 0}
             />
           </S.InputWrap>
 
@@ -344,7 +393,7 @@ export default function SignUpUser() {
             </S.ResetBtn>
             <S.SubmitBtn type="submit" color="brown">
               <Text size="24" fontColor="white">
-                회원가입
+                {props.isEdit ? "회원수정" : "회원가입"}
               </Text>
             </S.SubmitBtn>
           </S.SignUpBtnWrap>

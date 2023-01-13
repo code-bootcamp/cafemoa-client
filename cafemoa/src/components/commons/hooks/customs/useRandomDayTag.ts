@@ -1,8 +1,7 @@
 import { TAG_VALUES } from "../../../../commons/default/default";
 
-export const getRandomDday = () => {
+export const getRandomDday = async () => {
   const localTag = JSON.parse(localStorage.getItem("todayTag") ?? "{}");
-  //   const todayRandomNum = Math.floor(Math.random() * TAG_VALUES.length);
   const todayRandomNum = Math.floor(Math.random() * 1);
   const todayRandomTag = TAG_VALUES[todayRandomNum];
   const newDate = new Date();
@@ -14,8 +13,4 @@ export const getRandomDday = () => {
     date: dd,
   };
   localStorage.setItem("todayTag", JSON.stringify(todayData));
-  //   if (tMin >= 6 && tMin < 7) {
-  //     localTag[0] = todayRandomTag;
-  //     localStorage.setItem("todayTag", JSON.stringify(localTag));
-  //   }
 };

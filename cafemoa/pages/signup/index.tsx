@@ -1,5 +1,5 @@
-import SignUp from "../../src/components/units/signup/Signup.index";
+import SignUpWrite from "../../src/components/units/signup/SignupWrite.index";
 
 export default function SignUpPage() {
-  return <SignUp />;
+  return <SignUpWrite isEdit={false} />;
 }

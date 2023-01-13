@@ -103,12 +103,12 @@ const SLIDE_TEST = [
 
 export default function ReviewsSlide() {
   const { data } = useFetchCommentsAll();
-  console.log(data);
+  // console.log(data);
   return (
     <S.TodaySlideListsWrap>
       <Slider {...SETTINGS}>
-        {data?.fetchCommentsAll.map((el, idx) => (
-          <S.SlideItem key={idx}>
+        {data?.fetchCommentsAll.map((el) => (
+          <S.SlideItem key={uuidv4()}>
             <S.SlideBtn>
               <Card01 imageUrl="/images/temp/temp01.png">
                 <div>

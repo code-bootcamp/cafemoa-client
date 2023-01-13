@@ -16,7 +16,7 @@ export default function Main() {
   const [isScroll, setIsScroll] = useState(false);
   const [infoUser] = useRecoilState(infoUserState);
 
-  const handleScroll = _.throttle((event) => {
+  const handleScroll = _.debounce((event) => {
     if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
     if (Math.floor(window.scrollY) === 0) setIsScroll(false);
     const direction = event.deltaY > 0 ? "down" : "up";
@@ -27,7 +27,7 @@ export default function Main() {
       });
       setIsScroll(true);
     }
-  }, 1000);
+  }, 50);
 
   useEffect(() => {
     if (window.innerWidth < 1025) {
