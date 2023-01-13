@@ -4,25 +4,29 @@ import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../commons/stores";
 import { useCreateComment } from "../../../commons/hooks/mutations/useCreateComment";
 import { useUpdateComment } from "../../../commons/hooks/mutations/useUpdateComment";
-import { IFormCreateComment } from "./CafeDetail.Review.types";
 import Text from "../../../commons/text/01/Text01.index";
 import Textarea01 from "../../../commons/textareas/01/textarea01.index";
 import Uploads01 from "../../../commons/uploads/01/Upload01.index";
 import Users01 from "../../../commons/user/01/Users01.index";
 import * as S from "./CafeDetail.styles";
+import { useUploadFile } from "../../../commons/hooks/mutations/useUploadFile";
 
 interface IReviewWriteProps {
   isEdit: boolean;
-  commentId?: string;
+  image_Url?: string;
+  cafeInformId: string;
+  commentId: string;
+  onClickOpenReivewWrite: () => void;
 }
 interface IFormUpdateCommentData {
   reply: string;
-  commentImage?: string[];
+  image_Url?: string[];
 }
 
 export default function ReviewWrite(props: IReviewWriteProps) {
   const { createCommentSubmit } = useCreateComment();
   const { updateCommentSubmit } = useUpdateComment();
+  const { uploadFile } = useUploadFile();
   const [filesList, setFilesList] = useState(["", "", ""]);
   const [infoUser] = useRecoilState(infoUserState);
   const userName = infoUser?.fetchUser?.name;
@@ -31,7 +35,6 @@ export default function ReviewWrite(props: IReviewWriteProps) {
     mode: "onChange",
     defaultValues: {
       reply: "",
-      commentImage: ["", "", ""],
     },
   });
   const onChangeFileUrls = (fileUrl: string, index: number) => {
@@ -42,14 +45,23 @@ export default function ReviewWrite(props: IReviewWriteProps) {
   const onReplyUpdate = () => {
     // inputRef.current?.click();
   };
-  const onReplySubmit = (data: IFormCreateComment) => {
-    setValue("commentImage", filesList);
-    void createCommentSubmit(data);
+  const onReplySubmit = async (data: any) => {
+    const results = await Promise.all(
+      filesList.map(async (files) => await uploadFile({ variables: { files } }))
+    );
+    const resultUrls = results.map((el) =>
+      el !== undefined ? el.data?.uploadFile : ""
+    );
+
+    // const resultUrlsFlat = resultUrls.flat();
+
+    if (!props.isEdit) {
+      void createCommentSubmit(data, props.cafeInformId, resultUrls);
+    } else {
+      void updateCommentSubmit(data, props.commentId, resultUrls);
+    }
   };
-  const onUpdateReplySubmit = (data: IFormUpdateCommentData) => {
-    setValue("commentImage", filesList);
-    void updateCommentSubmit(data, props.commentId);
-  };
+
   return (
     <>
       <S.ReviewWriteWrapper>
@@ -58,11 +70,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
             소중한 리뷰를 작성해주세요
           </Text>
         </S.ReviewWriteTitle>
-        <S.ReviewWriteFromWrap
-          onSubmit={handleSubmit(
-            props.isEdit ? onUpdateReplySubmit : onReplySubmit
-          )}
-        >
+        <S.ReviewWriteFromWrap onSubmit={handleSubmit(onReplySubmit)}>
           <Uploads01 onChangeFileUrls={onChangeFileUrls} maxLength={3} />
           <S.ReviewWriteUserWrapper>
             <Users01
@@ -78,7 +86,11 @@ export default function ReviewWrite(props: IReviewWriteProps) {
             />
           </S.ReviewWriteInputWrapper>
           <S.ReviewWriteBtnContainer>
-            <S.ReviewCancelBtn color="lightBeige">
+            <S.ReviewCancelBtn
+              type="button"
+              color="lightBeige"
+              onClick={props.onClickOpenReivewWrite}
+            >
               <Text size="16" fontColor="black">
                 취소
               </Text>

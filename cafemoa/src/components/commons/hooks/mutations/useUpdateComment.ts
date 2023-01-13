@@ -41,7 +41,8 @@ export const useUpdateComment = () => {
 
   const updateCommentSubmit = async (
     data: IFormUpdateCommentData,
-    commentId: string
+    commentId: string,
+    resultUrls: string[]
   ) => {
     try {
       const result = await updateComment({
@@ -49,6 +50,7 @@ export const useUpdateComment = () => {
           commentId,
           UpdateCommentInput: {
             ...data,
+            image_Url: resultUrls,
           },
         },
       });

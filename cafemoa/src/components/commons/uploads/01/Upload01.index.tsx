@@ -53,7 +53,13 @@ export default function Uploads01(props: IUploadProps) {
       <S.InputFileWrap>
         {imgUrls?.map((el, idx) => (
           <S.InputFile key={uuidv4()}>
-            {el !== "" ? <img src={el} /> : <span>Upload</span>}
+            {el !== "" ? (
+              <img src={el} />
+            ) : (
+              <S.EmptyImage>
+                <img src="/images/cafedetail/CafeDetail07.png" />
+              </S.EmptyImage>
+            )}
             <input type="file" onChange={onChangeFile(idx)} />
           </S.InputFile>
         ))}
