@@ -16,11 +16,11 @@ export const ModalContentsWrap = styled.div`
 export const ModalTitle = styled.div`
   text-align: center;
   white-space: pre-line;
-  padding-bottom: 37px; ;
+  padding-bottom: 20px; ;
 `;
 
 export const ModalContents = styled.div`
-  padding-top: 32px;
+  // padding-top: 32px;
   white-space: pre-line;
   width: 100%;
 `;
@@ -46,12 +46,17 @@ export const AreaSelectWrap = styled.div`
   margin-right: 10px;
 `;
 
+export const CafeSearchWrap = styled.form`
+  width: 100%;
+`;
+
 export const SubAreaSelectWrap = styled.div`
   width: 45%;
 `;
 
 export const ContentWrapper = styled.div`
-  padding-bottom: 20px;
+  padding-top: 32px;
+  border-bottom: 2px solid #f3e6d8;
 `;
 
 export const SearchCafeInfo = styled.div`
@@ -63,6 +68,7 @@ export const SearchCafeInfo = styled.div`
 export const SearchCafeWrap = styled.div`
   display: flex;
   flex-direction: row;
+  padding-left: 24px;
   padding-bottom: 30px;
 `;
 

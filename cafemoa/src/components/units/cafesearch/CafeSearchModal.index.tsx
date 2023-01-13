@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import * as S from "./CafeSearchModal.styles";
 import Text from "../../commons/text/01/Text01.index";
 import Input01 from "../../commons/input/01/Input01.index";
@@ -6,6 +6,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import Select01 from "../../commons/select/01/Select01.index";
 import { Collapse } from "antd";
 import { useFetchCafeInform } from "../../commons/hooks/queries/useFetchCafeInform";
+import { useForm } from "react-hook-form";
+import { useFetchCafeByBrandName } from "../../commons/hooks/queries/useFetchCafeByBrandName";
 const { Panel } = Collapse;
 
 interface ISearchModalProps {
@@ -36,248 +38,122 @@ const SELECT_VALUES02 = [
 ];
 
 export default function CafeSearchModal() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [, setSelectValue] = useState<string | number>("");
-  // const { data, onSelectLocation } = useFetchCafeInform();
-  const onClickIsModalOpen = () => {
-    setIsModalOpen((prev) => !prev);
-  };
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   onSelectLocation(selectValue);
-  // }, [selectValue]);
+  const [selectValue, setSelectValue] = useState<string | number>("");
+  console.log(selectValue);
+  const { data, onRefetchCafe } = useFetchCafeByBrandName();
+  console.log(data);
+  const { register, watch } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      cafeSearch: "",
+    },
+  });
+  const searchValue = watch("cafeSearch");
 
-  const ModalComponent = (props: ISearchModalProps) => {
-    return (
-      <>
-        <S.ModalWrap
-          open={isModalOpen}
-          footer={null}
-          centered={true}
-          onCancel={() => {
-            setIsModalOpen(false);
+  useEffect(() => {
+    onRefetchCafe(searchValue);
+  }, [searchValue]);
+
+  return (
+    <>
+      <S.ModalContentsWrap>
+        <S.ModalTitle>
+          <Text size="24">매장을 검색해보세요!</Text>
+        </S.ModalTitle>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
           }}
         >
-          <S.ModalContentsWrap>
-            <S.ModalTitle>
-              <Text size="24">{props.title}</Text>
-            </S.ModalTitle>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "100%",
-              }}
+          <S.AreaContainer>
+            <S.AreaSelectWrap>
+              <Select01
+                defaultText="지역"
+                selectValue={SELECT_VALUES02}
+                setSelectValue={setSelectValue}
+              />
+            </S.AreaSelectWrap>
+          </S.AreaContainer>
+          <S.CafeSearchWrap>
+            <Input01
+              type="text"
+              placeHolder="구로"
+              register={register("cafeSearch")}
             >
-              <S.AreaContainer>
-                <S.AreaSelectWrap>
-                  <Select01
-                    defaultText="지역"
-                    selectValue={SELECT_VALUES02}
-                    setSelectValue={setSelectValue}
-                  />
-                </S.AreaSelectWrap>
-              </S.AreaContainer>
-              <div style={{ width: "100%" }}>
-                <Input01 type="text" placeHolder="구로">
-                  <S.InputIconWrap>
-                    <SearchOutlined />
-                  </S.InputIconWrap>
-                </Input01>
+              <S.InputIconWrap>
+                <SearchOutlined />
+              </S.InputIconWrap>
+            </Input01>
+          </S.CafeSearchWrap>
+        </div>
+        <S.ModalContents>
+          {data?.fetchCafeInformsByBrandName.map((el) => (
+            <S.ContentWrapper key={el.id}>
+              <S.SearchCafeInfo>
+                <Text size="20" weight="500" fontColor="mainColor">
+                  {el.owner.brandName}
+                </Text>
+                {/* <Text size="14" weight="300" fontColor="gray">
+                  0.2km
+                </Text> */}
+              </S.SearchCafeInfo>
+              <div>
+                <Text size="16" weight="500" fontColor="gray">
+                  {el.cafeAddr} {el.detailAddr}
+                </Text>
               </div>
-            </div>
-            <S.ModalContents>
-              <S.ContentWrapper>
-                <S.SearchCafeInfo>
-                  <Text size="20" weight="500">
-                    카페모아 구로디지털점
-                  </Text>
-                  <Text size="14" weight="300" fontColor="gray">
-                    0.2km
-                  </Text>
-                </S.SearchCafeInfo>
-                <div>
-                  <Text size="16" weight="500" fontColor="gray">
-                    서울특별시 구로구 디지털로34길 43 코오롱싸이언스밸리1차 1층
-                  </Text>
-                </div>
-                <div>
-                  <Text size="14" weight="300" fontColor="gray">
-                    02-111-2222
-                  </Text>
-                </div>
-                <Collapse ghost>
-                  <Panel
-                    header="매장 상세 정보"
-                    key="1"
-                    style={{ fontSize: "16px" }}
-                  >
-                    <S.SearchCafeWrap>
-                      <S.CafePictureWrap>
-                        <img src="/images/cafesearch/cafesearch.png" />
-                      </S.CafePictureWrap>
-                      <div>
-                        <S.CafeOperationWrap>
-                          <div>
-                            <Text size="18" weight="500" fontColor="mainColor">
-                              영업시간
-                            </Text>
-                          </div>
-                          <S.CafeOperation>
-                            <p>
-                              <Text size="16">평일 : </Text>
-                              <Text size="16" weight="300">
-                                07:30 - 22:00
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16">토요일 : </Text>
-                              <Text size="16" weight="300">
-                                12:00 - 22:00
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16">일요일 : </Text>
-                              <Text size="16" weight="300">
-                                12:00 - 22:00
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16">공휴일 : </Text>
-                              <Text size="16" weight="300">
-                                12:00 - 22:00
-                              </Text>
-                            </p>
-                          </S.CafeOperation>
-                        </S.CafeOperationWrap>
+              <div>
+                <Text size="14" weight="300" fontColor="gray">
+                  {el.cafeinfo}
+                </Text>
+              </div>
+              <Collapse ghost>
+                <Panel
+                  header="매장 상세 정보"
+                  key="1"
+                  style={{ fontSize: "16px" }}
+                >
+                  <S.SearchCafeWrap>
+                    {/* <S.CafePictureWrap>
+                      <img src="/images/cafesearch/cafesearch.png" />
+                    </S.CafePictureWrap> */}
+                    <div>
+                      <S.CafeOperationWrap>
                         <div>
-                          <div>
-                            <Text size="18" weight="500" fontColor="mainColor">
-                              매장정보
-                            </Text>
-                          </div>
-                          <S.CafeInfo>
-                            <p>
-                              <Text size="16" weight="300">
-                                노키즈존
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16" weight="300">
-                                주차가능
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16" weight="300">
-                                애견동반가능
-                              </Text>
-                            </p>
-                          </S.CafeInfo>
+                          <Text size="18" weight="500" fontColor="mainColor">
+                            영업시간
+                          </Text>
                         </div>
-                      </div>
-                    </S.SearchCafeWrap>
-                  </Panel>
-                </Collapse>
-              </S.ContentWrapper>
-
-              <S.ContentWrapper>
-                <S.SearchCafeInfo>
-                  <Text size="24" weight="500">
-                    카페모아 구로디지털점
-                  </Text>
-                  <Text size="18" weight="300" fontColor="gray">
-                    0.2km
-                  </Text>
-                </S.SearchCafeInfo>
-                <div>
-                  <Text size="18" weight="500" fontColor="gray">
-                    서울특별시 구로구 디지털로34길 43 코오롱싸이언스밸리1차 1층
-                  </Text>
-                </div>
-                <div>
-                  <Text size="16" weight="300" fontColor="gray">
-                    02-111-2222
-                  </Text>
-                </div>
-                <Collapse ghost>
-                  <Panel
-                    header="매장 상세 정보"
-                    key="1"
-                    style={{ fontSize: "16px" }}
-                  >
-                    <S.SearchCafeWrap>
-                      <S.CafePictureWrap>
-                        <img src="/images/cafesearch/cafesearch.png" />
-                      </S.CafePictureWrap>
+                        <S.CafeOperation>{el.operatingInfo}</S.CafeOperation>
+                      </S.CafeOperationWrap>
                       <div>
-                        <S.CafeOperationWrap>
-                          <div>
-                            <Text size="18" weight="500" fontColor="mainColor">
-                              영업시간
-                            </Text>
-                          </div>
-                          <S.CafeOperation>
-                            <p>
-                              <Text size="16">평일 : </Text>
-                              <Text size="16" weight="300">
-                                07:30 - 22:00
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16">토요일 : </Text>
-                              <Text size="16" weight="300">
-                                12:00 - 22:00
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16">일요일 : </Text>
-                              <Text size="16" weight="300">
-                                12:00 - 22:00
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16">공휴일 : </Text>
-                              <Text size="16" weight="300">
-                                12:00 - 22:00
-                              </Text>
-                            </p>
-                          </S.CafeOperation>
-                        </S.CafeOperationWrap>
                         <div>
-                          <div>
-                            <Text size="18" weight="500" fontColor="mainColor">
-                              매장정보
-                            </Text>
-                          </div>
-                          <S.CafeInfo>
-                            <p>
-                              <Text size="16" weight="300">
-                                노키즈존
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16" weight="300">
-                                주차가능
-                              </Text>
-                            </p>
-                            <p>
-                              <Text size="16" weight="300">
-                                애견동반가능
-                              </Text>
-                            </p>
-                          </S.CafeInfo>
+                          <Text size="18" weight="500" fontColor="mainColor">
+                            매장정보
+                          </Text>
                         </div>
+                        <S.CafeInfo>
+                          {el.cafeTag.map((el) => (
+                            <p key={el.id}>
+                              <Text size="16" weight="300">
+                                #{el.tagName}
+                              </Text>
+                            </p>
+                          ))}
+                        </S.CafeInfo>
                       </div>
-                    </S.SearchCafeWrap>
-                  </Panel>
-                </Collapse>
-              </S.ContentWrapper>
-            </S.ModalContents>
-          </S.ModalContentsWrap>
-        </S.ModalWrap>
-      </>
-    );
-  };
-  return { ModalComponent, onClickIsModalOpen, setIsModalOpen };
+                    </div>
+                  </S.SearchCafeWrap>
+                </Panel>
+              </Collapse>
+            </S.ContentWrapper>
+          ))}
+        </S.ModalContents>
+      </S.ModalContentsWrap>
+    </>
+  );
 }

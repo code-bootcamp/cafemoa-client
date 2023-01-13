@@ -1,6 +1,8 @@
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { Modal } from "antd";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
+import { MediumBtn } from "../../../../commons/styles/commonStyles";
 import * as mq from "../../../../commons/styles/mediaQuery";
 
 // interface IHeroProps {
@@ -77,5 +79,18 @@ export const MenuWrap = styled.div`
   }
   ${mq.MobileM} {
     display: none;
+  }
+`;
+
+export const ModalButton = styled(MediumBtn)``;
+
+export const ModalWrap = styled(Modal)`
+  .ant-modal-body {
+    padding: 64px 64px;
+  }
+  ${mq.MobileL} {
+    .ant-modal-body {
+      padding: 32px 3%;
+    }
   }
 `;
