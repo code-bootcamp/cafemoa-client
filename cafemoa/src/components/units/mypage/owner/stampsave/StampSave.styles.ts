@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
-import { Tabs } from "antd";
+import { Modal, Tabs } from "antd";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import {
+  BtnWrap,
   ContainerWrap,
   MediumBtn,
   SmallBtn,
@@ -65,11 +67,6 @@ export const StampSelect = styled.div`
   width: 100%;
 `;
 
-export const QrStampSelect = styled.div`
-  width: 100%;
-  padding-bottom: 16px;
-`;
-
 export const InputIconWrap = styled.div`
   position: absolute;
   right: 24px;
@@ -124,30 +121,6 @@ export const ButtonWrapper = styled.div`
   padding-top: 40px;
 `;
 
-export const QrReader = styled.div`
-  margin-bottom: 30px;
-`;
-
-export const QrWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding-top: 20px;
-  width: 100%;
-`;
-
-export const QrUserWrapper = styled.div`
-  display: flex;
-  max-width: 500px;
-  width: 100%;
-`;
-
-export const QrSaveStamp = styled.div`
-  width: 30%;
-  margin-left: 10px;
-`;
-
 export const TapWrap = styled(Tabs)`
   .ant-tabs-nav::before {
     display: none;
@@ -177,5 +150,81 @@ export const TapWrap = styled(Tabs)`
 
   .ant-tabs-top > .ant-tabs-nav::before {
     border-bottom: none;
+  }
+`;
+
+export const ModalWrap = styled(Modal)`
+  .ant-modal-body {
+    padding: 64px 64px;
+  }
+  ${mq.MobileL} {
+    .ant-modal-body {
+      padding: 32px 3%;
+    }
+  }
+`;
+
+export const ModalContentsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const ModalTitle = styled.div`
+  text-align: center;
+  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const QrStampSelect = styled.div`
+  width: 100%;
+  padding-bottom: 16px;
+`;
+
+export const QrReader = styled.div`
+  margin-bottom: 30px;
+`;
+
+export const QrWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 100%;
+`;
+
+export const QrUserWrapper = styled.div`
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+`;
+
+export const QrSaveStamp = styled.div`
+  width: 30%;
+  margin-left: 10px;
+`;
+
+export const QrModalTitle = styled.div`
+  position: relative;
+  padding-top: 48px;
+  text-align: center;
+  white-space: pre-line;
+`;
+
+export const QrModalContents = styled.div`
+  padding-top: 32px;
+  text-align: center;
+  white-space: pre-line;
+`;
+
+export const ModalBtnWrap = styled(BtnWrap)`
+  > button {
+    margin: 0 8px;
+    width: calc(50% - 16px);
+    text-align: center;
+    border-radius: 20px;
   }
 `;

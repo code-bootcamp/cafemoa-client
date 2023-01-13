@@ -37,7 +37,7 @@ export default function Select01(props: ISelectProps) {
   return (
     <S.SelectWrap style={_styles} isOpen={isOpen} isValue={value !== undefined}>
       <div>
-        <button onClick={onClickOpen}>
+        <button type="button" onClick={onClickOpen}>
           {label !== undefined ? label : props.defaultText ?? "선택"}
           <DownOutlined />
         </button>
@@ -46,7 +46,10 @@ export default function Select01(props: ISelectProps) {
         {props.selectValue?.map((el) => (
           <Fragment key={uuidv4()}>
             <li>
-              <button onClick={onClickSelectValue(el.value, el.label)}>
+              <button
+                type="button"
+                onClick={onClickSelectValue(el.value, el.label)}
+              >
                 {el.label}
               </button>
             </li>
