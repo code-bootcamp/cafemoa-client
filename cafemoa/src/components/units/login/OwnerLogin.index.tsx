@@ -50,9 +50,7 @@ export default function OwnerLogin() {
         content: "환영합니다 가맹주님! 카페모아입니다!",
         afterClose() {
           if (owner !== undefined) setInfoUser(owner);
-          console.log(owner?.fetchOwnerLoggedIn.id);
-          console.log(infoUser?.fetchOwnerLoggedIn?.id);
-          // void router.push(`/mypage/owner/${infoUser?.fetchOwnerLoggedIn?.id}`);
+          void router.push("/");
         },
       });
     } catch (error) {

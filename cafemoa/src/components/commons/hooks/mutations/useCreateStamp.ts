@@ -12,8 +12,10 @@ export const CREATE_STAMP = gql`
       }
       cafeInform {
         id
-        brandName
         cafeinfo
+        owner {
+          brandName
+        }
       }
     }
   }

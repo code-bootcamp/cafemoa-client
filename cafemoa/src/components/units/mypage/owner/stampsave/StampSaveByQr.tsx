@@ -12,6 +12,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import Select01 from "../../../../commons/select/01/Select01.index";
 import { useFetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
 import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
+import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -37,10 +38,14 @@ const html5QrCodeScannerFile = "/html5-qrcode.min.js";
 export default function StampSaveByQr() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-
+  let searchValue = "";
   const [createStamp] = useCreateStamp();
-  const { data, onRefetchUsers } = useFetchCouponAddUsers();
-  console.log(data);
+  // const { data } = useFetchCouponAddUsers();
+  // console.log(data);
+
+  const { mycafedata } = useFetchMyCafes();
+  const cafeId = mycafedata?.fetchMyCafes[0].id;
+  console.log(cafeId);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
   const { register, watch, handleSubmit } = useForm({
@@ -51,7 +56,7 @@ export default function StampSaveByQr() {
       selectPhone: "",
     },
   });
-  const searchValue = watch("phone");
+  searchValue = watch("phone");
 
   const onStampSave = () => {
     inputRef.current?.click();
@@ -61,12 +66,21 @@ export default function StampSaveByQr() {
     const { phone, ...value } = data;
     console.log(value);
     console.log(selectValue);
+    console.log("핸드폰번호 : " + searchValue);
+
+    if (selectValue === "") {
+      Modal.warning({
+        content: "적립할 스탬프 갯수를 선택하세요!",
+      });
+      return;
+    }
+
     try {
       const result = createStamp({
         variables: {
           createStampInput: {
-            phone: value.selectPhone,
-            cafeId: "fb8553fb-b45e-47cc-8815-872361cfad8e",
+            phone: searchValue,
+            cafeId,
             count: selectValue,
             password: value.password,
           },
@@ -77,7 +91,7 @@ export default function StampSaveByQr() {
         content: `스탬프가 ${selectValue}개 적립되었습니다!`,
         afterClose() {
           setSelectValue("");
-          void router.push("/mypage/owner/stampsave");
+          void router.push(`/mypage/owner/${cafeId}/stampsave`);
         },
       });
       console.log(result);
@@ -86,14 +100,18 @@ export default function StampSaveByQr() {
     }
   };
 
-  useEffect(() => {
-    onRefetchUsers(searchValue);
-  }, [searchValue]);
+  // useEffect(() => {
+  //   onRefetchUsers(searchValue);
+  // }, [searchValue]);
 
   const { Html5QrcodeScanner } = useHtml5QrCodeScanner(html5QrCodeScannerFile);
   console.log(Html5QrcodeScanner);
   const onScanSuccess = (decodedText: string, decodedResult: string) => {
-    console.log(`Scan result: ${decodedText}`, decodedResult);
+    console.log(`Scan 결과 : ${decodedText}`, decodedResult);
+
+    searchValue = decodedText.slice(-11);
+    console.log(searchValue);
+    setIsModalOpen(true);
     Html5QrcodeScanner.clear();
   };
 
@@ -110,7 +128,17 @@ export default function StampSaveByQr() {
 
   return (
     <>
-      <ModalComponent
+      <S.ModalWrap
+        open={isModalOpen}
+        footer={null}
+        centered={true}
+        onCancel={() => {
+          setIsModalOpen(false);
+        }}
+      >
+        <StampSaveQrModal />
+      </S.ModalWrap>
+      {/* <ModalComponent
         title={`스탬프 적립`}
         text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
         status="write"
@@ -121,13 +149,20 @@ export default function StampSaveByQr() {
                 취소
               </Text>
             </S.ModalButton>
-            <S.ModalButton type="submit" color="beige" onClick={onStampSave}>
+            <S.ModalButton color="beige" onClick={onStampSave}>
               <Text size="24">확인</Text>
             </S.ModalButton>
           </>
         }
       >
         <S.ModalFromWrap onSubmit={handleSubmit(submitStampSave)}>
+          <S.QrStampSelect>
+            <Select01
+              defaultText="적립스탬프 갯수"
+              selectValue={SELECT_VALUES01}
+              setSelectValue={setSelectValue}
+            />
+          </S.QrStampSelect>
           <Input01
             type="text"
             textAlign="center"
@@ -136,15 +171,15 @@ export default function StampSaveByQr() {
           />
           <input type="submit" hidden ref={inputRef} />
         </S.ModalFromWrap>
-      </ModalComponent>
+      </ModalComponent> */}
 
       <S.StampWrapper>
         <Box01 styles={{ padding: "40px 50px" }}>
           <S.StampContainer>
             <S.QrWrapper>
               <S.QrReader id="reader"></S.QrReader>
-              <S.QrUserWrapper>
-                <Input01
+              {/* <S.QrUserWrapper>
+                 <Input01
                   styles={{ width: "100%" }}
                   type="text"
                   placeHolder="핸드폰번호"
@@ -152,8 +187,8 @@ export default function StampSaveByQr() {
                 >
                   <S.InputIconWrap>
                     <SearchOutlined />
-                  </S.InputIconWrap>
-                </Input01>
+                  </S.InputIconWrap> 
+                </Input01> 
                 <S.StampSelect>
                   <Select01
                     defaultText="적립스탬프 갯수"
@@ -166,7 +201,7 @@ export default function StampSaveByQr() {
                     <Text size="14">적립 </Text>
                   </S.SaveButton>
                 </S.QrSaveStamp>
-              </S.QrUserWrapper>
+              </S.QrUserWrapper> */}
             </S.QrWrapper>
           </S.StampContainer>
         </Box01>

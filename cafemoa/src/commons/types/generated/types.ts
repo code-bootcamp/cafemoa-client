@@ -386,10 +386,10 @@ export type IQuery = {
   fetchCafeImage: Array<ICafeImage>;
   fetchCafeInform: ICafeInform;
   fetchCafeInforms: Array<ICafeInform>;
-  fetchCafeInformsByBrandName: Array<ICafeInform>;
   fetchCafeMenuImage: Array<ICafeMenuImage>;
   fetchCafeStamps: Array<IStamp>;
   fetchCafes: Array<ICafeInform>;
+  fetchCafesWithNameAndLocation: Array<ICafeInform>;
   fetchCategory: Array<ICategory>;
   fetchComment: IComment;
   fetchCommentBycafeID: Array<IComment>;
@@ -434,12 +434,6 @@ export type IQueryFetchCafeInformsArgs = {
 };
 
 
-export type IQueryFetchCafeInformsByBrandNameArgs = {
-  name?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
-};
-
-
 export type IQueryFetchCafeMenuImageArgs = {
   CafeInformID: Scalars['String'];
 };
@@ -455,6 +449,13 @@ export type IQueryFetchCafesArgs = {
   location?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['Int']>;
   tags?: InputMaybe<Array<Scalars['String']>>;
+};
+
+
+export type IQueryFetchCafesWithNameAndLocationArgs = {
+  location?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -591,6 +592,7 @@ export type IUpdateUserInput = {
   address?: InputMaybe<Scalars['String']>;
   detailAddress?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
+  nickname?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   phone?: InputMaybe<Scalars['String']>;
   profileImage?: InputMaybe<Scalars['String']>;

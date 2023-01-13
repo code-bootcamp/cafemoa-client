@@ -44,3 +44,14 @@ export const getExpiredDate = (value: string) => {
 
   return `${year}. ${month}. ${date}`;
 };
+
+export const getStampSaveDate = (value: string) => {
+  const newDate = new Date(value);
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+  const date = newDate.getDate();
+  const hours = newDate.getHours();
+  const mins = newDate.getMinutes();
+
+  return `${year}. ${month}. ${date} ${hours}시 ${mins}분`;
+};

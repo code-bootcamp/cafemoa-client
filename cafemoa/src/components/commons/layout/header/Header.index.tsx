@@ -2,8 +2,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import * as S from "./Header.styles";
 import { RiMenu3Fill } from "react-icons/ri";
-import { Drawer, Modal } from "antd";
-import { useState } from "react";
+import { Drawer } from "antd";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CafeSearchModal from "../../../units/cafesearch/CafeSearchModal.index";
 import Text from "../../text/01/Text01.index";
@@ -12,11 +12,7 @@ import { infoUserState } from "../../../../commons/stores";
 import { useRecoilState } from "recoil";
 import { useUserLogout } from "../../hooks/mutations/useUserLogout";
 import { IoMdExit } from "react-icons/io";
-import Input01 from "../../input/01/Input01.index";
-import MessageModal from "../../modal/message/MessageModal.index";
-import { useForm } from "react-hook-form";
-import styled from "@emotion/styled";
-import { MediumBtn } from "../../../../commons/styles/commonStyles";
+import { useFetchCafesWithOption } from "../../hooks/queries/usefetchCafesWithOption";
 
 const GNB_MENUS = [
   {
@@ -31,59 +27,33 @@ const GNB_MENUS = [
 
 export default function HeaderLayout() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isDrawerOpen, setiIsDrawerOpen] = useState<boolean>(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [infoUser] = useRecoilState(infoUserState);
+
   const { userLogoutSubmit } = useUserLogout();
-  // const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
-  // const { ModalComponent } = CafeSearchModal();
-  // const { register, setValue, watch, handleSubmit } = useForm({
-  //   mode: "onChange",
-  // });
+
   const onClickIsModalOpen = () => {
     // console.log(userPhone);
     setIsModalOpen((prev) => !prev);
   };
-
-  // const onClickIsModalOpen = () => {
-  //   setIsModalOpen((prev) => !prev);
-  // };
   const onClickDrawer = () => {
-    setiIsDrawerOpen((prev) => !prev);
+    setIsDrawerOpen((prev) => !prev);
   };
 
   const onClose = () => {
-    setiIsDrawerOpen((prev) => !prev);
+    setIsDrawerOpen((prev) => !prev);
   };
+
   return (
     <>
-      {/* <ModalComponent
-        title={`가까운 매장을 찾아보세요`}
-        text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        hasInput={true}
-        status="write"
-      ></ModalComponent> */}
-      {/* <ModalComponent
-        title={`매장을 검색해보세요!`}
-        text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
-        status="write"
-        buttons={
-          <>
-            <ModalButton color="lightBeige" onClick={onClickIsModalOpen}>
-              <Text size="24" fontColor="gray">
-                취소
-              </Text>
-            </ModalButton>
-            <ModalButton type="submit" color="beige">
-              <Text size="24">확인</Text>
-            </ModalButton>
-          </>
-        }
+      <S.ModalWrap
+        open={isModalOpen}
+        footer={null}
+        centered={true}
+        onCancel={() => {
+          setIsModalOpen(false);
+        }}
       >
-        <ModalFromWrap>
-          <CafeSearchModal />
-        </ModalFromWrap>
-      </ModalComponent> */}
-      <S.ModalWrap open={isModalOpen} footer={null} centered={true}>
         <CafeSearchModal />
       </S.ModalWrap>
       <S.HeaderWrap>
@@ -115,8 +85,14 @@ export default function HeaderLayout() {
             </S.MenuBtn>
             <Link
               href={
+                // infoUser === undefined
+                //   ? "/login"
+                //   : `/mypage/user/${String(infoUser?.fetchUser?.id)}`
+
                 infoUser === undefined
                   ? "/login"
+                  : infoUser?.fetchUser === undefined
+                  ? `/mypage/owner/${String(infoUser?.fetchOwnerLoggedIn?.id)}`
                   : `/mypage/user/${String(infoUser?.fetchUser?.id)}`
               }
             >

@@ -12,6 +12,7 @@ import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateSta
 import Input01 from "../../../../commons/input/01/Input01.index";
 import { useRouter } from "next/router";
 import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
+import { useFetchUser } from "../../../../commons/hooks/queries/useFetchUser";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -35,12 +36,16 @@ interface IStampSaveData {
 export default function StampSaveByPhone() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  // const { owner } = useFetchUser();
+  // console.log(owner);
 
   const [createStamp] = useCreateStamp();
   const { data, onRefetchUsers } = useFetchCouponAddUsers();
   const { mycafedata } = useFetchMyCafes();
-  console.log(data);
-  console.log(mycafedata);
+  // console.log(data);
+  // console.log(mycafedata);
+  const cafeId = mycafedata?.fetchMyCafes[0].id;
+  console.log(cafeId);
 
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
@@ -78,7 +83,7 @@ export default function StampSaveByPhone() {
         variables: {
           createStampInput: {
             phone: value.selectPhone,
-            cafeId: "fb8553fb-b45e-47cc-8815-872361cfad8e",
+            cafeId,
             count: selectValue,
             password: value.password,
           },
@@ -89,7 +94,7 @@ export default function StampSaveByPhone() {
         content: `스탬프가 ${selectValue}개 적립되었습니다!`,
         afterClose() {
           setSelectValue("");
-          void router.push("/mypage/owner/stampsave");
+          void router.push(`/mypage/owner/${cafeId}/stampsave`);
         },
       });
       console.log(result);

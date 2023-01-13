@@ -65,6 +65,11 @@ export const StampSelect = styled.div`
   width: 100%;
 `;
 
+export const QrStampSelect = styled.div`
+  width: 100%;
+  padding-bottom: 16px;
+`;
+
 export const InputIconWrap = styled.div`
   position: absolute;
   right: 24px;
