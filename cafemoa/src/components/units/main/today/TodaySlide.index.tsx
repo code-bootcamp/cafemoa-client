@@ -5,8 +5,8 @@ import Tag from "../../../commons/text/02/Text02.index";
 import Slider, { Settings } from "react-slick";
 import { useEffect, useRef, useState } from "react";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
-import axios from "axios";
 import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
+import { v4 as uuidv4 } from "uuid";
 
 const NAV_SETTINGS: Settings = {
   autoplay: true,
@@ -27,74 +27,76 @@ const VIEW_SETTINGS: Settings = {
 };
 
 export default function TodaySlide() {
-  const { data, refetch } = useFetchCafes();
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
-  const slider1 = useRef(null);
-  const slider2 = useRef(null);
+  const { data, onRefetchCafes } = useFetchCafes();
+  const [todayTag, setTodayTag] = useState<string[]>([]);
 
-  useEffect(() => {
-    setNav1(slider1.current ?? undefined);
-    setNav2(slider2.current ?? undefined);
-  }, []);
-
+  const [swipeIdx, setSwipeIdx] = useState(0);
+  console.log(data);
   useEffect(() => {
     void getRandomDday();
+    const tag = JSON.parse(localStorage.getItem("todayTag") ?? "{}").tag;
+    setTodayTag(tag);
   }, []);
 
   useEffect(() => {
-    const todayTag = JSON.parse(localStorage.getItem("todayTag") ?? "{}").tag;
-    void refetch({ tags: todayTag });
-    console.log(todayTag);
-  }, []);
-  console.log(data);
+    onRefetchCafes(todayTag);
+  }, [todayTag]);
 
   return (
-    <S.TodaySlideWrap>
+    <S.TodaySlideWrap key={uuidv4()}>
       <S.TodaySlideInfoWrap>
-        <Slider {...VIEW_SETTINGS} asNavFor={nav2} ref={slider1}>
-          {data?.fetchCafes.map((el) => (
-            <Link href="/" key={el.id}>
-              <a>
-                <S.ImageWrap>
-                  <img src={el.thumbNail} />
-                </S.ImageWrap>
-                <S.InfoWrap>
-                  <div>
-                    <Text size="32" fontColor="white" weight="700">
-                      {el.owner.brandName}
-                    </Text>
-                  </div>
-                  <S.InfoContents>
-                    <Text size="16" fontColor="white" weight="500">
-                      {el.cafeinfo}
-                    </Text>
-                  </S.InfoContents>
-                  <div>
-                    <Text size="16" fontColor="white" weight="500">
-                      {el.cafeAddr}
-                    </Text>
-                  </div>
-                  <div>
-                    {el.cafeTag?.map((cur, idx) => (
-                      <Tag key={cur.id} size="sm">
-                        {cur.tagName}
-                      </Tag>
-                    ))}
-                  </div>
-                </S.InfoWrap>
-              </a>
-            </Link>
-          ))}
-        </Slider>
+        {/* <Slider {...VIEW_SETTINGS} asNavFor={pagingSlick} ref={mainSlickRef}>
+          {data?.fetchCafes.map((el) => ( */}
+        <Link href="/" key={data?.fetchCafes[swipeIdx].id}>
+          <a>
+            <S.ImageWrap>
+              <img
+                src={
+                  data?.fetchCafes[swipeIdx].thumbNail ??
+                  "/images/commons/img_cafe_preparing.png"
+                }
+              />
+            </S.ImageWrap>
+            <S.InfoWrap>
+              <div>
+                <Text size="32" fontColor="white" weight="700">
+                  {data?.fetchCafes[swipeIdx].owner.brandName}
+                </Text>
+              </div>
+              <S.InfoContents>
+                <Text size="16" fontColor="white" weight="500">
+                  {data?.fetchCafes[swipeIdx].cafeinfo}
+                </Text>
+              </S.InfoContents>
+              <div>
+                <Text size="16" fontColor="white" weight="500">
+                  {data?.fetchCafes[swipeIdx].cafeAddr}
+                </Text>
+              </div>
+              <div>
+                {data?.fetchCafes[swipeIdx].cafeTag?.map((cur, idx) => (
+                  <Tag key={cur.id} size="sm">
+                    {cur.tagName}
+                  </Tag>
+                ))}
+              </div>
+            </S.InfoWrap>
+          </a>
+        </Link>
+        {/* ))}
+        </Slider> */}
       </S.TodaySlideInfoWrap>
       <S.TodaySlideListsWrap>
-        <Slider {...NAV_SETTINGS} asNavFor={nav1} ref={slider2}>
-          {data?.fetchCafes.map((el, idx) => (
-            <S.SlideItem key={idx}>
+        <Slider {...NAV_SETTINGS}>
+          {data?.fetchCafes.map((el) => (
+            <S.SlideItem key={uuidv4()}>
               <S.SlideBtn>
                 <S.ImageWrap>
-                  <img src={el.thumbNail} />
+                  <img
+                    src={
+                      el.thumbNail ?? "/images/commons/img_cafe_preparing.png"
+                    }
+                  />
                 </S.ImageWrap>
                 <div>
                   <Text size="14" fontColor="white">

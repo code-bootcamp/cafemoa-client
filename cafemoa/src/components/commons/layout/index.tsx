@@ -3,12 +3,11 @@ import * as mq from "../../../commons/styles/mediaQuery";
 import { useFetchUser } from "../hooks/queries/useFetchUser";
 import FooterLayout from "./footer/Footer.index";
 import HeaderLayout from "./header/Header.index";
-
 import { Transition, TransitionGroup } from "react-transition-group";
 import { useRouter } from "next/router";
-import { ReactNode, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
+import { useAuth } from "../hooks/customs/useAuth";
 
-const TIMEOUT = 400;
 interface IGetTransitionStyles {
   entering: {
     position: string;
@@ -24,7 +23,11 @@ interface IGetTransitionStyles {
   };
   [key: string]: any;
 }
+interface ILayoutProps {
+  children: ReactNode;
+}
 
+const TIMEOUT = 400;
 const getTransitionStyles: IGetTransitionStyles = {
   entering: {
     position: `absolute`,
@@ -40,14 +43,13 @@ const getTransitionStyles: IGetTransitionStyles = {
   },
 };
 
-interface ILayoutProps {
-  children: ReactNode;
-}
-
 export default function Layout(props: ILayoutProps) {
+  useAuth();
   const router = useRouter();
   const nodeRef = useRef(null);
-  useFetchUser();
+  const { owner } = useFetchUser();
+  console.log(owner);
+
   return (
     <>
       <HeaderLayout />
@@ -71,7 +73,6 @@ export default function Layout(props: ILayoutProps) {
           )}
         </Transition>
       </TransitionGroup>
-      {/* <Contents>{props.children}</Contents> */}
       <FooterLayout />
     </>
   );

@@ -33,13 +33,14 @@ export const FETCH_CAFES = gql`
 export const useFetchCafes = () => {
   const [tagState, setTagState] = useState<string[]>([]);
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch } = useQuery<
+  const { data, refetch, loading, client } = useQuery<
     Pick<IQuery, "fetchCafes">,
     IQueryFetchCafesArgs
   >(FETCH_CAFES, {
     variables: {
       location: "",
       tags: [],
+      page: 1,
     },
   });
 
@@ -58,5 +59,5 @@ export const useFetchCafes = () => {
   useEffect(() => {
     void refetch({ tags: tagState, location: locationState });
   }, [tagState, locationState]);
-  return { data, onRefetchCafes, onSelectLocation, refetch };
+  return { data, onRefetchCafes, onSelectLocation, refetch, client };
 };

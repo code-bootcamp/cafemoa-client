@@ -1,5 +1,12 @@
+import { IQuery } from "../../../commons/types/generated/types";
+
 export interface ISignUpProps {
-  isEdit?: boolean;
+  isEdit: boolean;
+  isUser?: boolean;
+  infoUser?: {
+    fetchUser?: IQuery["fetchUser"];
+    fetchOwnerLoggedIn?: IQuery["fetchOwnerLoggedIn"];
+  };
 }
 
 export interface ICheckAuth {

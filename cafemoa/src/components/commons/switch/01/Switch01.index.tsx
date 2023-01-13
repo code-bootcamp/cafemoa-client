@@ -1,9 +1,10 @@
 import { ChangeEvent } from "react";
-// import { UseFormRegisterReturn } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 import * as S from "./Switch01.styles";
 
 interface ISwitchProps {
   // register?: UseFormRegisterReturn;
+  defaultValue?: boolean;
   onSetValue: (value: boolean) => void;
 }
 
@@ -15,7 +16,12 @@ export default function Switch01(props: ISwitchProps) {
 
   return (
     <S.Label>
-      <input type="checkbox" onChange={onChangeSwitch} />
+      <input
+        type="checkbox"
+        onChange={onChangeSwitch}
+        key={uuidv4()}
+        checked={props.defaultValue}
+      />
       <S.LabelSlider />
       <S.LabelOn>On</S.LabelOn>
       <S.LabelOff>Off</S.LabelOff>

@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import axios from "axios";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 
 const SERVICEKEY = process.env.NEXT_PUBLIC_BUSINESSMAN_API_KEY;
 

@@ -15,6 +15,8 @@ import { Modal } from "antd";
 import { useBusinessCheck } from "../../../commons/hooks/customs/useBusinessCheck";
 import { useCreateOwner } from "../../../commons/hooks/mutations/useCreateOwner";
 import { useRouter } from "next/router";
+import { ISignUpProps } from "../SignupWrite.types";
+import { useUpdateOwner } from "../../../commons/hooks/mutations/useUpdateOwner";
 
 interface ICheckAuth {
   [key: string]: {
@@ -49,39 +51,47 @@ const CHECK_AUTH: ICheckAuth = {
   },
 };
 
-export default function SignUpOwner() {
+export default function SignUpOwner(props: ISignUpProps) {
   const router = useRouter();
   const [authOpt, setAuthOpt] = useState<string>("");
   // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { ownerEmailVerifySubmit, accessNum: emailAccessNum } =
     useOwnerEmailVerify();
   const { phoneVerifySubmit, accessNum: phoneAccessNum } = usePhoneVerify();
+  const { updateOwnerSubmit } = useUpdateOwner();
   const { createOwnerSubmit } = useCreateOwner();
   const { checkBusinessSubmit, businessCheck } = useBusinessCheck();
   const [isSignAuth, setIsSignAuth] = useState({ ...CHECK_AUTH });
-  const { register, handleSubmit, setValue, getValues, setFocus, formState } =
-    useForm<IFormCreateOwnerData>({
-      resolver: yupResolver(SignUpOwnerSchema),
-      mode: "onChange",
-      defaultValues: {
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
-        passwordCheck: "",
-        ownerNum: "",
-        ownerPassword: "",
-        ownerPasswordCheck: "",
-        is_main: false,
-        brandName: "",
-        opening: "",
-        emailAccess: "",
-        phoneAccess: "",
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    setFocus,
+    watch,
+    reset,
+    formState,
+  } = useForm<IFormCreateOwnerData>({
+    resolver: yupResolver(SignUpOwnerSchema),
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      passwordCheck: "",
+      ownerNum: "",
+      ownerPassword: "",
+      ownerPasswordCheck: "",
+      is_main: false,
+      brandName: "",
+      opening: "",
+      emailAccess: "",
+      phoneAccess: "",
+    },
+  });
 
-  const onSignUpSubmit = (data: IFormCreateOwnerData) => {
-    console.log(data);
+  const onSignUpSubmit = async (data: IFormCreateOwnerData) => {
     const {
       passwordCheck,
       emailAccess,
@@ -102,15 +112,52 @@ export default function SignUpOwner() {
       });
       return;
     }
-    if (businessCheck !== "01") {
+    if (ownerPasswordCheck?.length === 0) {
+      Modal.warning({
+        content: "관리자 비밀번호를 입력해 주세요.",
+      });
+      return;
+    }
+    if (businessCheck !== "01" && !props.isEdit) {
       Modal.warning({
         content: "사업자 등록을 완료해주세요.",
       });
       return;
     }
-    void createOwnerSubmit(value);
-    void router.push("/");
+    if (props.isEdit) {
+      const { email, name, phone, ...updateValue } = value;
+      console.log(updateValue);
+      await updateOwnerSubmit(updateValue);
+      void router.push("/");
+    } else {
+      await createOwnerSubmit(value);
+      void router.push("/");
+    }
   };
+
+  useEffect(() => {
+    if (props.isEdit === undefined) return;
+    const temp = { ...isSignAuth };
+    temp.email.checkAccect = props.isEdit;
+    temp.phone.checkAccect = props.isEdit;
+    temp.business.checkAccect = props.isEdit;
+    setIsSignAuth(temp);
+
+    if (props.infoUser !== undefined) {
+      const resetData = {
+        email: props.infoUser?.fetchOwnerLoggedIn?.email,
+        name: props.infoUser?.fetchOwnerLoggedIn?.name,
+        phone: props.infoUser?.fetchOwnerLoggedIn?.phone,
+        is_main: props.infoUser?.fetchOwnerLoggedIn?.is_main,
+        password: "",
+      };
+      reset({ ...resetData });
+    }
+
+    return () => {
+      setIsSignAuth(CHECK_AUTH);
+    };
+  }, [props.isEdit, props.infoUser]);
 
   const onClickBusiness = () => {
     const getName = getValues("name");
@@ -227,7 +274,7 @@ export default function SignUpOwner() {
       <S.ContainerInner>
         <S.TitleWrap>
           <Text size="32" fontColor="subColor01">
-            파트너 가입
+            {props.isEdit ? "파트너 수정" : "파트너 가입"}
           </Text>
         </S.TitleWrap>
         <S.InputWrap>
@@ -237,6 +284,7 @@ export default function SignUpOwner() {
             register={register("email")}
             errorMsg={formState.errors.email?.message}
             readOnly={isSignAuth.email.checkAccect}
+            isValid={watch("email")?.length > 0}
           />
           <S.EmailBtn
             type="button"
@@ -277,7 +325,13 @@ export default function SignUpOwner() {
         )}
 
         <S.InputWrap>
-          <Input02 type="text" name="이름" register={register("name")} />
+          <Input02
+            type="text"
+            name="이름"
+            register={register("name")}
+            isValid={watch("name")?.length > 0}
+            readOnly={props.isEdit}
+          />
         </S.InputWrap>
 
         <S.InputWrap>
@@ -287,6 +341,7 @@ export default function SignUpOwner() {
             errorMsg={formState.errors.phone?.message}
             readOnly={isSignAuth.phone.checkAccect}
             register={register("phone")}
+            isValid={watch("phone")?.length > 0}
           />
           <S.PhoneBtn
             type="button"
@@ -294,7 +349,9 @@ export default function SignUpOwner() {
             onClick={onClickVerify("phone")}
             disabled={isSignAuth.phone.checkAccect}
           >
-            <Text size="16">인증 요청</Text>
+            <Text size="16">
+              {isSignAuth.phone.checkAccect ? "인증 완료" : "인증 요청"}
+            </Text>
           </S.PhoneBtn>
         </S.InputWrap>
         {isSignAuth.phone.checking && !isSignAuth.phone.checkAccect && (
@@ -320,7 +377,9 @@ export default function SignUpOwner() {
               color="beige"
               onClick={onClickVerifyCheck("phone")}
             >
-              <Text size="16">인증 확인</Text>
+              <Text size="16">
+                {isSignAuth.phone.checkAccect ? "인증 완료" : "인증 요청"}
+              </Text>
             </S.PhoneBtn>
           </S.InputWrap>
         )}
@@ -329,6 +388,7 @@ export default function SignUpOwner() {
             type="password"
             name="비밀번호"
             errorMsg={formState.errors.password?.message}
+            isValid={watch("password")?.length > 0}
             register={register("password")}
             // isValid={}
           />
@@ -338,62 +398,73 @@ export default function SignUpOwner() {
             type="password"
             name="비밀번호 확인"
             errorMsg={formState.errors.passwordCheck?.message}
+            isValid={watch("passwordCheck")?.length > 0}
             register={register("passwordCheck")}
           />
         </S.InputWrap>
+        {!props.isEdit && (
+          <>
+            <S.InputWrap>
+              <Input02
+                type="text"
+                name="상호"
+                register={register("brandName")}
+                isValid={watch("brandName")?.length > 0}
+              />
+              <Input02
+                type="text"
+                name="개업 년 월 일"
+                register={register("opening")}
+              />
+            </S.InputWrap>
 
-        <S.InputWrap>
-          <Input02 type="text" name="상호" register={register("brandName")} />
-          <Input02
-            type="text"
-            name="개업 년 월 일"
-            register={register("opening")}
-          />
-        </S.InputWrap>
+            <S.InputWrap>
+              <Input02
+                type="text"
+                name="사업자등록번호"
+                register={register("ownerNum")}
+                isValid={watch("ownerNum")?.length > 0}
+              />
+              <S.PhoneBtn
+                type="button"
+                color="beige"
+                onClick={onClickBusiness}
+                disabled={isSignAuth.business.checkAccect}
+              >
+                <Text size="16">
+                  {isSignAuth.business.checkAccect ? "인증 완료" : "인증 요청"}
+                </Text>
+              </S.PhoneBtn>
+            </S.InputWrap>
 
-        <S.InputWrap>
-          <Input02
-            type="text"
-            name="사업자등록번호"
-            register={register("ownerNum")}
-          />
-          <S.PhoneBtn
-            type="button"
-            color="beige"
-            onClick={onClickBusiness}
-            // disabled={isSignAuth.phone.checkAccect}
-          >
-            <Text size="16">
-              {isSignAuth.phone.checkAccect ? "인증 완료" : "인증 요청"}
-            </Text>
-          </S.PhoneBtn>
-        </S.InputWrap>
-
-        <S.InputWrap>
-          <Input02
-            type="password"
-            name="관리자 비밀번호"
-            errorMsg={formState.errors.ownerPassword?.message}
-            register={register("ownerPassword")}
-          >
-            <Text size="14" fontColor="red">
-              *관리자 비밀번호는 변경이 불가능하오니, 신중히 결정해주세요
-            </Text>
-          </Input02>
-        </S.InputWrap>
-        <S.InputWrap>
-          <Input02
-            type="password"
-            name="관리자 비밀번호 확인"
-            errorMsg={formState.errors.ownerPasswordCheck?.message}
-            register={register("ownerPasswordCheck")}
-          />
-        </S.InputWrap>
+            <S.InputWrap>
+              <Input02
+                type="password"
+                name="관리자 비밀번호"
+                errorMsg={formState.errors.ownerPassword?.message}
+                register={register("ownerPassword")}
+              >
+                <Text size="14" fontColor="red">
+                  *관리자 비밀번호는 변경이 불가능하오니, 신중히 결정해주세요
+                </Text>
+              </Input02>
+            </S.InputWrap>
+            <S.InputWrap>
+              <Input02
+                type="password"
+                name="관리자 비밀번호 확인"
+                errorMsg={formState.errors.ownerPasswordCheck?.message}
+                register={register("ownerPasswordCheck")}
+              />
+            </S.InputWrap>
+          </>
+        )}
         <S.CheckBoxContainer>
           카페모아 메인화면 보기
           <Switch01
             // register={register("is_main")}
             onSetValue={onSetValue}
+            defaultValue={watch("is_main")}
           />
         </S.CheckBoxContainer>
         <S.SignUpBtnWrap>
@@ -402,7 +473,7 @@ export default function SignUpOwner() {
           </S.ResetBtn>
           <S.SubmitBtn color="brown">
             <Text size="24" fontColor="white">
-              회원가입
+              {props.isEdit ? "회원수정" : "회원가입"}
             </Text>
           </S.SubmitBtn>
         </S.SignUpBtnWrap>

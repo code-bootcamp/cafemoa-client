@@ -11,6 +11,7 @@ interface IInputProps {
   readOnly?: boolean;
   isValid?: boolean;
   children?: ReactNode;
+  defaultValue?: string | number;
 }
 
 export default function Input02(props: IInputProps) {
@@ -41,12 +42,13 @@ export default function Input02(props: IInputProps) {
     <S.InputWrap isVaild={isValid}>
       {}
       <input
-        required
+        // required
         type={props.type}
         {...props.register}
         readOnly={props.readOnly ?? false}
         // onInput={onInputData}
         onChange={onChangeData}
+        defaultValue={props.defaultValue}
       />
       <label>{props.name}</label>
       <div>

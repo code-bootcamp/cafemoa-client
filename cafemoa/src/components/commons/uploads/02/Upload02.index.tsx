@@ -3,11 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import { CropModal } from "../../cropModal/cropModal.index";
 import { checkValidationImage } from "../uploadValidation";
+import { isArray } from "lodash";
 
 interface IUploadProps {
   maxLength?: 1 | 2 | 3;
   cropShape?: "rect" | "round";
-  defaultUrls?: string[];
+  defaultUrls?: string[] | string;
   onChangeFileUrls: (fileUrl: File, index: number) => void;
 }
 
@@ -21,20 +22,25 @@ export default function Uploads02(props: IUploadProps) {
       : ["", "", ""]
   );
   const [selectList, setSelectList] = useState(["", "", 0]);
-  // useEffect(() => {
-  //   if (props?.defaultUrls === undefined) return;
-  //   const tempImgUrl = [...imgUrl];
-  //   tempImgUrl.map((el, idx) => {
-  //     if (el !== "") {
-  //       tempImgUrl[
-  //         idx
-  //       ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
-  //     } else {
-  //       tempImgUrl[idx] = "";
-  //     }
-  //   });
-  //   setImgUrl(tempImgUrl);
-  // }, [props.defaultUrls]);
+  useEffect(() => {
+    if (props?.defaultUrls === undefined) return;
+    const tempImgUrl = [...imgUrls];
+    if (isArray(props?.defaultUrls)) {
+      // eslint-disable-next-line array-callback-return
+      tempImgUrl.map((el, idx) => {
+        if (el !== "") {
+          tempImgUrl[
+            idx
+          ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
+        } else {
+          tempImgUrl[idx] = "";
+        }
+      });
+    } else {
+      tempImgUrl[0] = `https://storage.googleapis.com/${props?.defaultUrls}`;
+    }
+    setImgUrls(tempImgUrl);
+  }, [props.defaultUrls]);
 
   const onChangeFile =
     (idx: number) => async (event: ChangeEvent<HTMLInputElement>) => {
@@ -48,15 +54,6 @@ export default function Uploads02(props: IUploadProps) {
         setSelectList([event.target.result, fileName, idx]);
       };
       fileReader.readAsDataURL(file as any);
-      // fileReader.onload = (event) => {
-      //   if (typeof event.target?.result === "string") {
-      //     const tempImgUrls = [...imgUrl];
-      //     tempImgUrls[idx] = event.target?.result;
-      //     console.log(tempImgUrls);
-      //     setImgUrl(tempImgUrls);
-      //     props.onChangeFileUrls(file, idx);
-      //   }
-      // };
     };
   return (
     <>
