@@ -1,4 +1,4 @@
 export interface IFormCreateComment {
   reply: string;
-  commentImage: string[];
+  image_url: string[];
 }

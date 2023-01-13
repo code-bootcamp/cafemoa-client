@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Modal, Tabs } from "antd";
+import { Tabs } from "antd";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import {
   BtnWrap,
@@ -139,16 +139,28 @@ export const BtnWrapper = styled.div`
 `;
 export const EditBtn = styled.span`
   width: 100%;
+  font-size: 24px;
   text-align: right;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const DeleteBtn = styled.span`
   width: 100%;
+  font-size: 24px;
   text-align: right;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const ReviewContents = styled.div`
   width: 100%;
   display: flex;
   padding-left: 2px;
+`;
+export const LikeWrapper = styled.div`
+  padding-left: 24px;
+  padding-top: 4px;
 `;
 export const ReplyBtn = styled.div`
   padding-top: 8px;
@@ -217,14 +229,16 @@ export const BtnInnerWrapper = styled.div`
 `;
 // ============================점주 답글부분=====================
 export const ReplyWrap = styled.div`
+  // background: red;
+`;
+export const ReplyFormWrapper = styled.form`
   display: flex;
   padding-left: 100px;
 `;
-export const ReplyWrapper = styled.div`
-  width: 70%;
+export const ReplyInputWrapper = styled.div`
+  width: 80%;
 `;
-export const ReplySubmitBtn = styled.div`
-  width: 30%;
+export const ReplySubmitBtn = styled(SmallBtn)`
   margin-left: 10px;
   padding-top: 10px;
 `;
@@ -268,3 +282,15 @@ export const ReviewWriteInputWrapper = styled.div`
   padding-top: 24px;
 `;
 export const ModalBtnWrapper = styled.div``;
+
+export const CommentWrap = styled.div`
+  width: 100%;
+  display: flex;
+  padding-top: 16px;
+  padding-left: 64px;
+  // background: red;
+`;
+export const CommentImageWrapper = styled.div``;
+export const CommentContentWrapper = styled.div`
+  padding-left: 16px;
+`;

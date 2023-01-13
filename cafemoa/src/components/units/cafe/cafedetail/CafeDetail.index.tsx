@@ -187,7 +187,9 @@ export default function CafeDetail() {
             {
               label: `리뷰모아`,
               key: "2",
-              children: <CafeDetailReview />,
+              children: (
+                <CafeDetailReview cafeInformId={data?.fetchCafeInform.id} />
+              ),
             },
           ]}
         />

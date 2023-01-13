@@ -7,12 +7,12 @@ import {
 
 interface IFormCreateCommentData {
   reply: string;
-  commentImage?: string[];
+  image_Url?: string[];
 }
 
 export const CREATE_COMMENT = gql`
   mutation createComment(
-    $createCommentinput: CreateUserInput!
+    $createCommentinput: createCommentInput!
     $cafeinformId: String!
   ) {
     createComment(
@@ -21,12 +21,6 @@ export const CREATE_COMMENT = gql`
     ) {
       id
       reply
-      like
-      time
-      user {
-        name
-        nickname
-      }
       commentImage {
         image_url
       }
@@ -41,13 +35,18 @@ export const useCreateComment = () => {
     IMutationCreateCommentArgs
   >(CREATE_COMMENT);
 
-  const createCommentSubmit = async (data: IFormCreateCommentData) => {
+  const createCommentSubmit = async (
+    data: IFormCreateCommentData,
+    cafeinformId: string,
+    resultUrls: string[]
+  ) => {
     try {
       const result = await createComment({
         variables: {
-          cafeinformId: router.query.cafeinformId,
+          cafeinformId,
           createCommentinput: {
             ...data,
+            image_Url: resultUrls,
           },
         },
       });

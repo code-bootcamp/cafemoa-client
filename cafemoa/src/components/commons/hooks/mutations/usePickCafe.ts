@@ -7,8 +7,8 @@ import {
 import { FETCH_CAFE_INFORM } from "../queries/useFetchCafeInform";
 
 export const PICK_CAFE = gql`
-  mutation PickCafe($CafeInformID: String!) {
-    PickCafe(CafeInformID: $CafeInformID)
+  mutation PickCafe($cafeInformID: String!) {
+    PickCafe(cafeInformID: $cafeInformID)
   }
 `;
 
@@ -22,7 +22,7 @@ export const usePickCafe = () => {
     try {
       await PickCafe({
         variables: {
-          CafeInformID: router.query.cafeInformID,
+          cafeInformID: router.query.cafeInformID,
         },
         refetchQueries: [
           {
