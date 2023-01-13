@@ -40,6 +40,7 @@ export const useCreateComment = () => {
     cafeinformId: string,
     resultUrls: string[]
   ) => {
+    console.log(resultUrls, cafeinformId);
     try {
       const result = await createComment({
         variables: {

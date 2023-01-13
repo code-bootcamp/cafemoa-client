@@ -5,7 +5,7 @@ import FooterLayout from "./footer/Footer.index";
 import HeaderLayout from "./header/Header.index";
 import { Transition, TransitionGroup } from "react-transition-group";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useRef } from "react";
 import { useAuth } from "../hooks/customs/useAuth";
 import { useOwnerPage } from "../hooks/customs/useOwnerPage";
 

@@ -32,21 +32,27 @@ export default function MemberCoupon(props: IMemberCouponProps) {
           <Text size="14">자세히 보기</Text>
         </Link01>
       </div>
-      <Slider {...SETTINGS}>
-        {data?.fetchUserCoupons?.map((el, idx) => (
-          <S.SlideItem key={idx}>
-            <Box01 styles={{ padding: "16px", display: "flex" }}>
-              <S.BoxIconWrap>
-                <RiCoupon3Line />
-              </S.BoxIconWrap>
-              <S.BoxTextWrap>
-                <S.CafeName>{el.cafeInform.owner.brandName}</S.CafeName>
-                <div>유효기간 ~ {el.expiredDate}</div>
-              </S.BoxTextWrap>
-            </Box01>
-          </S.SlideItem>
-        ))}
-      </Slider>
+      {data?.fetchUserCoupons !== undefined &&
+        data?.fetchUserCoupons.length > 0 && (
+          <Slider {...SETTINGS}>
+            {data?.fetchUserCoupons?.map((el, idx) => (
+              <S.SlideItem key={idx}>
+                <Box01 styles={{ padding: "16px", display: "flex" }}>
+                  <S.BoxIconWrap>
+                    <RiCoupon3Line />
+                  </S.BoxIconWrap>
+                  <S.BoxTextWrap>
+                    <S.CafeName>{el.cafeInform.owner.brandName}</S.CafeName>
+                    <div>유효기간 ~ {el.expiredDate}</div>
+                  </S.BoxTextWrap>
+                </Box01>
+              </S.SlideItem>
+            ))}
+          </Slider>
+        )}
+      {data?.fetchUserCoupons.length === 0 && (
+        <div style={{ textAlign: "center" }}>쿠폰이 없습니다.</div>
+      )}
     </S.SlideWrap>
   );
 }

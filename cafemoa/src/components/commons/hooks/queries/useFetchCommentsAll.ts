@@ -7,8 +7,8 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_COMMENTS_ALL = gql`
-  query fetchCommentsAll($location: String, $tags: [String!]) {
-    fetchCommentsAll(location: $location, tags: $tags) {
+  query fetchCommentsAll($location: String, $tags: [String!], $page: Int) {
+    fetchCommentsAll(location: $location, tags: $tags, page: $page) {
       id
       reply
       like
@@ -37,7 +37,7 @@ export const FETCH_COMMENTS_ALL = gql`
 export const useFetchCommentsAll = () => {
   const [tagState, setTagState] = useState<string[]>([]);
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     Pick<IQuery, "fetchCommentsAll">,
     IQueryFetchCommentsAllArgs
   >(FETCH_COMMENTS_ALL, {
@@ -59,8 +59,34 @@ export const useFetchCommentsAll = () => {
     setLocationState(location);
   };
 
+  const onHandleMore = () => {
+    if (data === undefined) return;
+    console.log();
+    void fetchMore({
+      variables: {
+        tags: tagState,
+        page: Number(Math.ceil(data.fetchCommentsAll.length / 10) + 1),
+        location: locationState,
+      },
+      updateQuery(prev, { fetchMoreResult }) {
+        console.log(fetchMoreResult.fetchCommentsAll);
+        if (fetchMoreResult.fetchCommentsAll === undefined) {
+          return {
+            fetchCommentsAll: [...prev.fetchCommentsAll],
+          };
+        }
+        return {
+          fetchCommentsAll: [
+            ...prev.fetchCommentsAll,
+            ...fetchMoreResult.fetchCommentsAll,
+          ],
+        };
+      },
+    });
+  };
+
   useEffect(() => {
     void refetch({ tags: tagState, location: locationState });
   }, [tagState, locationState]);
-  return { data, onRefetchComments, onSelectLocation };
+  return { data, onRefetchComments, onSelectLocation, onHandleMore };
 };

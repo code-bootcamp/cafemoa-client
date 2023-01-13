@@ -12,6 +12,7 @@ import Select01 from "../../commons/select/01/Select01.index";
 import Link from "next/link";
 import Masonry from "react-masonry-component";
 import { GetDate } from "../../../commons/libraries/utill";
+import InfiniteScrollWrap from "../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "" },
@@ -37,8 +38,9 @@ const SELECT_VALUES02 = [
 export default function ReviewList() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
   const [selectValue, setSelectValue] = useState<string | number>("");
-  const { data, onRefetchComments, onSelectLocation } = useFetchCommentsAll();
-  console.log(data?.fetchCommentsAll?.user?.profileImage);
+  const { data, onRefetchComments, onSelectLocation, onHandleMore } =
+    useFetchCommentsAll();
+  // console.log(data?.fetchCommentsAll?.user?.profileImage);
 
   // 태그 클릭 버튼
   const onClickTag = (value: string) => () => {
@@ -88,171 +90,51 @@ export default function ReviewList() {
             ))}
           </S.TagWrapper>
           <S.ReviewListsWrap>
-            <Masonry>
-              {data?.fetchCommentsAll.map((el: any) => (
-                <S.ReviewList key={el.id}>
-                  <Link href={`/cafe/${String(el.id)}`}>
-                    <a>
-                      <Card01 imageUrl="/images/temp/temp01.png">
-                        <div>
-                          <S.UserWrapper>
-                            <Users01
-                              image={`https://storage.googleapis.com/${el.user.profileImage}`}
-                              name={el.user.nickname}
-                              size="sm"
-                            />
-                          </S.UserWrapper>
-                          <S.CafeName>
-                            <Text size="24" weight="500">
-                              {el.cafeinfo.owner.brandName}
-                            </Text>
-                          </S.CafeName>
-                          <S.ReviewContent>
-                            <Text size="16" weight="300">
-                              {el.reply}
-                            </Text>
-                          </S.ReviewContent>
-                          <S.ReviewTag>
-                            {el.cafeinfo.cafeTag.map((el, idx) => (
-                              <Tag key={idx} size="sm">
-                                {el.tagName}
-                              </Tag>
-                            ))}
-                          </S.ReviewTag>
-                          <S.ReviewDate>
-                            <Text size="14" weight="300" fontColor="gray">
-                              {GetDate(el.time)}
-                            </Text>
-                          </S.ReviewDate>
-                        </div>
-                      </Card01>
-                    </a>
-                  </Link>
-                </S.ReviewList>
-              ))}
-            </Masonry>
-            {/* <S.ReviewList>
-              <Card01 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <Users01
-                    image="/images/review/review_profile02.png"
-                    name="원두학살자"
-                    size="sm"
-                  />
-                  <S.CafeName>
-                    <Text size="24" weight="500">
-                      카페모아
-                    </Text>
-                  </S.CafeName>
-                  <S.ReviewContent>
-                    <Text size="16" weight="300">
-                      일산에 갈 때마다 방문하는 카페인데 사장님도 너무
-                      친절하시고 커피 맛도 최고에요! 일산에 방문하는 모든 사람들
-                      이 카페 꼭 가보세요
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추추강추강추강추강추
-                    </Text>
-                  </S.ReviewContent>
-                  <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        6일 전
-                      </Text>
-                    </S.ReviewDate>
-                  </S.ReviewTag>
-                </div>
-              </Card01>
-            </S.ReviewList>
-            <S.ReviewList>
-              <Card01 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <Users01
-                    image="/images/review/review_profile03.png"
-                    name="진쓰 월클인디"
-                    size="sm"
-                  />
-                  <S.CafeName>
-                    <Text size="24" weight="500">
-                      카페모아
-                    </Text>
-                  </S.CafeName>
-                  <S.ReviewContent>
-                    <Text size="16" weight="300">
-                      정말 너무 마쉰는 디저트네용 제가 한쿡와서 먹어본 것 중
-                      가장 맛이쒀요 정말 너무 마쉰는 디저트네용 제가 한쿡와서
-                      먹어본 것 중 가장 맛이쒀요 최고에요 싸랑해여 연예가중계
-                    </Text>
-                  </S.ReviewContent>
-                  <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        3일 전
-                      </Text>
-                    </S.ReviewDate>
-                  </S.ReviewTag>
-                </div>
-              </Card01>
-            </S.ReviewList>
-            <S.ReviewList>
-              <Card01 imageUrl="/images/temp/temp01.png">
-                <div>
-                  <Users01
-                    image="/images/review/review_profile02.png"
-                    name="원두학살자"
-                    size="sm"
-                  />
-                  <S.CafeName>
-                    <Text size="24" weight="500">
-                      카페모아
-                    </Text>
-                  </S.CafeName>
-                  <S.ReviewContent>
-                    <Text size="16" weight="300">
-                      일산에 갈 때마다 방문하는 카페인데 사장님도 너무
-                      친절하시고 커피 맛도 최고에요! 일산에 방문하는 모든 사람들
-                      이 카페 꼭 가보세요
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추강추
-                      강추강추강추강추강추강추강추강추강추강추강추강추강추강추추강추강추강추강추
-                    </Text>
-                  </S.ReviewContent>
-                  <S.ReviewTag>
-                    <div>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                      <Tag size="sm">태그</Tag>
-                    </div>
-                    <S.ReviewDate>
-                      <Text size="14" weight="300" fontColor="gray">
-                        6일 전
-                      </Text>
-                    </S.ReviewDate>
-                  </S.ReviewTag>
-                </div>
-              </Card01>
-            </S.ReviewList> */}
+            <InfiniteScrollWrap onHandleMore={onHandleMore}>
+              <Masonry>
+                {data?.fetchCommentsAll.map((el: any) => (
+                  <S.ReviewList key={el.id}>
+                    <Link href={`/cafe/${String(el.id)}`}>
+                      <a>
+                        <Card01 imageUrl="/images/temp/temp01.png">
+                          <div>
+                            <S.UserWrapper>
+                              <Users01
+                                image={`https://storage.googleapis.com/${el.user.profileImage}`}
+                                name={el.user.nickname}
+                                size="sm"
+                              />
+                            </S.UserWrapper>
+                            <S.CafeName>
+                              <Text size="24" weight="500">
+                                {el.cafeinfo.owner.brandName}
+                              </Text>
+                            </S.CafeName>
+                            <S.ReviewContent>
+                              <Text size="16" weight="300">
+                                {el.reply}
+                              </Text>
+                            </S.ReviewContent>
+                            <S.ReviewTag>
+                              {el.cafeinfo.cafeTag.map((el, idx) => (
+                                <Tag key={idx} size="sm">
+                                  {el.tagName}
+                                </Tag>
+                              ))}
+                            </S.ReviewTag>
+                            <S.ReviewDate>
+                              <Text size="14" weight="300" fontColor="gray">
+                                {GetDate(el.time)}
+                              </Text>
+                            </S.ReviewDate>
+                          </div>
+                        </Card01>
+                      </a>
+                    </Link>
+                  </S.ReviewList>
+                ))}
+              </Masonry>
+            </InfiniteScrollWrap>
           </S.ReviewListsWrap>
         </S.Container>
       </S.ContainerWrapper>

@@ -13,12 +13,12 @@ export default function Member() {
   const [infoUser] = useRecoilState(infoUserState);
   return (
     <>
-      <Box01
-        styles={{
-          padding: "48px",
-        }}
-      >
-        <S.BannerWrap>
+      <S.BannerWrap>
+        <Box01
+          styles={{
+            padding: "48px",
+          }}
+        >
           <S.BannerLeft>
             <QRCode
               size={400}
@@ -76,8 +76,8 @@ export default function Member() {
               ]}
             />
           </S.BannerRight>
-        </S.BannerWrap>
-      </Box01>
+        </Box01>
+      </S.BannerWrap>
     </>
   );
 }

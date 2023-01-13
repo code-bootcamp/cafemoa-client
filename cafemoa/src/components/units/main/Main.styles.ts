@@ -25,13 +25,15 @@ const ScrollAni = keyframes`
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
-export const MainVisual = styled.div`
+export const MainVisual = styled.div<IMainStylesProps>`
   position: relative;
   width: 100%;
   height: calc(100vh - 100px);
   overflow: hidden;
+
   ${mq.MobileM} {
-    height: calc(100vh - 72px);
+    height: ${(props) =>
+      props?.isHidden === true ? "0" : "calc(100vh - 72px)"};
   }
 `;
 export const VideoWrap = styled.div`
@@ -105,6 +107,9 @@ export const MainSection = styled.div`
   padding: 50px 0;
   &:nth-of-type(2) {
     padding-top: 120px;
+    ${mq.MobileM} {
+      padding-top: 56px;
+    }
   }
 `;
 export const MainSectionInner = styled(ContainerWrap)`
@@ -113,6 +118,9 @@ export const MainSectionInner = styled(ContainerWrap)`
 export const MainWrap = styled.div`
   > div + div {
     padding-top: 100px;
+    ${mq.MobileM} {
+      padding-top: 25px;
+    }
   }
 `;
 
@@ -167,6 +175,10 @@ export const Category = styled.div<IMainStylesProps>`
     &:hover {
       background-size: 110%;
     }
+  }
+  ${mq.MobileM} {
+    width: 50%;
+    padding: 10px;
   }
 `;
 

@@ -160,6 +160,7 @@ export type IMutation = {
   updateOwnerComment: IOwnerComment;
   updateUser: IUser;
   uploadFile: Array<Scalars['String']>;
+  uploadFileOne: Scalars['String'];
   useCoupon: IDeletedCoupon;
   userLogin: Scalars['String'];
   userLogout: Scalars['String'];
@@ -315,6 +316,11 @@ export type IMutationUpdateUserArgs = {
 
 export type IMutationUploadFileArgs = {
   files: Array<Scalars['Upload']>;
+};
+
+
+export type IMutationUploadFileOneArgs = {
+  file: Scalars['Upload'];
 };
 
 

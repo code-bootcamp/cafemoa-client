@@ -7,20 +7,29 @@ import {
   MediumBtn,
 } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
+import Box01 from "../../../../commons/box/01/Box01.index";
+import { BoxWrapper } from "../../../../commons/box/01/Box01.styles";
 
 export const BannerWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     ${mq.MobileM} {
-      width: 100%;
+      padding: 0 !important;
+      border: 0 none;
+    }
+    > div {
+      ${mq.MobileM} {
+        width: 100%;
+      }
     }
   }
   ${mq.MobileM} {
     flex-direction: column;
   }
 `;
+
 export const BannerLeft = styled.div`
   text-align: center;
   padding-right: 40px;
@@ -31,6 +40,7 @@ export const BannerLeft = styled.div`
     height: auto !important;
   }
   ${mq.MobileM} {
+    padding-right: 0;
   }
 `;
 export const BannerRight = styled.div`

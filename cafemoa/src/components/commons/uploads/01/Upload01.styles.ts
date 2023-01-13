@@ -10,11 +10,9 @@ export const InputFileWrap = styled.div`
 
 export const InputFile = styled.div`
   position: relative;
-  // display: inline-block;
-  width: 33.3333%
-  // height: 180px;
+  width: 33.3333%;
   text-align: center;
-  padding: 40px;
+  padding-bottom: calc(33.3333% - 24px);
   margin-right: 24px;
   margin-bottom: 24px;
   background-color: ${DEFAULT_COLOR.subColor02};
@@ -69,5 +67,13 @@ export const InputFile = styled.div`
   }
 `;
 export const EmptyImage = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   padding: 8px;
 `;

@@ -31,15 +31,8 @@ export default function Main() {
   }, 50);
 
   useEffect(() => {
-    setTimeout(
-      () =>
-        window.scrollTo({
-          top: 0,
-          behavior: "auto",
-        }),
-      0
-    );
-
+    setTimeout(() => window.scroll(0, 0), 1);
+    if (Math.floor(window.pageYOffset) !== 0) return;
     if (window.innerWidth < 1025) {
       setIsScroll(true);
       return;
@@ -54,6 +47,7 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
+    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
     if (!isScroll) {
       document.body.style.cssText = `overflow : hidden`;
     } else {
@@ -66,7 +60,7 @@ export default function Main() {
 
   return (
     <S.MainWrap>
-      <S.MainVisual>
+      <S.MainVisual isHidden={infoUser?.fetchUser !== undefined}>
         <S.VideoWrap>
           <S.VisualVideo
             src="/images/main/img_main_visual.mp4"

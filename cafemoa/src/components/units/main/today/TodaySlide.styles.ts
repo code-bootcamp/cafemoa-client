@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import { EllipsisTwo } from "../../../../commons/styles/commonStyles";
+import * as mq from "../../../../commons/styles/mediaQuery";
 // import { DEFAULT_COLOR } from "../../../commons/default/default";
 // import * as mq from "../../../commons/styles/mediaQuery";
 
@@ -19,7 +20,7 @@ export const ImageWrap = styled.div`
   }
 `;
 export const InfoWrap = styled.div`
-  background-color: ${DEFAULT_COLOR.subColor01};
+  /* background-color: ${DEFAULT_COLOR.subColor01}; */
 `;
 
 export const TodaySlideWrap = styled.div`
@@ -29,6 +30,12 @@ export const TodaySlideWrap = styled.div`
 export const TodaySlideInfoWrap = styled.div`
   width: 38.57%;
   padding-right: 40px;
+  .swiper-slide {
+    opacity: 0 !important;
+  }
+  .swiper-slide.swiper-slide-active {
+    opacity: 1 !important;
+  }
   > a {
     display: block;
   }
@@ -36,6 +43,10 @@ export const TodaySlideInfoWrap = styled.div`
     > div {
       margin-top: 16px;
     }
+  }
+  ${mq.MobileM} {
+    width: 100%;
+    padding-right: 0;
   }
 `;
 export const TodaySlideListsWrap = styled.div`
@@ -49,6 +60,9 @@ export const TodaySlideListsWrap = styled.div`
   }
   ${ImageWrap} {
     margin-bottom: 8px;
+  }
+  ${mq.MobileM} {
+    display: none;
   }
 `;
 export const TagWrap = styled.div`

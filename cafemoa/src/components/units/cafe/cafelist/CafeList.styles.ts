@@ -53,4 +53,4 @@ export const DetailTagWrap = styled.div`
 `;
 
 // -------------------------------------------------카페 상세페이지 기능부분
-export const CafeInfiniteScroll = styled(InfiniteScroll)``;
+// export const CafeInfiniteScroll = styled(InfiniteScroll)``;

@@ -3,28 +3,22 @@ import Text from "../../../commons/text/01/Text01.index";
 import * as S from "./TodaySlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
 // import Slider, { Settings } from "react-slick";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
 import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { EffectFade, Thumbs } from "swiper";
-
-import "swiper/css";
-import "swiper/css/effect-fade";
+import SwiperCore, { Autoplay, EffectFade, Thumbs } from "swiper";
 
 export default function TodaySlide() {
-  const { data, onRefetchCafes } = useFetchCafes();
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
+  const { data, onRefetchCafes } = useFetchCafes();
 
   useEffect(() => {
     void getRandomDday();
     const tag = JSON.parse(localStorage.getItem("todayTag") ?? "{}").tag;
     onRefetchCafes(tag);
   }, []);
-  console.log(data);
-
-  // console.log(tag);
 
   return (
     <S.TodaySlideWrap>
@@ -34,9 +28,16 @@ export default function TodaySlide() {
           effect={"fade"}
           loop={true}
           slidesPerView={1}
-          touchRatio={0}
-          autoplay={true}
+          touchRatio={1}
+          draggable={true}
+          allowTouchMove={true}
           onSwiper={(swiper: SwiperCore) => setThumbsSwiper(swiper)}
+          breakpoints={{
+            768: {
+              touchRatio: 1,
+              allowTouchMove: false,
+            },
+          }}
         >
           {data?.fetchCafes.map((el) => (
             <SwiperSlide key={el?.id}>
@@ -82,7 +83,7 @@ export default function TodaySlide() {
       </S.TodaySlideInfoWrap>
       <S.TodaySlideListsWrap>
         <Swiper
-          modules={[Thumbs]}
+          modules={[Thumbs, Autoplay]}
           slidesPerView={"auto"}
           spaceBetween={40}
           loop={true}
