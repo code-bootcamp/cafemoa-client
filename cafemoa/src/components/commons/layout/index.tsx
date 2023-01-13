@@ -7,6 +7,7 @@ import { Transition, TransitionGroup } from "react-transition-group";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useRef } from "react";
 import { useAuth } from "../hooks/customs/useAuth";
+import { useOwnerPage } from "../hooks/customs/useOwnerPage";
 
 interface IGetTransitionStyles {
   entering: {
@@ -45,6 +46,7 @@ const getTransitionStyles: IGetTransitionStyles = {
 
 export default function Layout(props: ILayoutProps) {
   useAuth();
+  useOwnerPage();
   const router = useRouter();
   const nodeRef = useRef(null);
   const { owner } = useFetchUser();

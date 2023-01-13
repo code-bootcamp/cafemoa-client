@@ -2,94 +2,96 @@ import Link from "next/link";
 import Text from "../../../commons/text/01/Text01.index";
 import * as S from "./TodaySlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
-import Slider, { Settings } from "react-slick";
-import { useEffect, useRef, useState } from "react";
+// import Slider, { Settings } from "react-slick";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
 import { v4 as uuidv4 } from "uuid";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { EffectFade, Thumbs } from "swiper";
 
-const NAV_SETTINGS: Settings = {
-  autoplay: true,
-  infinite: true,
-  slidesToShow: 2,
-  arrows: false,
-  speed: 500,
-  variableWidth: true,
-};
-
-const VIEW_SETTINGS: Settings = {
-  infinite: true,
-  arrows: false,
-  speed: 500,
-  fade: true,
-  draggable: false,
-  adaptiveHeight: true,
-};
+import "swiper/css";
+import "swiper/css/effect-fade";
 
 export default function TodaySlide() {
   const { data, onRefetchCafes } = useFetchCafes();
-  const [todayTag, setTodayTag] = useState<string[]>([]);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
 
-  const [swipeIdx, setSwipeIdx] = useState(0);
-  console.log(data);
   useEffect(() => {
     void getRandomDday();
     const tag = JSON.parse(localStorage.getItem("todayTag") ?? "{}").tag;
-    setTodayTag(tag);
+    onRefetchCafes(tag);
   }, []);
+  console.log(data);
 
-  useEffect(() => {
-    onRefetchCafes(todayTag);
-  }, [todayTag]);
+  // console.log(tag);
 
   return (
-    <S.TodaySlideWrap key={uuidv4()}>
+    <S.TodaySlideWrap>
       <S.TodaySlideInfoWrap>
-        {/* <Slider {...VIEW_SETTINGS} asNavFor={pagingSlick} ref={mainSlickRef}>
-          {data?.fetchCafes.map((el) => ( */}
-        <Link href="/" key={data?.fetchCafes[swipeIdx].id}>
-          <a>
-            <S.ImageWrap>
-              <img
-                src={
-                  data?.fetchCafes[swipeIdx].thumbNail ??
-                  "/images/commons/img_cafe_preparing.png"
-                }
-              />
-            </S.ImageWrap>
-            <S.InfoWrap>
-              <div>
-                <Text size="32" fontColor="white" weight="700">
-                  {data?.fetchCafes[swipeIdx].owner.brandName}
-                </Text>
-              </div>
-              <S.InfoContents>
-                <Text size="16" fontColor="white" weight="500">
-                  {data?.fetchCafes[swipeIdx].cafeinfo}
-                </Text>
-              </S.InfoContents>
-              <div>
-                <Text size="16" fontColor="white" weight="500">
-                  {data?.fetchCafes[swipeIdx].cafeAddr}
-                </Text>
-              </div>
-              <div>
-                {data?.fetchCafes[swipeIdx].cafeTag?.map((cur, idx) => (
-                  <Tag key={cur.id} size="sm">
-                    {cur.tagName}
-                  </Tag>
-                ))}
-              </div>
-            </S.InfoWrap>
-          </a>
-        </Link>
-        {/* ))}
-        </Slider> */}
+        <Swiper
+          modules={[EffectFade, Thumbs]}
+          effect={"fade"}
+          loop={true}
+          slidesPerView={1}
+          touchRatio={0}
+          autoplay={true}
+          onSwiper={(swiper: SwiperCore) => setThumbsSwiper(swiper)}
+        >
+          {data?.fetchCafes.map((el) => (
+            <SwiperSlide key={el?.id}>
+              <Link href={`/cafe/${el?.id}`}>
+                <a>
+                  <S.ImageWrap>
+                    <img
+                      src={
+                        el?.thumbNail ??
+                        "/images/commons/img_cafe_preparing.png"
+                      }
+                    />
+                  </S.ImageWrap>
+                  <S.InfoWrap>
+                    <div>
+                      <Text size="32" fontColor="white" weight="700">
+                        {el?.owner.brandName}
+                      </Text>
+                    </div>
+                    <S.InfoContents>
+                      <Text size="16" fontColor="white" weight="500">
+                        {el?.cafeinfo}
+                      </Text>
+                    </S.InfoContents>
+                    <div>
+                      <Text size="16" fontColor="white" weight="500">
+                        {el?.cafeAddr}
+                      </Text>
+                    </div>
+                    <S.TagWrap>
+                      {el?.cafeTag?.map((cur, idx) => (
+                        <Tag key={cur.id} size="sm">
+                          {cur.tagName}
+                        </Tag>
+                      ))}
+                    </S.TagWrap>
+                  </S.InfoWrap>
+                </a>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </S.TodaySlideInfoWrap>
       <S.TodaySlideListsWrap>
-        <Slider {...NAV_SETTINGS}>
+        <Swiper
+          modules={[Thumbs]}
+          slidesPerView={"auto"}
+          spaceBetween={40}
+          loop={true}
+          loopedSlides={3}
+          thumbs={{ swiper: thumbsSwiper }}
+          autoplay={{ delay: 2000 }}
+        >
           {data?.fetchCafes.map((el) => (
-            <S.SlideItem key={uuidv4()}>
+            <SwiperSlide key={uuidv4()}>
               <S.SlideBtn>
                 <S.ImageWrap>
                   <img
@@ -104,9 +106,9 @@ export default function TodaySlide() {
                   </Text>
                 </div>
               </S.SlideBtn>
-            </S.SlideItem>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </S.TodaySlideListsWrap>
     </S.TodaySlideWrap>
   );

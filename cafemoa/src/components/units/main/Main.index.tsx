@@ -11,6 +11,7 @@ import _ from "lodash";
 import { infoUserState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import NonMember from "./authbanners/nonmember/NonMember.index";
+import { useRouter } from "next/router";
 
 export default function Main() {
   const [isScroll, setIsScroll] = useState(false);
@@ -18,7 +19,7 @@ export default function Main() {
 
   const handleScroll = _.debounce((event) => {
     if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
-    if (Math.floor(window.scrollY) === 0) setIsScroll(false);
+    if (Math.floor(window.pageYOffset) === 0) setIsScroll(false);
     const direction = event.deltaY > 0 ? "down" : "up";
     if (direction === "down") {
       window.scrollTo({
@@ -30,17 +31,26 @@ export default function Main() {
   }, 50);
 
   useEffect(() => {
+    setTimeout(
+      () =>
+        window.scrollTo({
+          top: 0,
+          behavior: "auto",
+        }),
+      0
+    );
+
     if (window.innerWidth < 1025) {
       setIsScroll(true);
       return;
     } else {
       setIsScroll(false);
     }
-    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) {
-      setIsScroll(true);
-    }
     window.addEventListener("wheel", handleScroll);
-    return () => window.removeEventListener("wheel", handleScroll);
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+      setIsScroll(true);
+    };
   }, []);
 
   useEffect(() => {
