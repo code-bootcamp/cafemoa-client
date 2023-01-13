@@ -13,6 +13,7 @@ import Select01 from "../../../../commons/select/01/Select01.index";
 import { useFetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
 import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
 import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
+import StampSaveQrModal from "./StampSaveByQrModal";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -36,69 +37,75 @@ interface IStampSaveData {
 const html5QrCodeScannerFile = "/html5-qrcode.min.js";
 
 export default function StampSaveByQr() {
-  const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
-  let searchValue = "";
-  const [createStamp] = useCreateStamp();
+  // const router = useRouter();
+  // const inputRef = useRef<HTMLInputElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  // const [createStamp] = useCreateStamp();
   // const { data } = useFetchCouponAddUsers();
   // console.log(data);
 
   const { mycafedata } = useFetchMyCafes();
   const cafeId = mycafedata?.fetchMyCafes[0].id;
   console.log(cafeId);
-  const [selectValue, setSelectValue] = useState<string | number>("");
-  const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
-  const { register, watch, handleSubmit } = useForm({
-    mode: "onChange",
-    defaultValues: {
-      phone: "",
-      password: "",
-      selectPhone: "",
-    },
-  });
-  searchValue = watch("phone");
 
-  const onStampSave = () => {
-    inputRef.current?.click();
+  const onClickIsModalOpen = (prev) => {
+    // console.log(userPhone);
+    setIsModalOpen(prev);
   };
+  // const [selectValue, setSelectValue] = useState<string | number>("");
+  // const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
+  // const { register, watch, handleSubmit } = useForm({
+  //   mode: "onChange",
+  //   defaultValues: {
+  //     phone: "",
+  //     password: "",
+  //     selectPhone: "",
+  //   },
+  // });
+  // searchValue = watch("phone");
 
-  const submitStampSave = (data: IStampSaveData) => {
-    const { phone, ...value } = data;
-    console.log(value);
-    console.log(selectValue);
-    console.log("핸드폰번호 : " + searchValue);
+  // const onStampSave = () => {
+  //   inputRef.current?.click();
+  // };
 
-    if (selectValue === "") {
-      Modal.warning({
-        content: "적립할 스탬프 갯수를 선택하세요!",
-      });
-      return;
-    }
+  // const submitStampSave = (data: IStampSaveData) => {
+  //   const { phone, ...value } = data;
+  //   console.log(value);
+  //   console.log(selectValue);
+  //   console.log("핸드폰번호 : " + searchValue);
 
-    try {
-      const result = createStamp({
-        variables: {
-          createStampInput: {
-            phone: searchValue,
-            cafeId,
-            count: selectValue,
-            password: value.password,
-          },
-        },
-      });
-      setIsModalOpen(false);
-      Modal.success({
-        content: `스탬프가 ${selectValue}개 적립되었습니다!`,
-        afterClose() {
-          setSelectValue("");
-          void router.push(`/mypage/owner/${cafeId}/stampsave`);
-        },
-      });
-      console.log(result);
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
+  //   if (selectValue === "") {
+  //     Modal.warning({
+  //       content: "적립할 스탬프 갯수를 선택하세요!",
+  //     });
+  //     return;
+  //   }
+
+  //   try {
+  //     const result = createStamp({
+  //       variables: {
+  //         createStampInput: {
+  //           phone: searchValue,
+  //           cafeId,
+  //           count: selectValue,
+  //           password: value.password,
+  //         },
+  //       },
+  //     });
+  //     setIsModalOpen(false);
+  //     Modal.success({
+  //       content: `스탬프가 ${selectValue}개 적립되었습니다!`,
+  //       afterClose() {
+  //         setSelectValue("");
+  //         void router.push(`/mypage/owner/${cafeId}/stampsave`);
+  //       },
+  //     });
+  //     console.log(result);
+  //   } catch (error) {
+  //     if (error instanceof Error) alert(error.message);
+  //   }
+  // };
 
   // useEffect(() => {
   //   onRefetchUsers(searchValue);
@@ -106,13 +113,16 @@ export default function StampSaveByQr() {
 
   const { Html5QrcodeScanner } = useHtml5QrCodeScanner(html5QrCodeScannerFile);
   console.log(Html5QrcodeScanner);
+
   const onScanSuccess = (decodedText: string, decodedResult: string) => {
     console.log(`Scan 결과 : ${decodedText}`, decodedResult);
 
-    searchValue = decodedText.slice(-11);
+    setSearchValue(decodedText.slice(-11));
     console.log(searchValue);
-    setIsModalOpen(true);
+    console.log(isModalOpen);
+    onClickIsModalOpen(true);
     Html5QrcodeScanner.clear();
+    // Html5QrcodeScanner.stop();
   };
 
   useEffect(() => {
@@ -122,7 +132,9 @@ export default function StampSaveByQr() {
         { fps: 10, qrbox: { width: 250, height: 250 } },
         false
       );
-      html5QrcodeScanner.render(onScanSuccess);
+      if (!isModalOpen) {
+        html5QrcodeScanner.render(onScanSuccess);
+      }
     }
   }, [Html5QrcodeScanner]);
 
@@ -133,10 +145,10 @@ export default function StampSaveByQr() {
         footer={null}
         centered={true}
         onCancel={() => {
-          setIsModalOpen(false);
+          onClickIsModalOpen(false);
         }}
       >
-        <StampSaveQrModal />
+        <StampSaveQrModal searchValue={searchValue} />
       </S.ModalWrap>
       {/* <ModalComponent
         title={`스탬프 적립`}
