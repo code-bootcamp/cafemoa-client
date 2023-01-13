@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 export default function ReplyReview(props) {
   console.log(props.commentId);
   const { createOwnerCommentSubmit } = useCreateOwnerComment();
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit } = useForm({
     // resolver: yupResolver(CreateCommentSchema),
     mode: "onChange",
     defaultValues: {

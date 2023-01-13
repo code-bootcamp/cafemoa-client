@@ -9,6 +9,7 @@ interface IInputProps {
   placeHolder?: string;
   error?: string;
   children?: JSX.Element;
+  defaultValue?: string | number;
   styles?: {
     [key: string]: string | number;
   };
@@ -21,6 +22,7 @@ export default function Input01(props: IInputProps) {
       <input
         type={props.type}
         placeholder={props.placeHolder}
+        defaultValue={props.defaultValue}
         {...props.register}
       />
       {props.children}

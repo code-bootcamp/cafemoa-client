@@ -23,6 +23,11 @@ interface IFormUpdateCommentData {
   image_Url?: string[];
 }
 
+interface IFormCreateComment {
+  reply: string;
+  image_url: string[];
+}
+
 export default function ReviewWrite(props: IReviewWriteProps) {
   const { createCommentSubmit } = useCreateComment();
   const { updateCommentSubmit } = useUpdateComment();
@@ -30,7 +35,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
   const [filesList, setFilesList] = useState(["", "", ""]);
   const [infoUser] = useRecoilState(infoUserState);
   const userName = infoUser?.fetchUser?.name;
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit } = useForm({
     // resolver: yupResolver(CreateCommentSchema),
     mode: "onChange",
     defaultValues: {
@@ -46,19 +51,31 @@ export default function ReviewWrite(props: IReviewWriteProps) {
     // inputRef.current?.click();
   };
   const onReplySubmit = async (data: any) => {
-    const results = await Promise.all(
-      filesList.map(async (files) => await uploadFile({ variables: { files } }))
-    );
-    const resultUrls = results.map((el) =>
-      el !== undefined ? el.data?.uploadFile : ""
-    );
-
-    // const resultUrlsFlat = resultUrls.flat();
-
-    if (!props.isEdit) {
-      void createCommentSubmit(data, props.cafeInformId, resultUrls);
-    } else {
-      void updateCommentSubmit(data, props.commentId, resultUrls);
+    try {
+      // const result = await uploadFile({ variables: { files: filesList } });
+      // console.log(result);
+      // console.log("start 111111111");
+      const results = await Promise.all(
+        filesList.map(
+          async (files) => await uploadFile({ variables: { files } })
+        )
+      );
+      // console.log("resultUrls 2222222222");
+      const resultUrls = results.map((el) =>
+        el !== undefined ? el.data?.uploadFile : ""
+      );
+      // console.log(resultUrls);
+      // const resultUrlsFlat = resultUrls.flat();
+      // console.log("3333333");
+      if (!props.isEdit) {
+        console.log(data);
+        console.log(resultUrls);
+        void createCommentSubmit(data, props.cafeInformId, resultUrls);
+      } else {
+        void updateCommentSubmit(data, props.commentId, resultUrls);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
