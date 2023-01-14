@@ -12,7 +12,6 @@ interface IUserProps {
 }
 
 export default function Users01(props: IUserProps) {
-  console.log(props.image, "props.image");
   return (
     <S.UserWrap size={props.size} alignItem={props.alignItem ?? ""}>
       <S.UserImageWrap>

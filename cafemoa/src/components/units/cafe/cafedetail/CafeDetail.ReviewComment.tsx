@@ -109,14 +109,12 @@ export default function ReviewComment(props) {
         </S.ReviewContents>
         <S.ReviewImageContainer>
           {props.el.commentImage.map((el, idx) => (
-            // <S.ReviewImageWrapper key={idx}>
-            //   <img
-            //     src={`https://storage.googleapis.com/${el.image_url}`}
-            //   />
-            // </S.ReviewImageWrapper>
             <S.ReviewImageWrapper key={idx}>
-              {props.el.image_url}
+              <img src={`https://storage.googleapis.com/${el.image_url}`} />
             </S.ReviewImageWrapper>
+            // <S.ReviewImageWrapper key={idx}>
+            //   {props.el.image_url}
+            // </S.ReviewImageWrapper>
           ))}
         </S.ReviewImageContainer>
         {ownerbrandName && !data?.fetchOwnerCommentByCommentID ? (

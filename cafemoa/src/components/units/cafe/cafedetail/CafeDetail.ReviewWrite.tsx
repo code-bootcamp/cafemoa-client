@@ -52,6 +52,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
     // inputRef.current?.click();
   };
   const onReplySubmit = async (data: any) => {
+    // console.log(data);
     try {
       const results = await Promise.all(
         filesList.map(
@@ -60,8 +61,9 @@ export default function ReviewWrite(props: IReviewWriteProps) {
       );
       console.log(results);
       const resultUrls = results.map((el) =>
-        el !== undefined ? el.data?.uploadFile : ""
+        el !== undefined ? el.data?.uploadFile[0] : ""
       );
+      console.log(resultUrls);
       if (!props.isEdit) {
         void createCommentSubmit(data, props.cafeInformId, resultUrls);
       } else {
@@ -106,7 +108,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
               </Text>
             </S.ReviewCancelBtn>
             <S.ReviewSubmitBtn
-              onClick={props.isEdit ? onReplyUpdate : onReplySubmit}
+              // onClick={props.isEdit ? onReplyUpdate : onReplySubmit}
               color="brown"
             >
               {props.isEdit ? (
