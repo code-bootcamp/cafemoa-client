@@ -26,6 +26,7 @@ export const useUpdateUser = () => {
   >(UPDATE_USER);
 
   const updateUserSubmit = async (data: IFormUpdateUserData, files: string) => {
+    console.log(data);
     try {
       await updateUser({
         variables: {

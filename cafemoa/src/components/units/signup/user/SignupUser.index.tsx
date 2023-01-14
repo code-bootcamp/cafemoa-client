@@ -96,18 +96,19 @@ export default function SignUpUser(props: ISignUpProps) {
       });
       return;
     }
-
     const results = await Promise.all(
       filesList.map(
         async (files: any) => await uploadFile({ variables: { files } })
       )
     );
-    console.log(results[0].data?.uploadFile[0]);
     if (props.isEdit) {
-      const { email, name, nickname, phone, ...updateValue } = value;
-      void updateUserSubmit(updateValue, results[0].data?.uploadFile[0] ?? "");
+      const { email, name, phone, ...updateValue } = value;
+      void updateUserSubmit(
+        updateValue,
+        results[0]?.data?.uploadFile[0] ?? updateValue.profileImage
+      );
     } else {
-      void createUserSubmit(value, results[0].data?.uploadFile[0] ?? "");
+      void createUserSubmit(value, results[0]?.data?.uploadFile[0] ?? "");
     }
     void router.push("/");
   };
@@ -212,12 +213,11 @@ export default function SignUpUser(props: ISignUpProps) {
 
   return (
     <>
-      {console.log(props.infoUser)}
       <S.ContainerWrapper onSubmit={handleSubmit(submitSignUp)}>
         <S.ContainerInner>
           <S.TitleWrap>
             <Text size="32" fontColor="subColor01">
-              회원가입
+              {props.isEdit ? "회원수정" : "회원가입"}
             </Text>
           </S.TitleWrap>
           <S.ProfileImageWrap>
@@ -280,6 +280,7 @@ export default function SignUpUser(props: ISignUpProps) {
             <Input02
               type="text"
               name="이름"
+              readOnly={props.isEdit}
               errorMsg={formState.errors.name?.message}
               isValid={watch("name")?.length > 0}
               register={register("name")}

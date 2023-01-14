@@ -9,7 +9,6 @@ import * as S from "./Slider.Styles";
 
 export default function SlickSlider() {
   const { data } = useFetchBestCafe();
-  console.log(data?.fetchBestCafe);
   return (
     <S.SwiperWrap>
       <Swiper

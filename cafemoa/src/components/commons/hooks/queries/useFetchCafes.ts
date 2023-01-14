@@ -33,7 +33,7 @@ export const FETCH_CAFES = gql`
 export const useFetchCafes = () => {
   const [tagState, setTagState] = useState<string[]>([]);
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch, fetchMore, error } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     Pick<IQuery, "fetchCafes">,
     IQueryFetchCafesArgs
   >(FETCH_CAFES, {
@@ -41,9 +41,6 @@ export const useFetchCafes = () => {
       location: "",
       tags: [],
       page: 1,
-    },
-    onError: (error) => {
-      console.log(error);
     },
   });
 
@@ -69,18 +66,15 @@ export const useFetchCafes = () => {
           location: locationState,
         },
         updateQuery(prev, { fetchMoreResult }) {
-          if (prev?.fetchCafes?.length === 0) {
-            return {
-              fetchCafes: [],
-            };
-          }
-          if (
-            fetchMoreResult.fetchCafes === undefined ||
-            fetchMoreResult.fetchCafes === null
-          ) {
+          if (fetchMoreResult.fetchCafes === undefined) {
             console.log(prev, "sss");
             return {
               fetchCafes: [...prev.fetchCafes],
+            };
+          }
+          if (prev.fetchCafes === undefined) {
+            return {
+              fetchCafes: [],
             };
           }
           return {
