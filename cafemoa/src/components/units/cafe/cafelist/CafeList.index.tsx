@@ -148,6 +148,15 @@ export default function CafeList() {
                   </Link>
                 </S.CardBox>
               ))}
+              {/* {data?.fetchCafes !== undefined &&
+                new Array(data?.fetchCafes?.length % 4)
+                  .fill("blank")
+                  .map((el) => (
+                    <li
+                      style={{ width: "25%", minHeight: "400px" }}
+                      key={uuidv4()}
+                    ></li>
+                  ))} */}
             </Masonry>
           </InfiniteScrollWrap>
         </S.CardsWrapper>

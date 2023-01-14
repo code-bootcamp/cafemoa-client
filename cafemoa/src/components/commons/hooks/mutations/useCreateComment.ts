@@ -21,9 +21,6 @@ export const CREATE_COMMENT = gql`
     ) {
       id
       reply
-      commentImage {
-        image_url
-      }
     }
   }
 `;
@@ -40,7 +37,14 @@ export const useCreateComment = () => {
     cafeinformId: string,
     resultUrls: string[]
   ) => {
-    console.log(resultUrls, cafeinformId);
+    console.log(
+      "data: ",
+      data,
+      "cafeinformId : ",
+      cafeinformId,
+      "resultUrls :",
+      resultUrls
+    );
     try {
       const result = await createComment({
         variables: {
