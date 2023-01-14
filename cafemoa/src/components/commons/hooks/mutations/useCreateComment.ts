@@ -26,7 +26,6 @@ export const CREATE_COMMENT = gql`
 `;
 
 export const useCreateComment = () => {
-  const router = useRouter();
   const [createComment] = useMutation<
     Pick<IMutation, "createComment">,
     IMutationCreateCommentArgs

@@ -6,7 +6,7 @@ import {
 
 interface IFormUpdateCommentData {
   reply: string;
-  commentImage?: string[];
+  image_Url?: string[];
 }
 
 export const UPDATE_COMMENT = gql`
@@ -14,21 +14,12 @@ export const UPDATE_COMMENT = gql`
     $UpdateCommentInput: UpdateCommentInput!
     $commentId: String!
   ) {
-    createComment(
+    updateComment(
       UpdateCommentInput: $UpdateCommentInput
       commentId: $commentId
     ) {
       id
       reply
-      like
-      time
-      user {
-        name
-        nickname
-      }
-      commentImage {
-        image_url
-      }
     }
   }
 `;

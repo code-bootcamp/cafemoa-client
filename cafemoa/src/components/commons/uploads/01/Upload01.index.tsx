@@ -10,26 +10,32 @@ interface IUploadProps {
 
 export default function Uploads01(props: IUploadProps) {
   // console.log(props.defaultUrls);
+  // console.log(props.defaultUrls);
   // const [uploadFile] = useMutation(UPLOAD_FILE);
   const [imgUrls, setImgUrls] = useState<string[]>(
     props.maxLength !== undefined
       ? new Array(props.maxLength).fill("")
       : ["", "", ""]
   );
-  // useEffect(() => {
-  //   if (props?.defaultUrls === undefined) return;
-  //   const tempImgUrl = [...imgUrl];
-  //   tempImgUrl.map((el, idx) => {
-  //     if (el !== "") {
-  //       tempImgUrl[
-  //         idx
-  //       ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
-  //     } else {
-  //       tempImgUrl[idx] = "";
-  //     }
-  //   });
-  //   setImgUrl(tempImgUrl);
-  // }, [props.defaultUrls]);
+  useEffect(() => {
+    if (props?.defaultUrls === undefined) return;
+    console.log(props?.defaultUrls);
+    const tempImgUrl = [...imgUrls];
+    console.log(tempImgUrl);
+    props?.defaultUrls.map((el, idx) => {
+      if (el !== "") {
+        console.log(el);
+        tempImgUrl[
+          idx
+        ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
+      } else {
+        console.log(el);
+        tempImgUrl[idx] = "";
+      }
+    });
+    console.log(tempImgUrl);
+    setImgUrls(tempImgUrl);
+  }, [props.defaultUrls]);
 
   const onChangeFile =
     (idx: number) => async (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +53,23 @@ export default function Uploads01(props: IUploadProps) {
         }
       };
     };
+
+  // useEffect(() => {
+  //   if (props?.defaultUrls === undefined) return;
+  //   const tempImgUrl = [...imgUrls];
+  //     // eslint-disable-next-line array-callback-return
+  //     tempImgUrl.map((el, idx) => {
+  //       if (el !== "") {
+  //         tempImgUrl[
+  //           idx
+  //         ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
+  //       } else {
+  //         tempImgUrl[idx] = "";
+  //       }
+  //     });
+  //   }
+  //   setImgUrls(tempImgUrl);
+  // }, [props.defaultUrls]);
 
   return (
     <>

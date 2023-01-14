@@ -74,6 +74,8 @@ export default function ReviewComment(props) {
   const onClickCommentEdit = (CommentId: string) => () => {
     props.setIsEdit(true);
     props.setIsReview((prev) => !prev);
+    props.setCommentId(CommentId);
+    props.setUpdatedata(props.el);
   };
   return (
     <>
