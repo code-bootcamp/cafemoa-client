@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AiOutlineSetting } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../commons/stores";
@@ -11,22 +12,27 @@ interface ILayoutProps {
 
 export default function MypageSidebarLayout(props: ILayoutProps) {
   const [infoUser] = useRecoilState(infoUserState);
+  const userId = infoUser?.fetchUser?.id;
 
   return (
     <>
       <S.ProfileWrapper>
         <button>
           {infoUser?.fetchUser?.profileImage !== undefined ? (
-            <Users01
-              size="lg"
-              image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
-            >
-              <>
-                <S.SettingIcon>
-                  <AiOutlineSetting />
-                </S.SettingIcon>
-              </>
-            </Users01>
+            <Link href={`/mypage/user/${String(userId)}/edit`}>
+              <a>
+                <Users01
+                  size="lg"
+                  image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
+                >
+                  <>
+                    <S.SettingIcon>
+                      <AiOutlineSetting />
+                    </S.SettingIcon>
+                  </>
+                </Users01>
+              </a>
+            </Link>
           ) : (
             <Users01 size="lg"></Users01>
           )}
