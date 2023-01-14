@@ -78,6 +78,13 @@ export default function StampSaveByPhone() {
     const { phone, ...value } = data;
     console.log(value);
     console.log(selectValue);
+
+    if (value.password === "") {
+      Modal.warning({
+        content: "가맹주 비밀번호를 입력해주세요!",
+      });
+    }
+
     try {
       const result = createStamp({
         variables: {
@@ -93,7 +100,7 @@ export default function StampSaveByPhone() {
       Modal.success({
         content: `스탬프가 ${selectValue}개 적립되었습니다!`,
         afterClose() {
-          setSelectValue("");
+          setValue("phone", "");
           void router.push(`/mypage/owner/${cafeId}/stampsave`);
         },
       });

@@ -46,16 +46,18 @@ export default function HeaderLayout() {
 
   return (
     <>
-      <S.ModalWrap
-        open={isModalOpen}
-        footer={null}
-        centered={true}
-        onCancel={() => {
-          setIsModalOpen(false);
-        }}
-      >
-        <CafeSearchModal />
-      </S.ModalWrap>
+      {isModalOpen && (
+        <S.ModalWrap
+          open={true}
+          footer={null}
+          centered={true}
+          onCancel={() => {
+            setIsModalOpen(false);
+          }}
+        >
+          <CafeSearchModal />
+        </S.ModalWrap>
+      )}
       <S.HeaderWrap>
         <S.HeaderInner>
           <S.Logo>

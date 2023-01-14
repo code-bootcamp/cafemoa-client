@@ -174,8 +174,8 @@ export const ReviewColorLine = styled.div`
 export const ReviewImageContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 64px;
-  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04};
+  margin-left: 90px;
+  border-bottom: 2px solid ${DEFAULT_COLOR.subColor04};
 `;
 export const ReviewImageWrapper = styled.div`
   width: 33.3333%;

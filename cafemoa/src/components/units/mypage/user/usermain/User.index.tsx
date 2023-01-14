@@ -59,33 +59,6 @@ export default function UserMain() {
           </MypageSidebarLayout>
         </div>
         <S.Container>
-          {/* <S.ProfileWrapper>
-            <button>
-              <Users01
-                size="lg"
-                image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
-              >
-                <>
-                  <S.SettingIcon>
-                    <AiOutlineSetting />
-                  </S.SettingIcon>
-                </>
-              </Users01>
-            </button>
-            <S.UserName>
-              <Text size="32" weight="700">
-                {infoUser?.fetchUser?.nickname}
-              </Text>
-            </S.UserName>
-            <S.UserMainArea>
-              <Text size="24" weight="500">
-                내가 활동하는 지역은 <br />
-                {mainRegion !== undefined &&
-                  `${mainRegion[0]} ${mainRegion[1]}`}
-                입니다.
-              </Text>
-            </S.UserMainArea>
-          </S.ProfileWrapper> */}
           <S.MenuWrapper>
             <S.BoxContainer>
               <S.BoxWrapper>

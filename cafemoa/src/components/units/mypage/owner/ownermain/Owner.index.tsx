@@ -37,16 +37,20 @@ export default function OwnerMyPage() {
           </div>
           <div>
             <Box01 styles={{ height: "100%" }}>
-              <div>
-                <S.TitleWrap>
-                  <Text size="32" weight="700">
-                    내 개인정보 수정
-                  </Text>
-                </S.TitleWrap>
-                <S.ImageWrap>
-                  <img src="/images/owner/Owner03.png" />
-                </S.ImageWrap>
-              </div>
+              <Link href={`/mypage/owner/${String(ownerId)}/edit`}>
+                <a>
+                  <div>
+                    <S.TitleWrap>
+                      <Text size="32" weight="700">
+                        내 개인정보 수정
+                      </Text>
+                    </S.TitleWrap>
+                    <S.ImageWrap>
+                      <img src="/images/owner/Owner03.png" />
+                    </S.ImageWrap>
+                  </div>
+                </a>
+              </Link>
             </Box01>
           </div>
           <div>
