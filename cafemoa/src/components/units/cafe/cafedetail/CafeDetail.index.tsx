@@ -29,15 +29,10 @@ export default function CafeDetail() {
             <img src="/images/cafedetail/CafeDetail01.jpeg" />
           </S.CafeImageWrapper>
           <S.CafeInfoWrapper>
-            <Text size="32" weight="700">
-              {data?.fetchCafeInform.owner.brandName}
-            </Text>
-            <S.CafeInfoFooter>
-              <S.CafeAddressContainer>
-                <Text size="20" weight="300">
-                  {data?.fetchCafeInform.cafeAddr}
-                </Text>
-              </S.CafeAddressContainer>
+            <S.CafeInfoHeader>
+              <Text size="32" weight="700">
+                {data?.fetchCafeInform.owner.brandName}
+              </Text>
               <S.LikeContainer
                 id={data?.fetchCafeInform.id}
                 onClick={PickCafeSubmit}
@@ -48,6 +43,13 @@ export default function CafeDetail() {
                   count={data?.fetchCafeInform.like}
                 />
               </S.LikeContainer>
+            </S.CafeInfoHeader>
+            <S.CafeInfoFooter>
+              <S.CafeAddressContainer>
+                <Text size="20" weight="300">
+                  {data?.fetchCafeInform.cafeAddr}
+                </Text>
+              </S.CafeAddressContainer>
             </S.CafeInfoFooter>
           </S.CafeInfoWrapper>
           <S.OwnerContents>

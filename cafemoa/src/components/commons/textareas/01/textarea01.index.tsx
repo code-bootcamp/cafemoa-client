@@ -6,6 +6,7 @@ interface ITextareaProps {
   register?: UseFormRegisterReturn;
   placeHolder?: string;
   error?: string;
+  defaultValue?: string;
   styles?: {
     [key: string]: string | number;
   };
@@ -13,9 +14,14 @@ interface ITextareaProps {
 
 export default function Textarea01(props: ITextareaProps) {
   const _styles = { ...props.styles };
+  console.log(props);
   return (
     <S.TextareaWrap style={_styles}>
-      <textarea placeholder={props.placeHolder} {...props.register}></textarea>
+      <textarea
+        placeholder={props.placeHolder}
+        defaultValue={props.defaultValue}
+        {...props.register}
+      ></textarea>
     </S.TextareaWrap>
   );
 }

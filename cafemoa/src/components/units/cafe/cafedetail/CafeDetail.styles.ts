@@ -27,6 +27,10 @@ export const CafeInfoWrapper = styled.div`
   width: 100%;
   padding-top: 56px;
 `;
+export const CafeInfoHeader = styled.div`
+  width: 100%;
+  display: flex;
+`;
 export const CafeNameWrapper = styled.div`
   width: 100%;
 `;
@@ -47,10 +51,9 @@ export const TagContainer = styled.div`
 `;
 
 export const LikeContainer = styled.div`
-  width: 40%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  padding-top: 2px;
+  padding-left: 4px;
+  // background: red;
 `;
 
 export const Section = styled.div`
@@ -291,6 +294,11 @@ export const CommentWrap = styled.div`
   // background: red;
 `;
 export const CommentImageWrapper = styled.div``;
+export const CommentImageWrapper2 = styled.div`
+  padding-top: 4px;
+  padding-left: 10px;
+  font-size: 16px;
+`;
 export const CommentContentWrapper = styled.div`
-  padding-left: 16px;
+  padding-left: 10px;
 `;
