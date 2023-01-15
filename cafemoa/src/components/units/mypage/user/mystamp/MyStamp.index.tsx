@@ -134,7 +134,17 @@ export default function MyStamp() {
                       </S.IconWrap>
                     </S.StampInfoWrapper>
                     <S.Stamp>
-                      {new Array(el.count).fill(1).map((_, index) => (
+                      {new Array(10).fill(1).map((_, index) => (
+                        <S.IconWrap2 key={index}>
+                          <CgCoffee />
+                        </S.IconWrap2>
+                      ))}
+                      {new Array(10 - el.count).fill(1).map((_, index) => (
+                        <S.ValidStampWrap key={index}>
+                          <CgCoffee />
+                        </S.ValidStampWrap>
+                      ))}
+                      {/* {new Array(el.count).fill(1).map((_, index) => (
                         <S.ValidStampWrap key={index}>
                           <CgCoffee />
                         </S.ValidStampWrap>
@@ -143,7 +153,7 @@ export default function MyStamp() {
                         <S.IconWrap2 key={index}>
                           <CgCoffee key={index} />
                         </S.IconWrap2>
-                      ))}
+                      ))} */}
                     </S.Stamp>
                   </div>
                 </Box01>

@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const MYPAGE_MENU = [
   { label: "카페 정보 수정", path: "asd" },
-  { label: "내 개인정보 수정", path: "asd" },
+  { label: "내 개인정보 수정", path: "edit" },
   { label: "적립 회원 점검", path: "ownercheck" },
   { label: "스탬프 적립", path: "stampsave" },
 ];

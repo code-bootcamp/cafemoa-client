@@ -26,20 +26,22 @@ export default function StampCheck() {
   const { register, setValue, watch, handleSubmit } = useForm({
     mode: "onChange",
     defaultValues: {
-      cafeId: "",
+      stamphistoryId: "",
       ownerpassword: "",
     },
   });
   const onStampDelete = () => {
     inputRef.current?.click();
   };
-  const onDeleteStamp = (cafeId: string) => () => {
-    setValue("cafeId", cafeId);
+  const onDeleteStamp = (stamphistoryId: string) => () => {
+    setValue("stamphistoryId", stamphistoryId);
     setIsModalOpen(true);
   };
   const deleteStampSubmit = async (data: IFormDeleteUnusualStampData) => {
     console.log(data);
     void deleteUnusualStampSubmit(data);
+    setIsModalOpen(false);
+    setValue("ownerpassword", "");
   };
 
   console.log(data);
