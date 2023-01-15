@@ -17,6 +17,7 @@ import { useCreateOwner } from "../../../commons/hooks/mutations/useCreateOwner"
 import { useRouter } from "next/router";
 import { ISignUpProps } from "../SignupWrite.types";
 import { useUpdateOwner } from "../../../commons/hooks/mutations/useUpdateOwner";
+import Link from "next/link";
 
 interface ICheckAuth {
   [key: string]: {
@@ -469,7 +470,13 @@ export default function SignUpOwner(props: ISignUpProps) {
         </S.CheckBoxContainer>
         <S.SignUpBtnWrap>
           <S.ResetBtn type="reset" color="lightBeige">
-            <Text size="24">취소</Text>
+            <Link
+              href={`/mypage/owner/${props.infoUser?.fetchOwnerLoggedIn?.id}`}
+            >
+              <a>
+                <Text size="24">취소</Text>
+              </a>
+            </Link>
           </S.ResetBtn>
           <S.SubmitBtn color="brown">
             <Text size="24" fontColor="white">

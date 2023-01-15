@@ -41,10 +41,10 @@ export default function StampSaveByPhone() {
 
   const [createStamp] = useCreateStamp();
   const { data, onRefetchUsers } = useFetchCouponAddUsers();
-  const { mycafedata } = useFetchMyCafes();
+  const { data: mycafedata } = useFetchMyCafes();
   // console.log(data);
-  // console.log(mycafedata);
-  const cafeId = mycafedata?.fetchMyCafes[0].id;
+  console.log(mycafedata);
+  const cafeId = String(mycafedata?.fetchMyCafes[0].id);
   console.log(cafeId);
 
   const [selectValue, setSelectValue] = useState<string | number>("");
