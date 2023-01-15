@@ -1,7 +1,7 @@
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Modal } from "antd";
-import { MediumBtn } from "../../../../commons/styles/commonStyles";
+import { Drawer, Modal } from "antd";
+import { MediumBtn, SmallBtn } from "../../../../commons/styles/commonStyles";
 import * as mq from "../../../../commons/styles/mediaQuery";
 
 // interface IHeroProps {
@@ -92,4 +92,81 @@ export const ModalWrap = styled(Modal)`
       padding: 32px 3%;
     }
   }
+`;
+export const DrawerWrap = styled(Drawer)`
+  .ant-drawer-body {
+    padding: 0;
+    // padding-top: 24px;
+  }
+
+  .ant-drawer-header {
+    border-bottom: 1px solid #f3e6d8;
+  }
+`;
+export const DrawerProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // border-bottom: 1px solid #f3e6d8;
+  padding-top: 24px;
+`;
+
+export const DrawerLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #f3e6d8;
+  padding-top: 24px;
+  padding-bottom: 24px;
+`;
+
+export const DrawerName = styled.div`
+  padding: 8px 0 24px 0;
+`;
+
+export const DrawerOwner = styled.div`
+  padding: 8px 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DrawerButtonWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f3e6d8;
+`;
+
+export const MypageButton = styled(SmallBtn)`
+  border-radius: 5px;
+`;
+
+export const DrawerMypage = styled.div`
+  margin-left: 17px;
+
+  cursor: pointer;
+`;
+
+export const DrawerLogout = styled.div`
+  margin-left: 30px;
+  cursor: pointer;
+`;
+
+export const DrawerMenuWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding-top: 24px; */
+`;
+
+export const DrawerWMenu = styled.div`
+  padding: 24px 0;
+  border-bottom: 1px solid #f3e6d8;
+  width: 100%;
+  text-align: center;
 `;

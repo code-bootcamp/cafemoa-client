@@ -32,6 +32,7 @@ export const useDeleteUnusualStamp = () => {
   const deleteUnusualStampSubmit = async (
     data: IFormDeleteUnusualStampData
   ) => {
+    console.log(data);
     try {
       const result = await deleteUnusualStamp({
         variables: {

@@ -13,6 +13,8 @@ import { useRecoilState } from "recoil";
 import { useUserLogout } from "../../hooks/mutations/useUserLogout";
 import { IoMdExit } from "react-icons/io";
 import { useFetchCafesWithOption } from "../../hooks/queries/usefetchCafesWithOption";
+import Users01 from "../../user/01/Users01.index";
+import { DEFAULT_COLOR } from "../../../../commons/default/default";
 
 const GNB_MENUS = [
   {
@@ -117,26 +119,120 @@ export default function HeaderLayout() {
           </S.Utiles>
         </S.HeaderInner>
       </S.HeaderWrap>
-      <Drawer
-        title="Drawer with extra actions"
+      <S.DrawerWrap
+        title="카페모아"
         placement="right"
         open={isDrawerOpen}
         onClose={onClose}
         width={320}
         key="right"
       >
-        {GNB_MENUS.map((el) => (
-          <div key={uuidv4()}>
-            <Link href={el.path}>
+        {infoUser === undefined ? (
+          <S.DrawerLogin>
+            <Link href={"/login"}>
               <a>
                 <Text size="20" weight="700">
-                  {el.label}
+                  로그인
                 </Text>
               </a>
             </Link>
-          </div>
-        ))}
-      </Drawer>
+          </S.DrawerLogin>
+        ) : infoUser?.fetchUser !== undefined ? (
+          <>
+            <S.DrawerProfile>
+              <Users01
+                size="lg"
+                image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
+              ></Users01>
+              <S.DrawerName>
+                <Text size="20" weight="500">
+                  {infoUser.fetchUser.nickname}님
+                </Text>
+              </S.DrawerName>
+            </S.DrawerProfile>
+            <S.DrawerButtonWrap>
+              <S.DrawerMypage>
+                <S.MypageButton title="마이페이지" color="beige">
+                  <Link
+                    href={`/mypage/user/${String(infoUser?.fetchUser?.id)}`}
+                  >
+                    <a>
+                      <Text size="20" weight="500">
+                        MY
+                      </Text>
+                    </a>
+                  </Link>
+                </S.MypageButton>
+              </S.DrawerMypage>
+              <S.DrawerLogout>
+                <S.MypageButton
+                  title="로그아웃"
+                  color="beige"
+                  onClick={userLogoutSubmit}
+                >
+                  <Text size="20" weight="500">
+                    로그아웃
+                  </Text>
+                </S.MypageButton>
+              </S.DrawerLogout>
+            </S.DrawerButtonWrap>
+          </>
+        ) : (
+          <>
+            <S.DrawerProfile>
+              <S.DrawerOwner>
+                <Text size="20" weight="500">
+                  {infoUser.fetchOwnerLoggedIn?.name}님
+                </Text>
+                <Text size="20" weight="300">
+                  운영 카페 : {infoUser.fetchOwnerLoggedIn?.brandName}
+                </Text>
+              </S.DrawerOwner>
+            </S.DrawerProfile>
+            <S.DrawerButtonWrap>
+              <S.DrawerMypage>
+                <S.MypageButton title="마이페이지" color="beige">
+                  <Link
+                    href={`/mypage/owner/${String(
+                      infoUser?.fetchOwnerLoggedIn?.id
+                    )}`}
+                  >
+                    <a>
+                      <Text size="20" weight="500">
+                        MY
+                      </Text>
+                    </a>
+                  </Link>
+                </S.MypageButton>
+              </S.DrawerMypage>
+              <S.DrawerLogout>
+                <S.MypageButton
+                  title="로그아웃"
+                  color="beige"
+                  onClick={userLogoutSubmit}
+                >
+                  <Text size="20" weight="500">
+                    로그아웃
+                  </Text>
+                </S.MypageButton>
+              </S.DrawerLogout>
+            </S.DrawerButtonWrap>
+          </>
+        )}
+        <S.DrawerMenuWrap>
+          {GNB_MENUS.map((el) => (
+            <S.DrawerWMenu key={uuidv4()}>
+              <Link href={el.path}>
+                <a>
+                  <Text size="20" weight="700">
+                    {el.label}
+                  </Text>
+                </a>
+              </Link>
+            </S.DrawerWMenu>
+          ))}
+        </S.DrawerMenuWrap>
+      </S.DrawerWrap>
     </>
   );
 }
