@@ -77,6 +77,9 @@ export const UserWrap = styled.div<IUserStylesProps>`
           font-size: ${USER_SIZE[props.size].iconSize}px;
         }
       }
+      ${UserName} {
+        width: calc(100% - ${USER_SIZE[props.size].size}px);
+      }
     `}
   ${mq.MobileL} {
     ${(props) =>
@@ -88,6 +91,9 @@ export const UserWrap = styled.div<IUserStylesProps>`
           > svg {
             font-size: ${USER_SIZE[props.size].iconSize / 1.5}px;
           }
+        }
+        ${UserName} {
+          width: calc(100% - ${USER_SIZE[props.size].size / 1.5}px);
         }
       `}
   }

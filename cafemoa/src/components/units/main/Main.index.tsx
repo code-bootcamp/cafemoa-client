@@ -6,12 +6,11 @@ import * as S from "./Main.styles";
 import TodaySlide from "./today/TodaySlide.index";
 import ReviewsSlide from "./reviews/ReviewsSlide.index";
 import Member from "./authbanners/member/Member.index";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import _ from "lodash";
 import { infoUserState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import NonMember from "./authbanners/nonmember/NonMember.index";
-import { useRouter } from "next/router";
 
 export default function Main() {
   const [isScroll, setIsScroll] = useState(false);
@@ -31,8 +30,9 @@ export default function Main() {
   }, 50);
 
   useEffect(() => {
-    setTimeout(() => window.scroll(0, 0), 1);
-    if (Math.floor(window.pageYOffset) !== 0) return;
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0);
+    };
     if (window.innerWidth < 1025) {
       setIsScroll(true);
       return;

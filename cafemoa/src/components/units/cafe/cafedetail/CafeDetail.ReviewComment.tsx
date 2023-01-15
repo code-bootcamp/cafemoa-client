@@ -4,7 +4,7 @@ import { useLikeComment } from "../../../commons/hooks/mutations/useLikeComment"
 import { useDeleteComment } from "../../../commons/hooks/mutations/useDeleteComment";
 import { useState } from "react";
 import { FETCH_COMMENT_BY_CAFE_ID } from "../../../commons/hooks/queries/useFetchCommentByCafeID";
-import { Modal } from "antd";
+import { Modal, Image } from "antd";
 import { infoUserState } from "../../../../commons/stores";
 import { useRecoilState } from "recoil";
 import { useFetchOwnerCommentByCommentID } from "../../../commons/hooks/queries/useFetchOwnerCommentByCommentID";
@@ -14,8 +14,19 @@ import Users01 from "../../../commons/user/01/Users01.index";
 import * as S from "./CafeDetail.styles";
 import ReplyReview from "./CafeDetial.Reply";
 import OwnerComment from "./CafeDetail.OwnerComment";
+import { IComment } from "../../../../commons/types/generated/types";
+import { reviewRegisterDate } from "../../../../commons/libraries/utill";
 
-export default function ReviewComment(props) {
+interface IReviewCommentProps {
+  el: IComment;
+  cafeId: string;
+  setIsEdit: (bool: boolean) => void;
+  setIsReview: (bool: boolean) => void;
+  setCommentId: (CommentId: string) => void;
+  setUpdatedata: (el: IComment) => void;
+}
+
+export default function ReviewComment(props: IReviewCommentProps) {
   const [likeComment] = useLikeComment();
   const [deleteComment] = useDeleteComment();
   const { data } = useFetchOwnerCommentByCommentID(props.el.id);
@@ -73,7 +84,7 @@ export default function ReviewComment(props) {
 
   const onClickCommentEdit = (CommentId: string) => () => {
     props.setIsEdit(true);
-    props.setIsReview((prev) => !prev);
+    props.setIsReview(false);
     props.setCommentId(CommentId);
     props.setUpdatedata(props.el);
   };
@@ -82,18 +93,21 @@ export default function ReviewComment(props) {
       <S.ReviewWrapper key={props.el.id}>
         <S.ReviewHeader>
           <Users01
-            image={`https://storage.googleapis.com/${props.el.user.profileImage}`}
+            image={props.el.user.profileImage}
             name={props.el.user.nickname}
             size="md"
           />
-          <S.BtnWrapper>
-            <S.EditBtn onClick={onClickCommentEdit(props.el.id)}>
-              <AiFillEdit />
-            </S.EditBtn>
-            <S.DeleteBtn onClick={onClickCommentDelete(props.el.id)}>
-              <RiDeleteBin5Line />
-            </S.DeleteBtn>
-          </S.BtnWrapper>
+          {infoUser.fetchUser?.id === props.el.user.id &&
+            reviewRegisterDate(props.el.time, 3) && (
+              <S.BtnWrapper>
+                <S.EditBtn onClick={onClickCommentEdit(props.el.id)}>
+                  <AiFillEdit />
+                </S.EditBtn>
+                <S.DeleteBtn onClick={onClickCommentDelete(props.el.id)}>
+                  <RiDeleteBin5Line />
+                </S.DeleteBtn>
+              </S.BtnWrapper>
+            )}
         </S.ReviewHeader>
         <S.ReviewContents>
           <S.LikeWrapper onClick={onClickCommentLike(props.el.id)}>
@@ -112,14 +126,17 @@ export default function ReviewComment(props) {
         <S.ReviewImageContainer>
           {props.el.commentImage.map((el, idx) => (
             <S.ReviewImageWrapper key={idx}>
-              <img src={`https://storage.googleapis.com/${el.image_url}`} />
+              <S.ReviewImage>
+                <Image src={`https://storage.googleapis.com/${el.image_url}`} />
+              </S.ReviewImage>
             </S.ReviewImageWrapper>
             // <S.ReviewImageWrapper key={idx}>
             //   {props.el.image_url}
             // </S.ReviewImageWrapper>
           ))}
         </S.ReviewImageContainer>
-        {ownerbrandName && !data?.fetchOwnerCommentByCommentID ? (
+        {ownerbrandName != null &&
+        data?.fetchOwnerCommentByCommentID == null ? (
           <S.ReplyBtn onClick={onClickReply(props.el.id)}>답글달기</S.ReplyBtn>
         ) : (
           <div></div>

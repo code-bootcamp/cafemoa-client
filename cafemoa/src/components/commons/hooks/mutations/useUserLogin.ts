@@ -9,6 +9,5 @@ export const USER_LOGIN = gql`
 
 export const useUserLogin = () => {
   const mutation = useMutation<Pick<IMutation, "userLogin">>(USER_LOGIN);
-
   return mutation;
 };

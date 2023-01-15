@@ -1,13 +1,14 @@
 import { gql, useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
+import { Modal } from "antd";
 import {
   IMutation,
   IMutationCreateCommentArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_COMMENT_BY_CAFE_ID } from "../queries/useFetchCommentByCafeID";
 
 interface IFormCreateCommentData {
   reply: string;
-  image_Url?: string[];
+  image_Url: string[];
 }
 
 export const CREATE_COMMENT = gql`
@@ -33,28 +34,28 @@ export const useCreateComment = () => {
 
   const createCommentSubmit = async (
     data: IFormCreateCommentData,
-    cafeinformId: string,
-    resultUrls: string[]
+    cafeinformId: string
+    // resultUrls: string[]
   ) => {
-    console.log(
-      "data: ",
-      data,
-      "cafeinformId : ",
-      cafeinformId,
-      "resultUrls :",
-      resultUrls
-    );
     try {
-      const result = await createComment({
+      await createComment({
         variables: {
           cafeinformId,
           createCommentinput: {
             ...data,
-            image_Url: resultUrls,
+            // image_Url: [...resultUrls],
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT_BY_CAFE_ID,
+            variables: { cafeID: cafeinformId },
+          },
+        ],
       });
-      console.log(result.data);
+      Modal.success({
+        content: "리뷰 등록이 완료 되었습니다.",
+      });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

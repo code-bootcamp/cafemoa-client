@@ -3,7 +3,6 @@ import Text from "../../../commons/text/01/Text01.index";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./ReviewsSlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
-import Slider, { Settings } from "react-slick";
 import Card01 from "../../../commons/card/01/Card01.index";
 import Users01 from "../../../commons/user/01/Users01.index";
 import { GetDate } from "../../../../commons/libraries/utill";
@@ -19,7 +18,7 @@ export default function ReviewsSlide() {
       <Swiper
         loop={true}
         slidesPerView={1}
-        spaceBetween={40}
+        spaceBetween={20}
         modules={[Autoplay]}
         autoplay={{ delay: 2000 }}
         touchRatio={1}
@@ -38,9 +37,7 @@ export default function ReviewsSlide() {
           <SwiperSlide key={uuidv4()}>
             <Link href={`/cafe/${el.id}`}>
               <a>
-                <Card01
-                  imageUrl={`https://storage.googleapis.com/${el.cafeinfo.thumbNail}`}
-                >
+                <Card01 imageUrl={`${el.cafeinfo.thumbNail}`}>
                   <div>
                     <Users01
                       image={el.user.profileImage}

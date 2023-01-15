@@ -24,7 +24,6 @@ export default function Uploads01(props: IUploadProps) {
     console.log(tempImgUrl);
     props?.defaultUrls.map((el, idx) => {
       if (el !== "") {
-        console.log(el);
         tempImgUrl[
           idx
         ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
@@ -53,7 +52,6 @@ export default function Uploads01(props: IUploadProps) {
         }
       };
     };
-
   // useEffect(() => {
   //   if (props?.defaultUrls === undefined) return;
   //   const tempImgUrl = [...imgUrls];

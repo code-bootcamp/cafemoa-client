@@ -58,6 +58,7 @@ export const useFetchCafes = () => {
 
   const onHandleMore = async () => {
     if (data === undefined) return;
+    if (data.fetchCafes?.length === 0) return;
     try {
       void fetchMore({
         variables: {
