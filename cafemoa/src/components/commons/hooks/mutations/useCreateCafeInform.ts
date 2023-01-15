@@ -1,5 +1,4 @@
 import { gql, useMutation } from "@apollo/client";
-import { useRouter } from "next/router";
 import {
   IMutation,
   IMutationCreatecafeInformArgs,
@@ -11,6 +10,8 @@ interface IFormCreateCafeInformData {
   cafeAddr: string;
   detailAddr: string;
   cafeTag: string[];
+  is_WC: boolean;
+  is_Parking: boolean;
   menu_imageUrl: string[];
   cafe_imageUrl: string[];
 }
@@ -19,37 +20,28 @@ export const CREATE_CAFE_INFORM = gql`
   mutation CreatecafeInform($cafeInformInput: CafeInformInput!) {
     CreatecafeInform(cafeInformInput: $cafeInformInput) {
       id
-      cafeinfo
-      operatingInfo
-      cafeAddr
-      detailAddr
-      like
-      owner {
-        brandName
-      }
-      cafeTag {
-        tagName
-      }
-      cafeImage {
-        menu_imageUrl
-      }
     }
   }
 `;
 
 export const useCreateCafeInform = () => {
-  const router = useRouter();
   const [CreatecafeInform] = useMutation<
     Pick<IMutation, "CreatecafeInform">,
     IMutationCreatecafeInformArgs
   >(CREATE_CAFE_INFORM);
 
-  const CreatecafeInformSubmit = async (data: IFormCreateCafeInformData) => {
+  const CreatecafeInformSubmit = async (
+    data: IFormCreateCafeInformData,
+    MenuimageUrl: string | undefined[],
+    CafeimageUrl: string[]
+  ) => {
     try {
       const result = await CreatecafeInform({
         variables: {
           cafeInformInput: {
             ...data,
+            menu_imageUrl: MenuimageUrl,
+            cafe_imageUrl: CafeimageUrl,
           },
         },
       });
