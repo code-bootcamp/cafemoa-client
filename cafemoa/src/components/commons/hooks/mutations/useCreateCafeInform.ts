@@ -32,7 +32,7 @@ export const useCreateCafeInform = () => {
 
   const CreatecafeInformSubmit = async (
     data: IFormCreateCafeInformData,
-    MenuimageUrl: string | undefined[],
+    MenuimageUrl: string[],
     CafeimageUrl: string[]
   ) => {
     try {

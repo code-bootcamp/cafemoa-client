@@ -24,6 +24,7 @@ import { infoUserState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import Switch02 from "../../commons/switch/02/Switch02.index";
 import { useFetchMyCafes } from "../../commons/hooks/queries/useFetchMyCafes";
+import { useRouter } from "next/router";
 // import Uploads03 from "../../commons/uploads/03/Upload03.index";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
@@ -40,12 +41,14 @@ export default function SignUpCafeInfo() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectTag, setSelectTag] = useState<string[]>([]);
+  const router = useRouter();
   const { CreatecafeInformSubmit } = useCreateCafeInform();
   const { uploadFile } = useUploadFile();
   const { UpdateCafeInformSubmit } = useUpdateCafeInform();
   const { data } = useFetchMyCafes();
   const [infoUser] = useRecoilState(infoUserState);
   const isCafeInform = infoUser?.fetchOwnerLoggedIn?.is_cafeInform;
+  const OwnerId = infoUser.fetchOwnerLoggedIn?.id;
 
   const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...menufilesList];
@@ -69,8 +72,6 @@ export default function SignUpCafeInfo() {
       is_WC: false,
       is_Parking: false,
       cafeTag: ["", "", ""],
-      cafeImage: [],
-      cafeMenuImage: ["", "", ""],
     },
   });
 
@@ -138,7 +139,7 @@ export default function SignUpCafeInfo() {
         el !== undefined ? el.data?.uploadFile[0] : ""
       );
       void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
-
+      void router.push(`/mypage/owner/${OwnerId}`);
       // if (isCafeInform ?? false) {
       //   void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
       // } else {
