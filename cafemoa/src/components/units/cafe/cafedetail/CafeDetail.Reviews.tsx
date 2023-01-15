@@ -31,12 +31,15 @@ export default function CafeDetailReview() {
     setUpdatedata(undefined);
   };
 
-  console.log(updatedata);
+  // console.log(updatedata);
 
   return (
     <>
       <S.ReviewBtnWrapper>
-        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0].updatedAt, 1) && (
+        {console.log(
+          reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1)
+        )}
+        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1) && (
           <S.ReviewWriteBtn color="beige">
             <S.BtnInnerWrapper onClick={onClickOpenReivewWrite}>
               <img src="/images/cafedetail/CafeDetail05.png" />
@@ -48,7 +51,6 @@ export default function CafeDetailReview() {
         )}
       </S.ReviewBtnWrapper>
       <S.ReviewContainer>
-        {console.log(isReview)}
         {isReview && (
           <Modal
             open={true}

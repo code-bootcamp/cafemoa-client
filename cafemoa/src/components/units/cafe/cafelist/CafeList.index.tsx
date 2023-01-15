@@ -118,7 +118,9 @@ export default function CafeList() {
                   <Link href={`/cafe/${String(el.id)}`}>
                     <a>
                       {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
-                      <Card02 imageUrl="/images/temp/temp01.png">
+                      <Card02
+                        imageUrl={`https://storage.googleapis.com/${el.cafeImage[0].cafe_image}`}
+                      >
                         <div>
                           <S.LikeWrapper>
                             <Like01
