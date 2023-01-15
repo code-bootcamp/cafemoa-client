@@ -23,7 +23,7 @@ export default function MypageSidebarLayout(props: ILayoutProps) {
               <a>
                 <Users01
                   size="lg"
-                  image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
+                  image={`${infoUser?.fetchUser?.profileImage}`}
                 >
                   <>
                     <S.SettingIcon>

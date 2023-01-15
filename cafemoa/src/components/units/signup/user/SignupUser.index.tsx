@@ -18,6 +18,7 @@ import Uploads02 from "../../../commons/uploads/02/Upload02.index";
 import { useUploadFile } from "../../../commons/hooks/mutations/useUploadFile";
 import { ISignUpProps } from "../SignupWrite.types";
 import { useUpdateUser } from "../../../commons/hooks/mutations/useUpdateUser";
+import Link from "next/link";
 
 interface ICheckAuth {
   [key: string]: {
@@ -390,7 +391,11 @@ export default function SignUpUser(props: ISignUpProps) {
 
           <S.SignUpBtnWrap>
             <S.ResetBtn type="reset" color="lightBeige">
-              <Text size="24">취소</Text>
+              <Link href={`/mypage/user/${props.infoUser?.fetchUser?.id}`}>
+                <a>
+                  <Text size="24">취소</Text>
+                </a>
+              </Link>
             </S.ResetBtn>
             <S.SubmitBtn type="submit" color="brown">
               <Text size="24" fontColor="white">
