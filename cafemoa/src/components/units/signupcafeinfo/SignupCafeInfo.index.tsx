@@ -3,7 +3,7 @@ import Text from "../../commons/text/01/Text01.index";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as S from "./SignupCafeInfo.styles";
 import { SignUpCafeInfoSchema } from "./SignupCafeInfo.validation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import Input02 from "../../commons/input/02/Input02.index";
@@ -48,32 +48,32 @@ export default function SignUpCafeInfo() {
   const { data } = useFetchMyCafes();
   const [infoUser] = useRecoilState(infoUserState);
   const isCafeInform = infoUser?.fetchOwnerLoggedIn?.is_cafeInform;
-  const OwnerId = infoUser.fetchOwnerLoggedIn?.id;
+  const OwnerId = infoUser?.fetchOwnerLoggedIn?.id;
+
+  console.log(data);
 
   const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...menufilesList];
     newFileUrls[index] = fileUrl;
     setMenufilesList(newFileUrls);
   };
-  // const onChangeCafeImageFileUrls = (fileUrl: File, index: number) => {
-  //   const newFileUrls = [...menufilesList];
-  //   newFileUrls[index] = fileUrl;
-  //   setFileList(newFileUrls);
-  // };
-  console.log(data);
-  const { register, handleSubmit, watch, setValue, formState } = useForm({
-    resolver: yupResolver(SignUpCafeInfoSchema),
-    mode: "onChange",
-    defaultValues: {
-      cafeAddr: "",
-      detailAddr: "",
-      cafeinfo: "",
-      operatingInfo: "",
-      is_WC: false,
-      is_Parking: false,
-      cafeTag: ["", "", ""],
-    },
-  });
+
+  // console.log(data);
+  const { register, handleSubmit, watch, setValue, reset, formState } = useForm(
+    {
+      resolver: yupResolver(SignUpCafeInfoSchema),
+      mode: "onChange",
+      defaultValues: {
+        cafeAddr: "",
+        detailAddr: "",
+        cafeinfo: "",
+        operatingInfo: "",
+        is_WC: false,
+        is_Parking: false,
+        cafeTag: ["", "", ""],
+      },
+    }
+  );
 
   // 카페 이미지 업로드 부분
 
@@ -81,16 +81,6 @@ export default function SignUpCafeInfo() {
     fileList: newFileList,
     file: File,
   }) => setFileList(newFileList);
-  // setRealfilesList();
-  console.log(fileList);
-
-  // const getBase64 = (file: RcFile): Promise<string> =>
-  //   new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => resolve(reader.result as string);
-  //     reader.onerror = (error) => reject(error);
-  //   });
 
   const uploadButton = (
     <div>
@@ -138,18 +128,19 @@ export default function SignUpCafeInfo() {
       const resultCafeImageUrls = cafeImage.map((el) =>
         el !== undefined ? el.data?.uploadFile[0] : ""
       );
-      void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
-      void router.push(`/mypage/owner/${OwnerId}`);
-      // if (isCafeInform ?? false) {
-      //   void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
-      // } else {
-      //   void UpdateCafeInformSubmit(
-      //     data?.fetchMyCafes[0].id,
-      //     data,
-      //     resultMenuUrls,
-      //     resultCafeImageUrls
-      //   );
-      // }
+      // void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
+
+      if (isCafeInform === false) {
+        void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
+        void router.push(`/mypage/owner/${OwnerId}`);
+      } else {
+        void UpdateCafeInformSubmit(
+          data?.fetchMyCafes[0].id,
+          data,
+          resultMenuUrls,
+          resultCafeImageUrls
+        );
+      }
     } catch (e) {
       console.log(e);
     }
@@ -186,6 +177,44 @@ export default function SignUpCafeInfo() {
     console.log(value);
     setValue("is_Parking", value);
   };
+
+  useEffect(() => {
+    if (data?.fetchMyCafes[0].cafeTag != null) {
+      const cafeTags = data.fetchMyCafes[0].cafeTag.map((el) =>
+        String(el.tagName)
+      );
+      const cafeImages = data.fetchMyCafes[0].cafeImage.map((el) =>
+        String(el.cafe_image)
+      );
+      const cafeMenuImages = data.fetchMyCafes[0].cafeMenuImage.map((el) =>
+        String(el.menu_imageUrl)
+      );
+      console.log(cafeTags);
+      setSelectTag([...cafeTags]);
+      const resetData = {
+        cafeAddr: data.fetchMyCafes[0].cafeAddr,
+        detailAddr: data.fetchMyCafes[0].detailAddr,
+        cafeinfo: data.fetchMyCafes[0].cafeinfo,
+        operatingInfo: data.fetchMyCafes[0].operatingInfo,
+        is_WC: data.fetchMyCafes[0].is_WC,
+        is_Parking: data.fetchMyCafes[0].is_Parking,
+        cafeTag: [...cafeTags],
+        cafeImage: [...cafeImages],
+        caefeMenuImage: [...cafeMenuImages],
+      };
+      reset({ ...resetData });
+    }
+    return () =>
+      reset({
+        cafeAddr: "",
+        detailAddr: "",
+        cafeinfo: "",
+        operatingInfo: "",
+        is_WC: false,
+        is_Parking: false,
+        cafeTag: ["", "", ""],
+      });
+  }, [data]);
   return (
     <>
       <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
@@ -218,6 +247,7 @@ export default function SignUpCafeInfo() {
             <Input02
               type="text"
               name="상세 주소"
+              isValid={watch("cafeAddr").length !== 0}
               errorMsg={formState.errors.detailAddr?.message}
               register={register("detailAddr")}
             />
@@ -248,6 +278,7 @@ export default function SignUpCafeInfo() {
                 height: "300px",
               }}
               modules={modules}
+              defaultValue={data?.fetchMyCafes.cafeinfo}
             />
           </div>
           <S.ContentsTitleWrap>
@@ -283,6 +314,7 @@ export default function SignUpCafeInfo() {
                 height: "300px",
               }}
               modules={modules}
+              defaultValue={data?.fetchMyCafes.operatingInfo}
             />
           </div>
           <S.ContentsTitleWrap>

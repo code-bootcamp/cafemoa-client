@@ -9,6 +9,20 @@ export const FETCH_MY_CAFES = gql`
     fetchMyCafes {
       id
       cafeinfo
+      operatingInfo
+      cafeAddr
+      detailAddr
+      is_WC
+      is_Parking
+      cafeTag {
+        tagName
+      }
+      cafeImage {
+        cafe_image
+      }
+      cafeMenuImage {
+        menu_imageUrl
+      }
     }
   }
 `;
