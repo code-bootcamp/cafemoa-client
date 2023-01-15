@@ -10,25 +10,25 @@ import Uploads01 from "../../../commons/uploads/01/Upload01.index";
 import Users01 from "../../../commons/user/01/Users01.index";
 import * as S from "./CafeDetail.styles";
 import { useUploadFile } from "../../../commons/hooks/mutations/useUploadFile";
+import { IComment } from "../../../../commons/types/generated/types";
+import { Modal } from "antd";
 
 interface IReviewWriteProps {
   isEdit: boolean;
-  setIsEdit: () => void;
-  setIsReview: () => void;
+  setIsEdit: (bool: boolean) => void;
+  setIsReview: (bool: boolean) => void;
   image_Url?: string;
   cafeInformId: string;
   commentId: string;
-  updatedata: string;
+  updatedata?: IComment;
+  setUpdatedata: (el?: IComment) => void;
   onClickOpenReivewWrite: () => void;
-}
-interface IFormUpdateCommentData {
-  reply: string;
-  image_Url?: string[];
+  onClickCloseReviewWrite: () => void;
 }
 
 interface IFormCreateComment {
   reply: string;
-  image_url: string[];
+  image_Url: string[];
 }
 
 export default function ReviewWrite(props: IReviewWriteProps) {
@@ -40,22 +40,18 @@ export default function ReviewWrite(props: IReviewWriteProps) {
   const [infoUser] = useRecoilState(infoUserState);
   const userNickName = infoUser?.fetchUser?.nickname;
   const userProfileImage = infoUser?.fetchUser?.profileImage;
-  const { register, handleSubmit, reset } = useForm({
-    // resolver: yupResolver(CreateCommentSchema),
-    mode: "onChange",
-    defaultValues: {
-      reply: "",
-      // image_Url: ["", "", ""],
-    },
-  });
+  const { register, handleSubmit, getValues, reset } =
+    useForm<IFormCreateComment>({
+      // resolver: yupResolver(CreateCommentSchema),
+      mode: "onChange",
+      defaultValues: {
+        reply: "",
+        image_Url: [],
+      },
+    });
   // console.log(infoUser.fetchUser?.profileImage);
   console.log(infoUser);
   console.log("111111111111");
-
-  const onClickCloseReviewWrite = () => {
-    props.setIsEdit(false);
-    props.setIsReview(false);
-  };
 
   const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...filesList];
@@ -63,37 +59,57 @@ export default function ReviewWrite(props: IReviewWriteProps) {
     newFileUrls[index] = fileUrl;
     setFilesList(newFileUrls);
   };
-  const onReplySubmit = async (data: any) => {
-    // console.log(data);
+  const onReplySubmit = async (value: IFormCreateComment) => {
     try {
       const results = await Promise.all(
         filesList.map(
           async (files: any) => await uploadFile({ variables: { files } })
         )
       );
-      console.log(results);
-      const resultUrls = results.map((el) =>
-        el !== undefined ? el.data?.uploadFile[0] : ""
+      const tempUrls = results.map((el, idx) =>
+        el !== undefined ? String(el.data?.uploadFile[0]) : value.image_Url[idx]
       );
-      console.log(resultUrls);
-      if (!props.isEdit) {
-        void createCommentSubmit(data, props.cafeInformId, resultUrls);
-      } else {
-        void updateCommentSubmit(data, props.commentId, resultUrls);
+
+      const resultUrls = tempUrls.map((el) => el);
+
+      if (value.image_Url.length === 0 && resultUrls.length === 0) {
+        Modal.warning({
+          content: "리뷰 이미지 한개는 필수입니다.",
+        });
+        return;
       }
+
+      const data = {
+        ...value,
+        image_Url: resultUrls,
+      };
+
+      if (!props.isEdit) {
+        void createCommentSubmit(data, props.cafeInformId);
+      } else {
+        void updateCommentSubmit(data, props.commentId, props.cafeInformId);
+      }
+      props.setIsReview(false);
     } catch (e) {
       console.log(e);
     }
+    props.setIsReview(false);
+    props.setUpdatedata();
   };
 
   useEffect(() => {
-    if (props.updatedata) {
+    // console.log(props.updatedata);
+    if (props.updatedata != null) {
+      const ImageUrls = props.updatedata.commentImage.map((el) =>
+        String(el.image_url)
+      );
       const resetData = {
         reply: props.updatedata.reply,
-        // image_Url: [...props.updatedata.commentImage.image_Url],
+        image_Url: [...ImageUrls],
       };
       reset({ ...resetData });
     }
+    return () => reset({ reply: "", image_Url: [] });
   }, [props.updatedata]);
 
   return (
@@ -107,9 +123,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
         <S.ReviewWriteFromWrap onSubmit={handleSubmit(onReplySubmit)}>
           <Uploads01
             // defaultUrls={[...props.updatedata.commentImage]}
-            defaultUrls={props.updatedata?.commentImage?.map(
-              (el) => el.image_url
-            )}
+            defaultUrls={getValues("image_Url")}
             onChangeFileUrls={onChangeFileUrls}
             maxLength={3}
           />
@@ -125,9 +139,9 @@ export default function ReviewWrite(props: IReviewWriteProps) {
           </S.ReviewWriteInputWrapper>
           <S.ReviewWriteBtnContainer>
             <S.ReviewCancelBtn
-              type="button"
+              type="reset"
               color="lightBeige"
-              onClick={onClickCloseReviewWrite}
+              onClick={props.onClickCloseReviewWrite}
             >
               <Text size="16" fontColor="black">
                 취소

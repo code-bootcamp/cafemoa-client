@@ -14,9 +14,9 @@ export const ImageWrap = styled.div`
   > img {
     position: absolute;
     left: 50%;
-    top: 0;
+    top: 50%;
     width: 100%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
 `;
 export const InfoWrap = styled.div`

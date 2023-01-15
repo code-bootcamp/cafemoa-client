@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useFetchBestCafe } from "../../../../commons/hooks/queries/useFetchBestCafes";

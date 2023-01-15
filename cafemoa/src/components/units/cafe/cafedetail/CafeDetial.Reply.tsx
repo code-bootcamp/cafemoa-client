@@ -3,9 +3,12 @@ import Input01 from "../../../commons/input/01/Input01.index";
 import Text from "../../../commons/text/01/Text01.index";
 import * as S from "./CafeDetail.styles";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-export default function ReplyReview(props) {
+interface IReplyProps {
+  commentId: string;
+}
+
+export default function ReplyReview(props: IReplyProps) {
   console.log(props.commentId);
   const { createOwnerCommentSubmit } = useCreateOwnerComment();
   const { register, handleSubmit } = useForm({

@@ -1,12 +1,14 @@
 import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import {
   IMutation,
   IMutationUpdateCommentArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_COMMENT_BY_CAFE_ID } from "../queries/useFetchCommentByCafeID";
 
 interface IFormUpdateCommentData {
   reply: string;
-  image_Url?: string[];
+  image_Url: string[];
 }
 
 export const UPDATE_COMMENT = gql`
@@ -33,19 +35,28 @@ export const useUpdateComment = () => {
   const updateCommentSubmit = async (
     data: IFormUpdateCommentData,
     commentId: string,
-    resultUrls: string[]
+    cafeinformId: string
+    // resultUrls: string[]
   ) => {
     try {
-      const result = await updateComment({
+      await updateComment({
         variables: {
           commentId,
           UpdateCommentInput: {
             ...data,
-            image_Url: resultUrls,
+            // image_Url: [...resultUrls],
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_COMMENT_BY_CAFE_ID,
+            variables: { cafeID: cafeinformId },
+          },
+        ],
       });
-      console.log(result.data);
+      Modal.success({
+        content: "리뷰 수정이 완료 되었습니다.",
+      });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

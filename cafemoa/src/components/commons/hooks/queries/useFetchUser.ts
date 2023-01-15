@@ -1,5 +1,4 @@
 import { gql, useQuery } from "@apollo/client";
-import _ from "lodash";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../commons/stores";
@@ -47,7 +46,7 @@ export const useFetchUser = () => {
       setInfoUser(owner);
     }
   }, [user, owner]);
-
+  console.log(owner);
   return {
     user,
     owner,

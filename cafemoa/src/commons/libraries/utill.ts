@@ -55,3 +55,12 @@ export const getStampSaveDate = (value: string) => {
 
   return `${year}. ${month}. ${date} ${hours}시 ${mins}분`;
 };
+
+export const reviewRegisterDate = (value: string, limit: 0 | 1 | 2 | 3) => {
+  const nowDate = new Date();
+  const newDate = new Date(value);
+  return (
+    newDate.setDate(newDate.getDate() + limit) >
+    nowDate.setDate(nowDate.getDate())
+  );
+};

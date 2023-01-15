@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { DEFAULT_COLOR } from "../../../../commons/default/default";
+
 import {
   EllipsisOne,
   EllipsisTwo,
@@ -7,14 +7,7 @@ import {
 // import { DEFAULT_COLOR } from "../../../commons/default/default";
 // import * as mq from "../../../commons/styles/mediaQuery";
 
-export const TodaySlideListsWrap = styled.div`
-  .slick-list {
-    margin: 0 -20px;
-  }
-  .slick-slide {
-    padding: 20px;
-  }
-`;
+export const TodaySlideListsWrap = styled.div``;
 export const SlideItem = styled.div``;
 export const SlideBtn = styled.div``;
 

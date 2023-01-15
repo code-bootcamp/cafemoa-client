@@ -3,13 +3,15 @@ import Text from "../../../commons/text/01/Text01.index";
 import * as S from "./CafeDetail.styles";
 import { FaUserAlt } from "react-icons/fa";
 
-export default function OwnerComment(props) {
+interface IOwnerCommentProps {
+  commentId: string;
+}
+
+export default function OwnerComment(props: IOwnerCommentProps) {
   const { data } = useFetchOwnerCommentByCommentID(props.commentId);
-  console.log(props.commentId);
-  console.log(data);
   return (
     <>
-      {data?.fetchOwnerCommentByCommentID && (
+      {data?.fetchOwnerCommentByCommentID != null && (
         <S.CommentWrap>
           <S.CommentImageWrapper>
             <img src="/images/cafedetail/CafeDetail08.png" />

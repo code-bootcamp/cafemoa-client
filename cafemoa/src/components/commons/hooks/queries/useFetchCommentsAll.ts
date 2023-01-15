@@ -75,6 +75,11 @@ export const useFetchCommentsAll = () => {
             fetchCommentsAll: [...prev.fetchCommentsAll],
           };
         }
+        if (prev.fetchCommentsAll === undefined) {
+          return {
+            fetchCommentsAll: [],
+          };
+        }
         return {
           fetchCommentsAll: [
             ...prev.fetchCommentsAll,

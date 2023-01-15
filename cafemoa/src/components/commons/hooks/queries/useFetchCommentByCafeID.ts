@@ -33,7 +33,7 @@ export const useFetchCommentByCafeID = () => {
     IQueryFetchCommentBycafeIdArgs
   >(FETCH_COMMENT_BY_CAFE_ID, {
     variables: {
-      cafeID: router.query.cafeInformID,
+      cafeID: String(router.query.cafeInformID),
     },
   });
   return { data };

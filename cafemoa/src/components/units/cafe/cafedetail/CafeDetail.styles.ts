@@ -136,20 +136,23 @@ export const ReviewHeader = styled.div`
   justify-content: space-between;
 `;
 export const BtnWrapper = styled.div`
-  width: 20%;
   display: flex;
   padding-bottom: 50px;
+  > button {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+  }
 `;
-export const EditBtn = styled.span`
-  width: 100%;
+export const EditBtn = styled.button`
   font-size: 24px;
   text-align: right;
   :hover {
     cursor: pointer;
   }
 `;
-export const DeleteBtn = styled.span`
-  width: 100%;
+export const DeleteBtn = styled.button`
+  margin-left: 8px;
   font-size: 24px;
   text-align: right;
   :hover {
@@ -174,16 +177,33 @@ export const ReviewColorLine = styled.div`
   border-bottom: 10px solid #f3e6d8;
   margin: 32px 0px 16px 96px;
 `;
+export const ReviewImage = styled.div`
+  position: relative;
+  padding-bottom: 100%;
+  overflow: hidden;
+  .ant-image {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+`;
+export const ReviewImageWrapper = styled.div`
+  width: 33.3333%;
+  padding: 10px;
+  margin-bottom: 32px;
+`;
 export const ReviewImageContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 90px;
   border-bottom: 2px solid ${DEFAULT_COLOR.subColor04};
-`;
-export const ReviewImageWrapper = styled.div`
-  width: 33.3333%;
-  padding: 10px;
-  padding-bottom: 32px;
 `;
 export const ComponentsTabs = styled(Tabs)`
   margin-top: 40px;
@@ -257,8 +277,8 @@ export const CommentContents = styled.div`
 // ----------------------------모달 부분----------------------
 
 export const ReviewWriteWrapper = styled.div`
-  width: calc(100% - 100px);
-  padding: 40px 100px;
+  /* width: calc(100% - 100px);
+  padding: 40px 100px; */
 `;
 export const ReviewWriteTitle = styled.div`
   margin-bottom: 24px;
