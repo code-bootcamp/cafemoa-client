@@ -69,20 +69,19 @@ export default function ReviewWrite(props: IReviewWriteProps) {
       const tempUrls = results.map((el, idx) =>
         el !== undefined ? String(el.data?.uploadFile[0]) : value.image_Url[idx]
       );
-
       const resultUrls = tempUrls.map((el) => el);
 
-      if (value.image_Url.length === 0 && resultUrls.length === 0) {
+      const data = {
+        ...value,
+        image_Url: resultUrls.length === 0 ? value.image_Url : resultUrls,
+      };
+
+      if (data.image_Url.length === 0) {
         Modal.warning({
           content: "리뷰 이미지 한개는 필수입니다.",
         });
         return;
       }
-
-      const data = {
-        ...value,
-        image_Url: resultUrls,
-      };
 
       if (!props.isEdit) {
         void createCommentSubmit(data, props.cafeInformId);

@@ -15,11 +15,14 @@ export const CafeImageWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
+  overflow: hidden;
   > img {
     position: absolute;
     left: 50%;
     top: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     transform: translateX(-50%);
   }
 `;
@@ -50,7 +53,7 @@ export const TagContainer = styled.div`
   padding-top: 16px;
 `;
 
-export const LikeContainer = styled.div`
+export const LikeContainer = styled.button`
   padding-top: 2px;
   padding-left: 4px;
   // background: red;
@@ -106,11 +109,7 @@ export const TimeTableWrapper = styled.div`
 
 export const OwnerImageContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 20px;
+  position: relative;
 `;
 export const OwnerImageWrapper = styled.div`
   width: 24%;

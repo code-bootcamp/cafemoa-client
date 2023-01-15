@@ -12,6 +12,7 @@ import { usePickCafe } from "../../../commons/hooks/mutations/usePickCafe";
 
 export default function CafeDetail() {
   const { data } = useFetchCafeInform();
+  console.log(data);
   const { PickCafeSubmit } = usePickCafe();
   /* eslint-disable */
   const sanitizeHtml = require("sanitize-html");
@@ -25,8 +26,10 @@ export default function CafeDetail() {
       <S.DetailContainer>
         <S.Section>
           <S.CafeImageWrapper>
-            {/* <img src={`https://storage.googleapis.com/${data?.fetchCafeInform.thumbNail}`} /> */}
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
+            <img
+              src={`https://storage.googleapis.com/${data?.fetchCafeInform.cafeImage[0].cafe_image}`}
+            />
+            {/* <img src="/images/cafedetail/CafeDetail01.jpeg" /> */}
           </S.CafeImageWrapper>
           <S.CafeInfoWrapper>
             <S.CafeInfoHeader>
@@ -75,20 +78,13 @@ export default function CafeDetail() {
             </Text>
           </S.SectionTitle>
           <S.MenuImageWrapper>
-            {/* {data?.fetchCafeInform.cafeMenuImage.map((el) => (
+            {data?.fetchCafeInform.cafeMenuImage.map((el) => (
               <S.Menu key={el.id}>
-                <Image src={`https://storage.googleapis.com/${el.menu_imageUrl}`} />
+                <Image
+                  src={`https://storage.googleapis.com/${el.menu_imageUrl}`}
+                />
               </S.Menu>
-            ))} */}
-            <S.Menu>
-              <Image src="/images/cafedetail/CafeDetail02.jpeg" />
-            </S.Menu>
-            <S.Menu>
-              <Image src="/images/cafedetail/CafeDetail02.jpeg" />
-            </S.Menu>
-            <S.Menu>
-              <Image src="/images/cafedetail/CafeDetail02.jpeg" />
-            </S.Menu>
+            ))}
           </S.MenuImageWrapper>
         </S.Section>
         <S.Section>
@@ -157,11 +153,11 @@ export default function CafeDetail() {
             </Text> */}
             {/* {data?.fetchCafeInform.operatingInfo} */}
           </S.TimeTableWrapper>
-          <div>
+          {/* <div>
             <Text size="20" weight="500" fontColor="red">
               * 격주 월요일 정기 휴무
             </Text>
-          </div>
+          </div> */}
           <S.SubTitleWrapper>
             <div>
               <img src="/images/cafedetail/CafeDetail03.png" />
@@ -174,7 +170,9 @@ export default function CafeDetail() {
           </S.SubTitleWrapper>
           <div>
             <Text size="16" weight="500">
-              주차가능 / 매장 내 화장실 / 노키즈존
+              {data?.fetchCafeInform.is_Parking && "주차가능"} /
+              {data?.fetchCafeInform.is_WC && "매장 내 화장실"} /
+              {data?.fetchCafeInform.is_WC && "노키즈존"} /
             </Text>
           </div>
         </S.Section>

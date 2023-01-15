@@ -37,7 +37,9 @@ export default function ReviewsSlide() {
           <SwiperSlide key={uuidv4()}>
             <Link href={`/cafe/${el.id}`}>
               <a>
-                <Card01 imageUrl={`${el.cafeinfo.thumbNail}`}>
+                <Card01
+                  imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}
+                >
                   <div>
                     <Users01
                       image={el.user.profileImage}

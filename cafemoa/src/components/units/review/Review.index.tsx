@@ -63,7 +63,6 @@ export default function ReviewList() {
     onSelectLocation(selectValue);
     onRefetchComments(selectTag);
   }, [selectValue, selectTag]);
-  console.log(data?.fetchCommentsAll);
   return (
     <>
       <HeroWrap
@@ -92,15 +91,17 @@ export default function ReviewList() {
           <S.ReviewListsWrap>
             <InfiniteScrollWrap onHandleMore={onHandleMore}>
               <Masonry>
-                {data?.fetchCommentsAll.map((el: any) => (
+                {data?.fetchCommentsAll.map((el) => (
                   <S.ReviewList key={el.id}>
-                    <Link href={`/cafe/${String(el.id)}`}>
+                    <Link href={`/cafe/${String(el.cafeinfo.id)}`}>
                       <a>
-                        <Card01 imageUrl="/images/temp/temp01.png">
+                        <Card01
+                          imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}
+                        >
                           <div>
                             <S.UserWrapper>
                               <Users01
-                                image={`https://storage.googleapis.com/${el.user.profileImage}`}
+                                image={el.user.profileImage}
                                 name={el.user.nickname}
                                 size="sm"
                               />

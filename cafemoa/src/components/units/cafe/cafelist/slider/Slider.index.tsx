@@ -33,7 +33,9 @@ export default function SlickSlider() {
               <a>
                 <S.SlideWrapper>
                   <S.CafeImage>
-                    <img src="/images/cafelist/Cafe2.jpeg" />
+                    <img
+                      src={`https://storage.googleapis.com/${el.thumbNail}`}
+                    />
                   </S.CafeImage>
                   <S.CafeContent>
                     <div style={{ marginTop: 8, textAlign: "center" }}>

@@ -11,6 +11,7 @@ import { infoUserState } from "../../../../../commons/stores";
 
 export default function Member() {
   const [infoUser] = useRecoilState(infoUserState);
+  const mainRegion = infoUser?.fetchUser?.address?.split(" ");
   return (
     <>
       <S.BannerWrap>
@@ -52,8 +53,8 @@ export default function Member() {
               <div>
                 <Text size="20">
                   내가 활동하는 지역은 &nbsp;
-                  {infoUser.fetchUser?.address !== undefined &&
-                    infoUser.fetchUser?.address}
+                  {mainRegion !== undefined &&
+                    `${mainRegion[0]} ${mainRegion[1]}`}
                   &nbsp; 입니다.
                 </Text>
               </div>

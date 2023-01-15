@@ -19,6 +19,7 @@ export const FETCH_COMMENTS_ALL = gql`
         profileImage
       }
       cafeinfo {
+        id
         owner {
           brandName
         }
