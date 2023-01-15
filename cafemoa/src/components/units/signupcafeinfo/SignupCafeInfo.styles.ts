@@ -93,9 +93,14 @@ export const ContentsTitleWrap = styled.div`
   padding-bottom: 20px;
   border-bottom: 3px solid ${DEFAULT_COLOR.subColor04};
 `;
-export const CafeImageContainer = styled.div`
+export const CheckBoxContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+`;
+export const CafeImageContainer = styled.div`
+  margin-top: 16px;
 `;
 export const CafeImageWrap = styled.div`
   width: 25%;

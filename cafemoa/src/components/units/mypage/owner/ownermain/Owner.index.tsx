@@ -8,10 +8,7 @@ import * as S from "./Owner.styles";
 
 export default function OwnerMyPage() {
   const [infoUser] = useRecoilState(infoUserState);
-  // console.log(infoUser?.fetchOwnerLoggedIn);
   const ownerId = infoUser?.fetchOwnerLoggedIn?.id;
-  // ownerId의 useRecoilState로 변경필요함
-
   return (
     <>
       <HeroWrap
@@ -23,16 +20,20 @@ export default function OwnerMyPage() {
         <S.OwnerMenuContainer>
           <div>
             <Box01 styles={{ height: "100%" }}>
-              <div>
-                <S.TitleWrap>
-                  <Text size="32" weight="700">
-                    카페 정보 수정
-                  </Text>
-                </S.TitleWrap>
-                <S.ImageWrap>
-                  <img src="/images/owner/Owner02.png" />
-                </S.ImageWrap>
-              </div>
+              <Link href={`/mypage/owner/${String(ownerId)}/cafeInform`}>
+                <a>
+                  <div>
+                    <S.TitleWrap>
+                      <Text size="32" weight="700">
+                        카페 정보 수정
+                      </Text>
+                    </S.TitleWrap>
+                    <S.ImageWrap>
+                      <img src="/images/owner/Owner02.png" />
+                    </S.ImageWrap>
+                  </div>
+                </a>
+              </Link>
             </Box01>
           </div>
           <div>

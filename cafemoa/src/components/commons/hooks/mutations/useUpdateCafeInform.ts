@@ -25,38 +25,30 @@ export const UPDATE_CAFE_INFORM = gql`
       cafeInformID: $cafeInformID
     ) {
       id
-      cafeinfo
-      operatingInfo
-      cafeAddr
-      detailAddr
-      like
-      owner {
-        brandName
-      }
-      cafeTag {
-        tagName
-      }
-      cafeImage {
-        menu_imageUrl
-      }
     }
   }
 `;
 
 export const useUpdateCafeInform = () => {
-  const router = useRouter();
   const [updateCafeInform] = useMutation<
     Pick<IMutation, "updateCafeInform">,
     IMutationUpdateCafeInformArgs
   >(UPDATE_CAFE_INFORM);
 
-  const UpdateCafeInformSubmit = async (cafeInformID, data) => {
+  const UpdateCafeInformSubmit = async (
+    cafeInformID: string,
+    data: IFormUpdateCafeInformData,
+    MenuimageUrl: string[],
+    CafeimageUrl: string[]
+  ) => {
     try {
       const result = await updateCafeInform({
         variables: {
           cafeInformID,
           updateCafeInform: {
             ...data,
+            menu_imageUrl: MenuimageUrl,
+            cafe_imageUrl: CafeimageUrl,
           },
         },
       });

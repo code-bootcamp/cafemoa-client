@@ -9,19 +9,6 @@ export const FETCH_MY_CAFES = gql`
     fetchMyCafes {
       id
       cafeinfo
-      operatingInfo
-      cafeAddr
-      detailAddr
-      like
-      cafeTag {
-        tagName
-      }
-      cafeImage {
-        cafe_image
-      }
-      cafeMenuImage {
-        menu_imageUrl
-      }
     }
   }
 `;
@@ -31,6 +18,5 @@ export const useFetchMyCafes = () => {
     Pick<IQuery, "fetchMyCafes">,
     IQueryFetchMyCafesArgs
   >(FETCH_MY_CAFES);
-  const mycafedata = data;
-  return { mycafedata };
+  return { data };
 };
