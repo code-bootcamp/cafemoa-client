@@ -13,12 +13,23 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
   flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100% - 350px);
+  ${mq.MobileL} {
+    width: calc(100% - 252px);
+    flex-direction: column;
+  }
+  ${mq.MobileM} {
+    width: 100%;
+    padding-top: 24px;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -99,24 +110,20 @@ export const Stamp = styled.div`
   flex-wrap: wrap;
 `;
 
-export const ValidStampWrap = styled.div`
-  width: 20%;
-  text-align: center;
-  font-size: 70px;
-  color: ${DEFAULT_COLOR.mainColor};
-
-  ${mq.MobileL} {
-    font-size: 54px;
-  }
-`;
-
 export const IconWrap2 = styled.div`
   width: 20%;
   text-align: center;
-  font-size: 70px;
+  font-size: 50px;
   color: ${DEFAULT_COLOR.lightGray};
 
-  ${mq.MobileL} {
-    font-size: 54px;
+  ${mq.DesktopS} {
+    font-size: 32px;
   }
+  ${mq.MobileL} {
+    font-size: 28px;
+  }
+`;
+
+export const ValidStampWrap = styled(IconWrap2)`
+  color: ${DEFAULT_COLOR.mainColor};
 `;

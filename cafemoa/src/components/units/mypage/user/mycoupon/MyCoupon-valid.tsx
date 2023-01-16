@@ -83,9 +83,6 @@ export default function MyCouponValid() {
                   <Text size="28" weight="500" fontColor="mainColor">
                     {el.cafeInform.owner.brandName}
                   </Text>
-                  <S.CoffeeImgWrap>
-                    <BiCoffeeTogo />
-                  </S.CoffeeImgWrap>
                 </S.Div>
                 <S.Div>
                   <Text size="24" weight="300" fontColor="mainColor">
@@ -109,7 +106,10 @@ export default function MyCouponValid() {
                   </S.CouponUseBtn>
                 </S.BtnWrapper>
               </S.CouponDetail>
-              <S.CouponImg src="/images/mycoupon/mycoupon.png" />
+              <S.CoffeeImgWrap>
+                <BiCoffeeTogo />
+                <S.CouponImg src="/images/mycoupon/mycoupon.png" />
+              </S.CoffeeImgWrap>
             </S.BoxWrapper>
           </S.ValidBox>
         ))}

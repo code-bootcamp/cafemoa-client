@@ -6,6 +6,9 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
   flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
 export const Container = styled.div`
@@ -13,7 +16,12 @@ export const Container = styled.div`
   flex-direction: row;
   width: calc(100% - 350px);
   ${mq.MobileL} {
+    width: calc(100% - 252px);
     flex-direction: column;
+  }
+  ${mq.MobileM} {
+    width: 100%;
+    padding-top: 16px;
   }
 `;
 
@@ -66,7 +74,6 @@ export const BoxContainer = styled.ul`
 export const BoxWrapper = styled.li`
   display: block;
   width: 50%;
-  height: 100%;
   padding: 8px;
 
   ${mq.MobileM} {
@@ -75,7 +82,12 @@ export const BoxWrapper = styled.li`
 `;
 
 export const MypageButton = styled.div`
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 24px;
+  min-height: 154px;
 `;
 
 export const MenuDetail = styled.div`

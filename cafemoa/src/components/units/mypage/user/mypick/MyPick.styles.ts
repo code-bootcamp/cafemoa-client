@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import {
   ContainerWrap,
+  EllipsisOne,
+  EllipsisTwo,
   SmallBtn,
 } from "../../../../../commons/styles/commonStyles";
 
@@ -44,13 +46,13 @@ export const MypickContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0 -30px;
+  margin: 0 -15px;
 `;
 
 export const StampWrapper = styled.li`
   display: block;
   width: 50%;
-  padding: 0 30px 70px;
+  padding: 0 15px 30px;
 `;
 
 export const MypickInfoWrapper = styled.div`
@@ -82,10 +84,10 @@ export const MypickCafeInfo = styled.div`
   justify-content: space-between;
 `;
 
-export const MypickCafeAdd = styled.div`
-  padding-top: 10px;
+export const MypickCafeAdd = styled(EllipsisTwo)`
+  margin-top: 10px;
 `;
 
-export const MypickCafeTag = styled.div`
+export const MypickCafeTag = styled(EllipsisOne)`
   padding-top: 10px;
 `;

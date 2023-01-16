@@ -7,19 +7,11 @@ import Link from "next/link";
 import { GetStamp } from "../../../../../commons/libraries/utill";
 import { useFetchUserStamps } from "../../../../commons/hooks/queries/useFetchUserStamps";
 import Link01 from "../../../../commons/link/01/Link01.index";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface IMemberStampProps {
   infoUserId?: string;
 }
-
-const SETTINGS: Settings = {
-  infinite: false,
-  slidesToShow: 2,
-  slidesToScroll: 2,
-  dots: true,
-  arrows: false,
-  speed: 500,
-};
 
 export default function MemberStamp(props: IMemberStampProps) {
   const { data } = useFetchUserStamps();
@@ -33,9 +25,20 @@ export default function MemberStamp(props: IMemberStampProps) {
           <Text size="14">자세히 보기</Text>
         </Link01>
       </div>
-      <Slider {...SETTINGS}>
+
+      <Swiper
+        loop={true}
+        slidesPerView={1}
+        spaceBetween={20}
+        autoplay={{ delay: 2000 }}
+        breakpoints={{
+          540: {
+            slidesPerView: 2,
+          },
+        }}
+      >
         {data?.fetchUserStamps?.map((el, idx) => (
-          <S.SlideItem key={idx}>
+          <SwiperSlide key={el.id}>
             <Box01 styles={{ padding: "16px", display: "flex" }}>
               <S.BoxIconWrap>
                 <TfiStamp />
@@ -45,9 +48,9 @@ export default function MemberStamp(props: IMemberStampProps) {
                 <div>{GetStamp(el.count)} / 10</div>
               </S.BoxTextWrap>
             </Box01>
-          </S.SlideItem>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </S.SlideWrap>
   );
 }

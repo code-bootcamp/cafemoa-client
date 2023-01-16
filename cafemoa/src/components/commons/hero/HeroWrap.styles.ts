@@ -1,5 +1,6 @@
 // import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import * as mq from "../../../commons/styles/mediaQuery";
 
 interface IHeroProps {
   imageUrl: string;
@@ -41,4 +42,7 @@ export const HeroTextSubject = styled.div`
 export const HeroWrap = styled.div`
   position: relative;
   height: 400px;
+  ${mq.MobileM} {
+    height: 280px;
+  }
 `;

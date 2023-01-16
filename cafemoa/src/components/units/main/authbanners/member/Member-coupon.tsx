@@ -6,19 +6,11 @@ import Link from "next/link";
 import { RiCoupon3Line } from "react-icons/ri";
 import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 import Link01 from "../../../../commons/link/01/Link01.index";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface IMemberCouponProps {
   infoUserId?: string;
 }
-
-const SETTINGS: Settings = {
-  infinite: false,
-  slidesToShow: 2,
-  slidesToScroll: 2,
-  dots: true,
-  arrows: false,
-  speed: 500,
-};
 
 export default function MemberCoupon(props: IMemberCouponProps) {
   const { data } = useFetchUserCoupons();
@@ -34,9 +26,19 @@ export default function MemberCoupon(props: IMemberCouponProps) {
       </div>
       {data?.fetchUserCoupons !== undefined &&
         data?.fetchUserCoupons.length > 0 && (
-          <Slider {...SETTINGS}>
+          <Swiper
+            loop={true}
+            slidesPerView={1}
+            spaceBetween={20}
+            autoplay={{ delay: 2000 }}
+            breakpoints={{
+              540: {
+                slidesPerView: 2,
+              },
+            }}
+          >
             {data?.fetchUserCoupons?.map((el, idx) => (
-              <S.SlideItem key={idx}>
+              <SwiperSlide key={el.id}>
                 <Box01 styles={{ padding: "16px", display: "flex" }}>
                   <S.BoxIconWrap>
                     <RiCoupon3Line />
@@ -46,9 +48,9 @@ export default function MemberCoupon(props: IMemberCouponProps) {
                     <div>유효기간 ~ {el.expiredDate}</div>
                   </S.BoxTextWrap>
                 </Box01>
-              </S.SlideItem>
+              </SwiperSlide>
             ))}
-          </Slider>
+          </Swiper>
         )}
       {data?.fetchUserCoupons.length === 0 && (
         <div style={{ textAlign: "center" }}>쿠폰이 없습니다.</div>

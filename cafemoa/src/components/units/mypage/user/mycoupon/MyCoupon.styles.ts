@@ -8,6 +8,10 @@ import {
 } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
 
+interface ICouponStylesProps {
+  expired?: boolean;
+}
+
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
@@ -34,16 +38,16 @@ export const ValidWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0 -30px;
+  margin: 0 -15px;
 `;
 
 export const ValidBox = styled.li`
   display: block;
   width: 50%;
-  padding: 0 30px 72px;
+  padding: 0 15px 72px;
   ${mq.MobileL} {
     width: 100%;
-    padding: 0 30px 32px;
+    padding: 0 15px 32px;
   }
 `;
 
@@ -54,13 +58,13 @@ export const BoxWrapper = styled.div`
   padding-right: 90px;
   border-radius: 10px;
 
-  ${mq.MobileS} {
+  @media screen and (max-width: 1300px) {
     padding-right: 0;
-    padding-bottom: 64px;
+    padding-bottom: 0;
   }
 `;
 
-export const UsedCouponBoxWrapper = styled.div`
+export const UsedCouponBoxWrapper = styled.div<ICouponStylesProps>`
   position: relative;
   background-color: ${DEFAULT_COLOR.subColor04};
   padding-right: 90px;
@@ -73,7 +77,7 @@ export const UsedCouponBoxWrapper = styled.div`
     top: 0;
     left: 0;
     ${(props) =>
-      props?.expired
+      props?.expired ?? false
         ? css`
             background-image: url("/images/mycoupon/mycoupon_expired.png");
           `
@@ -102,7 +106,7 @@ export const CouponDetail = styled.div`
   background-color: ${DEFAULT_COLOR.white};
   border: 1px solid ${DEFAULT_COLOR.black};
   border-radius: 10px;
-  padding: 40px 24px 40px;
+  padding: 24px 24px 40px;
 `;
 
 export const UsedCoupon = styled.div`
@@ -111,7 +115,7 @@ export const UsedCoupon = styled.div`
   background-color: ${DEFAULT_COLOR.white};
   border: 1px solid ${DEFAULT_COLOR.black};
   border-radius: 10px;
-  padding: 40px 24px 40px;
+  padding: 24px 24px 40px;
   ::before {
     content: "";
     background-color: lightgray;
@@ -141,8 +145,8 @@ export const BtnWrapper = styled.div`
 
 export const CouponImg = styled.img`
   position: absolute;
-  right: 30px;
-  top: 73px;
+  right: 5px;
+  top: 50px;
   width: 28px;
   ${mq.MobileS} {
     right: initial;
@@ -169,8 +173,18 @@ export const InvalidCouponImg = styled.img`
 `;
 
 export const CoffeeImgWrap = styled.div`
+  position: absolute;
+  right: 24px;
+  top: 20px;
   font-size: 40px;
   color: ${DEFAULT_COLOR.subColor01};
+
+  ${mq.DesktopS} {
+    display: none;
+  }
+  ${mq.MobileL} {
+    display: block;
+  }
 `;
 
 export const TapWrap = styled(Tabs)`
