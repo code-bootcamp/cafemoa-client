@@ -10,6 +10,7 @@ import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSi
 import { useRouter } from "next/router";
 import * as S from "./MyPick.styles";
 import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
+import Link from "next/link";
 
 const SELECT_VALUES02 = [
   { label: "전체", value: "전체" },
@@ -84,41 +85,45 @@ export default function MyPick() {
           </S.AreaWrapper>
           <S.MypickContainer>
             {data?.fetchMyPickLists.map((el) => (
-              <S.StampWrapper key={el.id}>
-                <Box01 styles={{ padding: "24px" }}>
-                  <S.MypickInfoWrapper>
-                    <S.MypickCafeImg>
-                      <img
-                        src={`https://storage.googleapis.com/${el.cafeInform.cafeImage[0].cafe_image}`}
-                      />
-                    </S.MypickCafeImg>
-                    <S.MypickCafe>
-                      <S.MypickCafeInfo>
-                        <Text size="24" weight="500" fontColor="subColor01">
-                          {el.cafeInform.owner.brandName}
-                        </Text>
-                        <Like01
-                          iconColor="red"
-                          fontColor="black"
-                          count={el.cafeInform.like}
-                        />
-                      </S.MypickCafeInfo>
-                      <S.MypickCafeAdd>
-                        <Text size="16" weight="300">
-                          {el.cafeInform.cafeAddr}
-                        </Text>
-                      </S.MypickCafeAdd>
-                      <S.MypickCafeTag>
-                        {el.cafeInform.cafeTag.map((el) => (
-                          <Fragment key={el.id}>
-                            <Tag size="sm">{el.tagName}</Tag>
-                          </Fragment>
-                        ))}
-                      </S.MypickCafeTag>
-                    </S.MypickCafe>
-                  </S.MypickInfoWrapper>
-                </Box01>
-              </S.StampWrapper>
+              <S.PickWrapper key={el.id}>
+                <Link href={`/cafe/${el.cafeInform.id}`}>
+                  <a>
+                    <Box01 styles={{ padding: "24px" }}>
+                      <S.MypickInfoWrapper>
+                        <S.MypickCafeImg>
+                          <img
+                            src={`https://storage.googleapis.com/${el.cafeInform.cafeImage[0].cafe_image}`}
+                          />
+                        </S.MypickCafeImg>
+                        <S.MypickCafe>
+                          <S.MypickCafeInfo>
+                            <Text size="24" weight="500" fontColor="subColor01">
+                              {el.cafeInform.owner.brandName}
+                            </Text>
+                            <Like01
+                              iconColor="red"
+                              fontColor="black"
+                              count={el.cafeInform.like}
+                            />
+                          </S.MypickCafeInfo>
+                          <S.MypickCafeAdd>
+                            <Text size="16" weight="300">
+                              {el.cafeInform.cafeAddr}
+                            </Text>
+                          </S.MypickCafeAdd>
+                          <S.MypickCafeTag>
+                            {el.cafeInform.cafeTag.map((el) => (
+                              <Fragment key={el.id}>
+                                <Tag size="sm">{el.tagName}</Tag>
+                              </Fragment>
+                            ))}
+                          </S.MypickCafeTag>
+                        </S.MypickCafe>
+                      </S.MypickInfoWrapper>
+                    </Box01>
+                  </a>
+                </Link>
+              </S.PickWrapper>
             ))}
           </S.MypickContainer>
         </S.Container>

@@ -1,8 +1,6 @@
+import { Image } from "antd";
 import { useRouter } from "next/router";
-import {
-  GetDate,
-  getExpiredDate,
-} from "../../../../../commons/libraries/utill";
+import { GetDate } from "../../../../../commons/libraries/utill";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import { useFetchUserComments } from "../../../../commons/hooks/queries/useFetchUserComments";
@@ -53,6 +51,14 @@ export default function MyReview() {
                         <Like01 iconColor="black" count={el.cafeinfo.like} />
                       </S.LikeCount>
                     </S.ReviewInfoWrapper>
+                    <S.ReviewImagesWrap>
+                      {el.commentImage.map((el) => (
+                        <Image
+                          key={el.id}
+                          src={`https://storage.googleapis.com/${el.image_url}`}
+                        />
+                      ))}
+                    </S.ReviewImagesWrap>
                     <S.Review>
                       <Text size="18" weight="300">
                         {el.reply}

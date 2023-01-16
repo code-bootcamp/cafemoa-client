@@ -129,11 +129,18 @@ export const OwnerImageContainer = styled.div`
 export const OwnerImageWrapper = styled.div`
   width: 25%;
   display: inline-block;
+  > .ant-image {
+    width: 100%;
+  }
   ${mq.MobileM} {
-    width: 33.3333%;
+    > .ant-image {
+      width: 33.3333%;
+    }
   }
   ${mq.MobileS} {
-    width: 50%;
+    > .ant-image {
+      width: 50%;
+    }
   }
 `;
 // ------------------------리뷰모아 부분-------------------

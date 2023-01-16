@@ -5,17 +5,28 @@ import {
   EllipsisTwo,
   SmallBtn,
 } from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
   flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100% - 350px);
+  ${mq.DesktopS} {
+    width: calc(100% - 252px);
+  }
+  ${mq.MobileM} {
+    padding-top: 24px;
+    width: 100%;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -49,10 +60,13 @@ export const MypickContainer = styled.ul`
   margin: 0 -15px;
 `;
 
-export const StampWrapper = styled.li`
+export const PickWrapper = styled.li`
   display: block;
   width: 50%;
   padding: 0 15px 30px;
+  ${mq.DesktopM} {
+    width: 100%;
+  }
 `;
 
 export const MypickInfoWrapper = styled.div`
@@ -64,10 +78,15 @@ export const MypickInfoWrapper = styled.div`
 
 export const MypickCafeImg = styled.div`
   width: 120px;
-  height: 100px;
+  height: 120px;
   > img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+  ${mq.MobileS} {
+    width: 80px;
+    height: 80px;
   }
 `;
 
