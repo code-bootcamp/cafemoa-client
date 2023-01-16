@@ -137,7 +137,7 @@ export default function StampSaveByPhone() {
       </ModalComponent>
 
       <S.StampWrapper>
-        <Box01 styles={{ padding: "40px 50px" }}>
+        <Box01>
           <S.StampContainer>
             <S.UserWrapper>
               <Input01

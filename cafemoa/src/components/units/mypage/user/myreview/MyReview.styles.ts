@@ -7,16 +7,29 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
   flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100% - 350px);
+  ${mq.DesktopS} {
+    width: calc(100% - 252px);
+  }
+  ${mq.MobileM} {
+    padding-top: 24px;
+    width: 100%;
+  }
 `;
 
 export const TitleWrapper = styled.div`
   padding-bottom: 56px;
+  ${mq.MobileM} {
+    padding-bottom: 24px;
+  }
 `;
 
 export const ReviewContentWrapper = styled.div`
@@ -29,6 +42,18 @@ export const ReviewInfoWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
+`;
+export const ReviewImagesWrap = styled.div`
+  padding-top: 24px;
+  display: flex;
+  gap: 8px;
+  .ant-image {
+    width: 33.3333%;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 `;
 
 export const ReviewInfoHead = styled.div`
@@ -55,6 +80,5 @@ export const DateWrap = styled.div`
 export const LikeCount = styled.div``;
 
 export const Review = styled.div`
-  padding-left: 24px;
   padding-top: 24px;
 `;

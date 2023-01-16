@@ -60,7 +60,7 @@ export const StampContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0 -30px;
+  margin: 0 -15px;
 
   ${mq.MobileM} {
     flex-direction: column;
@@ -69,7 +69,7 @@ export const StampContainer = styled.ul`
 
 export const StampWrapper = styled.li`
   display: block;
-  padding: 0 30px 70px;
+  padding: 0 15px 30px;
   width: 50%;
   ${mq.MobileM} {
     width: 100%;

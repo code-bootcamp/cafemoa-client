@@ -4,19 +4,33 @@ import {
   ContainerWrap,
   MediumBtn,
 } from "../../../../../commons/styles/commonStyles";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const StampCheckContainer = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
   flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 export const Title = styled.div`
   padding-bottom: 56px;
+  ${mq.MobileM} {
+    padding-bottom: 24px;
+  }
 `;
 export const NotificationContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100% - 350px);
+  ${mq.DesktopS} {
+    width: calc(100% - 252px);
+  }
+  ${mq.MobileM} {
+    padding-top: 24px;
+    width: 100%;
+  }
 `;
 export const NotificationWrapper = styled.div`
   width: 100%;

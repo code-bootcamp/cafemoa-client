@@ -53,7 +53,7 @@ export default function MyStamp() {
     void deleteStampSubmit(stampId);
   };
   useEffect(() => {
-    onSelectLocation(selectValue);
+    onSelectLocation(String(selectValue));
   }, [selectValue]);
 
   return (

@@ -15,6 +15,9 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
   display: flex;
   flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 
 export const ModalButton = styled(MediumBtn)``;
@@ -34,11 +37,21 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100% - 350px);
+  ${mq.DesktopS} {
+    width: calc(100% - 252px);
+  }
+  ${mq.MobileM} {
+    padding-top: 24px;
+    width: 100%;
+  }
 `;
 
 export const TitleWrapper = styled.div`
   text-align: center;
   padding-bottom: 56px;
+  ${mq.MobileM} {
+    padding-bottom: 24px;
+  }
 `;
 
 export const StampWrapper = styled.div`
@@ -48,6 +61,12 @@ export const StampWrapper = styled.div`
   justify-content: center;
   max-width: 800px;
   width: 100%;
+  > div {
+    padding: 40px 50px;
+    ${mq.MobileL} {
+      padding: 20px 24px;
+    }
+  }
 `;
 
 export const StampContainer = styled.div`
@@ -58,6 +77,9 @@ export const StampContainer = styled.div`
 export const UserWrapper = styled.div`
   display: flex;
   max-width: 500px;
+  ${mq.MobileS} {
+    flex-direction: column;
+  }
 `;
 
 export const StampSelect = styled.div`
@@ -65,6 +87,9 @@ export const StampSelect = styled.div`
   align-items: center; */
   margin-left: 10px;
   width: 100%;
+  ${mq.MobileS} {
+    margin-left: 0;
+  }
 `;
 
 export const InputIconWrap = styled.div`
@@ -146,6 +171,9 @@ export const TapWrap = styled(Tabs)`
 
   .ant-tabs-content {
     padding-top: 56px;
+    ${mq.MobileM} {
+      padding-top: 0;
+    }
   }
 
   .ant-tabs-top > .ant-tabs-nav::before {

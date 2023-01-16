@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import * as mq from "../../../../../commons/styles/mediaQuery";
 
 export const ProfileWrapper = styled.div`
   width: 300px;
@@ -11,6 +12,14 @@ export const ProfileWrapper = styled.div`
   padding-top: 50px;
   > * {
     padding-bottom: 15px;
+  }
+  ${mq.MobileL} {
+    width: 220px;
+    margin-right: 32px;
+  }
+  ${mq.MobileM} {
+    width: 100%;
+    margin-right: 0;
   }
 `;
 
