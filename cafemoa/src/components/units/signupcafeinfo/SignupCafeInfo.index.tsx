@@ -74,8 +74,10 @@ export default function SignUpCafeInfo() {
       cafeAddr: "",
       detailAddr: "",
       cafeinfo: "",
+      notice: "",
       operatingInfo: "",
       is_WC: false,
+      is_Wifi: false,
       is_Parking: false,
       cafeTag: ["", "", ""],
       menu_imageUrl: ["", "", ""],
@@ -91,6 +93,10 @@ export default function SignUpCafeInfo() {
   const onChangeCafeInfo = (value: string) => {
     setValue("operatingInfo", value === "<p><br></p>" ? "" : value);
     void trigger("operatingInfo");
+  };
+  const onChangeNotice = (value: string) => {
+    setValue("notice", value === "<p><br></p>" ? "" : value);
+    void trigger("cafeinfo");
   };
 
   // 카페 이미지 업로드 부분
@@ -171,7 +177,7 @@ export default function SignUpCafeInfo() {
 
       if (isCafeInform === false) {
         void CreatecafeInformSubmit(data);
-        void router.push(`/mypage/owner/${OwnerId}`);
+        void router.push(`/mypage/owner/${String(OwnerId)}`);
       } else {
         void UpdateCafeInformSubmit(data?.fetchMyCafes[0].id, data);
       }
@@ -212,6 +218,10 @@ export default function SignUpCafeInfo() {
     console.log(value);
     setValue("is_Parking", value);
   };
+  const onSetWifiValue = (value: boolean) => {
+    console.log(value);
+    setValue("is_Wifi", value);
+  };
 
   useEffect(() => {
     if (data?.fetchMyCafes[0]?.cafeTag != null) {
@@ -243,8 +253,10 @@ export default function SignUpCafeInfo() {
         cafeAddr: data.fetchMyCafes[0].cafeAddr,
         detailAddr: data.fetchMyCafes[0].detailAddr,
         cafeinfo: data.fetchMyCafes[0].cafeinfo,
+        notice: data.fetchMyCafes[0].notice,
         operatingInfo: data.fetchMyCafes[0].operatingInfo,
         is_WC: data.fetchMyCafes[0].is_WC,
+        is_Wifi: data.fetchMyCafes[0].is_Wifi,
         is_Parking: data.fetchMyCafes[0].is_Parking,
         cafeTag: [...cafeTags],
         cafe_imageUrl: [...cafeImages],
@@ -257,8 +269,10 @@ export default function SignUpCafeInfo() {
         cafeAddr: "",
         detailAddr: "",
         cafeinfo: "",
+        notice: "",
         operatingInfo: "",
         is_WC: false,
+        is_Wifi: false,
         is_Parking: false,
         cafeTag: ["", "", ""],
         menu_imageUrl: ["", "", ""],
@@ -319,7 +333,40 @@ export default function SignUpCafeInfo() {
               }}
               modules={modules}
               onChange={onChangeOperatingInfo}
-              defaultValue={data?.fetchMyCafes.cafeinfo}
+              defaultValue={data?.fetchMyCafes[0].cafeinfo}
+            />
+          </div>
+          <S.ContentsTitleWrap>
+            <Text size="20" fontColor="subColor01">
+              공지사항
+            </Text>
+          </S.ContentsTitleWrap>
+          <div style={{ padding: "40px 0px", paddingBottom: "60px" }}>
+            <ReactQuill
+              style={{
+                width: "100%",
+                height: "200px",
+              }}
+              modules={modules}
+              onChange={onChangeNotice}
+              defaultValue={data?.fetchMyCafes[0].notice}
+            />
+          </div>
+
+          <S.ContentsTitleWrap>
+            <Text size="20" fontColor="subColor01">
+              운영시간 및 휴무일
+            </Text>
+          </S.ContentsTitleWrap>
+          <div style={{ padding: "40px 0px", paddingBottom: "60px" }}>
+            <ReactQuill
+              style={{
+                width: "100%",
+                height: "300px",
+              }}
+              modules={modules}
+              onChange={onChangeCafeInfo}
+              defaultValue={data?.fetchMyCafes[0].operatingInfo}
             />
           </div>
           <S.ContentsTitleWrap>
@@ -343,22 +390,14 @@ export default function SignUpCafeInfo() {
               defaultValue={watch("is_Parking")}
             />
           </S.CheckBoxContainer>
-          <S.ContentsTitleWrap>
-            <Text size="20" fontColor="subColor01">
-              운영시간 및 휴무일
-            </Text>
-          </S.ContentsTitleWrap>
-          <div style={{ padding: "40px 0px", paddingBottom: "60px" }}>
-            <ReactQuill
-              style={{
-                width: "100%",
-                height: "300px",
-              }}
-              modules={modules}
-              onChange={onChangeCafeInfo}
-              defaultValue={data?.fetchMyCafes.operatingInfo}
+          <S.CheckBoxContainer>
+            와이파이
+            <Switch02
+              // register={register("is_main")}
+              onSetValue={onSetWifiValue}
+              defaultValue={watch("is_Wifi")}
             />
-          </div>
+          </S.CheckBoxContainer>
           <S.ContentsTitleWrap>
             <Text size="20" fontColor="subColor01">
               메뉴 이미지

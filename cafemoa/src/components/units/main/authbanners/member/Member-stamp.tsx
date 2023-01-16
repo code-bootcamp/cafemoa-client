@@ -1,9 +1,7 @@
-import Slider, { Settings } from "react-slick";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import { TfiStamp } from "react-icons/tfi";
 import * as S from "./Member.styles";
-import Link from "next/link";
 import { GetStamp } from "../../../../../commons/libraries/utill";
 import { useFetchUserStamps } from "../../../../commons/hooks/queries/useFetchUserStamps";
 import Link01 from "../../../../commons/link/01/Link01.index";

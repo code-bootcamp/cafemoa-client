@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import InfiniteScroll from "react-infinite-scroller";
 import {
   ContainerWrap,
   TagWrap,

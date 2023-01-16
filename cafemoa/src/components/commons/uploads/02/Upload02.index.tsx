@@ -29,9 +29,7 @@ export default function Uploads02(props: IUploadProps) {
       // eslint-disable-next-line array-callback-return
       tempImgUrl.map((el, idx) => {
         if (el !== "") {
-          tempImgUrl[
-            idx
-          ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
+          tempImgUrl[idx] = `https://storage.googleapis.com/${el}`;
         } else {
           tempImgUrl[idx] = "";
         }

@@ -7,7 +7,6 @@ import * as S from "./CafeDetail.styles";
 import CafeDetailPhoto from "./CafeDetail.Photos";
 import CafeDetailReview from "./CafeDetail.Reviews";
 import { useFetchCafeInform } from "../../../commons/hooks/queries/useFetchCafeInform";
-import { useFetchCafeMenuImage } from "../../../commons/hooks/queries/useFetchCafeMenuImage";
 import { usePickCafe } from "../../../commons/hooks/mutations/usePickCafe";
 
 export default function CafeDetail() {
@@ -56,14 +55,17 @@ export default function CafeDetail() {
             </S.CafeInfoFooter>
           </S.CafeInfoWrapper>
           <S.OwnerContents>
-            {/* <Text size="18" weight="500">
-              가맹점주 카페소개란
-            </Text> */}
-            <S.Contents>
-              <Text size="16" weight="500">
-                {data?.fetchCafeInform.cafeinfo}
-              </Text>
-            </S.Contents>
+            <S.Contents
+              dangerouslySetInnerHTML={{
+                __html: sanitizeHtml(
+                  data?.fetchCafeInform?.cafeinfo?.replace(
+                    /(?:\r\n|\r|\n)/g,
+                    "<br />"
+                  ),
+                  { allowedTags: ["p", "br", "n"] }
+                ),
+              }}
+            ></S.Contents>
             <S.TagContainer>
               {data?.fetchCafeInform.cafeTag.map((el, idx) => (
                 <Tag size="md">{el.tagName}</Tag>
@@ -103,12 +105,17 @@ export default function CafeDetail() {
               </Text>
             </div>
           </S.SubTitleWrapper>
-          <div>
-            <Text size="16" weight="500">
-              2022년 10월 20일 이후 기본 원두 변경(콜롬비아 수프리모 {">"}{" "}
-              이티오피아 예카체프)
-            </Text>
-          </div>
+          <S.NoticeWrapper
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(
+                data?.fetchCafeInform?.notice?.replace(
+                  /(?:\r\n|\r|\n)/g,
+                  "<br/>"
+                ),
+                { allowedTags: ["p", "br", "n"] }
+              ),
+            }}
+          ></S.NoticeWrapper>
           <S.SubTitleWrapper>
             <div>
               <img src="/images/cafedetail/CafeDetail03.png" />
@@ -123,41 +130,13 @@ export default function CafeDetail() {
             dangerouslySetInnerHTML={{
               __html: sanitizeHtml(
                 data?.fetchCafeInform.operatingInfo.replace(
-                  /(?:\r\n|\r|\n|p)/g,
+                  /(?:\r\n|\r|\n)/g,
                   "<br />"
                 ),
-                { allowedTags: ["p", "br", "n"] }
+                { allowedTags: ["p", "br", "n", "nbsp"] }
               ),
             }}
-          >
-            {/* <Text size="16" weight="500">
-              Sunday : 10:00 ~ 22:00
-            </Text>
-            <Text size="16" weight="500">
-              Monday : 10:00 ~ 22:00
-            </Text>
-            <Text size="16" weight="500">
-              Tuesday : 10:00 ~ 22:00
-            </Text>
-            <Text size="16" weight="500">
-              Wednesday : 10:00 ~ 22:00
-            </Text>
-            <Text size="16" weight="500">
-              Thursday : 10:00 ~ 22:00
-            </Text>
-            <Text size="16" weight="500">
-              Friday : 10:00 ~ 22:00
-            </Text>
-            <Text size="16" weight="500">
-              Saturday : 10:00 ~ 22:00
-            </Text> */}
-            {/* {data?.fetchCafeInform.operatingInfo} */}
-          </S.TimeTableWrapper>
-          {/* <div>
-            <Text size="20" weight="500" fontColor="red">
-              * 격주 월요일 정기 휴무
-            </Text>
-          </div> */}
+          ></S.TimeTableWrapper>
           <S.SubTitleWrapper>
             <div>
               <img src="/images/cafedetail/CafeDetail03.png" />
@@ -170,9 +149,13 @@ export default function CafeDetail() {
           </S.SubTitleWrapper>
           <div>
             <Text size="16" weight="500">
-              {data?.fetchCafeInform.is_Parking && "주차가능"} /
-              {data?.fetchCafeInform.is_WC && "매장 내 화장실"} /
-              {data?.fetchCafeInform.is_WC && "노키즈존"} /
+              {data?.fetchCafeInform.is_Parking && "주차가능"}
+            </Text>
+            <Text size="16" weight="500">
+              {data?.fetchCafeInform.is_WC && "매장 내 화장실"}
+            </Text>
+            <Text size="16" weight="500">
+              {data?.fetchCafeInform.is_Wifi && "와이파이"}
             </Text>
           </div>
         </S.Section>

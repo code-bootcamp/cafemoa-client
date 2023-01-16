@@ -1,8 +1,6 @@
-import Slider, { Settings } from "react-slick";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./Member.styles";
-import Link from "next/link";
 import { RiCoupon3Line } from "react-icons/ri";
 import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
 import Link01 from "../../../../commons/link/01/Link01.index";

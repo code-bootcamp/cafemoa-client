@@ -60,7 +60,7 @@ export default function ReviewList() {
   };
 
   useEffect(() => {
-    onSelectLocation(selectValue);
+    onSelectLocation(String(selectValue));
     onRefetchComments(selectTag);
   }, [selectValue, selectTag]);
   return (

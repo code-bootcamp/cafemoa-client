@@ -471,7 +471,9 @@ export default function SignUpOwner(props: ISignUpProps) {
         <S.SignUpBtnWrap>
           <S.ResetBtn type="reset" color="lightBeige">
             <Link
-              href={`/mypage/owner/${props.infoUser?.fetchOwnerLoggedIn?.id}`}
+              href={`/mypage/owner/${String(
+                props.infoUser?.fetchOwnerLoggedIn?.id
+              )}`}
             >
               <a>
                 <Text size="24">취소</Text>
