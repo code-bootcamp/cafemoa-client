@@ -117,11 +117,11 @@ export default function ReviewComment(props: IReviewCommentProps) {
               fontColor="black"
             ></Like01>
           </S.LikeWrapper>
-          <div style={{ marginLeft: "32px" }}>
+          <S.ContentsText>
             <Text size="18" weight="300">
               {props.el.reply}
             </Text>
-          </div>
+          </S.ContentsText>
         </S.ReviewContents>
         <S.ReviewImageContainer>
           {props.el.commentImage.map((el, idx) => (

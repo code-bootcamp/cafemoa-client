@@ -7,6 +7,7 @@ import {
   MediumBtn,
   SmallBtn,
 } from "../../../../commons/styles/commonStyles";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 export const DetailContainer = styled(ContainerWrap)`
   padding-top: 100px;
@@ -51,6 +52,20 @@ export const TagContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 16px;
+  flex-wrap: nowrap;
+  ${mq.MobileM} {
+    max-width: max-content;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    > * {
+      position: relative;
+      float: left;
+      width: auto;
+      height: auto;
+      flex-shrink: 0;
+    }
+  }
 `;
 
 export const LikeContainer = styled.button`
@@ -112,9 +127,14 @@ export const OwnerImageContainer = styled.div`
   position: relative;
 `;
 export const OwnerImageWrapper = styled.div`
-  width: 24%;
+  width: 25%;
   display: inline-block;
-  padding-top: 20px;
+  ${mq.MobileM} {
+    width: 33.3333%;
+  }
+  ${mq.MobileS} {
+    width: 50%;
+  }
 `;
 // ------------------------리뷰모아 부분-------------------
 
@@ -127,6 +147,11 @@ export const ReviewWrapper = styled.div`
   width: 50%;
   padding-right: 32px;
   margin-bottom: 64px;
+  ${mq.MobileM} {
+    width: 100%;
+    padding-right: 0px;
+    margin-bottom: 32px;
+  }
   // margin-right: 4px;
 `;
 export const ReviewHeader = styled.div`
@@ -166,6 +191,15 @@ export const ReviewContents = styled.div`
 export const LikeWrapper = styled.div`
   padding-left: 24px;
   padding-top: 4px;
+  ${mq.MobileL} {
+    padding-left: 10px;
+  }
+`;
+export const ContentsText = styled.div`
+  margin-left: 32px;
+  ${mq.MobileL} {
+    margin-left: 20px;
+  }
 `;
 export const ReplyBtn = styled.div`
   padding-top: 8px;
@@ -203,6 +237,9 @@ export const ReviewImageContainer = styled.div`
   flex-direction: row;
   margin-left: 90px;
   border-bottom: 2px solid ${DEFAULT_COLOR.subColor04};
+  ${mq.MobileL} {
+    margin-left: 64px;
+  }
 `;
 export const ComponentsTabs = styled(Tabs)`
   margin-top: 40px;

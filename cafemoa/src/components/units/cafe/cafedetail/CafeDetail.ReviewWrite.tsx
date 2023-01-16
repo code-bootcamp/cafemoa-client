@@ -59,6 +59,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
     newFileUrls[index] = fileUrl;
     setFilesList(newFileUrls);
   };
+  console.log(filesList);
   const onReplySubmit = async (value: IFormCreateComment) => {
     try {
       const results = await Promise.all(
@@ -69,7 +70,7 @@ export default function ReviewWrite(props: IReviewWriteProps) {
       const tempUrls = results.map((el, idx) =>
         el !== undefined ? String(el.data?.uploadFile[0]) : value.image_Url[idx]
       );
-      const resultUrls = tempUrls.map((el) => el);
+      const resultUrls = tempUrls.filter((el) => el !== undefined);
 
       const data = {
         ...value,
@@ -88,10 +89,10 @@ export default function ReviewWrite(props: IReviewWriteProps) {
       } else {
         void updateCommentSubmit(data, props.commentId, props.cafeInformId);
       }
-      props.setIsReview(false);
     } catch (e) {
       console.log(e);
     }
+    props.setIsEdit(false);
     props.setIsReview(false);
     props.setUpdatedata();
   };
