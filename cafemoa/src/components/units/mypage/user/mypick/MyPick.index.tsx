@@ -40,7 +40,7 @@ export default function MyPick() {
   console.log(data);
 
   useEffect(() => {
-    onSelectLocation(selectValue);
+    onSelectLocation(String(selectValue));
   }, [selectValue]);
 
   return (
@@ -48,7 +48,7 @@ export default function MyPick() {
       <HeroWrap
         imageUrl="/images/review/review_hero01.png"
         title="마이모아"
-        subject="마이페이지 마이페이지 마이페이지"
+        subject="내 정보를 한눈에 보기 쉽게 모아!"
       ></HeroWrap>
       <S.ContainerWrapper>
         <div>
@@ -62,6 +62,7 @@ export default function MyPick() {
               내가 찜한 카페를 모아보세요!
             </Text>
           </S.TitleWrapper>
+
           <S.AreaWrapper>
             <S.MainArea>
               <Select01
@@ -87,7 +88,9 @@ export default function MyPick() {
                 <Box01 styles={{ padding: "24px" }}>
                   <S.MypickInfoWrapper>
                     <S.MypickCafeImg>
-                      <img src="/images/mypick/mypick.png" />
+                      <img
+                        src={`https://storage.googleapis.com/${el.cafeInform.cafeImage[0].cafe_image}`}
+                      />
                     </S.MypickCafeImg>
                     <S.MypickCafe>
                       <S.MypickCafeInfo>

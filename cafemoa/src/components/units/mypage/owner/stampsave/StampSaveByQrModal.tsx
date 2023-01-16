@@ -28,18 +28,17 @@ interface IStampSaveData {
 
 interface IStampSaveProps {
   searchValue: string;
+  setIsModalOpen: (bool: boolean) => void;
 }
 
 export default function StampSaveQrModal(props: IStampSaveProps) {
   const [, setIsModalOpen] = useState<boolean>(true);
-  console.log(props.searchValue);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [createStamp] = useCreateStamp();
 
-  const { mycafedata } = useFetchMyCafes();
-  const cafeId = mycafedata?.fetchMyCafes[0].id;
-  console.log(cafeId);
+  const { data: mycafedata } = useFetchMyCafes();
+  const cafeId = String(mycafedata?.fetchMyCafes[0].id);
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
@@ -48,26 +47,23 @@ export default function StampSaveQrModal(props: IStampSaveProps) {
     },
   });
 
-  const submitStampSave = (data: IStampSaveData) => {
-    console.log(data);
-    console.log(selectValue);
-    console.log("핸드폰번호 : " + props.searchValue);
-
+  const submitStampSave = async (data: IStampSaveData) => {
     if (selectValue === "") {
       Modal.warning({
         content: "적립할 스탬프 갯수를 선택하세요!",
       });
-      // return;
+      return;
     }
 
     if (data.password === "") {
       Modal.warning({
         content: "가맹주 비밀번호를 입력해주세요!",
       });
+      return;
     }
 
     try {
-      const result = createStamp({
+      const result = await createStamp({
         variables: {
           createStampInput: {
             phone: props.searchValue,
@@ -78,17 +74,28 @@ export default function StampSaveQrModal(props: IStampSaveProps) {
         },
       });
       setIsModalOpen(false);
+
       Modal.success({
         content: `스탬프가 ${selectValue}개 적립되었습니다!`,
         afterClose() {
           setSelectValue("");
           setValue("password", "");
+          props.setIsModalOpen(false);
           void router.push(`/mypage/owner/${cafeId}/stampsave`);
         },
       });
+
       console.log(result);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        console.log(error.message);
+        if (error.message.includes("비밀번호가 일치하지 않습니다")) {
+          Modal.warning({
+            content: "비밀번호가 일치하지 않습니다.",
+          });
+          // return;
+        }
+      }
     }
   };
 

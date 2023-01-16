@@ -13,8 +13,8 @@ export default function OwnerMyPage() {
     <>
       <HeroWrap
         imageUrl="/images/owner/Owner01.jpeg"
-        title="마이 모아"
-        subject="마이페이지 마이페이지 마이페이지 마이페이지 마이페이지 마이페이지 마이페이지"
+        title="마이모아"
+        subject="내 정보를 한눈에 보기 쉽게 모아!"
       ></HeroWrap>
       <S.MyPageContainer>
         <S.OwnerMenuContainer>

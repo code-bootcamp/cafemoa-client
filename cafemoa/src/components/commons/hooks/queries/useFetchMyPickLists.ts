@@ -22,6 +22,10 @@ export const MY_PICK_LISTS = gql`
           id
           tagName
         }
+        cafeImage {
+          id
+          cafe_image
+        }
         owner {
           brandName
         }

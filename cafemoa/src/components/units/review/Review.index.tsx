@@ -68,7 +68,7 @@ export default function ReviewList() {
       <HeroWrap
         imageUrl="/images/review/review_hero01.png"
         title="리뷰모아"
-        subject="리뷰를 한눈에 보기 쉽게 모아"
+        subject="리뷰를 한눈에 보기 쉽게 모아!"
       ></HeroWrap>
       <S.ContainerWrapper>
         <S.FilterWrapper>
