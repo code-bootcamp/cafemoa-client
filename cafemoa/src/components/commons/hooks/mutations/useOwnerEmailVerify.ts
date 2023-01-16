@@ -2,7 +2,6 @@ import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import {
   IMutation,
-  IMutationEmailVerifyArgs,
   IMutationSendTokenToOwnerEmailArgs,
 } from "../../../../commons/types/generated/types";
 

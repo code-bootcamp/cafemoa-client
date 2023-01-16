@@ -391,7 +391,9 @@ export default function SignUpUser(props: ISignUpProps) {
 
           <S.SignUpBtnWrap>
             <S.ResetBtn type="reset" color="lightBeige">
-              <Link href={`/mypage/user/${props.infoUser?.fetchUser?.id}`}>
+              <Link
+                href={`/mypage/user/${String(props.infoUser?.fetchUser?.id)}`}
+              >
                 <a>
                   <Text size="24">취소</Text>
                 </a>

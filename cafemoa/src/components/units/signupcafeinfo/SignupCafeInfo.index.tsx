@@ -18,13 +18,14 @@ import { useUpdateCafeInform } from "../../commons/hooks/mutations/useUpdateCafe
 import "antd/dist/antd.css";
 import { Upload, Form, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd/es/upload";
-import type { UploadFile } from "antd/es/upload/interface";
 import { infoUserState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
 import Switch02 from "../../commons/switch/02/Switch02.index";
 import { useFetchMyCafes } from "../../commons/hooks/queries/useFetchMyCafes";
 import { useRouter } from "next/router";
+import type { UploadProps } from "antd/es/upload";
+import type { UploadFile } from "antd/es/upload/interface";
+import { IFormCafeInfoData } from "./SignupCafeInfo.types";
 
 // import Uploads03 from "../../commons/uploads/03/Upload03.index";
 
@@ -34,12 +35,9 @@ const ReactQuill = dynamic(async () => await import("react-quill"), {
 
 export default function SignUpCafeInfo() {
   const [menufilesList, setMenufilesList] = useState<File[]>([]);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  // const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectTag, setSelectTag] = useState<string[]>([]);
-  const [defaultFileListview, setDefaultFileListview] = useState<UploadFile[]>(
-    []
-  );
   const router = useRouter();
   const { CreatecafeInformSubmit } = useCreateCafeInform();
   const { uploadFile } = useUploadFile();
@@ -48,6 +46,7 @@ export default function SignUpCafeInfo() {
   const [infoUser] = useRecoilState(infoUserState);
   const isCafeInform = infoUser?.fetchOwnerLoggedIn?.is_cafeInform;
   const OwnerId: string | undefined = infoUser?.fetchOwnerLoggedIn?.id;
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   console.log(data);
 
@@ -67,7 +66,7 @@ export default function SignUpCafeInfo() {
     getValues,
     formState,
     trigger,
-  } = useForm({
+  } = useForm<IFormCafeInfoData>({
     resolver: yupResolver(SignUpCafeInfoSchema),
     mode: "onChange",
     defaultValues: {
@@ -129,48 +128,46 @@ export default function SignUpCafeInfo() {
 
   const onSignUpSubmit = async (value: any) => {
     try {
+      console.log(value);
       // 메뉴이미지 업로드
-
       const results = await Promise.all(
         menufilesList.map(
           async (files: any) => await uploadFile({ variables: { files } })
         )
       );
-      // console.log(results);
-      const tempMenuUrls = results.map((el, idx) =>
-        el !== undefined
-          ? String(el.data?.uploadFile[0])
-          : value.cafeMenuImage[idx].menu_imageUrl
-      );
+      console.log(results);
 
-      const resultMenuUrls = tempMenuUrls.filter((el) => el !== undefined);
+      // // console.log(results);
+      // const tempMenuUrls = results.map((el, idx) =>
+      //   el !== undefined
+      //     ? String(el.data?.uploadFile[0])
+      //     : value.cafeMenuImage[idx].menu_imageUrl
+      // );
 
+      // const resultMenuUrls = tempMenuUrls.filter((el) => el !== undefined);
+      // console.log(resultMenuUrls);
       // 카페이미지 업로드
 
-      const cafeImage = await Promise.all(
-        fileList.map(
-          async (files: any) =>
-            await uploadFile({ variables: { files: files.originFileObj } })
-        )
-      );
-      const tempCafeImageUrls = cafeImage.map((el, idx) =>
-        el !== undefined
-          ? String(el.data?.uploadFile[0])
-          : value.cafeImage[idx].cafe_imageUrl
-      );
-
-      const resultCafeImageUrls = tempCafeImageUrls.map((el) => el);
+      // const cafeImage = await Promise.all(
+      //   fileList.map(
+      //     async (files: any) =>
+      //       files?.originFileObj !== undefined &&
+      //       (await uploadFile({ variables: { files: files.originFileObj } }))
+      //   )
+      // );
+      // const tempCafeImageUrls = cafeImage.map((el, idx) =>
+      //   el !== undefined
+      //     ? String(el.data?.uploadFile[0])
+      //     : value.cafeImage[idx].cafe_imageUrl
+      // );
+      // const resultCafeImageUrls = tempCafeImageUrls.map((el) => el);
 
       const data = {
         ...value,
-        menu_imageUrl:
-          resultMenuUrls.length === 0
-            ? value.cafeMenuImage.menu_imageUrl
-            : resultMenuUrls,
-        cafe_imageUrl:
-          resultCafeImageUrls.length === 0
-            ? value.cafeImage.cafe_imageUrl
-            : resultCafeImageUrls,
+        // menu_imageUrl:
+        //   resultMenuUrls.length === 0
+        //     ? value.cafeMenuImage.menu_imageUrl
+        //     : resultMenuUrls,
       };
 
       // void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
@@ -181,8 +178,8 @@ export default function SignUpCafeInfo() {
       } else {
         void UpdateCafeInformSubmit(data?.fetchMyCafes[0].id, data);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -235,32 +232,33 @@ export default function SignUpCafeInfo() {
       //   setDefaultFileListview(defaultFileList);
       // };
       // const cafeImageUrl = watch("cafe_imageUrl");
-      const defaultFileList = cafeImages.map((url: string) => ({
-        uid: "-1",
-        name: url.split("/").pop(),
-        status: "done",
-        url: `https://storage.googleapis.com/${url}`,
-      }));
-
-      setDefaultFileListview(defaultFileList);
+      const defaultFileList: any[] = cafeImages?.map(
+        (url: string, idx: number) => ({
+          uid: idx,
+          name: url.split("")[0],
+          status: "done",
+          url: String(`https://storage.googleapis.com/${url}`),
+        })
+      );
+      setFileList(defaultFileList);
       const cafeMenuImages = data.fetchMyCafes[0].cafeMenuImage.map((el) =>
         String(el.menu_imageUrl)
       );
-      console.log(cafeTags);
+      // console.log(cafeTags);
 
       setSelectTag([...cafeTags]);
       const resetData = {
-        cafeAddr: data.fetchMyCafes[0].cafeAddr,
-        detailAddr: data.fetchMyCafes[0].detailAddr,
-        cafeinfo: data.fetchMyCafes[0].cafeinfo,
-        notice: data.fetchMyCafes[0].notice,
-        operatingInfo: data.fetchMyCafes[0].operatingInfo,
-        is_WC: data.fetchMyCafes[0].is_WC,
-        is_Wifi: data.fetchMyCafes[0].is_Wifi,
-        is_Parking: data.fetchMyCafes[0].is_Parking,
-        cafeTag: [...cafeTags],
-        cafe_imageUrl: [...cafeImages],
-        menu_imageUrl: [...cafeMenuImages],
+        cafeAddr: data.fetchMyCafes[0].cafeAddr ?? "",
+        detailAddr: data.fetchMyCafes[0].detailAddr ?? "",
+        cafeinfo: data.fetchMyCafes[0].cafeinfo ?? "",
+        notice: data.fetchMyCafes[0].notice ?? "",
+        operatingInfo: data.fetchMyCafes[0].operatingInfo ?? "",
+        is_WC: data.fetchMyCafes[0].is_WC ?? false,
+        is_Wifi: data.fetchMyCafes[0].is_Wifi ?? false,
+        is_Parking: data.fetchMyCafes[0].is_Parking ?? false,
+        cafeTag: [...(cafeTags ?? "")],
+        menu_imageUrl: [...(cafeMenuImages ?? "")],
+        cafe_imageUrl: [...(cafeImages ?? "")],
       };
       reset({ ...resetData });
     }
@@ -280,7 +278,6 @@ export default function SignUpCafeInfo() {
       });
   }, [data]);
 
-  console.log(defaultFileListview);
   return (
     <>
       <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
@@ -419,9 +416,7 @@ export default function SignUpCafeInfo() {
             <Form layout="vertical">
               <Form.Item>
                 <Upload
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  // defaultFileList={defaultFileList}
-                  defaultFileList={defaultFileListview}
+                  // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   listType="picture-card"
                   fileList={fileList}
                   onChange={handleChange}
@@ -430,6 +425,14 @@ export default function SignUpCafeInfo() {
                 </Upload>
               </Form.Item>
             </Form>
+            {/* <Upload
+              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture-card"
+              fileList={fileList}
+              onChange={handleChange}
+            >
+              {uploadButton}
+            </Upload> */}
           </S.CafeImageContainer>
           <S.SignUpBtnWrap>
             <S.SubmitBtn color="brown">
