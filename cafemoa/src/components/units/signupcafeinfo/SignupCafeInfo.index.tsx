@@ -24,8 +24,9 @@ import Switch02 from "../../commons/switch/02/Switch02.index";
 import { useFetchMyCafes } from "../../commons/hooks/queries/useFetchMyCafes";
 import { useRouter } from "next/router";
 import type { UploadProps } from "antd/es/upload";
-import type { UploadFile } from "antd/es/upload/interface";
+import type { RcFile, UploadFile } from "antd/es/upload/interface";
 import { IFormCafeInfoData } from "./SignupCafeInfo.types";
+import { useDeleteCafeImage } from "../../commons/hooks/mutations/useDeleteCafeImage";
 
 // import Uploads03 from "../../commons/uploads/03/Upload03.index";
 
@@ -42,14 +43,15 @@ export default function SignUpCafeInfo() {
   const { CreatecafeInformSubmit } = useCreateCafeInform();
   const { uploadFile } = useUploadFile();
   const { UpdateCafeInformSubmit } = useUpdateCafeInform();
+  const { onDeleteCafeImage } = useDeleteCafeImage();
   const { data } = useFetchMyCafes();
   const [infoUser] = useRecoilState(infoUserState);
-  const isCafeInform = infoUser?.fetchOwnerLoggedIn?.is_cafeInform;
   const OwnerId: string | undefined = infoUser?.fetchOwnerLoggedIn?.id;
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [cafeFileList, setCafeFileList] = useState<RcFile[]>([]);
 
-  console.log(data);
-
+  // console.log(data);
+  console.log("cafeFileList", cafeFileList);
   const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...menufilesList];
     newFileUrls[index] = fileUrl;
@@ -95,15 +97,16 @@ export default function SignUpCafeInfo() {
   };
   const onChangeNotice = (value: string) => {
     setValue("notice", value === "<p><br></p>" ? "" : value);
-    void trigger("cafeinfo");
+    void trigger("notice");
   };
 
   // 카페 이미지 업로드 부분
 
-  const handleChange: UploadProps["onChange"] = ({
-    fileList: newFileList,
-    file: File,
-  }) => setFileList(newFileList);
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  // console.log(cafeFileList);
 
   const uploadButton = (
     <div>
@@ -125,58 +128,53 @@ export default function SignUpCafeInfo() {
           ['clean']  
         ],
   };
-
-  const onSignUpSubmit = async (value: any) => {
+  // console.log(isCafeInform);
+  const onSignUpSubmit = async (value: IFormCafeInfoData) => {
+    console.log(value);
     try {
-      console.log(value);
-      // 메뉴이미지 업로드
       const results = await Promise.all(
         menufilesList.map(
           async (files: any) => await uploadFile({ variables: { files } })
         )
       );
-      console.log(results);
+      const tempUrls = results.map((el, idx) =>
+        el !== undefined
+          ? String(el.data?.uploadFile[0])
+          : value.menu_imageUrl[idx]
+      );
+      const resultUrls = tempUrls.filter((el) => el !== undefined);
 
-      // // console.log(results);
-      // const tempMenuUrls = results.map((el, idx) =>
-      //   el !== undefined
-      //     ? String(el.data?.uploadFile[0])
-      //     : value.cafeMenuImage[idx].menu_imageUrl
-      // );
+      const cafeImage = await Promise.all(
+        cafeFileList.map(
+          async (files: any) => await uploadFile({ variables: { files } })
+        )
+      );
+      const tempCafeUrls = cafeImage.map((el, idx) =>
+        el !== undefined
+          ? String(el.data?.uploadFile[0])
+          : value.menu_imageUrl[idx]
+      );
+      const resultCafeImageUrls = tempCafeUrls.filter((el) => el !== undefined);
 
-      // const resultMenuUrls = tempMenuUrls.filter((el) => el !== undefined);
-      // console.log(resultMenuUrls);
-      // 카페이미지 업로드
-
-      // const cafeImage = await Promise.all(
-      //   fileList.map(
-      //     async (files: any) =>
-      //       files?.originFileObj !== undefined &&
-      //       (await uploadFile({ variables: { files: files.originFileObj } }))
-      //   )
-      // );
-      // const tempCafeImageUrls = cafeImage.map((el, idx) =>
-      //   el !== undefined
-      //     ? String(el.data?.uploadFile[0])
-      //     : value.cafeImage[idx].cafe_imageUrl
-      // );
-      // const resultCafeImageUrls = tempCafeImageUrls.map((el) => el);
-
-      const data = {
+      const submitData: IFormCafeInfoData = {
         ...value,
-        // menu_imageUrl:
-        //   resultMenuUrls.length === 0
-        //     ? value.cafeMenuImage.menu_imageUrl
-        //     : resultMenuUrls,
+        menu_imageUrl:
+          resultUrls.length === 0 ? value.menu_imageUrl : resultUrls,
+        cafe_imageUrl:
+          resultCafeImageUrls.length === 0
+            ? [...value.cafe_imageUrl]
+            : [...resultCafeImageUrls],
       };
+      console.log(submitData);
 
-      // void CreatecafeInformSubmit(data, resultMenuUrls, resultCafeImageUrls);
-
-      if (isCafeInform === false) {
-        void CreatecafeInformSubmit(data);
+      if (infoUser?.fetchOwnerLoggedIn?.is_cafeInform === false) {
+        void CreatecafeInformSubmit(submitData);
         void router.push(`/mypage/owner/${String(OwnerId)}`);
       } else {
-        void UpdateCafeInformSubmit(data?.fetchMyCafes[0].id, data);
+        void UpdateCafeInformSubmit(
+          String(data?.fetchMyCafes[0].id),
+          submitData
+        );
       }
     } catch (error) {
       console.log(error);
@@ -208,16 +206,20 @@ export default function SignUpCafeInfo() {
     setValue("cafeTag", selectTag);
   };
   const onSetWCValue = (value: boolean) => {
-    console.log(value);
+    // console.log(value);
     setValue("is_WC", value);
   };
   const onSetPKValue = (value: boolean) => {
-    console.log(value);
+    // console.log(value);
     setValue("is_Parking", value);
   };
   const onSetWifiValue = (value: boolean) => {
-    console.log(value);
+    // console.log(value);
     setValue("is_Wifi", value);
+  };
+
+  const onReset = () => {
+    router.back();
   };
 
   useEffect(() => {
@@ -228,24 +230,22 @@ export default function SignUpCafeInfo() {
       const cafeImages = data.fetchMyCafes[0].cafeImage.map((el) =>
         String(el.cafe_image)
       );
-      // const cafeImages = () => {
-      //   setDefaultFileListview(defaultFileList);
-      // };
-      // const cafeImageUrl = watch("cafe_imageUrl");
-      const defaultFileList: any[] = cafeImages?.map(
-        (url: string, idx: number) => ({
-          uid: idx,
-          name: url.split("")[0],
-          status: "done",
-          url: String(`https://storage.googleapis.com/${url}`),
-        })
+      console.log(
+        data.fetchMyCafes[0].cafeImage,
+        "data.fetchMyCafes[0].cafeImage"
       );
+      const defaultFileList: UploadFile[] =
+        data?.fetchMyCafes[0].cafeImage?.map((el) => ({
+          uid: el.id,
+          name: el.cafe_image,
+          status: "done",
+          url: `https://storage.googleapis.com/${el.cafe_image}`,
+        }));
       setFileList(defaultFileList);
       const cafeMenuImages = data.fetchMyCafes[0].cafeMenuImage.map((el) =>
         String(el.menu_imageUrl)
       );
-      // console.log(cafeTags);
-
+      console.log(data);
       setSelectTag([...cafeTags]);
       const resetData = {
         cafeAddr: data.fetchMyCafes[0].cafeAddr ?? "",
@@ -280,7 +280,10 @@ export default function SignUpCafeInfo() {
 
   return (
     <>
-      <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
+      <S.ContainerWrapper
+        onSubmit={handleSubmit(onSignUpSubmit)}
+        onReset={onReset}
+      >
         <S.ContainerInner>
           <S.InputWrap>
             <Input02
@@ -330,7 +333,7 @@ export default function SignUpCafeInfo() {
               }}
               modules={modules}
               onChange={onChangeOperatingInfo}
-              defaultValue={data?.fetchMyCafes[0].cafeinfo}
+              defaultValue={data?.fetchMyCafes[0]?.cafeinfo}
             />
           </div>
           <S.ContentsTitleWrap>
@@ -346,7 +349,7 @@ export default function SignUpCafeInfo() {
               }}
               modules={modules}
               onChange={onChangeNotice}
-              defaultValue={data?.fetchMyCafes[0].notice}
+              defaultValue={data?.fetchMyCafes[0]?.notice}
             />
           </div>
 
@@ -363,7 +366,7 @@ export default function SignUpCafeInfo() {
               }}
               modules={modules}
               onChange={onChangeCafeInfo}
-              defaultValue={data?.fetchMyCafes[0].operatingInfo}
+              defaultValue={data?.fetchMyCafes[0]?.operatingInfo}
             />
           </div>
           <S.ContentsTitleWrap>
@@ -420,8 +423,24 @@ export default function SignUpCafeInfo() {
                   listType="picture-card"
                   fileList={fileList}
                   onChange={handleChange}
+                  beforeUpload={(file) => {
+                    console.log(file);
+                    const tempFileList = [...cafeFileList, file];
+                    setCafeFileList(tempFileList);
+                  }}
+                  onRemove={async (file) => {
+                    console.log(file.uid);
+                    if (!file.uid.includes("upload")) {
+                      await onDeleteCafeImage(file.uid);
+                    } else {
+                      const tempFileList = cafeFileList.filter(
+                        (el) => el.uid !== file.uid
+                      );
+                      setCafeFileList(tempFileList);
+                    }
+                  }}
                 >
-                  {fileList.length >= 8 ? null : uploadButton}
+                  {uploadButton}
                 </Upload>
               </Form.Item>
             </Form>
@@ -435,6 +454,13 @@ export default function SignUpCafeInfo() {
             </Upload> */}
           </S.CafeImageContainer>
           <S.SignUpBtnWrap>
+            {infoUser?.fetchOwnerLoggedIn?.is_cafeInform && (
+              <S.ResetBtn color="beige" type="reset">
+                <Text size="24" fontColor="black">
+                  취소
+                </Text>
+              </S.ResetBtn>
+            )}
             <S.SubmitBtn color="brown">
               <Text size="24" fontColor="white">
                 등록

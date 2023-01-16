@@ -17,11 +17,11 @@ interface IFormUpdateCafeInformData {
 
 export const UPDATE_CAFE_INFORM = gql`
   mutation updateCafeInform(
-    $cafeInformInput: CafeInformInput!
+    $updateCafeInform: UpdateCafeInform!
     $cafeInformID: String!
   ) {
     updateCafeInform(
-      cafeInformInput: $cafeInformInput
+      updateCafeInform: $updateCafeInform
       cafeInformID: $cafeInformID
     ) {
       id

@@ -18,6 +18,7 @@ export const FETCH_MY_CAFES = gql`
         tagName
       }
       cafeImage {
+        id
         cafe_image
       }
       cafeMenuImage {
