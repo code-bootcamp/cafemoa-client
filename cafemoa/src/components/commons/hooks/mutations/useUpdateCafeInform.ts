@@ -37,9 +37,7 @@ export const useUpdateCafeInform = () => {
 
   const UpdateCafeInformSubmit = async (
     cafeInformID: string,
-    data: IFormUpdateCafeInformData,
-    MenuimageUrl: string[],
-    CafeimageUrl: string[]
+    data: IFormUpdateCafeInformData
   ) => {
     try {
       const result = await updateCafeInform({
@@ -47,8 +45,6 @@ export const useUpdateCafeInform = () => {
           cafeInformID,
           updateCafeInform: {
             ...data,
-            menu_imageUrl: MenuimageUrl,
-            cafe_imageUrl: CafeimageUrl,
           },
         },
       });

@@ -30,18 +30,12 @@ export const useCreateCafeInform = () => {
     IMutationCreatecafeInformArgs
   >(CREATE_CAFE_INFORM);
 
-  const CreatecafeInformSubmit = async (
-    data: IFormCreateCafeInformData,
-    MenuimageUrl: string[],
-    CafeimageUrl: string[]
-  ) => {
+  const CreatecafeInformSubmit = async (data: IFormCreateCafeInformData) => {
     try {
       const result = await CreatecafeInform({
         variables: {
           cafeInformInput: {
             ...data,
-            menu_imageUrl: MenuimageUrl,
-            cafe_imageUrl: CafeimageUrl,
           },
         },
       });
