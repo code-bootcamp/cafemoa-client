@@ -33,7 +33,9 @@ export type ICafeInform = {
   id: Scalars['String'];
   is_Parking: Scalars['Boolean'];
   is_WC: Scalars['Boolean'];
+  is_Wifi: Scalars['Boolean'];
   like: Scalars['Int'];
+  notice: Scalars['String'];
   operatingInfo: Scalars['String'];
   owner: IOwner;
   thumbNail: Scalars['String'];
@@ -47,7 +49,9 @@ export type ICafeInformInput = {
   detailAddr: Scalars['String'];
   is_Parking: Scalars['Boolean'];
   is_WC: Scalars['Boolean'];
+  is_Wifi: Scalars['Boolean'];
   menu_imageUrl: Array<Scalars['String']>;
+  notice: Scalars['String'];
   operatingInfo: Scalars['String'];
 };
 
@@ -586,7 +590,9 @@ export type IUpdateCafeInform = {
   detailAddr?: InputMaybe<Scalars['String']>;
   is_Parking?: InputMaybe<Scalars['Boolean']>;
   is_WC?: InputMaybe<Scalars['Boolean']>;
+  is_Wifi?: InputMaybe<Scalars['Boolean']>;
   menu_imageUrl?: InputMaybe<Array<Scalars['String']>>;
+  notice?: InputMaybe<Scalars['String']>;
   operatingInfo?: InputMaybe<Scalars['String']>;
   ownerNum?: InputMaybe<Scalars['String']>;
 };

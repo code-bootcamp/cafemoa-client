@@ -82,7 +82,7 @@ export default function MyStamp() {
       <HeroWrap
         imageUrl="/images/review/review_hero01.png"
         title="마이모아"
-        subject="마이페이지 마이페이지 마이페이지"
+        subject="내 정보를 한눈에 보기 쉽게 모아!"
       ></HeroWrap>
       <S.ContainerWrapper>
         <div>

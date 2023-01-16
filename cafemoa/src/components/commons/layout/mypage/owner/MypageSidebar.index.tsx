@@ -1,8 +1,6 @@
-import { AiOutlineSetting } from "react-icons/ai";
 import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../commons/stores";
 import Text from "../../../text/01/Text01.index";
-import Users01 from "../../../user/01/Users01.index";
 import * as S from "./MypageSidebar.styles";
 
 interface ILayoutProps {

@@ -36,16 +36,11 @@ interface IStampSaveData {
 export default function StampSaveByPhone() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  // const { owner } = useFetchUser();
-  // console.log(owner);
 
   const [createStamp] = useCreateStamp();
   const { data, onRefetchUsers } = useFetchCouponAddUsers();
   const { data: mycafedata } = useFetchMyCafes();
-  // console.log(data);
-  console.log(mycafedata);
   const cafeId = String(mycafedata?.fetchMyCafes[0].id);
-  console.log(cafeId);
 
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
@@ -78,15 +73,15 @@ export default function StampSaveByPhone() {
     const { phone, ...value } = data;
     console.log(value);
     console.log(selectValue);
-
     if (value.password === "") {
       Modal.warning({
         content: "가맹주 비밀번호를 입력해주세요!",
       });
+      return;
     }
 
     try {
-      const result = createStamp({
+      void createStamp({
         variables: {
           createStampInput: {
             phone: value.selectPhone,
@@ -96,17 +91,26 @@ export default function StampSaveByPhone() {
           },
         },
       });
-      setIsModalOpen(false);
       Modal.success({
         content: `스탬프가 ${selectValue}개 적립되었습니다!`,
         afterClose() {
           setValue("phone", "");
-          void router.push(`/mypage/owner/${cafeId}/stampsave`);
+          setIsModalOpen(false);
+          // onClickIsModalOpen();
+          // void router.push(`/mypage/owner/${cafeId}/stampsave`);
         },
       });
-      console.log(result);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) {
+        alert(error.message);
+
+        // if (error.message.includes("비밀번호가 일치하지 않습니다")) {
+        //   Modal.warning({
+        //     content: "비밀번호가 일치하지 않습니다.",
+        //   });
+        //   // return;
+        // }
+      }
     }
   };
 

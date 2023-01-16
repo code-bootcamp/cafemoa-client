@@ -11,7 +11,7 @@ export default function StampSaveByQr() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const { mycafedata } = useFetchMyCafes();
+  const { data: mycafedata } = useFetchMyCafes();
   const cafeId = mycafedata?.fetchMyCafes[0].id;
   console.log(cafeId);
 
@@ -59,7 +59,10 @@ export default function StampSaveByQr() {
             onClickIsModalOpen(false);
           }}
         >
-          <StampSaveQrModal searchValue={searchValue} />
+          <StampSaveQrModal
+            searchValue={searchValue}
+            setIsModalOpen={setIsModalOpen}
+          />
         </S.ModalWrap>
       )}
       <S.StampWrapper>

@@ -2,8 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import * as S from "./Header.styles";
 import { RiMenu3Fill } from "react-icons/ri";
-import { Drawer } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CafeSearchModal from "../../../units/cafesearch/CafeSearchModal.index";
 import Text from "../../text/01/Text01.index";
@@ -12,9 +11,7 @@ import { infoUserState } from "../../../../commons/stores";
 import { useRecoilState } from "recoil";
 import { useUserLogout } from "../../hooks/mutations/useUserLogout";
 import { IoMdExit } from "react-icons/io";
-import { useFetchCafesWithOption } from "../../hooks/queries/usefetchCafesWithOption";
 import Users01 from "../../user/01/Users01.index";
-import { DEFAULT_COLOR } from "../../../../commons/default/default";
 
 const GNB_MENUS = [
   {
@@ -158,7 +155,7 @@ export default function HeaderLayout() {
                   >
                     <a>
                       <Text size="20" weight="500">
-                        MY
+                        마이페이지
                       </Text>
                     </a>
                   </Link>
@@ -199,7 +196,7 @@ export default function HeaderLayout() {
                   >
                     <a>
                       <Text size="20" weight="500">
-                        MY
+                        마이페이지
                       </Text>
                     </a>
                   </Link>
