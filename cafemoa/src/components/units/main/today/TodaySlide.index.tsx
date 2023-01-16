@@ -9,6 +9,7 @@ import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
 import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, EffectFade, Thumbs } from "swiper";
+import { regText } from "../../../../commons/libraries/utill";
 
 export default function TodaySlide() {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
@@ -59,7 +60,7 @@ export default function TodaySlide() {
                     </div>
                     <S.InfoContents>
                       <Text size="16" fontColor="white" weight="500">
-                        {el?.cafeinfo}
+                        {regText(el?.cafeinfo)}
                       </Text>
                     </S.InfoContents>
                     <div>

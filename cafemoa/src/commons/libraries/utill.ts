@@ -64,3 +64,9 @@ export const reviewRegisterDate = (value: string, limit: 0 | 1 | 2 | 3) => {
     nowDate.setDate(nowDate.getDate())
   );
 };
+
+export const regText = (value: string) => {
+  const newText = value.replace(/<[^>]*>?/g, "");
+
+  return newText;
+};

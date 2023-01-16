@@ -28,7 +28,7 @@ export const FETCH_COMMENT_BY_CAFE_ID = gql`
 
 export const useFetchCommentByCafeID = () => {
   const router = useRouter();
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchCommentBycafeID">,
     IQueryFetchCommentBycafeIdArgs
   >(FETCH_COMMENT_BY_CAFE_ID, {
@@ -36,5 +36,33 @@ export const useFetchCommentByCafeID = () => {
       cafeID: String(router.query.cafeInformID),
     },
   });
+
+  const onHandleMore = async () => {
+    if (data === undefined) return;
+    if (data.fetchCommentBycafeID.length === 0) return;
+    try {
+      void fetchMore({
+        variables: {
+          page: Number(Math.ceil(data.fetchCommentBycafeID.length / 10) + 1),
+        },
+        updateQuery(prev, { fetchMoreResult }) {
+          if (fetchMoreResult.fetchCommentBycafeID === undefined) {
+            return {
+              fetchCommentBycafeID: [...prev.fetchCommentBycafeID],
+            };
+          }
+          return {
+            fetchCommentBycafeID: [
+              ...prev?.fetchCommentBycafeID,
+              ...fetchMoreResult?.fetchCommentBycafeID,
+            ],
+          };
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return { data };
 };

@@ -90,8 +90,8 @@ export default function StampCheck() {
         </S.NotificationContainer>
       </S.StampCheckContainer>
       <ModalComponent
-        title={`스탬프 적립`}
-        text={`스탬프 적립을 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
+        title={`적립 확인`}
+        text={`알림삭제를 위해서 \n 가맹주 비밀번호를 입력해주세요.`}
         status="write"
         buttons={
           <>

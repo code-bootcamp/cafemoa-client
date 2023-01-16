@@ -97,7 +97,7 @@ export default function ReviewComment(props: IReviewCommentProps) {
             name={props.el.user.nickname}
             size="md"
           />
-          {infoUser.fetchUser?.id === props.el.user.id &&
+          {infoUser?.fetchUser?.id === props.el.user.id &&
             reviewRegisterDate(props.el.time, 3) && (
               <S.BtnWrapper>
                 <S.EditBtn onClick={onClickCommentEdit(props.el.id)}>

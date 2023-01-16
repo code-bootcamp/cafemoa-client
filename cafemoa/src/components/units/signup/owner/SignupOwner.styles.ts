@@ -26,6 +26,9 @@ export const ContainerInner = styled.form`
   ${mq.MobileL} {
     padding: 50px 100px;
   }
+  ${mq.MobileS} {
+    padding: 24px;
+  }
 `;
 export const TitleWrap = styled.div`
   position: relative;

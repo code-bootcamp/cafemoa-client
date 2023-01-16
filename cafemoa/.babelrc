@@ -12,7 +12,7 @@
   ],
   "plugins": [
     "@emotion/babel-plugin",
-    "babel-plugin-styled-components",
-    "transform-remove-console"
+    "babel-plugin-styled-components"
+    // "transform-remove-console"
   ]
 }
