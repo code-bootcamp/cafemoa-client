@@ -22,7 +22,7 @@ export const usePickCafe = () => {
     try {
       await PickCafe({
         variables: {
-          cafeInformID: router.query.cafeInformID,
+          cafeInformID: String(router.query.cafeInformID),
         },
         refetchQueries: [
           {

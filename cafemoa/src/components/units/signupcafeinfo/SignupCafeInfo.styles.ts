@@ -7,7 +7,6 @@ import {
   LargeBtn,
   MediumBtn,
   SmallBtn,
-  TagWrap,
 } from "../../../commons/styles/commonStyles";
 
 interface ISignupStylesProps {

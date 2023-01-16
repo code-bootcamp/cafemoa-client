@@ -9,8 +9,10 @@ interface IFormCreateCafeInformData {
   operatingInfo: string;
   cafeAddr: string;
   detailAddr: string;
+  notice: string;
   cafeTag: string[];
   is_WC: boolean;
+  is_Wifi: boolean;
   is_Parking: boolean;
   menu_imageUrl: string[];
   cafe_imageUrl: string[];

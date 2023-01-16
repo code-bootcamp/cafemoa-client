@@ -24,12 +24,17 @@ export default function Uploads01(props: IUploadProps) {
     console.log(tempImgUrl);
     props?.defaultUrls.map((el, idx) => {
       if (el !== "") {
-        tempImgUrl[
-          idx
-        ] = `https://storage.googleapis.com/${props?.defaultUrls[idx]}`;
+        console.log("=========================");
+        console.log("=========================");
+        console.log("=========================");
+        console.log(el);
+        console.log("=========================");
+        console.log("=========================");
+        console.log("=========================");
+        return (tempImgUrl[idx] = `https://storage.googleapis.com/${el}`);
       } else {
         console.log(el);
-        tempImgUrl[idx] = "";
+        return (tempImgUrl[idx] = "");
       }
     });
     console.log(tempImgUrl);

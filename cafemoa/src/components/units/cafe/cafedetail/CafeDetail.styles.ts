@@ -116,6 +116,10 @@ export const SubTitleWrapper = styled.div`
   margin-top: 32px;
   margin-bottom: 16px;
 `;
+export const NoticeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export const TimeTableWrapper = styled.div`
   display: flex;
   flex-direction: column;

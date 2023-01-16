@@ -1,5 +1,4 @@
 import { Modal } from "antd";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
@@ -17,7 +16,6 @@ export default function OwnerLogin() {
   const { owner } = useFetchUser();
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const [, setInfoUser] = useRecoilState(infoUserState);
-  const [infoUser] = useRecoilState(infoUserState);
   const [ownerLogin] = useOwnerLogin();
 
   const { register, handleSubmit } = useForm({

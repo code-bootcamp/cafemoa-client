@@ -7,8 +7,6 @@ import {
   MediumBtn,
 } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
-import Box01 from "../../../../commons/box/01/Box01.index";
-import { BoxWrapper } from "../../../../commons/box/01/Box01.styles";
 
 export const BannerWrap = styled.div`
   > div {

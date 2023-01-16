@@ -32,7 +32,7 @@ export const useCreateOwnerComment = () => {
 
   const createOwnerCommentSubmit = async (
     data: IFormCreateOwnerCommentData,
-    commentID: String
+    commentID: string
   ) => {
     try {
       const result = await createOwnerComment({
