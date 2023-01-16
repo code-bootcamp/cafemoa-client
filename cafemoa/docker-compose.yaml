@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  my-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 2500:3000
