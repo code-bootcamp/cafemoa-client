@@ -23,7 +23,7 @@ export default function StampCheck() {
   const { deleteUnusualStampSubmit } = useDeleteUnusualStamp();
   const inputRef = useRef<HTMLInputElement>(null);
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
-  const { register, setValue, watch, handleSubmit } = useForm({
+  const { register, setValue, handleSubmit } = useForm({
     mode: "onChange",
     defaultValues: {
       stamphistoryId: "",

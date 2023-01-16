@@ -5,7 +5,7 @@ import MyCouponValid from "./MyCoupon-valid";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import { useRouter } from "next/router";
 import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
-import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/user/SidebarMenu/SidebarMenu.index";
 
 export default function MyCoupon() {
   const router = useRouter();
