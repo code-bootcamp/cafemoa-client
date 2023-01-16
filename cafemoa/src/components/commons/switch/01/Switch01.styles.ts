@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
 

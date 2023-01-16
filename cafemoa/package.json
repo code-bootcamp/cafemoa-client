@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build:ssg": "next build & next export",
     "build": "next build",
-    "start": "next start",
+    "prestart": "NODE_ENV=production next build",
+    "start": "NODE_ENV=production next start",
     "lint": "next lint",
     "generate": "graphql-codegen"
   },
@@ -69,6 +70,7 @@
     "@types/zen-observable": "^0.8.3",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "babel-plugin-styled-components": "^2.0.7",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^8.0.1",
     "eslint-config-next": "13.0.0",
     "eslint-config-prettier": "^8.5.0",
