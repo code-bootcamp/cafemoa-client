@@ -11,6 +11,10 @@ export const globalStyles = css`
     margin: 0;
     box-sizing: border-box;
   }
+  #__next {
+    width: 100%;
+    min-width: 320px;
+  }
   button {
     margin: 0;
     padding: 0;
