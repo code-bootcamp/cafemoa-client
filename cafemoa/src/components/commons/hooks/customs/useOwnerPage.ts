@@ -14,4 +14,17 @@ export const useOwnerPage = () => {
       }
     }
   }, [infoUser, router]);
+
+  useEffect(() => {
+    if (infoUser?.fetchOwnerLoggedIn === undefined) return;
+    console.log(router.pathname);
+    if (
+      !infoUser.fetchOwnerLoggedIn.is_cafeInform &&
+      router.pathname !== "/mypage/owner/[ownerId]/cafeInform"
+    ) {
+      void router.push(
+        `/mypage/owner/${infoUser.fetchOwnerLoggedIn.id}/cafeInform`
+      );
+    }
+  }, [infoUser, router.pathname]);
 };
