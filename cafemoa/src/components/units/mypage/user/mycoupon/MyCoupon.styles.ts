@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Tabs } from "antd";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
@@ -7,8 +8,17 @@ import {
 } from "../../../../../commons/styles/commonStyles";
 import * as mq from "../../../../../commons/styles/mediaQuery";
 
+interface ICouponStylesProps {
+  expired?: boolean;
+}
+
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
+  display: flex;
+  flex-direction: row;
+  ${mq.MobileM} {
+    flex-direction: column;
+  }
 `;
 export const ModalButton = styled(MediumBtn)``;
 
@@ -20,6 +30,14 @@ export const CouponUseBtn = styled(MediumBtn)`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 350px);
+  ${mq.DesktopS} {
+    width: calc(100% - 252px);
+  }
+  ${mq.MobileM} {
+    padding-top: 24px;
+    width: 100%;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -30,16 +48,18 @@ export const ValidWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0 -30px;
+  margin: 0 -15px;
 `;
 
 export const ValidBox = styled.li`
   display: block;
   width: 50%;
-  padding: 0 30px 72px;
+  padding: 0 15px 30px;
   ${mq.MobileL} {
     width: 100%;
-    padding: 0 30px 32px;
+  }
+  ${mq.DesktopS} {
+    width: 100%;
   }
 `;
 
@@ -49,12 +69,16 @@ export const BoxWrapper = styled.div`
   background-color: ${DEFAULT_COLOR.subColor04};
   padding-right: 90px;
   border-radius: 10px;
+
+  ${mq.DesktopM} {
+    padding-right: 0;
+    padding-bottom: 0;
+  }
 `;
 
-export const UsedCouponBoxWrapper = styled.div`
+export const UsedCouponBoxWrapper = styled.div<ICouponStylesProps>`
   position: relative;
   background-color: ${DEFAULT_COLOR.subColor04};
-  padding-right: 90px;
   border-radius: 10px;
   ::before {
     content: "";
@@ -63,17 +87,27 @@ export const UsedCouponBoxWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("/images/mycoupon/mycoupon_used.png");
+    ${(props) =>
+      props?.expired ?? false
+        ? css`
+            background-image: url("/images/mycoupon/mycoupon_expired.png");
+          `
+        : css`
+            background-image: url("/images/mycoupon/mycoupon_used.png");
+          `}
     background-repeat: no-repeat;
     background-color: transparent;
-    background-position: right 140px center;
+    background-position: right 190px center;
     z-index: 99;
+    ${mq.DesktopM} {
+      padding-right: 0;
+      background-position: right 100px center;
+    }
   }
   ${mq.MobileS} {
-    padding-right: 0;
-    padding-bottom: 64px;
     ::before {
-      background-position: center;
+      /* background-position: right 20px top 20px; */
+      background-size: 72px;
     }
   }
 `;
@@ -85,7 +119,7 @@ export const CouponDetail = styled.div`
   background-color: ${DEFAULT_COLOR.white};
   border: 1px solid ${DEFAULT_COLOR.black};
   border-radius: 10px;
-  padding: 40px 24px 40px;
+  padding: 24px 24px 40px;
 `;
 
 export const UsedCoupon = styled.div`
@@ -94,7 +128,7 @@ export const UsedCoupon = styled.div`
   background-color: ${DEFAULT_COLOR.white};
   border: 1px solid ${DEFAULT_COLOR.black};
   border-radius: 10px;
-  padding: 40px 24px 40px;
+  padding: 24px 24px 40px;
   ::before {
     content: "";
     background-color: lightgray;
@@ -110,6 +144,7 @@ export const UsedCoupon = styled.div`
 
 export const Div = styled.div`
   padding-bottom: 10px;
+  padding-right: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -124,20 +159,28 @@ export const BtnWrapper = styled.div`
 
 export const CouponImg = styled.img`
   position: absolute;
-  right: 28px;
-  top: 62px;
-  ${mq.MobileS} {
-    right: initial;
-    top: initial;
-    left: 50%;
-    transform: translateX(-50%) rotate(90deg) scale(0.6);
-    bottom: -64px;
-  }
+  right: 5px;
+  top: 50px;
+  width: 28px;
+`;
+
+export const InvalidCouponImg = styled.img`
+  position: absolute;
+  right: 34px;
+  top: 64px;
+  width: 18px;
 `;
 
 export const CoffeeImgWrap = styled.div`
+  position: absolute;
+  right: 24px;
+  top: 20px;
   font-size: 40px;
   color: ${DEFAULT_COLOR.subColor01};
+
+  ${mq.MobileL} {
+    display: block;
+  }
 `;
 
 export const TapWrap = styled(Tabs)`
@@ -169,6 +212,11 @@ export const TapWrap = styled(Tabs)`
 
   .ant-tabs-top > .ant-tabs-nav::before {
     border-bottom: none;
+  }
+  ${mq.MobileL} {
+    .ant-tabs-content {
+      padding-top: 32px;
+    }
   }
 `;
 

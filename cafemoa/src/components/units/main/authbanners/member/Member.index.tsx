@@ -2,22 +2,24 @@ import Box01 from "../../../../commons/box/01/Box01.index";
 import Text from "../../../../commons/text/01/Text01.index";
 import { QRCode } from "react-qrcode-logo";
 import * as S from "./Member.styles";
-import { useState } from "react";
+// import {} from "react";
 import MemberStamp from "./Member-stamp";
 import MemberCoupon from "./Member-coupon";
 import { DEFAULT_COLOR } from "../../../../../commons/default/default";
+import { useRecoilState } from "recoil";
+import { infoUserState } from "../../../../../commons/stores";
 
 export default function Member() {
-  const [userQrCode, setUserQrCode] = useState("https://naver.com");
-
+  const [infoUser] = useRecoilState(infoUserState);
+  const mainRegion = infoUser?.fetchUser?.address?.split(" ");
   return (
     <>
-      <Box01
-        styles={{
-          padding: "48px",
-        }}
-      >
-        <S.BannerWrap>
+      <S.BannerWrap>
+        <Box01
+          styles={{
+            padding: "48px",
+          }}
+        >
           <S.BannerLeft>
             <QRCode
               size={400}
@@ -37,7 +39,7 @@ export default function Member() {
               qrStyle="dots"
               logoWidth={230}
               logoOpacity={0.4}
-              value={userQrCode}
+              value={infoUser.fetchUser?.phone}
             />
             ,
           </S.BannerLeft>
@@ -45,11 +47,16 @@ export default function Member() {
             <div>
               <div style={{ marginBottom: "8px" }}>
                 <Text size="32" weight="700">
-                  안녕하세요 닉네임님
+                  안녕하세요 {infoUser.fetchUser?.nickname}님
                 </Text>
               </div>
               <div>
-                <Text size="20">내가 활동하는 지역은 ㅁㅁㅁ 입니다.</Text>
+                <Text size="20">
+                  내가 활동하는 지역은 &nbsp;
+                  {mainRegion !== undefined &&
+                    `${mainRegion[0]} ${mainRegion[1]}`}
+                  &nbsp; 입니다.
+                </Text>
               </div>
             </div>
             <S.TapWrap
@@ -58,18 +65,20 @@ export default function Member() {
                 {
                   label: "스탬프",
                   key: "1",
-                  children: <MemberStamp />,
+                  children: <MemberStamp infoUserId={infoUser.fetchUser?.id} />,
                 },
                 {
                   label: "쿠폰",
                   key: "2",
-                  children: <MemberCoupon />,
+                  children: (
+                    <MemberCoupon infoUserId={infoUser.fetchUser?.id} />
+                  ),
                 },
               ]}
             />
           </S.BannerRight>
-        </S.BannerWrap>
-      </Box01>
+        </Box01>
+      </S.BannerWrap>
     </>
   );
 }

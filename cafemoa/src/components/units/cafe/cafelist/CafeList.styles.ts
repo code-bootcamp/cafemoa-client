@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
-import InfiniteScroll from "react-infinite-scroller";
-import { ContainerWrap, TagWrap } from "../../../../commons/styles/commonStyles";
+import {
+  ContainerWrap,
+  TagWrap,
+} from "../../../../commons/styles/commonStyles";
 import * as mq from "../../../../commons/styles/mediaQuery";
 
 // --------------------------------------------------카페 상세페이지 퍼블리싱
@@ -8,8 +10,8 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
 export const CardsWrapper = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   padding: 0;
   margin: 0 -20px;
   // background: green;
@@ -45,5 +47,9 @@ export const LikeWrapper = styled.div`
   top: 6px;
 `;
 
+export const DetailTagWrap = styled.div`
+  padding-top: 8px;
+`;
+
 // -------------------------------------------------카페 상세페이지 기능부분
-export const CafeInfiniteScroll = styled(InfiniteScroll)``;
+// export const CafeInfiniteScroll = styled(InfiniteScroll)``;

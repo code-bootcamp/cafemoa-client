@@ -5,7 +5,10 @@ import * as mq from "../../../commons/styles/mediaQuery";
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
-
+export const FilterWrapper = styled.div`
+  width: 10%;
+  padding-bottom: 40px;
+`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,15 +22,15 @@ export const TagWrapper = styled(TagWrap)`
 `;
 
 export const ReviewListsWrap = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
   padding: 0;
   margin: 0 -20px;
 `;
 
 export const ReviewList = styled.li`
   display: block;
-  width: 33.3%;
+  width: 25%;
   padding: 20px;
   ${mq.MobileL} {
     width: 50%;
@@ -36,7 +39,9 @@ export const ReviewList = styled.li`
     width: 100%;
   }
 `;
-
+export const UserWrapper = styled.div`
+  // padding-top: 8px;
+`;
 export const CafeName = styled.div`
   padding-top: 20px;
 `;
@@ -46,13 +51,11 @@ export const ReviewContent = styled.div`
 `;
 
 export const ReviewTag = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 21px;
-  width: 100%;
+  padding-top: 8px;
 `;
 
 export const ReviewDate = styled.span`
-  margin-left: 10px;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
 `;

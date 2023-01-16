@@ -41,6 +41,9 @@ export const InputWrap = styled.div`
   > div {
     width: 100%;
   }
+  > button {
+    text-align: center;
+  }
   padding-bottom: 40px;
   justify-content: space-between;
   ${(props: ISignupStylesProps) =>
@@ -55,7 +58,7 @@ export const InputWrap = styled.div`
         }
       }
       > button {
-        width: 140px;
+        width: 128px;
         border-radius: 10px;
       }
     `}
@@ -89,9 +92,14 @@ export const ContentsTitleWrap = styled.div`
   padding-bottom: 20px;
   border-bottom: 3px solid ${DEFAULT_COLOR.subColor04};
 `;
-export const CafeImageContainer = styled.div`
+export const CheckBoxContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+`;
+export const CafeImageContainer = styled.div`
+  margin-top: 16px;
 `;
 export const CafeImageWrap = styled.div`
   width: 25%;
@@ -102,6 +110,18 @@ export const BusinessBtnWrap = styled.div`
   > button {
     width: 180px;
     border-radius: 10px;
+    text-align: center;
+  }
+`;
+export const ImageWrapper = styled.div`
+  padding: 40px 0px;
+`;
+export const TagsWrap = styled.div`
+  margin-top: 16px;
+  padding: 0 0 16px;
+  > button {
+    margin-right: 8px;
+    margin-top: 8px;
   }
 `;
 export const EmailBtn = styled(MediumBtn)``;

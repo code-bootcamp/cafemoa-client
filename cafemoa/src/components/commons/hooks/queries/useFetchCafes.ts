@@ -7,19 +7,24 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_CAFES = gql`
-  query fetchCafes($Location: String, $Tags: [String!], $page: Int!) {
-    fetchCafes(Location: $Location, Tags: $Tags, page: $page) {
+  query fetchCafes($location: String, $tags: [String!], $page: Int) {
+    fetchCafes(location: $location, tags: $tags, page: $page) {
       id
       cafeinfo
       operatingInfo
-      brandName
       like
       cafeAddr
       like
-      brandName
+      owner {
+        brandName
+      }
       cafeTag {
         id
         tagName
+      }
+      cafeImage {
+        id
+        cafe_image
       }
     }
   }
@@ -28,13 +33,13 @@ export const FETCH_CAFES = gql`
 export const useFetchCafes = () => {
   const [tagState, setTagState] = useState<string[]>([]);
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     Pick<IQuery, "fetchCafes">,
     IQueryFetchCafesArgs
   >(FETCH_CAFES, {
     variables: {
-      Location: "",
-      Tags: [],
+      location: "",
+      tags: [],
       page: 1,
     },
   });
@@ -43,16 +48,49 @@ export const useFetchCafes = () => {
     setTagState(tagValue);
   }, 300);
 
-  const onRefetchCafes = (Tags: string[]) => {
-    getDebounce(Tags);
+  const onRefetchCafes = (tags: string[]) => {
+    getDebounce(tags);
   };
 
   const onSelectLocation = (location: string) => {
     setLocationState(location);
   };
 
+  const onHandleMore = async () => {
+    if (data === undefined) return;
+    if (data.fetchCafes?.length === 0) return;
+    try {
+      void fetchMore({
+        variables: {
+          tags: tagState,
+          page: Number(Math.ceil(data.fetchCafes.length / 10) + 1),
+          location: locationState,
+        },
+        updateQuery(prev, { fetchMoreResult }) {
+          if (fetchMoreResult.fetchCafes === undefined) {
+            console.log(prev, "sss");
+            return {
+              fetchCafes: [...prev.fetchCafes],
+            };
+          }
+          if (prev.fetchCafes === undefined) {
+            return {
+              fetchCafes: [],
+            };
+          }
+          return {
+            fetchCafes: [...prev?.fetchCafes, ...fetchMoreResult?.fetchCafes],
+          };
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    void refetch({ Tags: tagState, Location: locationState });
+    void refetch({ tags: tagState, location: locationState });
   }, [tagState, locationState]);
-  return { data, onRefetchCafes, onSelectLocation };
+
+  return { data, onRefetchCafes, onSelectLocation, refetch, onHandleMore };
 };

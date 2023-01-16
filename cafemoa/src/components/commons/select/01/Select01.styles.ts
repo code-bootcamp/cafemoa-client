@@ -35,7 +35,9 @@ export const SelectWrap = styled.div<ISelectStylesProps>`
     left: 0;
     top: 72px;
     padding: 25px 8px;
-    width: 100%;
+    width: calc(100% + 20px);
+    max-height: 200px;
+    overflow-y: auto;
     border: 1px solid #000000;
     border-radius: 10px;
     background-color: #ffffff;

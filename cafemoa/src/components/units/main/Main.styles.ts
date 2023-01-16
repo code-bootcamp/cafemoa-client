@@ -7,21 +7,34 @@ import { IMainStylesProps } from "./Main.types";
 
 const ScrollAni = keyframes`
   0% {
-    top : 5px
+    top: 5px;
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    top: 30px;
+    opacity: 0;
   }
   100% {
-    top : 30px
+    opacity: 0;
   }
 `;
 
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
-export const MainVisual = styled.div`
+export const MainVisual = styled.div<IMainStylesProps>`
   position: relative;
   width: 100%;
   height: calc(100vh - 100px);
   overflow: hidden;
+
+  ${mq.MobileM} {
+    height: ${(props) =>
+      props?.isHidden === true ? "0" : "calc(100vh - 72px)"};
+  }
 `;
 export const VideoWrap = styled.div`
   width: 100%;
@@ -36,9 +49,10 @@ export const VideoWrap = styled.div`
     transform: translate(-50%, -50%);
     background-image: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.1) 0%,
       rgba(255, 255, 255, 0) 100%
     );
+    z-index: 1;
   }
 `;
 
@@ -47,7 +61,7 @@ export const VisualVideo = styled.video`
   left: 50%;
   top: 50%;
   width: 100%;
-  min-width: 1400px;
+  min-width: 1920px;
   transform: translate(-50%, -50%);
   ${mq.MobileM} {
     left: 20%;
@@ -77,9 +91,9 @@ export const ScrollAnimation = styled.div`
     position: absolute;
     left: 50%;
     top: 5px;
-    width: 15px;
+    width: 8px;
     height: 15px;
-    border-radius: 100%;
+    border-radius: 10px;
     background-color: ${DEFAULT_COLOR.white};
     transform: translateX(-50%);
     animation: ${ScrollAni} 2s ease-in infinite forwards;
@@ -93,6 +107,9 @@ export const MainSection = styled.div`
   padding: 50px 0;
   &:nth-of-type(2) {
     padding-top: 120px;
+    ${mq.MobileM} {
+      padding-top: 56px;
+    }
   }
 `;
 export const MainSectionInner = styled(ContainerWrap)`
@@ -101,6 +118,9 @@ export const MainSectionInner = styled(ContainerWrap)`
 export const MainWrap = styled.div`
   > div + div {
     padding-top: 100px;
+    ${mq.MobileM} {
+      padding-top: 25px;
+    }
   }
 `;
 
@@ -155,6 +175,10 @@ export const Category = styled.div<IMainStylesProps>`
     &:hover {
       background-size: 110%;
     }
+  }
+  ${mq.MobileM} {
+    width: 50%;
+    padding: 10px;
   }
 `;
 

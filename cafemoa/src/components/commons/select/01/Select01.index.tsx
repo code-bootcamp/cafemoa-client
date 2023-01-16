@@ -21,21 +21,24 @@ export default function Select01(props: ISelectProps) {
   const _styles = { ...props.styles };
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState<string | number>();
+  const [label, setLabel] = useState<string | number>();
   const onClickOpen = () => {
     setIsOpen((prev) => !prev);
   };
   const onClickSelectValue =
-    (value: string | number) => (event: MouseEvent<HTMLButtonElement>) => {
+    (value: string | number, label: string | number) =>
+    (event: MouseEvent<HTMLButtonElement>) => {
       setIsOpen((prev) => !prev);
       setValue(value);
+      setLabel(label);
       props.setSelectValue(value);
     };
 
   return (
     <S.SelectWrap style={_styles} isOpen={isOpen} isValue={value !== undefined}>
       <div>
-        <button onClick={onClickOpen}>
-          {value !== undefined ? value : props.defaultText ?? "선택"}
+        <button type="button" onClick={onClickOpen}>
+          {label !== undefined ? label : props.defaultText ?? "선택"}
           <DownOutlined />
         </button>
       </div>
@@ -43,7 +46,12 @@ export default function Select01(props: ISelectProps) {
         {props.selectValue?.map((el) => (
           <Fragment key={uuidv4()}>
             <li>
-              <button onClick={onClickSelectValue(el.value)}>{el.label}</button>
+              <button
+                type="button"
+                onClick={onClickSelectValue(el.value, el.label)}
+              >
+                {el.label}
+              </button>
             </li>
           </Fragment>
         ))}

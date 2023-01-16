@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Modal, Tabs } from "antd";
+import { Tabs } from "antd";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import {
   BtnWrap,
@@ -7,6 +7,7 @@ import {
   MediumBtn,
   SmallBtn,
 } from "../../../../commons/styles/commonStyles";
+import * as mq from "../../../../commons/styles/mediaQuery";
 
 export const DetailContainer = styled(ContainerWrap)`
   padding-top: 100px;
@@ -15,17 +16,24 @@ export const CafeImageWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
+  overflow: hidden;
   > img {
     position: absolute;
     left: 50%;
     top: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     transform: translateX(-50%);
   }
 `;
 export const CafeInfoWrapper = styled.div`
   width: 100%;
   padding-top: 56px;
+`;
+export const CafeInfoHeader = styled.div`
+  width: 100%;
+  display: flex;
 `;
 export const CafeNameWrapper = styled.div`
   width: 100%;
@@ -44,13 +52,26 @@ export const TagContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding-top: 16px;
+  flex-wrap: nowrap;
+  ${mq.MobileM} {
+    max-width: max-content;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    > * {
+      position: relative;
+      float: left;
+      width: auto;
+      height: auto;
+      flex-shrink: 0;
+    }
+  }
 `;
 
-export const LikeContainer = styled.div`
-  width: 40%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+export const LikeContainer = styled.button`
+  padding-top: 2px;
+  padding-left: 4px;
+  // background: red;
 `;
 
 export const Section = styled.div`
@@ -95,6 +116,10 @@ export const SubTitleWrapper = styled.div`
   margin-top: 32px;
   margin-bottom: 16px;
 `;
+export const NoticeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export const TimeTableWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,26 +128,42 @@ export const TimeTableWrapper = styled.div`
 
 export const OwnerImageContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 40px;
+  position: relative;
 `;
 export const OwnerImageWrapper = styled.div`
-  width: 24%;
+  width: 25%;
   display: inline-block;
+  > .ant-image {
+    width: 100%;
+  }
+  ${mq.MobileM} {
+    > .ant-image {
+      width: 33.3333%;
+    }
+  }
+  ${mq.MobileS} {
+    > .ant-image {
+      width: 50%;
+    }
+  }
 `;
 // ------------------------리뷰모아 부분-------------------
 
 export const ReviewContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 24px;
 `;
 export const ReviewWrapper = styled.div`
   width: 50%;
   padding-right: 32px;
-  margin-bottom: 16px;
+  margin-bottom: 64px;
+  ${mq.MobileM} {
+    width: 100%;
+    padding-right: 0px;
+    margin-bottom: 32px;
+  }
+  // margin-right: 4px;
 `;
 export const ReviewHeader = styled.div`
   display: flex;
@@ -130,24 +171,49 @@ export const ReviewHeader = styled.div`
   justify-content: space-between;
 `;
 export const BtnWrapper = styled.div`
-  width: 20%;
   display: flex;
   padding-bottom: 50px;
+  > button {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+  }
 `;
-export const EditBtn = styled.span`
-  width: 100%;
+export const EditBtn = styled.button`
+  font-size: 24px;
   text-align: right;
+  :hover {
+    cursor: pointer;
+  }
 `;
-export const DeleteBtn = styled.span`
-  width: 100%;
+export const DeleteBtn = styled.button`
+  margin-left: 8px;
+  font-size: 24px;
   text-align: right;
+  :hover {
+    cursor: pointer;
+  }
 `;
 export const ReviewContents = styled.div`
   width: 100%;
-  padding-left: 96px;
+  display: flex;
+  padding-left: 2px;
+`;
+export const LikeWrapper = styled.div`
+  padding-left: 24px;
+  padding-top: 4px;
+  ${mq.MobileL} {
+    padding-left: 10px;
+  }
+`;
+export const ContentsText = styled.div`
+  margin-left: 32px;
+  ${mq.MobileL} {
+    margin-left: 20px;
+  }
 `;
 export const ReplyBtn = styled.div`
-  padding-top: 16px;
+  padding-top: 8px;
   text-align: right;
 `;
 export const ReviewColorLine = styled.div`
@@ -155,16 +221,36 @@ export const ReviewColorLine = styled.div`
   border-bottom: 10px solid #f3e6d8;
   margin: 32px 0px 16px 96px;
 `;
-export const ReviewImageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-left: 64px;
+export const ReviewImage = styled.div`
+  position: relative;
+  padding-bottom: 100%;
+  overflow: hidden;
+  .ant-image {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 `;
 export const ReviewImageWrapper = styled.div`
   width: 33.3333%;
   padding: 10px;
-  padding-bottom: 32px;
-  border-bottom: 4px solid ${DEFAULT_COLOR.subColor04}
+  margin-bottom: 32px;
+`;
+export const ReviewImageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 90px;
+  border-bottom: 2px solid ${DEFAULT_COLOR.subColor04};
+  ${mq.MobileL} {
+    margin-left: 64px;
+  }
 `;
 export const ComponentsTabs = styled(Tabs)`
   margin-top: 40px;
@@ -213,49 +299,39 @@ export const BtnInnerWrapper = styled.div`
 `;
 // ============================점주 답글부분=====================
 export const ReplyWrap = styled.div`
+  // background: red;
+`;
+export const ReplyFormWrapper = styled.form`
   display: flex;
   padding-left: 100px;
-`
-export const ReplyWrapper = styled.div`
-  width: 70%;
 `;
-export const ReplySubmitBtn = styled.div`
-  width: 30%;
+export const ReplyInputWrapper = styled.div`
+  width: 80%;
+`;
+export const ReplySubmitBtn = styled(SmallBtn)`
   margin-left: 10px;
   padding-top: 10px;
-`
+`;
 export const OwnerComment = styled.div`
   display: flex;
   padding-left: 64px;
   padding-top: 16px;
-`
-export const CommentIcon = styled.div`
-`
+`;
+export const CommentIcon = styled.div``;
 export const CommentContents = styled.div`
   padding-left: 16px;
-`
+`;
 // ----------------------------모달 부분----------------------
 
-export const ModalWrapper = styled(Modal)`
-  .ant-modal-content {
-  }
-  .ant-modal-centered .ant-modal {
-  }
-  .ant-modal-body {
-    // width: fit-content
-  }
-  .ant-modal-body {
-  }
+export const ReviewWriteWrapper = styled.div`
+  /* width: calc(100% - 100px);
+  padding: 40px 100px; */
 `;
-export const ModalReviewWrapper = styled.div`
-  width: 100%;
-  padding: 80px 64px;
-`;
-export const ModalReviewTitle = styled.div`
+export const ReviewWriteTitle = styled.div`
   margin-bottom: 24px;
 `;
 export const ModalReviewContents = styled.div``;
-export const ModalReviewBtnContainer = styled(BtnWrap)`
+export const ReviewWriteBtnContainer = styled(BtnWrap)`
   /* width: 100%;
   display: flex;
   flex-direction: row;
@@ -268,11 +344,28 @@ export const ReviewCancelBtn = styled(MediumBtn)`
   border-radius: 20px;
   margin-right: 3%;
 `;
-export const ModalReviewFromWrap = styled.form``;
-export const ModalUserWrapper = styled.div`
+export const ReviewWriteFromWrap = styled.form``;
+export const ReviewWriteUserWrapper = styled.div`
   padding-top: 24px;
 `;
-export const ModalInputWrapper = styled.div`
+export const ReviewWriteInputWrapper = styled.div`
   padding-top: 24px;
 `;
 export const ModalBtnWrapper = styled.div``;
+
+export const CommentWrap = styled.div`
+  width: 100%;
+  display: flex;
+  padding-top: 16px;
+  padding-left: 64px;
+  // background: red;
+`;
+export const CommentImageWrapper = styled.div``;
+export const CommentImageWrapper2 = styled.div`
+  padding-top: 4px;
+  padding-left: 10px;
+  font-size: 16px;
+`;
+export const CommentContentWrapper = styled.div`
+  padding-left: 10px;
+`;

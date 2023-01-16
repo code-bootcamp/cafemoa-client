@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import { EllipsisTwo } from "../../../../commons/styles/commonStyles";
+import * as mq from "../../../../commons/styles/mediaQuery";
 // import { DEFAULT_COLOR } from "../../../commons/default/default";
 // import * as mq from "../../../commons/styles/mediaQuery";
 
@@ -13,12 +14,14 @@ export const ImageWrap = styled.div`
   > img {
     position: absolute;
     left: 50%;
-    top: 0;
+    top: 50%;
     width: 100%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
 `;
-export const InfoWrap = styled.div``;
+export const InfoWrap = styled.div`
+  /* background-color: ${DEFAULT_COLOR.subColor01}; */
+`;
 
 export const TodaySlideWrap = styled.div`
   padding-top: 20px;
@@ -27,6 +30,12 @@ export const TodaySlideWrap = styled.div`
 export const TodaySlideInfoWrap = styled.div`
   width: 38.57%;
   padding-right: 40px;
+  .swiper-slide {
+    opacity: 0 !important;
+  }
+  .swiper-slide.swiper-slide-active {
+    opacity: 1 !important;
+  }
   > a {
     display: block;
   }
@@ -35,20 +44,29 @@ export const TodaySlideInfoWrap = styled.div`
       margin-top: 16px;
     }
   }
+  ${mq.MobileM} {
+    width: 100%;
+    padding-right: 0;
+  }
 `;
 export const TodaySlideListsWrap = styled.div`
   width: 61.43%;
   margin-top: 40px;
-  .slick-track {
+  .swiper-wrapper {
     margin-left: -45%;
-  }
-  .slick-slide {
-    padding: 0 10px;
-    width: 3%;
+    .swiper-slide {
+      width: calc(45% - 40px);
+    }
   }
   ${ImageWrap} {
     margin-bottom: 8px;
   }
+  ${mq.MobileM} {
+    display: none;
+  }
+`;
+export const TagWrap = styled.div`
+  height: 60px;
 `;
 export const SlideItem = styled.div``;
 export const InfoTitle = styled(EllipsisTwo)`

@@ -22,12 +22,12 @@ interface IApolloSettingProps {
 const GLOBAL_STATE = new InMemoryCache();
 export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const aaa = useRecoilValueLoadable(restoreAccessTokenLoadable);
-
-  console.log(aaa);
+  const getRestoreAccessToken = useRecoilValueLoadable(
+    restoreAccessTokenLoadable
+  );
   useEffect(() => {
     // const result = localStorage.getItem("accessToken") ?? "";
-    void aaa.toPromise().then((newAccessToken) => {
+    void getRestoreAccessToken.toPromise().then((newAccessToken) => {
       console.log(newAccessToken);
       setAccessToken(newAccessToken);
     });

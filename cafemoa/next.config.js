@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: true,
-}
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

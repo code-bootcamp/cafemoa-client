@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/stores";
 import { useUserLogin } from "../../commons/hooks/mutations/useUserLogin";
 import Input02 from "../../commons/input/02/Input02.index";
+import Link01 from "../../commons/link/01/Link01.index";
 import Text from "../../commons/text/01/Text01.index";
 import * as S from "./Login.styles";
 import { IFormLogin } from "./Login.types";
@@ -13,9 +14,13 @@ export default function UserLogin() {
   const router = useRouter();
   const [userLogin] = useUserLogin();
   const [, setAccessToken] = useRecoilState(accessTokenState);
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit } = useForm({
     // resolver: yupResolver(ProductSchema),
     mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onClickUserLogin = async (data: IFormLogin) => {
@@ -70,11 +75,16 @@ export default function UserLogin() {
           </S.FormsField>
         </div>
         <S.FormsButtonsWrapper>
-          <S.FindPassword type="button">
+          <Link01 href="/login/findpw">
             <Text size="16" weight="300" fontColor="gray">
               비밀번호를 잊으셨나요?
             </Text>
-          </S.FindPassword>
+          </Link01>
+          <Link01 href={{ pathname: "/signup", query: { type: "user" } }}>
+            <Text size="16" weight="300" fontColor="gray">
+              회원 회원가입
+            </Text>
+          </Link01>
           <S.LoginButton color="brown">
             <Text size="20" weight="300" fontColor="white">
               로그인

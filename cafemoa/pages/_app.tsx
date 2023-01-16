@@ -1,6 +1,8 @@
 import { AppProps } from "next/app";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import "antd/dist/antd.css";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";

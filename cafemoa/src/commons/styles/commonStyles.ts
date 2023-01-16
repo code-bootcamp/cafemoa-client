@@ -130,7 +130,7 @@ export const EllipsisOne = styled.div`
 export const EllipsisTwo = styled.div`
   display: -webkit-box;
   line-height: 1.2;
-  height: 2.4em;
+  height: 2.6em;
   word-break: break-word;
   overflow: hidden;
   white-space: normal;
@@ -140,7 +140,6 @@ export const EllipsisTwo = styled.div`
 `;
 
 export const TagWrap = styled.div`
-  position: sticky;
   left: 0;
   top: 100px;
   padding: 0 16px 18px;

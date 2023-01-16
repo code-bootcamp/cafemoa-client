@@ -1,180 +1,115 @@
 import Link from "next/link";
 import Text from "../../../commons/text/01/Text01.index";
-import { v4 as uuidv4 } from "uuid";
 import * as S from "./TodaySlide.styles";
 import Tag from "../../../commons/text/02/Text02.index";
-import Slider, { Settings } from "react-slick";
-import { useEffect, useRef, useState } from "react";
-
-const NAV_SETTINGS: Settings = {
-  autoplay: true,
-  infinite: true,
-  slidesToShow: 2,
-  arrows: false,
-  speed: 500,
-  variableWidth: true,
-};
-
-const VIEW_SETTINGS: Settings = {
-  infinite: true,
-  arrows: false,
-  speed: 500,
-  fade: true,
-  draggable: false,
-  adaptiveHeight: true,
-};
-
-const SLIDE_TEST = [
-  {
-    thumbNail: "/images/temp/temp04.png",
-    brandName: "카페명이야~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp03.png",
-    brandName: "카페모아",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까?ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ ",
-    cafeTag: ["태그", "맞아", "카페"],
-  },
-  {
-    thumbNail: "/images/temp/temp01.png",
-    brandName: "카페명적기~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr:
-      "경기도 어디일까? ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅋㅇ륲ㅋㄴ아ㅓ픀ㄴ아ㅓ픀나어퓬카어ㅠㅏㅋㄴ",
-    cafeTag: ["태그"],
-  },
-  {
-    thumbNail: "/images/temp/temp02.png",
-    brandName: "카페명 너무 길면 어떡해? 두줄처리? 한줄처리?",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ㄴㅇㅁㄴㅇㅁㄴㅇㅁ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp03.png",
-    brandName: "10개가 이렇게 많아?",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아", "스터디"],
-  },
-  {
-    thumbNail: "/images/temp/temp01.png",
-    brandName: "카페 그만 적을까~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그"],
-  },
-  {
-    thumbNail: "/images/temp/temp04.png",
-    brandName: "이제 6번째인가..?~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp03.png",
-    brandName: "이제 얼마 안남았어~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp04.png",
-    brandName: "그만그만,,,, 제발~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-  {
-    thumbNail: "/images/temp/temp02.png",
-    brandName: "마지막이야 ~~",
-    cafeinfo:
-      "상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야상세정보야",
-    cafeAddr: "경기도 어디일까? ",
-    cafeTag: ["태그", "맞아"],
-  },
-];
+// import Slider, { Settings } from "react-slick";
+import { useEffect, useState } from "react";
+import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
+import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
+import { v4 as uuidv4 } from "uuid";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay, EffectFade, Thumbs } from "swiper";
 
 export default function TodaySlide() {
-  const [nav1, setNav1] = useState();
-  const [nav2, setNav2] = useState();
-  const slider1 = useRef(null);
-  const slider2 = useRef(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
+  const { data, onRefetchCafes } = useFetchCafes();
 
   useEffect(() => {
-    setNav1(slider1.current ?? undefined);
-    setNav2(slider2.current ?? undefined);
+    void getRandomDday();
+    const tag = JSON.parse(localStorage.getItem("todayTag") ?? "{}").tag;
+    onRefetchCafes(tag);
   }, []);
 
   return (
     <S.TodaySlideWrap>
       <S.TodaySlideInfoWrap>
-        <Slider {...VIEW_SETTINGS} asNavFor={nav2} ref={slider1}>
-          {SLIDE_TEST.map((el, idx) => (
-            <Link href="/" key={uuidv4()}>
-              <a>
-                <S.ImageWrap>
-                  <img src={el.thumbNail} />
-                </S.ImageWrap>
-                <S.InfoWrap>
-                  <div>
-                    <Text size="32" fontColor="white" weight="700">
-                      {el.brandName}
-                    </Text>
-                  </div>
-                  <S.InfoContents>
-                    <Text size="16" fontColor="white" weight="500">
-                      {el.cafeinfo}
-                    </Text>
-                  </S.InfoContents>
-                  <div>
-                    <Text size="16" fontColor="white" weight="500">
-                      {el.cafeAddr}
-                    </Text>
-                  </div>
-                  <div>
-                    {el.cafeTag.map((cur, idx) => (
-                      <Tag key={idx + "asdwd"} size="sm">
-                        {cur}
-                      </Tag>
-                    ))}
-                  </div>
-                </S.InfoWrap>
-              </a>
-            </Link>
+        <Swiper
+          modules={[EffectFade, Thumbs]}
+          effect={"fade"}
+          loop={true}
+          slidesPerView={1}
+          touchRatio={1}
+          draggable={true}
+          allowTouchMove={true}
+          onSwiper={(swiper: SwiperCore) => setThumbsSwiper(swiper)}
+          breakpoints={{
+            768: {
+              touchRatio: 1,
+              allowTouchMove: false,
+            },
+          }}
+        >
+          {data?.fetchCafes.map((el) => (
+            <SwiperSlide key={el?.id}>
+              <Link href={`/cafe/${el?.id}`}>
+                <a>
+                  <S.ImageWrap>
+                    <img
+                      src={
+                        el?.thumbNail ??
+                        "/images/commons/img_cafe_preparing.png"
+                      }
+                    />
+                  </S.ImageWrap>
+                  <S.InfoWrap>
+                    <div>
+                      <Text size="32" fontColor="white" weight="700">
+                        {el?.owner.brandName}
+                      </Text>
+                    </div>
+                    <S.InfoContents>
+                      <Text size="16" fontColor="white" weight="500">
+                        {el?.cafeinfo}
+                      </Text>
+                    </S.InfoContents>
+                    <div>
+                      <Text size="16" fontColor="white" weight="500">
+                        {el?.cafeAddr}
+                      </Text>
+                    </div>
+                    <S.TagWrap>
+                      {el?.cafeTag?.map((cur, idx) => (
+                        <Tag key={cur.id} size="sm">
+                          {cur.tagName}
+                        </Tag>
+                      ))}
+                    </S.TagWrap>
+                  </S.InfoWrap>
+                </a>
+              </Link>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </S.TodaySlideInfoWrap>
       <S.TodaySlideListsWrap>
-        <Slider {...NAV_SETTINGS} asNavFor={nav1} ref={slider2}>
-          {SLIDE_TEST.map((el, idx) => (
-            <S.SlideItem key={idx}>
+        <Swiper
+          modules={[Thumbs, Autoplay]}
+          slidesPerView={"auto"}
+          spaceBetween={40}
+          loop={true}
+          loopedSlides={3}
+          thumbs={{ swiper: thumbsSwiper }}
+          autoplay={{ delay: 2000 }}
+        >
+          {data?.fetchCafes.map((el) => (
+            <SwiperSlide key={uuidv4()}>
               <S.SlideBtn>
                 <S.ImageWrap>
-                  <img src={el.thumbNail} />
+                  <img
+                    src={
+                      el.thumbNail ?? "/images/commons/img_cafe_preparing.png"
+                    }
+                  />
                 </S.ImageWrap>
                 <div>
                   <Text size="14" fontColor="white">
-                    {el.brandName}
+                    {el.owner.brandName}
                   </Text>
                 </div>
               </S.SlideBtn>
-            </S.SlideItem>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </S.TodaySlideListsWrap>
     </S.TodaySlideWrap>
   );

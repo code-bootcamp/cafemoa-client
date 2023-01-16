@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 
 export const ModalWrap = styled(Modal)`
   .ant-modal-body {
-    padding-bottom: 10px;
   }
 `;
 
@@ -16,12 +15,13 @@ export const ModalContentsWrap = styled.div`
 export const ModalTitle = styled.div`
   text-align: center;
   white-space: pre-line;
-  padding-bottom: 37px; ;
 `;
 
 export const ModalContents = styled.div`
-  padding-top: 32px;
   white-space: pre-line;
+  width: 100%;
+  max-height: 300px;
+  overflow: auto;
 `;
 
 export const InputIconWrap = styled.div`
@@ -36,13 +36,17 @@ export const InputIconWrap = styled.div`
 
 export const AreaContainer = styled.div`
   display: flex;
-  padding-bottom: 10px;
   width: 100%;
 `;
 
 export const AreaSelectWrap = styled.div`
   width: calc(100% - 45% - 10px);
   margin-right: 10px;
+  padding-bottom: 10px;
+`;
+
+export const CafeSearchWrap = styled.form`
+  width: 100%;
 `;
 
 export const SubAreaSelectWrap = styled.div`
@@ -50,7 +54,8 @@ export const SubAreaSelectWrap = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  padding-bottom: 20px;
+  border-bottom: 2px solid #f3e6d8;
+  padding-top: 24px;
 `;
 
 export const SearchCafeInfo = styled.div`
@@ -62,12 +67,9 @@ export const SearchCafeInfo = styled.div`
 export const SearchCafeWrap = styled.div`
   display: flex;
   flex-direction: row;
-  padding-bottom: 30px;
 `;
 
 export const CafePictureWrap = styled.div`
-  padding-right: 30px;
-
   > img {
     width: 120px;
     height: 100px;
@@ -75,7 +77,7 @@ export const CafePictureWrap = styled.div`
 `;
 
 export const CafeOperationWrap = styled.div`
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 `;
 
 export const CafeOperation = styled.div`
@@ -92,6 +94,5 @@ export const CafeInfo = styled.div`
 
   > p {
     margin-bottom: 0;
-    padding-right: 20px;
   }
 `;

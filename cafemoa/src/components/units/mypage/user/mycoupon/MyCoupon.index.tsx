@@ -3,19 +3,25 @@ import Text from "../../../../commons/text/01/Text01.index";
 import MyCouponInvalid from "./MyCoupon-invalid";
 import MyCouponValid from "./MyCoupon-valid";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
-import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchUserCoupons";
+import { useRouter } from "next/router";
+import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
+import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 
 export default function MyCoupon() {
-  const { data } = useFetchUserCoupons(1);
-  console.log(data);
+  const router = useRouter();
   return (
     <>
       <HeroWrap
         imageUrl="/images/review/review_hero01.png"
         title="마이모아"
-        subject="마이페이지 마이페이지 마이페이지"
+        subject="내 정보를 한눈에 보기 쉽게 모아!"
       ></HeroWrap>
       <S.ContainerWrapper>
+        <div>
+          <MypageSidebarLayout>
+            <SidebarMenuLayout asPath={router.asPath} />
+          </MypageSidebarLayout>
+        </div>
         <S.Container>
           <S.TitleWrapper>
             <Text size="32" weight="500">
@@ -29,7 +35,7 @@ export default function MyCoupon() {
               {
                 label: "사용가능 쿠폰",
                 key: "1",
-                children: <MyCouponValid data={data} />,
+                children: <MyCouponValid />,
               },
               {
                 label: "사용완료 쿠폰",

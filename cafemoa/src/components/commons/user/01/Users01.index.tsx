@@ -15,7 +15,11 @@ export default function Users01(props: IUserProps) {
   return (
     <S.UserWrap size={props.size} alignItem={props.alignItem ?? ""}>
       <S.UserImageWrap>
-        {props.image !== undefined ? <img src={props.image} /> : <BiUser />}
+        {props.image !== undefined && props.image !== "" ? (
+          <img src={`https://storage.googleapis.com/${props.image}`} />
+        ) : (
+          <BiUser />
+        )}
       </S.UserImageWrap>
       {props.name !== undefined && <S.UserName>{props.name}</S.UserName>}
       {props.children}

@@ -8,12 +8,17 @@ import ReviewsSlide from "./reviews/ReviewsSlide.index";
 import Member from "./authbanners/member/Member.index";
 import { useEffect, useState } from "react";
 import _ from "lodash";
+import { infoUserState } from "../../../commons/stores";
+import { useRecoilState } from "recoil";
+import NonMember from "./authbanners/nonmember/NonMember.index";
 
 export default function Main() {
   const [isScroll, setIsScroll] = useState(false);
+  const [infoUser] = useRecoilState(infoUserState);
+
   const handleScroll = _.debounce((event) => {
     if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
-    if (Math.floor(window.scrollY) === 0) setIsScroll(false);
+    if (Math.floor(window.pageYOffset) === 0) setIsScroll(false);
     const direction = event.deltaY > 0 ? "down" : "up";
     if (direction === "down") {
       window.scrollTo({
@@ -25,30 +30,37 @@ export default function Main() {
   }, 50);
 
   useEffect(() => {
+    window.onbeforeunload = function pushRefresh() {
+      window.scrollTo(0, 0);
+    };
     if (window.innerWidth < 1025) {
       setIsScroll(true);
       return;
     } else {
       setIsScroll(false);
     }
-    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) {
-      setIsScroll(true);
-    }
     window.addEventListener("wheel", handleScroll);
-    return () => window.removeEventListener("wheel", handleScroll);
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+      setIsScroll(true);
+    };
   }, []);
 
   useEffect(() => {
+    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
     if (!isScroll) {
       document.body.style.cssText = `overflow : hidden`;
     } else {
       document.body.style.cssText = `overflow : auto`;
     }
+    return () => {
+      document.body.style.cssText = `overflow : auto`;
+    };
   }, [isScroll]);
 
   return (
     <S.MainWrap>
-      <S.MainVisual>
+      <S.MainVisual isHidden={infoUser?.fetchUser !== undefined}>
         <S.VideoWrap>
           <S.VisualVideo
             src="/images/main/img_main_visual.mp4"
@@ -68,8 +80,7 @@ export default function Main() {
       </S.MainVisual>
       <S.MainSection>
         <S.MainSectionInner>
-          {/* <NonMember /> */}
-          <Member />
+          {infoUser?.fetchUser === undefined ? <NonMember /> : <Member />}
         </S.MainSectionInner>
       </S.MainSection>
 
@@ -84,7 +95,10 @@ export default function Main() {
           <S.CategoryWrap>
             {MAIN_CATEGORY.map((el) => (
               <S.Category imageUrl={el.imageUrl} key={uuidv4()}>
-                <Link href="/">
+                <Link
+                  href={{ pathname: "/cafe", query: { tag: el.label } }}
+                  as="/cafe"
+                >
                   <a>
                     <Text size="24" fontColor="white" weight="700">
                       {el.label}

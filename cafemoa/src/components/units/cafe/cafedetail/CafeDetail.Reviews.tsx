@@ -1,221 +1,90 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Like01 from "../../../commons/like/01/Like01.index";
-import Text from "../../../commons/text/01/Text01.index";
-import Textarea01 from "../../../commons/textareas/01/textarea01.index";
-import Users01 from "../../../commons/user/01/Users01.index";
-import ReviewModal from "./CafeDetail.Modal";
+import { Fragment, useState } from "react";
+import { useFetchCommentByCafeID } from "../../../commons/hooks/queries/useFetchCommentByCafeID";
+import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 import * as S from "./CafeDetail.styles";
-import ReplyReview from "./CafeDetial.Reply";
-import TempCafeDetailReviewImages from "./imageupload/TempCafeDetail.ReviewImages";
+import Text from "../../../commons/text/01/Text01.index";
+import ReviewWrite from "./CafeDetail.ReviewWrite";
+import ReviewComment from "./CafeDetail.ReviewComment";
+import { IComment } from "../../../../commons/types/generated/types";
+import { useFetchCafeStamps } from "../../../commons/hooks/queries/useFetchCafeStamps";
+import { reviewRegisterDate } from "../../../../commons/libraries/utill";
+import { Modal } from "antd";
 
 export default function CafeDetailReview() {
-  const {
-    ReviewModalComponent,
-    onClickIsModalOpen,
-    onClickEditModalOpen,
-    onCLickCancel,
-    isEdit,
-  } = ReviewModal();
-  const { register, handleSubmit } = useForm();
-  const [isReply, setIsReply] = useState(false);
+  const router = useRouter();
+  const { data } = useFetchCommentByCafeID();
+  const { data: cafeStamps } = useFetchCafeStamps(
+    String(router.query.cafeInformID)
+  );
+  const [isReview, setIsReview] = useState(false);
+  const [commentId, setCommentId] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
+  const [updatedata, setUpdatedata] = useState<IComment>();
 
-  const onClickReply = () => {
-    setIsReply((prev) => !prev);
+  const onClickOpenReivewWrite = () => {
+    setIsReview((prev) => !prev);
   };
+  const onClickCloseReviewWrite = () => {
+    setIsEdit(false);
+    setIsReview(false);
+    setUpdatedata(undefined);
+  };
+
+  // console.log(updatedata);
 
   return (
     <>
-    <S.ReviewBtnWrapper>
-        <S.ReviewWriteBtn onClick={onClickIsModalOpen} color="beige">
-          <S.BtnInnerWrapper>
-            <img src="/images/cafedetail/CafeDetail05.png" />
-            <Text size="16" weight="300" fontColor="black">
-              리뷰 작성하기
-            </Text>
-          </S.BtnInnerWrapper>
-        </S.ReviewWriteBtn>
+      <S.ReviewBtnWrapper>
+        {console.log(
+          reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1)
+        )}
+        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1) && (
+          <S.ReviewWriteBtn color="beige">
+            <S.BtnInnerWrapper onClick={onClickOpenReivewWrite}>
+              <img src="/images/cafedetail/CafeDetail05.png" />
+              <Text size="16" weight="300" fontColor="black">
+                리뷰 작성하기
+              </Text>
+            </S.BtnInnerWrapper>
+          </S.ReviewWriteBtn>
+        )}
       </S.ReviewBtnWrapper>
-    <S.ReviewContainer>
-      <ReviewModalComponent
-        title={`소중한 리뷰를 작성해주세요`}
-        buttons={
-          <>
-            <S.ReviewCancelBtn onClick={onCLickCancel} color="lightBeige">
-              <Text size="16" fontColor="black">
-                취소
-              </Text>
-            </S.ReviewCancelBtn>
-            <S.ModalBtnWrapper>
-              <S.ReviewSubmitBtn color="brown">
-                {isEdit ? (
-                  <Text size="16" fontColor="white">
-                    수정하기
-                  </Text>
-                ) : (
-                  <Text size="16" fontColor="white">
-                    작성하기
-                  </Text>
-                )}
-              </S.ReviewSubmitBtn>
-            </S.ModalBtnWrapper>
-          </>
-        }
-      >
-        {/* <S.ModalReviewFromWrap onSubmit={handleSubmit(onModalSubmit)}> */}
-        <S.ModalReviewFromWrap>
-          {/* {props.fileUrls.map((el, index) => (
-              <Uploads02
-                key={uuidv4()}
-                index={index}
-                fileUrl={el}
-                onChangeFileUrls={props.onChangeFileUrls}
-              />
-            ))} */}
-          <TempCafeDetailReviewImages />
-          <S.ModalUserWrapper>
-            <Users01
-              image="/images/cafedetail/CafeDetail04.jpeg"
-              name="원두학살자"
-              size="sm"
+      <S.ReviewContainer>
+        {isReview && (
+          <Modal
+            open={true}
+            footer={null}
+            closable={true}
+            onCancel={onClickCloseReviewWrite}
+            centered
+          >
+            <ReviewWrite
+              isEdit={isEdit}
+              setIsReview={setIsReview}
+              setIsEdit={setIsEdit}
+              onClickCloseReviewWrite={onClickCloseReviewWrite}
+              cafeInformId={String(router.query.cafeInformID)}
+              commentId={commentId}
+              onClickOpenReivewWrite={onClickOpenReivewWrite}
+              updatedata={updatedata}
+              setUpdatedata={setUpdatedata}
             />
-          </S.ModalUserWrapper>
-          <S.ModalInputWrapper>
-            <Textarea01
-              placeHolder="고객님의 의견을 자유롭게 적어주세요"
-              register={register("contents")}
+          </Modal>
+        )}
+        {data?.fetchCommentBycafeID.map((el) => (
+          <Fragment key={uuidv4()}>
+            <ReviewComment
+              setIsEdit={setIsEdit}
+              setIsReview={setIsReview}
+              setCommentId={setCommentId}
+              setUpdatedata={setUpdatedata}
+              el={el}
+              cafeId={String(router.query.cafeInformID)}
             />
-            {/* <Input01 type="text" textAlign="center" /> */}
-          </S.ModalInputWrapper>
-          <Text size="16" weight="300" fontColor="gray">
-            * 작성하신 리뷰는 작성 후 3일이내 수정 가능합니다.
-          </Text>
-        </S.ModalReviewFromWrap>
-      </ReviewModalComponent>
-      <S.ReviewWrapper>
-        <S.ReviewHeader>
-          <Users01
-            image="/images/cafedetail/CafeDetail04.jpeg"
-            name="원두학살자"
-            size="md"
-          />
-          <S.BtnWrapper>
-            <S.EditBtn onClick={onClickEditModalOpen}>
-              <Text size="16" weight="300" fontColor="black">
-                수정
-              </Text>
-            </S.EditBtn>
-            <S.DeleteBtn>
-              <Text size="16" weight="300" fontColor="black">
-                삭제
-              </Text>
-            </S.DeleteBtn>
-          </S.BtnWrapper>
-        </S.ReviewHeader>
-        <S.ReviewContents>
-          <Text size="18" weight="300">
-            커피맛이 너무좋아요
-          </Text>
-        </S.ReviewContents>
-        <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-        <S.ReviewImageContainer>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-        </S.ReviewImageContainer>
-        <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn>
-        {isReply && <ReplyReview />}
-      </S.ReviewWrapper>
-      <S.ReviewWrapper>
-        <Users01
-          image="/images/cafedetail/CafeDetail04.jpeg"
-          name="원두학살자"
-          size="md"
-        />
-        <S.ReviewContents>
-          <Text size="18" weight="300">
-            커피맛이 너무좋아요
-          </Text>
-        </S.ReviewContents>
-        <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-        <S.ReviewImageContainer>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-        </S.ReviewImageContainer>
-        {/* <S.ReplyBtn onClick={onClickReply}>답글달기</S.ReplyBtn> */}
-        <S.OwnerComment>
-          <S.CommentIcon>
-            <img src="/images/cafedetail/CafeDetail08.png" />
-          </S.CommentIcon>
-          <S.CommentContents>
-            <Text>
-              감사합니다 또 방문해주세요
-            </Text>
-          </S.CommentContents>
-        </S.OwnerComment>
-      </S.ReviewWrapper>
-      <S.ReviewWrapper>
-        <Users01
-          image="/images/cafedetail/CafeDetail04.jpeg"
-          name="원두학살자"
-          size="md"
-        />
-        <S.ReviewContents>
-          <Text size="18" weight="300">
-            커피맛이 너무좋아요
-          </Text>
-        </S.ReviewContents>
-        <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-        <S.ReviewImageContainer>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-        </S.ReviewImageContainer>
-      </S.ReviewWrapper>
-      <S.ReviewWrapper>
-        <Users01
-          image="/images/cafedetail/CafeDetail04.jpeg"
-          name="원두학살자"
-          size="md"
-        />
-        <S.ReviewContents>
-          <Text size="18" weight="300">
-            커피맛이 너무좋아요
-          </Text>
-        </S.ReviewContents>
-        <Like01 iconColor="red" count={142} fontColor="black"></Like01>
-        <S.ReviewImageContainer>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-          <S.ReviewImageWrapper>
-            <img src="/images/cafedetail/CafeDetail01.jpeg" />
-          </S.ReviewImageWrapper>
-        </S.ReviewImageContainer>
-      </S.ReviewWrapper>
-    </S.ReviewContainer>
-  </>
+          </Fragment>
+        ))}
+      </S.ReviewContainer>
+    </>
   );
 }
