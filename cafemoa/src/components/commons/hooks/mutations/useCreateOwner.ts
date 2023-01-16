@@ -35,14 +35,13 @@ export const useCreateOwner = () => {
 
   const createOwnerSubmit = async (data: IFormCreateOwnerData) => {
     try {
-      const result = await CreateOwner({
+      await CreateOwner({
         variables: {
           createOwnerInput: {
             ...data,
           },
         },
       });
-      console.log(result.data);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import {
   IMutation,
   IMutationCreateUserArgs,
@@ -38,7 +39,9 @@ export const useCreateUser = () => {
           },
         },
       });
-      alert("카페모아에서 쿠폰을 모아");
+      Modal.success({
+        content: "카페모아에서 쿠폰을 모아",
+      });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

@@ -17,6 +17,10 @@ export const FETCH_USER_COMMENTS = gql`
           brandName
         }
       }
+      commentImage {
+        id
+        image_url
+      }
     }
   }
 `;

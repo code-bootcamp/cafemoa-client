@@ -62,7 +62,7 @@ export default function UserMain() {
           <S.MenuWrapper>
             <S.BoxContainer>
               <S.BoxWrapper>
-                <Box01 styles={{ height: "100%" }}>
+                <Box01 styles={{ padding: 0, height: "100%" }}>
                   <Link href={`/mypage/user/${String(userId)}/mystamp`}>
                     <a>
                       <S.MypageButton>
@@ -83,7 +83,7 @@ export default function UserMain() {
                 </Box01>
               </S.BoxWrapper>
               <S.BoxWrapper>
-                <Box01 styles={{ height: "100%" }}>
+                <Box01 styles={{ padding: 0, height: "100%" }}>
                   <Link href={`/mypage/user/${String(userId)}/mycoupon`}>
                     <a>
                       <S.MypageButton>
@@ -116,7 +116,7 @@ export default function UserMain() {
                 </Box01>
               </S.BoxWrapper>
               <S.BoxWrapper>
-                <Box01 styles={{ height: "100%" }}>
+                <Box01 styles={{ padding: 0, height: "100%" }}>
                   <Link href={`/mypage/user/${String(userId)}/mypick`}>
                     <a>
                       <S.MypageButton>
@@ -136,7 +136,7 @@ export default function UserMain() {
                 </Box01>
               </S.BoxWrapper>
               <S.BoxWrapper>
-                <Box01 styles={{ height: "100%" }}>
+                <Box01 styles={{ padding: 0, height: "100%" }}>
                   <Link href={`/mypage/user/${String(userId)}/myreview`}>
                     <a>
                       <S.MypageButton>

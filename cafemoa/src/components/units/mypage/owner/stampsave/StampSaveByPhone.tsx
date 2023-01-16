@@ -10,9 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useFetchCouponAddUsers } from "../../../../commons/hooks/queries/useFetchCouponAddUsers";
 import { useCreateStamp } from "../../../../commons/hooks/mutations/useCreateStamp";
 import Input01 from "../../../../commons/input/01/Input01.index";
-import { useRouter } from "next/router";
 import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
-import { useFetchUser } from "../../../../commons/hooks/queries/useFetchUser";
 
 const SELECT_VALUES01 = [
   { label: "1개", value: 1 },
@@ -34,7 +32,6 @@ interface IStampSaveData {
 }
 
 export default function StampSaveByPhone() {
-  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [createStamp] = useCreateStamp();
@@ -96,20 +93,11 @@ export default function StampSaveByPhone() {
         afterClose() {
           setValue("phone", "");
           setIsModalOpen(false);
-          // onClickIsModalOpen();
-          // void router.push(`/mypage/owner/${cafeId}/stampsave`);
         },
       });
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
-
-        // if (error.message.includes("비밀번호가 일치하지 않습니다")) {
-        //   Modal.warning({
-        //     content: "비밀번호가 일치하지 않습니다.",
-        //   });
-        //   // return;
-        // }
       }
     }
   };
