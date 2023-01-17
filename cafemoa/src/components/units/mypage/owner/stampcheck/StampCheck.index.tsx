@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { getStampSaveDate } from "../../../../../commons/libraries/utill";
 import InfiniteScrollWrap from "../../../../commons/infiniteScroll/01/InfiniteScroll.index";
 import Link from "next/link";
+import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
 
 interface IFormDeleteUnusualStampData {
   ownerpassword: string;
