@@ -16,6 +16,7 @@ import ReplyReview from "./CafeDetial.Reply";
 import OwnerComment from "./CafeDetail.OwnerComment";
 import { IComment } from "../../../../commons/types/generated/types";
 import { reviewRegisterDate } from "../../../../commons/libraries/utill";
+import InfiniteScrollWrap from "../../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 interface IReviewCommentProps {
   el: IComment;
@@ -24,6 +25,7 @@ interface IReviewCommentProps {
   setIsReview: (bool: boolean) => void;
   setCommentId: (CommentId: string) => void;
   setUpdatedata: (el: IComment) => void;
+  onHandleMore: () => void;
 }
 
 export default function ReviewComment(props: IReviewCommentProps) {

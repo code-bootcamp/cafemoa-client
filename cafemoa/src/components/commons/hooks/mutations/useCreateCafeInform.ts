@@ -3,6 +3,7 @@ import {
   IMutation,
   IMutationCreatecafeInformArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_OWNER_LOGGEDIN } from "../queries/useFetchUser";
 
 interface IFormCreateCafeInformData {
   cafeinfo: string;
@@ -40,6 +41,11 @@ export const useCreateCafeInform = () => {
             ...data,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_OWNER_LOGGEDIN,
+          },
+        ],
       });
       console.log(result.data);
     } catch (error) {

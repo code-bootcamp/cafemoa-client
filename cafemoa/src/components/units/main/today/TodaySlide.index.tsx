@@ -47,8 +47,9 @@ export default function TodaySlide() {
                   <S.ImageWrap>
                     <img
                       src={
-                        el?.thumbNail ??
-                        "/images/commons/img_cafe_preparing.png"
+                        el.cafeImage[0]?.cafe_image !== undefined
+                          ? `https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`
+                          : "/images/commons/img_cafe_preparing.png"
                       }
                     />
                   </S.ImageWrap>
@@ -98,7 +99,9 @@ export default function TodaySlide() {
                 <S.ImageWrap>
                   <img
                     src={
-                      el.thumbNail ?? "/images/commons/img_cafe_preparing.png"
+                      el.cafeImage[0]?.cafe_image !== undefined
+                        ? `https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`
+                        : "/images/commons/img_cafe_preparing.png"
                     }
                   />
                 </S.ImageWrap>

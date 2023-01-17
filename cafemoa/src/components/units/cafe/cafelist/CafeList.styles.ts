@@ -28,7 +28,7 @@ export const CardBox = styled.li`
   }
 `;
 export const FilterWrapper = styled.div`
-  width: 10%;
+  max-width: 150px;
   padding-bottom: 40px;
 `;
 export const TagsWrap = styled(TagWrap)`

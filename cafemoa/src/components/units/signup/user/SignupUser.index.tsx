@@ -111,7 +111,7 @@ export default function SignUpUser(props: ISignUpProps) {
     } else {
       void createUserSubmit(value, results[0]?.data?.uploadFile[0] ?? "");
     }
-    void router.push("/");
+    void router.push("/login");
   };
 
   useEffect(() => {
