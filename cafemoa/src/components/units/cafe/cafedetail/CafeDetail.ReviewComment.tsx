@@ -16,7 +16,6 @@ import ReplyReview from "./CafeDetial.Reply";
 import OwnerComment from "./CafeDetail.OwnerComment";
 import { IComment } from "../../../../commons/types/generated/types";
 import { reviewRegisterDate } from "../../../../commons/libraries/utill";
-import InfiniteScrollWrap from "../../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 interface IReviewCommentProps {
   el: IComment;
