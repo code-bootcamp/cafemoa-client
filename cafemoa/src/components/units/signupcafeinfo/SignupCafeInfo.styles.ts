@@ -131,7 +131,7 @@ export const SubmitBtn = styled(MediumBtn)``;
 export const SignUpBtnWrap = styled(BtnWrap)`
   > button {
     margin: 0 8px;
-    width: calc(50% - 216px);
+    padding: 8px 32px;
     text-align: center;
     border-radius: 20px;
   }
