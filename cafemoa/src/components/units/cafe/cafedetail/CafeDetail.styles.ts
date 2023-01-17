@@ -229,9 +229,12 @@ export const ContentsText = styled.div`
     margin-left: 20px;
   }
 `;
-export const ReplyBtn = styled.div`
+export const ReplyBtn = styled.button`
+  display: block;
   padding-top: 8px;
   text-align: right;
+  margin-right: 0;
+  margin-left: auto;
 `;
 export const ReviewColorLine = styled.div`
   width: 79%;
@@ -317,17 +320,24 @@ export const BtnInnerWrapper = styled.div`
 // ============================점주 답글부분=====================
 export const ReplyWrap = styled.div`
   // background: red;
+  margin-top: 8px;
 `;
 export const ReplyFormWrapper = styled.form`
   display: flex;
-  padding-left: 100px;
+  padding-left: 90px;
+  ${mq.MobileL} {
+    padding-left: 64px;
+  }
 `;
 export const ReplyInputWrapper = styled.div`
-  width: 80%;
+  width: calc(100% - 80px);
 `;
 export const ReplySubmitBtn = styled(SmallBtn)`
+  width: 80px;
+  padding: 0 8px;
+  text-align: center;
   margin-left: 10px;
-  padding-top: 10px;
+  height: 40px;
 `;
 export const OwnerComment = styled.div`
   display: flex;

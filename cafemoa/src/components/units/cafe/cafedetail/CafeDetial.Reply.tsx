@@ -31,8 +31,10 @@ export default function ReplyReview(props: IReplyProps) {
             register={register("content")}
           />
         </S.ReplyInputWrapper>
-        <S.ReplySubmitBtn color="brown">
-          <Text size="16">답글등록</Text>
+        <S.ReplySubmitBtn color="brownLine">
+          <Text fontColor="subColor01" size="14">
+            답글등록
+          </Text>
         </S.ReplySubmitBtn>
       </S.ReplyFormWrapper>
     </S.ReplyWrap>
