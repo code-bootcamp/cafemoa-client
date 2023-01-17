@@ -102,7 +102,7 @@ export default function CafeList() {
                     <a>
                       {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
                       <Card02
-                        imageUrl={`https://storage.googleapis.com/${el.cafeImage[0].cafe_image}`}
+                        imageUrl={`https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`}
                       >
                         <div>
                           <S.LikeWrapper>

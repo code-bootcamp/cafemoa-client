@@ -14,6 +14,7 @@ export const FETCH_MY_CAFES = gql`
       detailAddr
       is_WC
       is_Parking
+      notice
       cafeTag {
         tagName
       }

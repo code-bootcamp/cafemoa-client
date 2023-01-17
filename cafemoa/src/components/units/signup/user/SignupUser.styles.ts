@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 import { DEFAULT_COLOR } from "../../../../commons/default/default";
 import {
   BtnWrap,
-  ContainerWrap,
   MediumBtn,
   SmallBtn,
 } from "../../../../commons/styles/commonStyles";

@@ -64,5 +64,5 @@ export const useFetchCommentByCafeID = () => {
     }
   };
 
-  return { data };
+  return { data, onHandleMore };
 };

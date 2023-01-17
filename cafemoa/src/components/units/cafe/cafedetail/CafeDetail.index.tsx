@@ -26,7 +26,7 @@ export default function CafeDetail() {
         <S.Section>
           <S.CafeImageWrapper>
             <img
-              src={`https://storage.googleapis.com/${data?.fetchCafeInform.cafeImage[0].cafe_image}`}
+              src={`https://storage.googleapis.com/${data?.fetchCafeInform.cafeImage[0]?.cafe_image}`}
             />
             {/* <img src="/images/cafedetail/CafeDetail01.jpeg" /> */}
           </S.CafeImageWrapper>
@@ -147,17 +147,23 @@ export default function CafeDetail() {
               </Text>
             </div>
           </S.SubTitleWrapper>
-          <div>
-            <Text size="16" weight="500">
-              {data?.fetchCafeInform.is_Parking && "주차가능"}
-            </Text>
-            <Text size="16" weight="500">
-              {data?.fetchCafeInform.is_WC && "매장 내 화장실"}
-            </Text>
-            <Text size="16" weight="500">
-              {data?.fetchCafeInform.is_Wifi && "와이파이"}
-            </Text>
-          </div>
+          <S.facilityWrapper>
+            {data?.fetchCafeInform?.is_Parking && (
+              <Text size="16" weight="500">
+                주차가능
+              </Text>
+            )}
+            {data?.fetchCafeInform.is_WC && (
+              <Text size="16" weight="500">
+                매장 내 화장실
+              </Text>
+            )}
+            {data?.fetchCafeInform.is_Wifi && (
+              <Text size="16" weight="500">
+                와이파이
+              </Text>
+            )}
+          </S.facilityWrapper>
         </S.Section>
         <S.ComponentsTabs
           defaultActiveKey="1"

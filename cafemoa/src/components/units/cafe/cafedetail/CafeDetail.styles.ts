@@ -116,6 +116,15 @@ export const SubTitleWrapper = styled.div`
   margin-top: 32px;
   margin-bottom: 16px;
 `;
+export const facilityWrapper = styled.div`
+  span {
+    display: inline-block;
+    margin-right: 8px;
+    ::before {
+      content: "#";
+    }
+  }
+`;
 export const NoticeWrapper = styled.div`
   display: flex;
   flex-direction: column;
