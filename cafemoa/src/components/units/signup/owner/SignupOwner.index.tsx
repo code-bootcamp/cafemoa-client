@@ -129,11 +129,10 @@ export default function SignUpOwner(props: ISignUpProps) {
       const { email, name, phone, ...updateValue } = value;
       console.log(updateValue);
       await updateOwnerSubmit(updateValue);
-      void router.push("/");
     } else {
       await createOwnerSubmit(value);
-      void router.push("/");
     }
+    void router.push("/login");
   };
 
   useEffect(() => {

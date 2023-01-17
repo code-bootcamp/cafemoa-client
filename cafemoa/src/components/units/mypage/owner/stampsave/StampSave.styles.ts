@@ -66,6 +66,10 @@ export const StampWrapper = styled.div`
     ${mq.MobileL} {
       padding: 20px 24px;
     }
+    ${mq.MobileS} {
+      padding: 0;
+      border: 0 none;
+    }
   }
 `;
 

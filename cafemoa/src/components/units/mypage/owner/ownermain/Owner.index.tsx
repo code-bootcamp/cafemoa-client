@@ -25,7 +25,9 @@ export default function OwnerMyPage() {
                   <div>
                     <S.TitleWrap>
                       <Text size="32" weight="700">
-                        카페 정보 수정
+                        {infoUser?.fetchOwnerLoggedIn?.is_cafeInform
+                          ? "카페 정보 수정"
+                          : "카페 정보 등록"}
                       </Text>
                     </S.TitleWrap>
                     <S.ImageWrap>
@@ -54,38 +56,42 @@ export default function OwnerMyPage() {
               </Link>
             </Box01>
           </div>
-          <div>
-            <Box01 styles={{ height: "100%" }}>
-              <Link href={`/mypage/owner/${String(ownerId)}/ownercheck`}>
-                <a>
-                  <S.TitleWrap>
-                    <Text size="32" weight="700">
-                      적립 회원 점검
-                    </Text>
-                  </S.TitleWrap>
-                  <S.ImageWrap>
-                    <img src="/images/owner/Owner04.png" />
-                  </S.ImageWrap>
-                </a>
-              </Link>
-            </Box01>
-          </div>
-          <div>
-            <Box01 styles={{ height: "100%" }}>
-              <Link href={`/mypage/owner/${String(ownerId)}/stampsave`}>
-                <a>
-                  <S.TitleWrap>
-                    <Text size="32" weight="700">
-                      적립 페이지
-                    </Text>
-                  </S.TitleWrap>
-                  <S.ImageWrap>
-                    <img src="/images/owner/Owner05.png" />
-                  </S.ImageWrap>
-                </a>
-              </Link>
-            </Box01>
-          </div>
+          {infoUser?.fetchOwnerLoggedIn?.is_cafeInform && (
+            <>
+              <div>
+                <Box01 styles={{ height: "100%" }}>
+                  <Link href={`/mypage/owner/${String(ownerId)}/ownercheck`}>
+                    <a>
+                      <S.TitleWrap>
+                        <Text size="32" weight="700">
+                          적립 회원 점검
+                        </Text>
+                      </S.TitleWrap>
+                      <S.ImageWrap>
+                        <img src="/images/owner/Owner04.png" />
+                      </S.ImageWrap>
+                    </a>
+                  </Link>
+                </Box01>
+              </div>
+              <div>
+                <Box01 styles={{ height: "100%" }}>
+                  <Link href={`/mypage/owner/${String(ownerId)}/stampsave`}>
+                    <a>
+                      <S.TitleWrap>
+                        <Text size="32" weight="700">
+                          적립 페이지
+                        </Text>
+                      </S.TitleWrap>
+                      <S.ImageWrap>
+                        <img src="/images/owner/Owner05.png" />
+                      </S.ImageWrap>
+                    </a>
+                  </Link>
+                </Box01>
+              </div>
+            </>
+          )}
         </S.OwnerMenuContainer>
       </S.MyPageContainer>
     </>

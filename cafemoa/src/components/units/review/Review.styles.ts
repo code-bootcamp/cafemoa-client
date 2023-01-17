@@ -6,7 +6,7 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
 export const FilterWrapper = styled.div`
-  width: 10%;
+  max-width: 150px;
   padding-bottom: 40px;
 `;
 export const Container = styled.div`

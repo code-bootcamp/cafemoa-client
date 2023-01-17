@@ -6,8 +6,8 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export const FETCH_COMMENT_BY_CAFE_ID = gql`
-  query fetchCommentBycafeID($cafeID: String!) {
-    fetchCommentBycafeID(cafeID: $cafeID) {
+  query fetchCommentBycafeID($cafeID: String!, $page: Int) {
+    fetchCommentBycafeID(cafeID: $cafeID, page: $page) {
       id
       reply
       like

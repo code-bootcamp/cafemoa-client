@@ -66,7 +66,7 @@ export default function StampSaveByQr() {
         </S.ModalWrap>
       )}
       <S.StampWrapper>
-        <Box01 styles={{ padding: "40px 50px" }}>
+        <Box01>
           <S.StampContainer>
             <S.QrWrapper>
               <S.QrReader id="reader"></S.QrReader>

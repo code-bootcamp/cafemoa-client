@@ -159,9 +159,11 @@ export const OwnerImageWrapper = styled.div`
 // ------------------------리뷰모아 부분-------------------
 
 export const ReviewContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   margin-top: 24px;
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 export const ReviewWrapper = styled.div`
   width: 50%;

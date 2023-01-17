@@ -37,7 +37,7 @@ export default function StampSaveByPhone() {
   const [createStamp] = useCreateStamp();
   const { data, onRefetchUsers } = useFetchCouponAddUsers();
   const { data: mycafedata } = useFetchMyCafes();
-  const cafeId = String(mycafedata?.fetchMyCafes[0].id);
+  const cafeId = String(mycafedata?.fetchMyCafes[0]?.id);
 
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();

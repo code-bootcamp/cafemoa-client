@@ -50,7 +50,6 @@ export default function SignUpCafeInfo() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [cafeFileList, setCafeFileList] = useState<RcFile[]>([]);
 
-  console.log(data);
   console.log("cafeFileList", cafeFileList);
   const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...menufilesList];
@@ -167,15 +166,21 @@ export default function SignUpCafeInfo() {
 
       if (infoUser?.fetchOwnerLoggedIn?.is_cafeInform === false) {
         void CreatecafeInformSubmit(submitData);
+        Modal.success({ content: "카페 정보 등록이 완료되었습니다" });
+        void router.push(`/mypage/owner/${String(OwnerId)}`);
       } else {
         void UpdateCafeInformSubmit(
           String(data?.fetchMyCafes[0].id),
           submitData
         );
+        Modal.success({ content: "카페 정보 수정이 완료되었습니다" });
+        void router.push(`/mypage/owner/${String(OwnerId)}`);
       }
-      void router.push(`/mypage/owner/${String(OwnerId)}`);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error)
+        Modal.error({
+          content: error.message,
+        });
     }
   };
 
