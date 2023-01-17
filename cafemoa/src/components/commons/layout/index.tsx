@@ -50,7 +50,6 @@ export default function Layout(props: ILayoutProps) {
   useFetchUser();
   const router = useRouter();
   const nodeRef = useRef(null);
-  console.log(router.pathname);
   return (
     <>
       <HeaderLayout />
