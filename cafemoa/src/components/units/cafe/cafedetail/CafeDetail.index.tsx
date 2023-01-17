@@ -8,10 +8,13 @@ import CafeDetailPhoto from "./CafeDetail.Photos";
 import CafeDetailReview from "./CafeDetail.Reviews";
 import { useFetchCafeInform } from "../../../commons/hooks/queries/useFetchCafeInform";
 import { usePickCafe } from "../../../commons/hooks/mutations/usePickCafe";
+import { useRecoilState } from "recoil";
+import { infoUserState } from "../../../../commons/stores";
 
 export default function CafeDetail() {
   const { data } = useFetchCafeInform();
-  console.log(data);
+  const [infoUser] = useRecoilState(infoUserState);
+  console.log(infoUser);
   const { PickCafeSubmit } = usePickCafe();
   /* eslint-disable */
   const sanitizeHtml = require("sanitize-html");
@@ -35,16 +38,27 @@ export default function CafeDetail() {
               <Text size="32" weight="700">
                 {data?.fetchCafeInform.owner.brandName}
               </Text>
-              <S.LikeContainer
-                id={data?.fetchCafeInform.id}
-                onClick={PickCafeSubmit}
-              >
-                <Like01
-                  iconColor="red"
-                  fontColor="black"
-                  count={data?.fetchCafeInform.like}
-                />
-              </S.LikeContainer>
+              {infoUser?.fetchOwnerLoggedIn === undefined && (
+                <S.LikeContainer
+                  id={data?.fetchCafeInform.id}
+                  onClick={PickCafeSubmit}
+                >
+                  <Like01
+                    iconColor="red"
+                    fontColor="black"
+                    count={data?.fetchCafeInform.like}
+                  />
+                </S.LikeContainer>
+              )}
+              {infoUser?.fetchOwnerLoggedIn !== undefined && (
+                <S.LikeContainerOwner id={data?.fetchCafeInform.id}>
+                  <Like01
+                    iconColor="red"
+                    fontColor="black"
+                    count={data?.fetchCafeInform.like}
+                  />
+                </S.LikeContainerOwner>
+              )}
             </S.CafeInfoHeader>
             <S.CafeInfoFooter>
               <S.CafeAddressContainer>

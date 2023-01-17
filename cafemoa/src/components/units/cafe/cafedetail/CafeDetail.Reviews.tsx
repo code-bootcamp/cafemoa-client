@@ -37,13 +37,7 @@ export default function CafeDetailReview() {
   return (
     <>
       <S.ReviewBtnWrapper>
-        {console.log(
-          "cafeStamps:",
-          cafeStamps,
-          "reviewRegisterDate : ",
-          reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1)
-        )}
-        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1) && (
+        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0], 1) && (
           <S.ReviewWriteBtn color="beige">
             <S.BtnInnerWrapper onClick={onClickOpenReivewWrite}>
               <img src="/images/cafedetail/CafeDetail05.png" />

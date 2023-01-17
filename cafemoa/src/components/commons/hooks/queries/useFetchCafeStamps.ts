@@ -6,14 +6,7 @@ import {
 
 export const FETCH_CAFE_STAMPS = gql`
   query fetchCafeStamps($cafeId: String!) {
-    fetchCafeStamps(cafeId: $cafeId) {
-      id
-      count
-      updatedAt
-      cafeInform {
-        cafeinfo
-      }
-    }
+    fetchCafeStamps(cafeId: $cafeId)
   }
 `;
 
