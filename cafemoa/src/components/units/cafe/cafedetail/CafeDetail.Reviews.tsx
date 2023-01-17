@@ -38,6 +38,9 @@ export default function CafeDetailReview() {
     <>
       <S.ReviewBtnWrapper>
         {console.log(
+          "cafeStamps:",
+          cafeStamps,
+          "reviewRegisterDate : ",
           reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1)
         )}
         {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1) && (

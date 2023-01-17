@@ -3,6 +3,7 @@ import {
   IMutation,
   IMutationUpdateOwnerArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_OWNER_LOGGEDIN } from "../queries/useFetchUser";
 
 export interface IFormUpdateOwnerData {
   password: string;
@@ -31,6 +32,11 @@ export const useUpdateOwner = () => {
             ...data,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_OWNER_LOGGEDIN,
+          },
+        ],
       });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
