@@ -16,7 +16,7 @@ import { useCreateCafeInform } from "../../commons/hooks/mutations/useCreateCafe
 import { useUploadFile } from "../../commons/hooks/mutations/useUploadFile";
 import { useUpdateCafeInform } from "../../commons/hooks/mutations/useUpdateCafeInform";
 import "antd/dist/antd.css";
-import { Upload, Form, Modal } from "antd";
+import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { infoUserState } from "../../../commons/stores";
 import { useRecoilState } from "recoil";
@@ -50,7 +50,7 @@ export default function SignUpCafeInfo() {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [cafeFileList, setCafeFileList] = useState<RcFile[]>([]);
 
-  // console.log(data);
+  console.log(data);
   console.log("cafeFileList", cafeFileList);
   const onChangeFileUrls = (fileUrl: File, index: number) => {
     const newFileUrls = [...menufilesList];
@@ -161,21 +161,19 @@ export default function SignUpCafeInfo() {
         menu_imageUrl:
           resultUrls.length === 0 ? value.menu_imageUrl : resultUrls,
         cafe_imageUrl:
-          resultCafeImageUrls.length === 0
-            ? [...value.cafe_imageUrl]
-            : [...resultCafeImageUrls],
+          resultCafeImageUrls.length === 0 ? [] : [...resultCafeImageUrls],
       };
       console.log(submitData);
 
       if (infoUser?.fetchOwnerLoggedIn?.is_cafeInform === false) {
         void CreatecafeInformSubmit(submitData);
-        void router.push(`/mypage/owner/${String(OwnerId)}`);
       } else {
         void UpdateCafeInformSubmit(
           String(data?.fetchMyCafes[0].id),
           submitData
         );
       }
+      void router.push(`/mypage/owner/${String(OwnerId)}`);
     } catch (error) {
       console.log(error);
     }
@@ -327,13 +325,14 @@ export default function SignUpCafeInfo() {
           </S.ContentsTitleWrap>
           <div style={{ padding: "40px 0px", paddingBottom: "60px" }}>
             <ReactQuill
+              modules={modules}
+              onChange={onChangeOperatingInfo}
+              key={data?.fetchMyCafes[0]?.cafeinfo}
+              defaultValue={data?.fetchMyCafes[0]?.cafeinfo}
               style={{
                 width: "100%",
                 height: "300px",
               }}
-              modules={modules}
-              onChange={onChangeOperatingInfo}
-              defaultValue={data?.fetchMyCafes[0]?.cafeinfo}
             />
           </div>
           <S.ContentsTitleWrap>
@@ -348,6 +347,7 @@ export default function SignUpCafeInfo() {
                 height: "200px",
               }}
               modules={modules}
+              key={data?.fetchMyCafes[0]?.notice}
               onChange={onChangeNotice}
               defaultValue={data?.fetchMyCafes[0]?.notice}
             />
@@ -365,6 +365,7 @@ export default function SignUpCafeInfo() {
                 height: "300px",
               }}
               modules={modules}
+              key={data?.fetchMyCafes[0]?.operatingInfo}
               onChange={onChangeCafeInfo}
               defaultValue={data?.fetchMyCafes[0]?.operatingInfo}
             />
@@ -416,34 +417,30 @@ export default function SignUpCafeInfo() {
             </Text>
           </S.ContentsTitleWrap>
           <S.CafeImageContainer>
-            <Form layout="vertical">
-              <Form.Item>
-                <Upload
-                  // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  listType="picture-card"
-                  fileList={fileList}
-                  onChange={handleChange}
-                  beforeUpload={(file) => {
-                    console.log(file);
-                    const tempFileList = [...cafeFileList, file];
-                    setCafeFileList(tempFileList);
-                  }}
-                  onRemove={async (file) => {
-                    console.log(file.uid);
-                    if (!file.uid.includes("upload")) {
-                      await onDeleteCafeImage(file.uid);
-                    } else {
-                      const tempFileList = cafeFileList.filter(
-                        (el) => el.uid !== file.uid
-                      );
-                      setCafeFileList(tempFileList);
-                    }
-                  }}
-                >
-                  {uploadButton}
-                </Upload>
-              </Form.Item>
-            </Form>
+            <Upload
+              // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture-card"
+              fileList={fileList}
+              onChange={handleChange}
+              beforeUpload={(file) => {
+                console.log(file);
+                const tempFileList = [...cafeFileList, file];
+                setCafeFileList(tempFileList);
+              }}
+              onRemove={async (file) => {
+                console.log(file.uid);
+                if (!file.uid.includes("upload")) {
+                  await onDeleteCafeImage(file.uid);
+                } else {
+                  const tempFileList = cafeFileList.filter(
+                    (el) => el.uid !== file.uid
+                  );
+                  setCafeFileList(tempFileList);
+                }
+              }}
+            >
+              {uploadButton}
+            </Upload>
             {/* <Upload
               // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture-card"
