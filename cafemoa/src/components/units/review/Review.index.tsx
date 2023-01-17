@@ -70,49 +70,53 @@ export default function ReviewList() {
           <S.ReviewListsWrap>
             <InfiniteScrollWrap onHandleMore={onHandleMore}>
               <Masonry>
-                {data?.fetchCommentsAll.map((el) => (
-                  <S.ReviewList key={el.id}>
-                    <Link href={`/cafe/${String(el.cafeinfo.id)}`}>
-                      <a>
-                        <Card01
-                          imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}
-                        >
-                          <div>
-                            <S.UserWrapper>
-                              <Users01
-                                image={el.user.profileImage}
-                                name={el.user.nickname}
-                                size="sm"
-                              />
-                            </S.UserWrapper>
-                            <S.CafeName>
-                              <Text size="24" weight="500">
-                                {el.cafeinfo.owner.brandName}
-                              </Text>
-                            </S.CafeName>
-                            <S.ReviewContent>
-                              <Text size="16" weight="300">
-                                {el.reply}
-                              </Text>
-                            </S.ReviewContent>
-                            <S.ReviewTag>
-                              {el.cafeinfo.cafeTag.map((el, idx) => (
-                                <Tag key={idx} size="sm">
-                                  {el.tagName}
-                                </Tag>
-                              ))}
-                            </S.ReviewTag>
-                            <S.ReviewDate>
-                              <Text size="14" weight="300" fontColor="gray">
-                                {GetDate(el.time)}
-                              </Text>
-                            </S.ReviewDate>
-                          </div>
-                        </Card01>
-                      </a>
-                    </Link>
-                  </S.ReviewList>
-                ))}
+                {data?.fetchCommentsAll ? (
+                  data?.fetchCommentsAll.map((el) => (
+                    <S.ReviewList key={el.id}>
+                      <Link href={`/cafe/${String(el.cafeinfo.id)}`}>
+                        <a>
+                          <Card01
+                            imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}
+                          >
+                            <div>
+                              <S.UserWrapper>
+                                <Users01
+                                  image={el.user.profileImage}
+                                  name={el.user.nickname}
+                                  size="sm"
+                                />
+                              </S.UserWrapper>
+                              <S.CafeName>
+                                <Text size="24" weight="500">
+                                  {el.cafeinfo.owner.brandName}
+                                </Text>
+                              </S.CafeName>
+                              <S.ReviewContent>
+                                <Text size="16" weight="300">
+                                  {el.reply}
+                                </Text>
+                              </S.ReviewContent>
+                              <S.ReviewTag>
+                                {el.cafeinfo.cafeTag.map((el, idx) => (
+                                  <Tag key={idx} size="sm">
+                                    {el.tagName}
+                                  </Tag>
+                                ))}
+                              </S.ReviewTag>
+                              <S.ReviewDate>
+                                <Text size="14" weight="300" fontColor="gray">
+                                  {GetDate(el.time)}
+                                </Text>
+                              </S.ReviewDate>
+                            </div>
+                          </Card01>
+                        </a>
+                      </Link>
+                    </S.ReviewList>
+                  ))
+                ) : (
+                  <>데이터가 없습니다.</>
+                )}
               </Masonry>
             </InfiniteScrollWrap>
           </S.ReviewListsWrap>

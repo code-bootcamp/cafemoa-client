@@ -56,18 +56,20 @@ export const SubArea = styled.div`
 
 export const Search = styled(SmallBtn)``;
 
-export const StampContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0 -15px;
+export const StampContainer = styled.div`
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0 -15px;
 
-  ${mq.MobileM} {
-    flex-direction: column;
+    ${mq.MobileM} {
+      flex-direction: column;
+    }
   }
 `;
 
-export const StampWrapper = styled.li`
+export const StampWrapper = styled.div`
   display: block;
   padding: 0 15px 30px;
   width: 50%;

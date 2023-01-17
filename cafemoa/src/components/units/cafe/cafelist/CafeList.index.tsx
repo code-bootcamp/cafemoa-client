@@ -96,43 +96,47 @@ export default function CafeList() {
         <S.CardsWrapper>
           <InfiniteScrollWrap onHandleMore={onHandleMore}>
             <Masonry>
-              {data?.fetchCafes.map((el) => (
-                <S.CardBox id={el.id} key={el.id}>
-                  <Link href={`/cafe/${String(el.id)}`}>
-                    <a>
-                      {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
-                      <Card02
-                        imageUrl={`https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`}
-                      >
-                        <div>
-                          <S.LikeWrapper>
-                            <Like01
-                              iconColor="red"
-                              fontColor="white"
-                              count={el.like}
-                            />
-                          </S.LikeWrapper>
-                          <Text size="20" weight="500">
-                            {el.owner.brandName}
-                          </Text>
-                          <div style={{ paddingTop: "8px" }}>
-                            <Text size="16" weight="300">
-                              {regText(el.cafeinfo)}
+              {data?.fetchCafes ? (
+                data?.fetchCafes.map((el) => (
+                  <S.CardBox id={el.id} key={el.id}>
+                    <Link href={`/cafe/${String(el.id)}`}>
+                      <a>
+                        {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
+                        <Card02
+                          imageUrl={`https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`}
+                        >
+                          <div>
+                            <S.LikeWrapper>
+                              <Like01
+                                iconColor="red"
+                                fontColor="white"
+                                count={el.like}
+                              />
+                            </S.LikeWrapper>
+                            <Text size="20" weight="500">
+                              {el.owner.brandName}
                             </Text>
-                            <S.DetailTagWrap>
-                              {el.cafeTag?.map((el) => (
-                                <Tag key={uuidv4()} size="sm">
-                                  {el.tagName}
-                                </Tag>
-                              ))}
-                            </S.DetailTagWrap>
+                            <div style={{ paddingTop: "8px" }}>
+                              <Text size="16" weight="300">
+                                {regText(el.cafeinfo)}
+                              </Text>
+                              <S.DetailTagWrap>
+                                {el.cafeTag?.map((el) => (
+                                  <Tag key={uuidv4()} size="sm">
+                                    {el.tagName}
+                                  </Tag>
+                                ))}
+                              </S.DetailTagWrap>
+                            </div>
                           </div>
-                        </div>
-                      </Card02>
-                    </a>
-                  </Link>
-                </S.CardBox>
-              ))}
+                        </Card02>
+                      </a>
+                    </Link>
+                  </S.CardBox>
+                ))
+              ) : (
+                <></>
+              )}
               {/* {data?.fetchCafes !== undefined &&
                 new Array(data?.fetchCafes?.length % 4)
                   .fill("blank")

@@ -79,29 +79,33 @@ export default function StampCheck() {
             </Text>
           </S.Title>
           <InfiniteScrollWrap onHandleMore={onHandleMore}>
-            {data?.fetchUnusualStamps.map((el) => (
-              <S.NotificationWrapper key={el.id}>
-                <div>
-                  <Text size="20" weight="500">
-                    {el.user.name}님에게&nbsp;
-                  </Text>
-                  <Text size="20" weight="300">
-                    {getStampSaveDate(el.createdAt)}
-                  </Text>
-                  <Text size="20" weight="500">
-                    에 스탬프&nbsp;{el.count.toString()}
-                  </Text>
-                  <Text size="20" weight="500">
-                    개를 적립하였습니다.
-                  </Text>
-                </div>
-                <S.ConfirmBtn color="brown" onClick={onDeleteStamp(el.id)}>
-                  <Text size="16" fontColor="white">
-                    확인
-                  </Text>
-                </S.ConfirmBtn>
-              </S.NotificationWrapper>
-            ))}
+            {data?.fetchUnusualStamps ? (
+              data?.fetchUnusualStamps.map((el) => (
+                <S.NotificationWrapper key={el.id}>
+                  <div>
+                    <Text size="20" weight="500">
+                      {el.user.name}님에게&nbsp;
+                    </Text>
+                    <Text size="20" weight="300">
+                      {getStampSaveDate(el.createdAt)}
+                    </Text>
+                    <Text size="20" weight="500">
+                      에 스탬프&nbsp;{el.count.toString()}
+                    </Text>
+                    <Text size="20" weight="500">
+                      개를 적립하였습니다.
+                    </Text>
+                  </div>
+                  <S.ConfirmBtn color="brown" onClick={onDeleteStamp(el.id)}>
+                    <Text size="16" fontColor="white">
+                      확인
+                    </Text>
+                  </S.ConfirmBtn>
+                </S.NotificationWrapper>
+              ))
+            ) : (
+              <></>
+            )}
           </InfiniteScrollWrap>
         </S.NotificationContainer>
       </S.StampCheckContainer>

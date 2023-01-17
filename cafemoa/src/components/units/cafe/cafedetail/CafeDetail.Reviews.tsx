@@ -71,19 +71,23 @@ export default function CafeDetailReview() {
           </Modal>
         )}
         <InfiniteScrollWrap onHandleMore={onHandleMore}>
-          {data?.fetchCommentBycafeID.map((el) => (
-            <Fragment key={uuidv4()}>
-              <ReviewComment
-                setIsEdit={setIsEdit}
-                setIsReview={setIsReview}
-                setCommentId={setCommentId}
-                setUpdatedata={setUpdatedata}
-                el={el}
-                cafeId={String(router.query.cafeInformID)}
-                onHandleMore={onHandleMore}
-              />
-            </Fragment>
-          ))}
+          {data?.fetchCommentBycafeID ? (
+            data?.fetchCommentBycafeID.map((el) => (
+              <Fragment key={uuidv4()}>
+                <ReviewComment
+                  setIsEdit={setIsEdit}
+                  setIsReview={setIsReview}
+                  setCommentId={setCommentId}
+                  setUpdatedata={setUpdatedata}
+                  el={el}
+                  cafeId={String(router.query.cafeInformID)}
+                  onHandleMore={onHandleMore}
+                />
+              </Fragment>
+            ))
+          ) : (
+            <></>
+          )}
         </InfiniteScrollWrap>
       </S.ReviewContainer>
     </>

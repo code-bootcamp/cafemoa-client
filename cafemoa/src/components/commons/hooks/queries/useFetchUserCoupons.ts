@@ -5,8 +5,8 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export const USER_COUPONS = gql`
-  query fetchUserCoupons {
-    fetchUserCoupons {
+  query fetchUserCoupons($page: Int) {
+    fetchUserCoupons(page: $page) {
       id
       expiredDate
       user {
@@ -26,9 +26,43 @@ export const USER_COUPONS = gql`
 `;
 
 export const useFetchUserCoupons = () => {
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUserCoupons">,
     IQueryFetchUserCouponsArgs
   >(USER_COUPONS);
-  return { data };
+
+  const onHandleMore = async () => {
+    if (data === undefined) return;
+    if (data.fetchUserCoupons?.length === 0) return;
+    try {
+      void fetchMore({
+        variables: {
+          location: "",
+          page: Number(Math.ceil(data.fetchUserCoupons.length / 10) + 1),
+        },
+        updateQuery(prev, { fetchMoreResult }) {
+          if (fetchMoreResult.fetchUserCoupons === undefined) {
+            return {
+              fetchUserCoupons: [...prev.fetchUserCoupons],
+            };
+          }
+          if (prev.fetchUserCoupons === undefined) {
+            return {
+              fetchUserCoupons: [],
+            };
+          }
+          return {
+            fetchUserCoupons: [
+              ...prev?.fetchUserCoupons,
+              ...fetchMoreResult?.fetchUserCoupons,
+            ],
+          };
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { data, onHandleMore };
 };
