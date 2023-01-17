@@ -37,7 +37,7 @@ export default function StampSaveByPhone() {
   const [createStamp] = useCreateStamp();
   const { data, onRefetchUsers } = useFetchCouponAddUsers();
   const { data: mycafedata } = useFetchMyCafes();
-  const cafeId = String(mycafedata?.fetchMyCafes[0].id);
+  const cafeId = String(mycafedata?.fetchMyCafes[0]?.id);
 
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
@@ -66,7 +66,7 @@ export default function StampSaveByPhone() {
     inputRef.current?.click();
   };
 
-  const submitStampSave = (data: IStampSaveData) => {
+  const submitStampSave = async (data: IStampSaveData) => {
     const { phone, ...value } = data;
     console.log(value);
     console.log(selectValue);
@@ -78,7 +78,7 @@ export default function StampSaveByPhone() {
     }
 
     try {
-      void createStamp({
+      await createStamp({
         variables: {
           createStampInput: {
             phone: value.selectPhone,
@@ -97,7 +97,7 @@ export default function StampSaveByPhone() {
       });
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message);
+        Modal.error({ content: error.message });
       }
     }
   };

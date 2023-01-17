@@ -67,6 +67,7 @@ export default function Layout(props: ILayoutProps) {
               style={{
                 ...getTransitionStyles[status],
               }}
+              isLoginPage={router.pathname === "/login"}
             >
               {props.children}
             </Contents>
@@ -78,10 +79,14 @@ export default function Layout(props: ILayoutProps) {
   );
 }
 
-const Contents = styled.div`
+interface IContentsStyles {
+  isLoginPage: boolean;
+}
+
+const Contents = styled.div<IContentsStyles>`
   overflow: hidden;
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: ${(props) => (props.isLoginPage ? "0" : "100px")};
   ${mq.MobileM} {
     padding-top: 72px;
   }

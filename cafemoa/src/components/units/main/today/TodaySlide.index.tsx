@@ -9,6 +9,7 @@ import { getRandomDday } from "../../../commons/hooks/customs/useRandomDayTag";
 import { v4 as uuidv4 } from "uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, EffectFade, Thumbs } from "swiper";
+import { regText } from "../../../../commons/libraries/utill";
 
 export default function TodaySlide() {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
@@ -46,8 +47,9 @@ export default function TodaySlide() {
                   <S.ImageWrap>
                     <img
                       src={
-                        el?.thumbNail ??
-                        "/images/commons/img_cafe_preparing.png"
+                        el.cafeImage[0]?.cafe_image !== undefined
+                          ? `https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`
+                          : "/images/commons/img_cafe_preparing.png"
                       }
                     />
                   </S.ImageWrap>
@@ -59,7 +61,7 @@ export default function TodaySlide() {
                     </div>
                     <S.InfoContents>
                       <Text size="16" fontColor="white" weight="500">
-                        {el?.cafeinfo}
+                        {regText(el?.cafeinfo)}
                       </Text>
                     </S.InfoContents>
                     <div>
@@ -97,7 +99,9 @@ export default function TodaySlide() {
                 <S.ImageWrap>
                   <img
                     src={
-                      el.thumbNail ?? "/images/commons/img_cafe_preparing.png"
+                      el.cafeImage[0]?.cafe_image !== undefined
+                        ? `https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`
+                        : "/images/commons/img_cafe_preparing.png"
                     }
                   />
                 </S.ImageWrap>

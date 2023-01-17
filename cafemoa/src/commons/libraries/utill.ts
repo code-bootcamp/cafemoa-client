@@ -57,10 +57,17 @@ export const getStampSaveDate = (value: string) => {
 };
 
 export const reviewRegisterDate = (value: string, limit: 0 | 1 | 2 | 3) => {
+  console.log(value);
   const nowDate = new Date();
   const newDate = new Date(value);
   return (
     newDate.setDate(newDate.getDate() + limit) >
     nowDate.setDate(nowDate.getDate())
   );
+};
+
+export const regText = (value: string) => {
+  const newText = value.replace(/<[^>]*>?/g, "");
+
+  return newText;
 };

@@ -2,7 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import * as S from "./Header.styles";
 import { RiMenu3Fill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CafeSearchModal from "../../../units/cafesearch/CafeSearchModal.index";
 import Text from "../../text/01/Text01.index";
@@ -12,6 +12,7 @@ import { useRecoilState } from "recoil";
 import { useUserLogout } from "../../hooks/mutations/useUserLogout";
 import { IoMdExit } from "react-icons/io";
 import Users01 from "../../user/01/Users01.index";
+import { useRouter } from "next/router";
 
 const GNB_MENUS = [
   {
@@ -25,6 +26,7 @@ const GNB_MENUS = [
 ];
 
 export default function HeaderLayout() {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [infoUser] = useRecoilState(infoUserState);
@@ -42,6 +44,10 @@ export default function HeaderLayout() {
   const onClose = () => {
     setIsDrawerOpen((prev) => !prev);
   };
+  useEffect(() => {
+    setIsDrawerOpen(false);
+    setIsModalOpen(false);
+  }, [router]);
 
   return (
     <>
@@ -139,7 +145,7 @@ export default function HeaderLayout() {
             <S.DrawerProfile>
               <Users01
                 size="lg"
-                image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
+                image={`${infoUser?.fetchUser?.profileImage}`}
               ></Users01>
               <S.DrawerName>
                 <Text size="20" weight="500">

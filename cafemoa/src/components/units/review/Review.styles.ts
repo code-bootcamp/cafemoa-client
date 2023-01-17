@@ -6,7 +6,7 @@ export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
 export const FilterWrapper = styled.div`
-  width: 10%;
+  max-width: 150px;
   padding-bottom: 40px;
 `;
 export const Container = styled.div`
@@ -21,14 +21,16 @@ export const TagWrapper = styled(TagWrap)`
   }
 `;
 
-export const ReviewListsWrap = styled.ul`
+export const ReviewListsWrap = styled.div`
   // display: flex;
   // flex-wrap: wrap;
-  padding: 0;
-  margin: 0 -20px;
+  > div {
+    padding: 0;
+    margin: 0 -20px;
+  }
 `;
 
-export const ReviewList = styled.li`
+export const ReviewList = styled.div`
   display: block;
   width: 25%;
   padding: 20px;

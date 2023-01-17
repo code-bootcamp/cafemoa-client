@@ -125,14 +125,22 @@ export default function SignUpOwner(props: ISignUpProps) {
       });
       return;
     }
+    console.log(props.isEdit);
     if (props.isEdit) {
       const { email, name, phone, ...updateValue } = value;
-      console.log(updateValue);
       await updateOwnerSubmit(updateValue);
-      void router.push("/");
+      Modal.success({
+        content: "정보 수정이 완료 되었습니다",
+      });
+      void router.push(
+        `/mypage/owner/${props.infoUser?.fetchOwnerLoggedIn?.id}`
+      );
     } else {
       await createOwnerSubmit(value);
-      void router.push("/");
+      Modal.success({
+        content: "카페모아 가맹주에 회원가입을 환영합니다.",
+      });
+      void router.push("/login");
     }
   };
 
@@ -270,8 +278,12 @@ export default function SignUpOwner(props: ISignUpProps) {
     setValue("is_main", value);
   };
 
+  const onReset = () => {
+    router.back();
+  };
+
   return (
-    <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
+    <form onSubmit={handleSubmit(onSignUpSubmit)} onReset={onReset}>
       <S.ContainerInner>
         <S.TitleWrap>
           <Text size="32" fontColor="subColor01">
@@ -487,6 +499,6 @@ export default function SignUpOwner(props: ISignUpProps) {
           </S.SubmitBtn>
         </S.SignUpBtnWrap>
       </S.ContainerInner>
-    </S.ContainerWrapper>
+    </form>
   );
 }

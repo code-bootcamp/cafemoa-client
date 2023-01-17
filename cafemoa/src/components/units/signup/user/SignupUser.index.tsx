@@ -108,10 +108,17 @@ export default function SignUpUser(props: ISignUpProps) {
         updateValue,
         results[0]?.data?.uploadFile[0] ?? updateValue.profileImage
       );
+      Modal.success({
+        content: "개인정보 수정은 완료했습니다.",
+      });
+      void router.push(`/mypage/user/${props.infoUser?.fetchUser?.id}`);
     } else {
       void createUserSubmit(value, results[0]?.data?.uploadFile[0] ?? "");
+      Modal.success({
+        content: "카페모아에서 쿠폰을 모아",
+      });
+      void router.push("/login");
     }
-    void router.push("/");
   };
 
   useEffect(() => {
@@ -212,9 +219,13 @@ export default function SignUpUser(props: ISignUpProps) {
     setFilesList(newFileUrls);
   };
 
+  const onReset = () => {
+    router.back();
+  };
+
   return (
     <>
-      <S.ContainerWrapper onSubmit={handleSubmit(submitSignUp)}>
+      <form onSubmit={handleSubmit(submitSignUp)} onReset={onReset}>
         <S.ContainerInner>
           <S.TitleWrap>
             <Text size="32" fontColor="subColor01">
@@ -406,7 +417,7 @@ export default function SignUpUser(props: ISignUpProps) {
             </S.SubmitBtn>
           </S.SignUpBtnWrap>
         </S.ContainerInner>
-      </S.ContainerWrapper>
+      </form>
       {isModalOpen && (
         <Modal
           title="주소 검색"

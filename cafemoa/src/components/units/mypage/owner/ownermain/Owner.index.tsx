@@ -3,19 +3,32 @@ import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../commons/stores";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./Owner.styles";
 
 export default function OwnerMyPage() {
   const [infoUser] = useRecoilState(infoUserState);
+  const { data: cafeId } = useFetchMyCafes();
   const ownerId = infoUser?.fetchOwnerLoggedIn?.id;
+
   return (
     <>
       <HeroWrap
         imageUrl="/images/owner/Owner01.jpeg"
         title="마이모아"
         subject="내 정보를 한눈에 보기 쉽게 모아!"
-      ></HeroWrap>
+      >
+        <S.MyCafe>
+          <Link href={`/cafe/${cafeId?.fetchMyCafes[0]?.id}`}>
+            <a>
+              <Text fontColor="white" size="16">
+                내 카페 보기
+              </Text>
+            </a>
+          </Link>
+        </S.MyCafe>
+      </HeroWrap>
       <S.MyPageContainer>
         <S.OwnerMenuContainer>
           <div>
@@ -25,7 +38,9 @@ export default function OwnerMyPage() {
                   <div>
                     <S.TitleWrap>
                       <Text size="32" weight="700">
-                        카페 정보 수정
+                        {infoUser?.fetchOwnerLoggedIn?.is_cafeInform
+                          ? "카페 정보 수정"
+                          : "카페 정보 등록"}
                       </Text>
                     </S.TitleWrap>
                     <S.ImageWrap>
@@ -54,38 +69,42 @@ export default function OwnerMyPage() {
               </Link>
             </Box01>
           </div>
-          <div>
-            <Box01 styles={{ height: "100%" }}>
-              <Link href={`/mypage/owner/${String(ownerId)}/ownercheck`}>
-                <a>
-                  <S.TitleWrap>
-                    <Text size="32" weight="700">
-                      적립 회원 점검
-                    </Text>
-                  </S.TitleWrap>
-                  <S.ImageWrap>
-                    <img src="/images/owner/Owner04.png" />
-                  </S.ImageWrap>
-                </a>
-              </Link>
-            </Box01>
-          </div>
-          <div>
-            <Box01 styles={{ height: "100%" }}>
-              <Link href={`/mypage/owner/${String(ownerId)}/stampsave`}>
-                <a>
-                  <S.TitleWrap>
-                    <Text size="32" weight="700">
-                      적립 페이지
-                    </Text>
-                  </S.TitleWrap>
-                  <S.ImageWrap>
-                    <img src="/images/owner/Owner05.png" />
-                  </S.ImageWrap>
-                </a>
-              </Link>
-            </Box01>
-          </div>
+          {infoUser?.fetchOwnerLoggedIn?.is_cafeInform && (
+            <>
+              <div>
+                <Box01 styles={{ height: "100%" }}>
+                  <Link href={`/mypage/owner/${String(ownerId)}/ownercheck`}>
+                    <a>
+                      <S.TitleWrap>
+                        <Text size="32" weight="700">
+                          적립 회원 점검
+                        </Text>
+                      </S.TitleWrap>
+                      <S.ImageWrap>
+                        <img src="/images/owner/Owner04.png" />
+                      </S.ImageWrap>
+                    </a>
+                  </Link>
+                </Box01>
+              </div>
+              <div>
+                <Box01 styles={{ height: "100%" }}>
+                  <Link href={`/mypage/owner/${String(ownerId)}/stampsave`}>
+                    <a>
+                      <S.TitleWrap>
+                        <Text size="32" weight="700">
+                          적립 페이지
+                        </Text>
+                      </S.TitleWrap>
+                      <S.ImageWrap>
+                        <img src="/images/owner/Owner05.png" />
+                      </S.ImageWrap>
+                    </a>
+                  </Link>
+                </Box01>
+              </div>
+            </>
+          )}
         </S.OwnerMenuContainer>
       </S.MyPageContainer>
     </>

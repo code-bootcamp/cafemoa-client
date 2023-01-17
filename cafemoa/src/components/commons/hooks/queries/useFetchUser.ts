@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../commons/stores";
 import { IQuery } from "../../../../commons/types/generated/types";
 
-const FETCH_USER = gql`
+export const FETCH_USER = gql`
   query fetchUser {
     fetchUser {
       id
@@ -18,7 +18,7 @@ const FETCH_USER = gql`
     }
   }
 `;
-const FETCH_OWNER_LOGGEDIN = gql`
+export const FETCH_OWNER_LOGGEDIN = gql`
   query fetchOwnerLoggedIn {
     fetchOwnerLoggedIn {
       id

@@ -6,6 +6,7 @@ import { infoUserState } from "../../../../commons/stores";
 export const useOwnerPage = () => {
   const router = useRouter();
   const [infoUser] = useRecoilState(infoUserState);
+
   useEffect(() => {
     if (infoUser?.fetchOwnerLoggedIn === undefined) return;
     if (router.asPath === "/") {

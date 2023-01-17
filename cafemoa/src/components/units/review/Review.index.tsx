@@ -5,7 +5,7 @@ import * as S from "./Review.styles";
 import Users01 from "../../commons/user/01/Users01.index";
 import Text from "../../commons/text/01/Text01.index";
 import { v4 as uuidv4 } from "uuid";
-import { TAG_VALUES } from "../../../commons/default/default";
+import { SELECT_VALUES02, TAG_VALUES } from "../../../commons/default/default";
 import { useEffect, useState } from "react";
 import { useFetchCommentsAll } from "../../commons/hooks/queries/useFetchCommentsAll";
 import Select01 from "../../commons/select/01/Select01.index";
@@ -13,27 +13,6 @@ import Link from "next/link";
 import Masonry from "react-masonry-component";
 import { GetDate } from "../../../commons/libraries/utill";
 import InfiniteScrollWrap from "../../commons/infiniteScroll/01/InfiniteScroll.index";
-
-const SELECT_VALUES02 = [
-  { label: "전체", value: "" },
-  { label: "서울특별시", value: "서울" },
-  { label: "경기도", value: "경기" },
-  { label: "강원도", value: "강원" },
-  { label: "충청북도", value: "충북" },
-  { label: "충청남도", value: "충남" },
-  { label: "전라북도", value: "전북" },
-  { label: "전라남도", value: "전남" },
-  { label: "경상북도", value: "경북" },
-  { label: "경상남도", value: "경남" },
-  { label: "광주광역시", value: "광주" },
-  { label: "대구광역시", value: "대구" },
-  { label: "대전광역시", value: "대전" },
-  { label: "부산광역시", value: "부산" },
-  { label: "세종특별자치시", value: "세종" },
-  { label: "울산광역시", value: "울산" },
-  { label: "인천광역시", value: "인천" },
-  { label: "제주도", value: "제주도" },
-];
 
 export default function ReviewList() {
   const [selectTag, setSelectTag] = useState<string[]>([]);
@@ -91,49 +70,53 @@ export default function ReviewList() {
           <S.ReviewListsWrap>
             <InfiniteScrollWrap onHandleMore={onHandleMore}>
               <Masonry>
-                {data?.fetchCommentsAll.map((el) => (
-                  <S.ReviewList key={el.id}>
-                    <Link href={`/cafe/${String(el.cafeinfo.id)}`}>
-                      <a>
-                        <Card01
-                          imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}
-                        >
-                          <div>
-                            <S.UserWrapper>
-                              <Users01
-                                image={el.user.profileImage}
-                                name={el.user.nickname}
-                                size="sm"
-                              />
-                            </S.UserWrapper>
-                            <S.CafeName>
-                              <Text size="24" weight="500">
-                                {el.cafeinfo.owner.brandName}
-                              </Text>
-                            </S.CafeName>
-                            <S.ReviewContent>
-                              <Text size="16" weight="300">
-                                {el.reply}
-                              </Text>
-                            </S.ReviewContent>
-                            <S.ReviewTag>
-                              {el.cafeinfo.cafeTag.map((el, idx) => (
-                                <Tag key={idx} size="sm">
-                                  {el.tagName}
-                                </Tag>
-                              ))}
-                            </S.ReviewTag>
-                            <S.ReviewDate>
-                              <Text size="14" weight="300" fontColor="gray">
-                                {GetDate(el.time)}
-                              </Text>
-                            </S.ReviewDate>
-                          </div>
-                        </Card01>
-                      </a>
-                    </Link>
-                  </S.ReviewList>
-                ))}
+                {data?.fetchCommentsAll ? (
+                  data?.fetchCommentsAll.map((el) => (
+                    <S.ReviewList key={el.id}>
+                      <Link href={`/cafe/${String(el.cafeinfo.id)}`}>
+                        <a>
+                          <Card01
+                            imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}
+                          >
+                            <div>
+                              <S.UserWrapper>
+                                <Users01
+                                  image={el.user.profileImage}
+                                  name={el.user.nickname}
+                                  size="sm"
+                                />
+                              </S.UserWrapper>
+                              <S.CafeName>
+                                <Text size="24" weight="500">
+                                  {el.cafeinfo.owner.brandName}
+                                </Text>
+                              </S.CafeName>
+                              <S.ReviewContent>
+                                <Text size="16" weight="300">
+                                  {el.reply}
+                                </Text>
+                              </S.ReviewContent>
+                              <S.ReviewTag>
+                                {el.cafeinfo.cafeTag.map((el, idx) => (
+                                  <Tag key={idx} size="sm">
+                                    {el.tagName}
+                                  </Tag>
+                                ))}
+                              </S.ReviewTag>
+                              <S.ReviewDate>
+                                <Text size="14" weight="300" fontColor="gray">
+                                  {GetDate(el.time)}
+                                </Text>
+                              </S.ReviewDate>
+                            </div>
+                          </Card01>
+                        </a>
+                      </Link>
+                    </S.ReviewList>
+                  ))
+                ) : (
+                  <>데이터가 없습니다.</>
+                )}
               </Masonry>
             </InfiniteScrollWrap>
           </S.ReviewListsWrap>

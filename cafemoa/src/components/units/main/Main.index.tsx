@@ -13,11 +13,14 @@ import { useRecoilState } from "recoil";
 import NonMember from "./authbanners/nonmember/NonMember.index";
 
 export default function Main() {
-  const [isScroll, setIsScroll] = useState(false);
+  const [isScroll, setIsScroll] = useState(true);
   const [infoUser] = useRecoilState(infoUserState);
 
   const handleScroll = _.debounce((event) => {
-    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
+    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) {
+      setIsScroll(true);
+      return;
+    }
     if (Math.floor(window.pageYOffset) === 0) setIsScroll(false);
     const direction = event.deltaY > 0 ? "down" : "up";
     if (direction === "down") {
@@ -28,7 +31,6 @@ export default function Main() {
       setIsScroll(true);
     }
   }, 50);
-
   useEffect(() => {
     window.onbeforeunload = function pushRefresh() {
       window.scrollTo(0, 0);
@@ -47,7 +49,6 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    if (Math.floor(window.scrollY) > Math.floor(window.innerHeight)) return;
     if (!isScroll) {
       document.body.style.cssText = `overflow : hidden`;
     } else {

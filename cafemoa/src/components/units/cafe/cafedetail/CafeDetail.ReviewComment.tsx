@@ -24,6 +24,7 @@ interface IReviewCommentProps {
   setIsReview: (bool: boolean) => void;
   setCommentId: (CommentId: string) => void;
   setUpdatedata: (el: IComment) => void;
+  onHandleMore: () => void;
 }
 
 export default function ReviewComment(props: IReviewCommentProps) {
@@ -97,8 +98,8 @@ export default function ReviewComment(props: IReviewCommentProps) {
             name={props.el.user.nickname}
             size="md"
           />
-          {infoUser.fetchUser?.id === props.el.user.id &&
-            reviewRegisterDate(props.el.time, 3) && (
+          {infoUser?.fetchUser?.id === props.el.user.id &&
+            reviewRegisterDate(props.el.time, 1) && (
               <S.BtnWrapper>
                 <S.EditBtn onClick={onClickCommentEdit(props.el.id)}>
                   <AiFillEdit />
@@ -141,7 +142,9 @@ export default function ReviewComment(props: IReviewCommentProps) {
         ) : (
           <div></div>
         )}
-        {isReply && <ReplyReview commentId={props.el.id} />}
+        {isReply && (
+          <ReplyReview commentId={props.el.id} setIsReply={setIsReply} />
+        )}
         <OwnerComment commentId={props.el.id} />
       </S.ReviewWrapper>
     </>

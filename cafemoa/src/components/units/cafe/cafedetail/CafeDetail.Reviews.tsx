@@ -10,10 +10,11 @@ import { IComment } from "../../../../commons/types/generated/types";
 import { useFetchCafeStamps } from "../../../commons/hooks/queries/useFetchCafeStamps";
 import { reviewRegisterDate } from "../../../../commons/libraries/utill";
 import { Modal } from "antd";
+import InfiniteScrollWrap from "../../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 export default function CafeDetailReview() {
   const router = useRouter();
-  const { data } = useFetchCommentByCafeID();
+  const { data, onHandleMore } = useFetchCommentByCafeID();
   const { data: cafeStamps } = useFetchCafeStamps(
     String(router.query.cafeInformID)
   );
@@ -36,10 +37,7 @@ export default function CafeDetailReview() {
   return (
     <>
       <S.ReviewBtnWrapper>
-        {console.log(
-          reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1)
-        )}
-        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0]?.updatedAt, 1) && (
+        {reviewRegisterDate(cafeStamps?.fetchCafeStamps[0], 1) && (
           <S.ReviewWriteBtn color="beige">
             <S.BtnInnerWrapper onClick={onClickOpenReivewWrite}>
               <img src="/images/cafedetail/CafeDetail05.png" />
@@ -72,18 +70,25 @@ export default function CafeDetailReview() {
             />
           </Modal>
         )}
-        {data?.fetchCommentBycafeID.map((el) => (
-          <Fragment key={uuidv4()}>
-            <ReviewComment
-              setIsEdit={setIsEdit}
-              setIsReview={setIsReview}
-              setCommentId={setCommentId}
-              setUpdatedata={setUpdatedata}
-              el={el}
-              cafeId={String(router.query.cafeInformID)}
-            />
-          </Fragment>
-        ))}
+        <InfiniteScrollWrap onHandleMore={onHandleMore}>
+          {data?.fetchCommentBycafeID ? (
+            data?.fetchCommentBycafeID.map((el) => (
+              <Fragment key={uuidv4()}>
+                <ReviewComment
+                  setIsEdit={setIsEdit}
+                  setIsReview={setIsReview}
+                  setCommentId={setCommentId}
+                  setUpdatedata={setUpdatedata}
+                  el={el}
+                  cafeId={String(router.query.cafeInformID)}
+                  onHandleMore={onHandleMore}
+                />
+              </Fragment>
+            ))
+          ) : (
+            <></>
+          )}
+        </InfiniteScrollWrap>
       </S.ReviewContainer>
     </>
   );

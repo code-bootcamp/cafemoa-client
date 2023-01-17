@@ -66,6 +66,10 @@ export const StampWrapper = styled.div`
     ${mq.MobileL} {
       padding: 20px 24px;
     }
+    ${mq.MobileS} {
+      padding: 0;
+      border: 0 none;
+    }
   }
 `;
 
@@ -254,5 +258,16 @@ export const ModalBtnWrap = styled(BtnWrap)`
     width: calc(50% - 16px);
     text-align: center;
     border-radius: 20px;
+  }
+`;
+export const MyCafe = styled.div`
+  text-align: center;
+  margin-top: 16px;
+  > a {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid ${DEFAULT_COLOR.white};
+    max-width: 200px;
+    width: 100%;
   }
 `;

@@ -8,33 +8,16 @@ import Text from "../../../commons/text/01/Text01.index";
 import Like01 from "../../../commons/like/01/Like01.index";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useRef, useState } from "react";
-import { TAG_VALUES } from "../../../../commons/default/default";
+import {
+  SELECT_VALUES02,
+  TAG_VALUES,
+} from "../../../../commons/default/default";
 import { useFetchCafes } from "../../../commons/hooks/queries/useFetchCafes";
 import Link from "next/link";
 import Masonry from "react-masonry-component";
 import { useRouter } from "next/router";
 import InfiniteScrollWrap from "../../../commons/infiniteScroll/01/InfiniteScroll.index";
-
-const SELECT_VALUES02 = [
-  { label: "전체", value: "" },
-  { label: "서울특별시", value: "서울" },
-  { label: "경기도", value: "경기" },
-  { label: "강원도", value: "강원" },
-  { label: "충청북도", value: "충북" },
-  { label: "충청남도", value: "충남" },
-  { label: "전라북도", value: "전북" },
-  { label: "전라남도", value: "전남" },
-  { label: "경상북도", value: "경북" },
-  { label: "경상남도", value: "경남" },
-  { label: "광주광역시", value: "광주" },
-  { label: "대구광역시", value: "대구" },
-  { label: "대전광역시", value: "대전" },
-  { label: "부산광역시", value: "부산" },
-  { label: "세종특별자치시", value: "세종" },
-  { label: "울산광역시", value: "울산" },
-  { label: "인천광역시", value: "인천" },
-  { label: "제주도", value: "제주도" },
-];
+import { regText } from "../../../../commons/libraries/utill";
 
 export default function CafeList() {
   const router = useRouter();
@@ -113,43 +96,47 @@ export default function CafeList() {
         <S.CardsWrapper>
           <InfiniteScrollWrap onHandleMore={onHandleMore}>
             <Masonry>
-              {data?.fetchCafes.map((el) => (
-                <S.CardBox id={el.id} key={el.id}>
-                  <Link href={`/cafe/${String(el.id)}`}>
-                    <a>
-                      {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
-                      <Card02
-                        imageUrl={`https://storage.googleapis.com/${el.cafeImage[0].cafe_image}`}
-                      >
-                        <div>
-                          <S.LikeWrapper>
-                            <Like01
-                              iconColor="red"
-                              fontColor="white"
-                              count={el.like}
-                            />
-                          </S.LikeWrapper>
-                          <Text size="20" weight="500">
-                            {el.owner.brandName}
-                          </Text>
-                          <div style={{ paddingTop: "8px" }}>
-                            <Text size="16" weight="300">
-                              {el.cafeinfo}
+              {data?.fetchCafes ? (
+                data?.fetchCafes.map((el) => (
+                  <S.CardBox id={el.id} key={el.id}>
+                    <Link href={`/cafe/${String(el.id)}`}>
+                      <a>
+                        {/* <S.CardBox id={el.id} key={el.id} onClick={onClickMoveToDetail}> */}
+                        <Card02
+                          imageUrl={`https://storage.googleapis.com/${el.cafeImage[0]?.cafe_image}`}
+                        >
+                          <div>
+                            <S.LikeWrapper>
+                              <Like01
+                                iconColor="red"
+                                fontColor="white"
+                                count={el.like}
+                              />
+                            </S.LikeWrapper>
+                            <Text size="20" weight="500">
+                              {el.owner.brandName}
                             </Text>
-                            <S.DetailTagWrap>
-                              {el.cafeTag?.map((el) => (
-                                <Tag key={uuidv4()} size="sm">
-                                  {el.tagName}
-                                </Tag>
-                              ))}
-                            </S.DetailTagWrap>
+                            <div style={{ paddingTop: "8px" }}>
+                              <Text size="16" weight="300">
+                                {regText(el.cafeinfo)}
+                              </Text>
+                              <S.DetailTagWrap>
+                                {el.cafeTag?.map((el) => (
+                                  <Tag key={uuidv4()} size="sm">
+                                    {el.tagName}
+                                  </Tag>
+                                ))}
+                              </S.DetailTagWrap>
+                            </div>
                           </div>
-                        </div>
-                      </Card02>
-                    </a>
-                  </Link>
-                </S.CardBox>
-              ))}
+                        </Card02>
+                      </a>
+                    </Link>
+                  </S.CardBox>
+                ))
+              ) : (
+                <></>
+              )}
               {/* {data?.fetchCafes !== undefined &&
                 new Array(data?.fetchCafes?.length % 4)
                   .fill("blank")

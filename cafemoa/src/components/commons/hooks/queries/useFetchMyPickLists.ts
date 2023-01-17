@@ -36,7 +36,7 @@ export const MY_PICK_LISTS = gql`
 
 export const useFetchMyPickLists = () => {
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     Pick<IQuery, "fetchMyPickLists">,
     IQueryFetchMyPickListsArgs
   >(MY_PICK_LISTS, {
@@ -57,5 +57,39 @@ export const useFetchMyPickLists = () => {
   useEffect(() => {
     void refetch({ Location: locationState });
   }, [locationState]);
-  return { data, onSelectLocation };
+
+  const onHandleMore = async () => {
+    if (data === undefined) return;
+    if (data.fetchMyPickLists?.length === 0) return;
+    try {
+      void fetchMore({
+        variables: {
+          location: "",
+          page: Number(Math.ceil(data.fetchMyPickLists.length / 10) + 1),
+        },
+        updateQuery(prev, { fetchMoreResult }) {
+          if (fetchMoreResult.fetchMyPickLists === undefined) {
+            return {
+              fetchMyPickLists: [...prev.fetchMyPickLists],
+            };
+          }
+          if (prev.fetchMyPickLists === undefined) {
+            return {
+              fetchMyPickLists: [],
+            };
+          }
+          return {
+            fetchMyPickLists: [
+              ...prev?.fetchMyPickLists,
+              ...fetchMoreResult?.fetchMyPickLists,
+            ],
+          };
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { data, onSelectLocation, onHandleMore };
 };

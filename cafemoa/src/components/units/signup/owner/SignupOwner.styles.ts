@@ -17,7 +17,7 @@ interface ISignupStylesProps {
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 0;
 `;
-export const ContainerInner = styled.form`
+export const ContainerInner = styled.div`
   padding: 40px 100px;
   max-width: 540px;
   margin: 0 auto;
@@ -25,6 +25,9 @@ export const ContainerInner = styled.form`
   box-shadow: 0 0 12px -4px;
   ${mq.MobileL} {
     padding: 50px 100px;
+  }
+  ${mq.MobileS} {
+    padding: 24px;
   }
 `;
 export const TitleWrap = styled.div`

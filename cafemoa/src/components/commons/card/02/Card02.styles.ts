@@ -7,6 +7,19 @@ export const CardImgWrap = styled.div`
   > img {
     width: 100%;
   }
+  ::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+  }
 `;
 export const CardInfoWrap = styled.div`
   padding: 24px 24px 48px;

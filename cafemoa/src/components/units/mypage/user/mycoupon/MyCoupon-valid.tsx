@@ -8,6 +8,7 @@ import { useFetchUserCoupons } from "../../../../commons/hooks/queries/useFetchU
 import { getExpiredDate } from "../../../../../commons/libraries/utill";
 import { useRef } from "react";
 import { useUseCoupon } from "../../../../commons/hooks/mutations/useUseCoupon";
+import InfiniteScrollWrap from "../../../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 interface IFormUseCouponData {
   password: string;
@@ -17,7 +18,7 @@ interface IFormUseCouponData {
 export default function MyCouponValid() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { data } = useFetchUserCoupons();
+  const { data, onHandleMore } = useFetchUserCoupons();
   console.log(data);
   const { useCouponSubmit } = useUseCoupon();
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
@@ -75,44 +76,50 @@ export default function MyCouponValid() {
       </ModalComponent>
 
       <S.ValidWrapper>
-        {data?.fetchUserCoupons.map((el) => (
-          <S.ValidBox key={el.id}>
-            <S.BoxWrapper>
-              <S.CouponDetail>
-                <S.Div>
-                  <Text size="28" weight="500" fontColor="mainColor">
-                    {el.cafeInform.owner.brandName}
-                  </Text>
-                </S.Div>
-                <S.Div>
-                  <Text size="24" weight="300" fontColor="mainColor">
-                    아메리카노 1잔 무료 쿠폰
-                  </Text>
-                </S.Div>
-                <S.Div>
-                  <Text size="20" weight="500" fontColor="mainColor">
-                    유효기간 : ~ {getExpiredDate(el.expiredDate)}
-                  </Text>
-                </S.Div>
-                <S.BtnWrapper>
-                  <S.CouponUseBtn
-                    color="beige"
-                    type="button"
-                    onClick={onClickCoupon(el.id)}
-                  >
-                    <Text size="16" fontColor="mainColor">
-                      쿠폰 사용
-                    </Text>
-                  </S.CouponUseBtn>
-                </S.BtnWrapper>
-              </S.CouponDetail>
-              <S.CoffeeImgWrap>
-                <BiCoffeeTogo />
-                <S.CouponImg src="/images/mycoupon/mycoupon.png" />
-              </S.CoffeeImgWrap>
-            </S.BoxWrapper>
-          </S.ValidBox>
-        ))}
+        <InfiniteScrollWrap onHandleMore={onHandleMore}>
+          {data?.fetchUserCoupons ? (
+            data?.fetchUserCoupons.map((el) => (
+              <S.ValidBox key={el.id}>
+                <S.BoxWrapper>
+                  <S.CouponDetail>
+                    <S.Div>
+                      <Text size="28" weight="500" fontColor="mainColor">
+                        {el.cafeInform.owner.brandName}
+                      </Text>
+                    </S.Div>
+                    <S.Div>
+                      <Text size="24" weight="300" fontColor="mainColor">
+                        아메리카노 1잔 무료 쿠폰
+                      </Text>
+                    </S.Div>
+                    <S.Div>
+                      <Text size="20" weight="500" fontColor="mainColor">
+                        유효기간 : ~ {getExpiredDate(el.expiredDate)}
+                      </Text>
+                    </S.Div>
+                    <S.BtnWrapper>
+                      <S.CouponUseBtn
+                        color="beige"
+                        type="button"
+                        onClick={onClickCoupon(el.id)}
+                      >
+                        <Text size="16" fontColor="mainColor">
+                          쿠폰 사용
+                        </Text>
+                      </S.CouponUseBtn>
+                    </S.BtnWrapper>
+                  </S.CouponDetail>
+                  <S.CoffeeImgWrap>
+                    <BiCoffeeTogo />
+                    <S.CouponImg src="/images/mycoupon/mycoupon.png" />
+                  </S.CoffeeImgWrap>
+                </S.BoxWrapper>
+              </S.ValidBox>
+            ))
+          ) : (
+            <></>
+          )}
+        </InfiniteScrollWrap>
       </S.ValidWrapper>
     </>
   );

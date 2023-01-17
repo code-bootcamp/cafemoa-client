@@ -12,27 +12,8 @@ import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSi
 import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 import { useRouter } from "next/router";
 import MessageModal from "../../../../commons/modal/message/MessageModal.index";
-
-const SELECT_VALUES02 = [
-  { label: "전체", value: "전체" },
-  { label: "서울특별시", value: "서울" },
-  { label: "경기도", value: "경기" },
-  { label: "강원도", value: "강원" },
-  { label: "충청북도", value: "충청북도" },
-  { label: "충청남도", value: "충청남도" },
-  { label: "전라북도", value: "전라북도" },
-  { label: "전라남도", value: "전라남도" },
-  { label: "경상북도", value: "경상북도" },
-  { label: "경상남도", value: "경상남도" },
-  { label: "광주광역시", value: "광주" },
-  { label: "대구광역시", value: "대구" },
-  { label: "대전광역시", value: "대전" },
-  { label: "부산광역시", value: "부산" },
-  { label: "세종특별자치시", value: "세종" },
-  { label: "울산광역시", value: "울산" },
-  { label: "인천광역시", value: "인천" },
-  { label: "제주도", value: "제주도" },
-];
+import { SELECT_VALUES02 } from "../../../../../commons/default/default";
+import InfiniteScrollWrap from "../../../../commons/infiniteScroll/01/InfiniteScroll.index";
 
 export default function MyStamp() {
   const router = useRouter();
@@ -40,7 +21,7 @@ export default function MyStamp() {
   const [stampId, setStampId] = useState("");
   const [selectValue, setSelectValue] = useState<string | number>("");
   const { deleteStampSubmit } = useDeleteStamp();
-  const { data, onSelectLocation } = useFetchUserStamps();
+  const { data, onSelectLocation, onHandleMore } = useFetchUserStamps();
   console.log(data);
 
   const onClickDeleteCoupon = (data: string) => () => {
@@ -116,39 +97,45 @@ export default function MyStamp() {
             </S.Search> */}
           </S.AreaWrapper>
           <S.StampContainer>
-            {data?.fetchUserStamps.map((el) => (
-              <S.StampWrapper key={el.id}>
-                <Box01>
-                  <div>
-                    <S.StampInfoWrapper>
-                      <S.StampInfo>
-                        <Text size="24" weight="500" fontColor="subColor01">
-                          {el.cafeInform.owner.brandName}
-                        </Text>
-                        <Text size="16" weight="300" fontColor="gray">
-                          {el.count}/10
-                        </Text>
-                      </S.StampInfo>
-                      <S.IconWrap onClick={onClickDeleteCoupon(el.id)}>
-                        <TbTrash />
-                      </S.IconWrap>
-                    </S.StampInfoWrapper>
-                    <S.Stamp>
-                      {new Array(el.count).fill(1).map((_, index) => (
-                        <S.ValidStampWrap key={index}>
-                          <CgCoffee />
-                        </S.ValidStampWrap>
-                      ))}
-                      {new Array(10 - el.count).fill(1).map((_, index) => (
-                        <S.IconWrap2 key={index}>
-                          <CgCoffee key={index} />
-                        </S.IconWrap2>
-                      ))}
-                    </S.Stamp>
-                  </div>
-                </Box01>
-              </S.StampWrapper>
-            ))}
+            <InfiniteScrollWrap onHandleMore={onHandleMore}>
+              {data?.fetchUserStamps ? (
+                data?.fetchUserStamps.map((el) => (
+                  <S.StampWrapper key={el.id}>
+                    <Box01>
+                      <div>
+                        <S.StampInfoWrapper>
+                          <S.StampInfo>
+                            <Text size="24" weight="500" fontColor="subColor01">
+                              {el.cafeInform.owner.brandName}
+                            </Text>
+                            <Text size="16" weight="300" fontColor="gray">
+                              {el.count}/10
+                            </Text>
+                          </S.StampInfo>
+                          <S.IconWrap onClick={onClickDeleteCoupon(el.id)}>
+                            <TbTrash />
+                          </S.IconWrap>
+                        </S.StampInfoWrapper>
+                        <S.Stamp>
+                          {new Array(el.count).fill(1).map((_, index) => (
+                            <S.ValidStampWrap key={index}>
+                              <CgCoffee />
+                            </S.ValidStampWrap>
+                          ))}
+                          {new Array(10 - el.count).fill(1).map((_, index) => (
+                            <S.IconWrap2 key={index}>
+                              <CgCoffee key={index} />
+                            </S.IconWrap2>
+                          ))}
+                        </S.Stamp>
+                      </div>
+                    </Box01>
+                  </S.StampWrapper>
+                ))
+              ) : (
+                <></>
+              )}
+            </InfiniteScrollWrap>
           </S.StampContainer>
         </S.Container>
       </S.ContainerWrapper>

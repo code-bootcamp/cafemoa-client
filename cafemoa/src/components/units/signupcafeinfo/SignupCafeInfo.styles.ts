@@ -4,9 +4,7 @@ import { DEFAULT_COLOR } from "../../../commons/default/default";
 import {
   BtnWrap,
   ContainerWrap,
-  LargeBtn,
   MediumBtn,
-  SmallBtn,
 } from "../../../commons/styles/commonStyles";
 
 interface ISignupStylesProps {
@@ -128,12 +126,12 @@ export const EmailBtn = styled(MediumBtn)``;
 export const PhoneBtn = styled(MediumBtn)``;
 export const BusinessBtn = styled(MediumBtn)``;
 export const AddrBtn = styled(MediumBtn)``;
-export const ResetBtn = styled(LargeBtn)``;
-export const SubmitBtn = styled(SmallBtn)``;
+export const ResetBtn = styled(MediumBtn)``;
+export const SubmitBtn = styled(MediumBtn)``;
 export const SignUpBtnWrap = styled(BtnWrap)`
   > button {
     margin: 0 8px;
-    width: calc(50% - 216px);
+    padding: 8px 32px;
     text-align: center;
     border-radius: 20px;
   }

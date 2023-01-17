@@ -38,6 +38,7 @@ export const HeroTextWrap = styled.div`
 export const HeroTextTitle = styled.div``;
 export const HeroTextSubject = styled.div`
   margin-top: 16px;
+  word-break: keep-all;
 `;
 export const HeroWrap = styled.div`
   position: relative;

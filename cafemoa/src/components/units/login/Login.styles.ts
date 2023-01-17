@@ -17,6 +17,9 @@ export const ContainerWrapper = styled(ContainerWrap)`
 export const LoginButton = styled(MediumBtn)`
   padding-top: 8px;
   padding-bottom: 8px;
+  ${mq.MobileS} {
+    width: 100%;
+  }
 `;
 
 export const Wrapper = styled.section`
@@ -174,6 +177,9 @@ export const RegistForms = styled.div`
     padding: 100px;
     width: 100%;
   }
+  ${mq.MobileM} {
+    padding: 50px 24px;
+  }
 `;
 
 export const FormTitle = styled.div`
@@ -187,8 +193,15 @@ export const FormsField = styled.div`
 export const FormsButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 35px;
+  ${mq.MobileS} {
+    flex-wrap: wrap;
+  }
+  > * {
+    margin-bottom: 8px;
+  }
 `;
 
 export const FindPassword = styled.a`

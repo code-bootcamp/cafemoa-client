@@ -35,7 +35,7 @@ export default function ReviewsSlide() {
       >
         {data?.fetchCommentsAll.map((el) => (
           <SwiperSlide key={uuidv4()}>
-            <Link href={`/cafe/${el.id}`}>
+            <Link href={`/cafe/${el.cafeinfo.id}`}>
               <a>
                 <Card01
                   imageUrl={`https://storage.googleapis.com/${el.commentImage[0].image_url}`}

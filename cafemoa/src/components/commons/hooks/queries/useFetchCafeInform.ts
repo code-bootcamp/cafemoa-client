@@ -12,14 +12,20 @@ export const FETCH_CAFE_INFORM = gql`
       cafeinfo
       operatingInfo
       cafeAddr
+      notice
       like
+      is_WC
+      is_Wifi
+      is_Parking
       owner {
         brandName
       }
       cafeImage {
+        id
         cafe_image
       }
       cafeMenuImage {
+        id
         menu_imageUrl
       }
       cafeTag {

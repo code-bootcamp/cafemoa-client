@@ -6,16 +6,29 @@ import StampSaveByQr from "./StampSaveByQr";
 import StampSaveByPhone from "./StampSaveByPhone";
 import MypageSidebarLayout from "../../../../commons/layout/mypage/owner/MypageSidebar.index";
 import SidebarMenuLayout from "../../../../commons/layout/mypage/owner/sidebarMenu/SidebarMenu.index";
+import Link from "next/link";
+import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
 
 export default function StampSave() {
   const router = useRouter();
+  const { data: cafeId } = useFetchMyCafes();
   return (
     <>
       <HeroWrap
         imageUrl="/images/review/review_hero01.png"
         title="마이모아"
         subject="내 정보를 한눈에 보기 쉽게 모아!"
-      ></HeroWrap>
+      >
+        <S.MyCafe>
+          <Link href={`/cafe/${cafeId?.fetchMyCafes[0]?.id}`}>
+            <a>
+              <Text fontColor="white" size="16">
+                내 카페 보기
+              </Text>
+            </a>
+          </Link>
+        </S.MyCafe>
+      </HeroWrap>
       <S.ContainerWrapper>
         <div>
           <MypageSidebarLayout>

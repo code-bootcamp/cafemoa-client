@@ -3,23 +3,38 @@ import Input01 from "../../../commons/input/01/Input01.index";
 import Text from "../../../commons/text/01/Text01.index";
 import * as S from "./CafeDetail.styles";
 import { useForm } from "react-hook-form";
+import { Modal } from "antd";
 
 interface IReplyProps {
   commentId: string;
+  setIsReply: (bool: boolean) => void;
+}
+interface IReplyData {
+  content: string;
 }
 
 export default function ReplyReview(props: IReplyProps) {
   console.log(props.commentId);
   const { createOwnerCommentSubmit } = useCreateOwnerComment();
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<IReplyData>({
     // resolver: yupResolver(CreateCommentSchema),
     mode: "onChange",
     defaultValues: {
       content: "",
     },
   });
-  const onClickCreateOwnerComment = (data: any) => {
-    void createOwnerCommentSubmit(data, props.commentId);
+  const onClickCreateOwnerComment = (data: IReplyData) => {
+    try {
+      void createOwnerCommentSubmit(data, props.commentId);
+      props.setIsReply(false);
+      Modal.success({
+        content: "답글 등록을 완료했습니다.",
+      });
+    } catch (error) {
+      Modal.error({
+        content: "답글 등록에 실패했습니다.",
+      });
+    }
   };
   return (
     <S.ReplyWrap>
@@ -31,8 +46,10 @@ export default function ReplyReview(props: IReplyProps) {
             register={register("content")}
           />
         </S.ReplyInputWrapper>
-        <S.ReplySubmitBtn color="brown">
-          <Text size="16">답글등록</Text>
+        <S.ReplySubmitBtn color="brownLine">
+          <Text fontColor="subColor01" size="14">
+            답글등록
+          </Text>
         </S.ReplySubmitBtn>
       </S.ReplyFormWrapper>
     </S.ReplyWrap>

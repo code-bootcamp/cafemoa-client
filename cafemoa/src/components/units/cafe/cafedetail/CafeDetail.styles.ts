@@ -73,6 +73,12 @@ export const LikeContainer = styled.button`
   padding-left: 4px;
   // background: red;
 `;
+export const LikeContainerOwner = styled.span`
+  display: inline-block;
+  padding-top: 2px;
+  padding-left: 4px;
+  // background: red;
+`;
 
 export const Section = styled.div`
   padding-bottom: 40px;
@@ -116,6 +122,15 @@ export const SubTitleWrapper = styled.div`
   margin-top: 32px;
   margin-bottom: 16px;
 `;
+export const facilityWrapper = styled.div`
+  span {
+    display: inline-block;
+    margin-right: 8px;
+    ::before {
+      content: "#";
+    }
+  }
+`;
 export const NoticeWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,22 +152,20 @@ export const OwnerImageWrapper = styled.div`
     width: 100%;
   }
   ${mq.MobileM} {
-    > .ant-image {
-      width: 33.3333%;
-    }
+    width: 33.3333%;
   }
   ${mq.MobileS} {
-    > .ant-image {
-      width: 50%;
-    }
+    width: 50%;
   }
 `;
 // ------------------------리뷰모아 부분-------------------
 
 export const ReviewContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   margin-top: 24px;
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;
 export const ReviewWrapper = styled.div`
   width: 50%;
@@ -212,9 +225,12 @@ export const ContentsText = styled.div`
     margin-left: 20px;
   }
 `;
-export const ReplyBtn = styled.div`
+export const ReplyBtn = styled.button`
+  display: block;
   padding-top: 8px;
   text-align: right;
+  margin-right: 0;
+  margin-left: auto;
 `;
 export const ReviewColorLine = styled.div`
   width: 79%;
@@ -300,17 +316,24 @@ export const BtnInnerWrapper = styled.div`
 // ============================점주 답글부분=====================
 export const ReplyWrap = styled.div`
   // background: red;
+  margin-top: 8px;
 `;
 export const ReplyFormWrapper = styled.form`
   display: flex;
-  padding-left: 100px;
+  padding-left: 90px;
+  ${mq.MobileL} {
+    padding-left: 64px;
+  }
 `;
 export const ReplyInputWrapper = styled.div`
-  width: 80%;
+  width: calc(100% - 80px);
 `;
 export const ReplySubmitBtn = styled(SmallBtn)`
+  width: 80px;
+  padding: 0 8px;
+  text-align: center;
   margin-left: 10px;
-  padding-top: 10px;
+  height: 40px;
 `;
 export const OwnerComment = styled.div`
   display: flex;

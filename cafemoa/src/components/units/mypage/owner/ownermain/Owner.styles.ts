@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { DEFAULT_COLOR } from "../../../../../commons/default/default";
 import { ContainerWrap } from "../../../../../commons/styles/commonStyles";
 import { MobileS } from "../../../../../commons/styles/mediaQuery";
 
@@ -26,4 +27,16 @@ export const ImageWrap = styled.div`
 `;
 export const TitleWrap = styled.div`
   text-align: center;
+`;
+
+export const MyCafe = styled.div`
+  text-align: center;
+  margin-top: 16px;
+  > a {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid ${DEFAULT_COLOR.white};
+    max-width: 200px;
+    width: 100%;
+  }
 `;

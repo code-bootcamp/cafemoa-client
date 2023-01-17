@@ -7,6 +7,11 @@ export const accessTokenState = atom({
   default: "",
 });
 
+export const MainScrollState = atom({
+  key: "MainScrollState",
+  default: 0,
+});
+
 interface IUser {
   fetchUser?: IQuery["fetchUser"];
   fetchOwnerLoggedIn?: IQuery["fetchOwnerLoggedIn"];
