@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useFetchCafesWithOption } from "../../commons/hooks/queries/useFetchCafesWithOption";
 import { SELECT_VALUES02 } from "../../../commons/default/default";
 import { regText } from "../../../commons/libraries/utill";
+import Link from "next/link";
 const { Panel } = Collapse;
 
 export default function CafeSearchModal() {
@@ -69,9 +70,13 @@ export default function CafeSearchModal() {
           {data?.fetchCafesWithNameAndLocation.map((el) => (
             <S.ContentWrapper key={el.id}>
               <S.SearchCafeInfo>
-                <Text size="20" weight="500" fontColor="mainColor">
-                  {el.owner.brandName}
-                </Text>
+                <Link href={`/cafe/${el.id}`}>
+                  <a>
+                    <Text size="20" weight="500" fontColor="mainColor">
+                      {el.owner.brandName}
+                    </Text>
+                  </a>
+                </Link>
                 {/* <Text size="14" weight="300" fontColor="gray">
                   0.2km
                 </Text> */}

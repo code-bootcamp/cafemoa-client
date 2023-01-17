@@ -193,6 +193,7 @@ export const FormsField = styled.div`
 export const FormsButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 35px;
   ${mq.MobileS} {

@@ -152,14 +152,10 @@ export const OwnerImageWrapper = styled.div`
     width: 100%;
   }
   ${mq.MobileM} {
-    > .ant-image {
-      width: 33.3333%;
-    }
+    width: 33.3333%;
   }
   ${mq.MobileS} {
-    > .ant-image {
-      width: 50%;
-    }
+    width: 50%;
   }
 `;
 // ------------------------리뷰모아 부분-------------------
