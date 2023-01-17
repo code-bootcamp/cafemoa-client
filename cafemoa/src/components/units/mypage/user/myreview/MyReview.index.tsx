@@ -1,9 +1,11 @@
 import { Image } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { GetDate } from "../../../../../commons/libraries/utill";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
 import { useFetchUserComments } from "../../../../commons/hooks/queries/useFetchUserComments";
+import InfiniteScrollWrap from "../../../../commons/infiniteScroll/01/InfiniteScroll.index";
 import MypageSidebarLayout from "../../../../commons/layout/mypage/user/MypageSidebar.index";
 import SidebarMenuLayout from "../../../../commons/layout/mypage/user/sidebarMenu/SidebarMenu.index";
 import Like01 from "../../../../commons/like/01/Like01.index";
@@ -12,7 +14,7 @@ import * as S from "./MyReview.styles";
 
 export default function MyReview() {
   const router = useRouter();
-  const { data } = useFetchUserComments();
+  const { data, onHandleMore } = useFetchUserComments();
   console.log(data);
 
   return (
@@ -34,46 +36,58 @@ export default function MyReview() {
               내가 남긴 리뷰를 모아보세요!
             </Text>
           </S.TitleWrapper>
-          <div>
-            {data?.fetchUserComments.map((el) => (
-              <S.ReviewContentWrapper key={el.id}>
-                <Box01>
-                  <div>
-                    <S.ReviewInfoWrapper>
-                      <S.ReviewInfoHead>
-                        <S.CafeName>
-                          <Text size="20" weight="500" fontColor="subColor01">
-                            {el.cafeinfo.owner.brandName}
-                          </Text>
-                        </S.CafeName>
-                      </S.ReviewInfoHead>
-                      <S.LikeCount>
-                        <Like01 iconColor="black" count={el.cafeinfo.like} />
-                      </S.LikeCount>
-                    </S.ReviewInfoWrapper>
-                    <S.ReviewImagesWrap>
-                      {el.commentImage.map((el) => (
-                        <Image
-                          key={el.id}
-                          src={`https://storage.googleapis.com/${el.image_url}`}
-                        />
-                      ))}
-                    </S.ReviewImagesWrap>
-                    <S.Review>
-                      <Text size="18" weight="300">
-                        {el.reply}
-                      </Text>
-                    </S.Review>
-                    <S.DateWrap>
-                      <Text size="14" weight="300" fontColor="gray">
-                        {GetDate(el.time)}
-                      </Text>
-                    </S.DateWrap>
-                  </div>
-                </Box01>
-              </S.ReviewContentWrapper>
-            ))}
-          </div>
+          <InfiniteScrollWrap onHandleMore={onHandleMore}>
+            {data?.fetchUserComments ? (
+              data?.fetchUserComments.map((el) => (
+                <S.ReviewContentWrapper key={el.id}>
+                  <Box01>
+                    <div>
+                      <S.ReviewInfoWrapper>
+                        <S.ReviewInfoHead>
+                          <S.CafeName>
+                            <Link href={`/cafe/${el.cafeinfo.id}`}>
+                              <a>
+                                <Text
+                                  size="20"
+                                  weight="500"
+                                  fontColor="subColor01"
+                                >
+                                  {el.cafeinfo.owner.brandName}
+                                </Text>
+                              </a>
+                            </Link>
+                          </S.CafeName>
+                        </S.ReviewInfoHead>
+                        <S.LikeCount>
+                          <Like01 iconColor="black" count={el.cafeinfo.like} />
+                        </S.LikeCount>
+                      </S.ReviewInfoWrapper>
+                      <S.ReviewImagesWrap>
+                        {el.commentImage.map((el) => (
+                          <Image
+                            key={el.id}
+                            src={`https://storage.googleapis.com/${el.image_url}`}
+                          />
+                        ))}
+                      </S.ReviewImagesWrap>
+                      <S.Review>
+                        <Text size="18" weight="300">
+                          {el.reply}
+                        </Text>
+                      </S.Review>
+                      <S.DateWrap>
+                        <Text size="14" weight="300" fontColor="gray">
+                          {GetDate(el.time)}
+                        </Text>
+                      </S.DateWrap>
+                    </div>
+                  </Box01>
+                </S.ReviewContentWrapper>
+              ))
+            ) : (
+              <></>
+            )}
+          </InfiniteScrollWrap>
         </S.Container>
       </S.ContainerWrapper>
     </>

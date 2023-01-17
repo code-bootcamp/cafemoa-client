@@ -9,14 +9,16 @@ import * as mq from "../../../../commons/styles/mediaQuery";
 export const ContainerWrapper = styled(ContainerWrap)`
   padding-top: 100px;
 `;
-export const CardsWrapper = styled.ul`
+export const CardsWrapper = styled.div`
   /* display: flex;
   flex-wrap: wrap; */
-  padding: 0;
-  margin: 0 -20px;
   // background: green;
+  > div {
+    padding: 0;
+    margin: 0 -20px;
+  }
 `;
-export const CardBox = styled.li`
+export const CardBox = styled.div`
   display: block;
   width: 25%;
   padding: 20px;
@@ -40,6 +42,9 @@ export const TagsWrap = styled(TagWrap)`
 export const SliderWrapper = styled.div`
   width: 100%;
   padding-top: 100px;
+  ${mq.MobileL} {
+    padding-top: 36px;
+  }
 `;
 export const LikeWrapper = styled.div`
   position: absolute;

@@ -53,14 +53,16 @@ export const SubArea = styled.div`
 
 export const Search = styled(SmallBtn)``;
 
-export const MypickContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0 -15px;
+export const MypickContainer = styled.div`
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0 -15px;
+  }
 `;
 
-export const PickWrapper = styled.li`
+export const PickWrapper = styled.div`
   display: block;
   width: 50%;
   padding: 0 15px 30px;

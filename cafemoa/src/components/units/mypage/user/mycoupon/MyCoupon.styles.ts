@@ -44,14 +44,16 @@ export const TitleWrapper = styled.div`
   padding-bottom: 32px;
 `;
 
-export const ValidWrapper = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0 -15px;
+export const ValidWrapper = styled.div`
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0 -15px;
+  }
 `;
 
-export const ValidBox = styled.li`
+export const ValidBox = styled.div`
   display: block;
   width: 50%;
   padding: 0 15px 30px;

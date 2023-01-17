@@ -28,7 +28,7 @@ export const USER_STAMPS = gql`
 
 export const useFetchUserStamps = () => {
   const [locationState, setLocationState] = useState<string>("");
-  const { data, refetch } = useQuery<
+  const { data, refetch, fetchMore } = useQuery<
     Pick<IQuery, "fetchUserStamps">,
     IQueryFetchUserStampsArgs
   >(USER_STAMPS, {
@@ -46,8 +46,42 @@ export const useFetchUserStamps = () => {
     }
   };
 
+  const onHandleMore = async () => {
+    if (data === undefined) return;
+    if (data.fetchUserStamps?.length === 0) return;
+    try {
+      void fetchMore({
+        variables: {
+          location: "",
+          page: Number(Math.ceil(data.fetchUserStamps.length / 10) + 1),
+        },
+        updateQuery(prev, { fetchMoreResult }) {
+          if (fetchMoreResult.fetchUserStamps === undefined) {
+            return {
+              fetchUserStamps: [...prev.fetchUserStamps],
+            };
+          }
+          if (prev.fetchUserStamps === undefined) {
+            return {
+              fetchUserStamps: [],
+            };
+          }
+          return {
+            fetchUserStamps: [
+              ...prev?.fetchUserStamps,
+              ...fetchMoreResult?.fetchUserStamps,
+            ],
+          };
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     void refetch({ location: locationState });
   }, [locationState]);
-  return { data, onSelectLocation };
+
+  return { data, onSelectLocation, onHandleMore };
 };
