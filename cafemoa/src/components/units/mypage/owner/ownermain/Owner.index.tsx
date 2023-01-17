@@ -3,19 +3,32 @@ import { useRecoilState } from "recoil";
 import { infoUserState } from "../../../../../commons/stores";
 import Box01 from "../../../../commons/box/01/Box01.index";
 import HeroWrap from "../../../../commons/hero/HeroWrap.index";
+import { useFetchMyCafes } from "../../../../commons/hooks/queries/useFetchMyCafes";
 import Text from "../../../../commons/text/01/Text01.index";
 import * as S from "./Owner.styles";
 
 export default function OwnerMyPage() {
   const [infoUser] = useRecoilState(infoUserState);
+  const { data: cafeId } = useFetchMyCafes();
   const ownerId = infoUser?.fetchOwnerLoggedIn?.id;
+
   return (
     <>
       <HeroWrap
         imageUrl="/images/owner/Owner01.jpeg"
         title="마이모아"
         subject="내 정보를 한눈에 보기 쉽게 모아!"
-      ></HeroWrap>
+      >
+        <S.MyCafe>
+          <Link href={`/cafe/${cafeId?.fetchMyCafes[0]?.id}`}>
+            <a>
+              <Text fontColor="white" size="16">
+                내 카페 보기
+              </Text>
+            </a>
+          </Link>
+        </S.MyCafe>
+      </HeroWrap>
       <S.MyPageContainer>
         <S.OwnerMenuContainer>
           <div>

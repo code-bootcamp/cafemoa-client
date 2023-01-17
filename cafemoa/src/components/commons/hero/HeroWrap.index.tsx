@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import Text from "../text/01/Text01.index";
 import * as S from "./HeroWrap.styles";
 
@@ -5,6 +6,7 @@ interface IHeroWrapProps {
   imageUrl: string;
   title: string;
   subject: string;
+  children?: ReactNode;
 }
 
 export default function HeroWrap(props: IHeroWrapProps) {
@@ -21,6 +23,7 @@ export default function HeroWrap(props: IHeroWrapProps) {
           <Text size="24" fontColor="white">
             {props.subject}
           </Text>
+          {props.children}
         </S.HeroTextSubject>
       </S.HeroTextWrap>
     </S.HeroWrap>

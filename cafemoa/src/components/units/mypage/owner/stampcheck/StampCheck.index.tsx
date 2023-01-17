@@ -11,6 +11,8 @@ import MypageSidebarLayout from "../../../../commons/layout/mypage/owner/MypageS
 import SidebarMenuLayout from "../../../../commons/layout/mypage/owner/sidebarMenu/SidebarMenu.index";
 import { useRouter } from "next/router";
 import { getStampSaveDate } from "../../../../../commons/libraries/utill";
+import InfiniteScrollWrap from "../../../../commons/infiniteScroll/01/InfiniteScroll.index";
+import Link from "next/link";
 
 interface IFormDeleteUnusualStampData {
   ownerpassword: string;
@@ -19,7 +21,8 @@ interface IFormDeleteUnusualStampData {
 
 export default function StampCheck() {
   const router = useRouter();
-  const { data } = useFetchUnusualStamps();
+  const { data, onHandleMore } = useFetchUnusualStamps();
+  const { data: cafeId } = useFetchMyCafes();
   const { deleteUnusualStampSubmit } = useDeleteUnusualStamp();
   const inputRef = useRef<HTMLInputElement>(null);
   const { ModalComponent, setIsModalOpen, onClickIsModalOpen } = MessageModal();
@@ -51,7 +54,17 @@ export default function StampCheck() {
         imageUrl="/images/owner/Owner01.jpeg"
         title="마이모아"
         subject="내 정보를 한눈에 보기 쉽게 모아!"
-      ></HeroWrap>
+      >
+        <S.MyCafe>
+          <Link href={`/cafe/${cafeId?.fetchMyCafes[0]?.id}`}>
+            <a>
+              <Text fontColor="white" size="16">
+                내 카페 보기
+              </Text>
+            </a>
+          </Link>
+        </S.MyCafe>
+      </HeroWrap>
       <S.StampCheckContainer>
         <div>
           <MypageSidebarLayout>
@@ -64,29 +77,31 @@ export default function StampCheck() {
               스탬프를 한번에 받은 회원님들을 모아봤어요!
             </Text>
           </S.Title>
-          {data?.fetchUnusualStamps.map((el) => (
-            <S.NotificationWrapper key={el.id}>
-              <div>
-                <Text size="20" weight="500">
-                  {el.user.name}님에게&nbsp;
-                </Text>
-                <Text size="20" weight="300">
-                  {getStampSaveDate(el.createdAt)}
-                </Text>
-                <Text size="20" weight="500">
-                  에 스탬프&nbsp;{el.count.toString()}
-                </Text>
-                <Text size="20" weight="500">
-                  개를 적립하였습니다.
-                </Text>
-              </div>
-              <S.ConfirmBtn color="brown" onClick={onDeleteStamp(el.id)}>
-                <Text size="16" fontColor="white">
-                  확인
-                </Text>
-              </S.ConfirmBtn>
-            </S.NotificationWrapper>
-          ))}
+          <InfiniteScrollWrap onHandleMore={onHandleMore}>
+            {data?.fetchUnusualStamps.map((el) => (
+              <S.NotificationWrapper key={el.id}>
+                <div>
+                  <Text size="20" weight="500">
+                    {el.user.name}님에게&nbsp;
+                  </Text>
+                  <Text size="20" weight="300">
+                    {getStampSaveDate(el.createdAt)}
+                  </Text>
+                  <Text size="20" weight="500">
+                    에 스탬프&nbsp;{el.count.toString()}
+                  </Text>
+                  <Text size="20" weight="500">
+                    개를 적립하였습니다.
+                  </Text>
+                </div>
+                <S.ConfirmBtn color="brown" onClick={onDeleteStamp(el.id)}>
+                  <Text size="16" fontColor="white">
+                    확인
+                  </Text>
+                </S.ConfirmBtn>
+              </S.NotificationWrapper>
+            ))}
+          </InfiniteScrollWrap>
         </S.NotificationContainer>
       </S.StampCheckContainer>
       <ModalComponent

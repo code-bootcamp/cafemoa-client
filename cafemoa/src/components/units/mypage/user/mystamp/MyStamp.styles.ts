@@ -74,10 +74,19 @@ export const StampWrapper = styled.li`
   ${mq.MobileM} {
     width: 100%;
   }
+  > div {
+    height: 100%;
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
+    }
+  }
 `;
 
 export const StampInfoWrapper = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

@@ -3,7 +3,7 @@ import {
   IMutation,
   IMutationCreateOwnerCommentArgs,
 } from "../../../../commons/types/generated/types";
-import { FETCH_COMMENT_BY_CAFE_ID } from "../queries/useFetchCommentByCafeID";
+import { FETCH_OWNER_COMMENT_BY_COMMENT_ID } from "../queries/useFetchOwnerCommentByCommentID";
 
 interface IFormCreateOwnerCommentData {
   content: string;
@@ -44,7 +44,10 @@ export const useCreateOwnerComment = () => {
         },
         refetchQueries: [
           {
-            query: FETCH_COMMENT_BY_CAFE_ID,
+            query: FETCH_OWNER_COMMENT_BY_COMMENT_ID,
+            variables: {
+              commentID,
+            },
           },
         ],
       });

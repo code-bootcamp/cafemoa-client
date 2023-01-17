@@ -99,7 +99,7 @@ export default function ReviewComment(props: IReviewCommentProps) {
             size="md"
           />
           {infoUser?.fetchUser?.id === props.el.user.id &&
-            reviewRegisterDate(props.el.time, 3) && (
+            reviewRegisterDate(props.el.time, 1) && (
               <S.BtnWrapper>
                 <S.EditBtn onClick={onClickCommentEdit(props.el.id)}>
                   <AiFillEdit />
@@ -142,7 +142,9 @@ export default function ReviewComment(props: IReviewCommentProps) {
         ) : (
           <div></div>
         )}
-        {isReply && <ReplyReview commentId={props.el.id} />}
+        {isReply && (
+          <ReplyReview commentId={props.el.id} setIsReply={setIsReply} />
+        )}
         <OwnerComment commentId={props.el.id} />
       </S.ReviewWrapper>
     </>

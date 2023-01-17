@@ -260,3 +260,14 @@ export const ModalBtnWrap = styled(BtnWrap)`
     border-radius: 20px;
   }
 `;
+export const MyCafe = styled.div`
+  text-align: center;
+  margin-top: 16px;
+  > a {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid ${DEFAULT_COLOR.white};
+    max-width: 200px;
+    width: 100%;
+  }
+`;

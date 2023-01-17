@@ -46,6 +46,7 @@ export default function HeaderLayout() {
   };
   useEffect(() => {
     setIsDrawerOpen(false);
+    setIsModalOpen(false);
   }, [router]);
 
   return (
