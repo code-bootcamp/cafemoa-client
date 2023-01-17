@@ -271,7 +271,7 @@ export default function SignUpOwner(props: ISignUpProps) {
   };
 
   return (
-    <S.ContainerWrapper onSubmit={handleSubmit(onSignUpSubmit)}>
+    <form onSubmit={handleSubmit(onSignUpSubmit)}>
       <S.ContainerInner>
         <S.TitleWrap>
           <Text size="32" fontColor="subColor01">
@@ -487,6 +487,6 @@ export default function SignUpOwner(props: ISignUpProps) {
           </S.SubmitBtn>
         </S.SignUpBtnWrap>
       </S.ContainerInner>
-    </S.ContainerWrapper>
+    </form>
   );
 }

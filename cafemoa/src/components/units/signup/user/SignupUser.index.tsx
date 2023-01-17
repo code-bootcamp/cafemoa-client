@@ -214,7 +214,7 @@ export default function SignUpUser(props: ISignUpProps) {
 
   return (
     <>
-      <S.ContainerWrapper onSubmit={handleSubmit(submitSignUp)}>
+      <form onSubmit={handleSubmit(submitSignUp)}>
         <S.ContainerInner>
           <S.TitleWrap>
             <Text size="32" fontColor="subColor01">
@@ -406,7 +406,7 @@ export default function SignUpUser(props: ISignUpProps) {
             </S.SubmitBtn>
           </S.SignUpBtnWrap>
         </S.ContainerInner>
-      </S.ContainerWrapper>
+      </form>
       {isModalOpen && (
         <Modal
           title="주소 검색"
