@@ -144,7 +144,7 @@ export default function HeaderLayout() {
             <S.DrawerProfile>
               <Users01
                 size="lg"
-                image={`https://storage.googleapis.com/${infoUser?.fetchUser?.profileImage}`}
+                image={`${infoUser?.fetchUser?.profileImage}`}
               ></Users01>
               <S.DrawerName>
                 <Text size="20" weight="500">
