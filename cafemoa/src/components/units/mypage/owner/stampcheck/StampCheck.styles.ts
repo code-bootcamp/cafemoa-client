@@ -59,3 +59,14 @@ export const ModalButton = styled(MediumBtn)``;
 export const ModalFromWrap = styled.form`
   padding-top: 32px;
 `;
+export const MyCafe = styled.div`
+  text-align: center;
+  margin-top: 16px;
+  > a {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid ${DEFAULT_COLOR.white};
+    max-width: 200px;
+    width: 100%;
+  }
+`;
