@@ -73,6 +73,12 @@ export const LikeContainer = styled.button`
   padding-left: 4px;
   // background: red;
 `;
+export const LikeContainerOwner = styled.span`
+  display: inline-block;
+  padding-top: 2px;
+  padding-left: 4px;
+  // background: red;
+`;
 
 export const Section = styled.div`
   padding-bottom: 40px;

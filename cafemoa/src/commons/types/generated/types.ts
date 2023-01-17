@@ -401,7 +401,7 @@ export type IQuery = {
   fetchCafeInform: ICafeInform;
   fetchCafeInforms: Array<ICafeInform>;
   fetchCafeMenuImage: Array<ICafeMenuImage>;
-  fetchCafeStamps: Array<IStamp>;
+  fetchCafeStamps: Array<Scalars['DateTime']>;
   fetchCafes: Array<ICafeInform>;
   fetchCafesWithNameAndLocation: Array<ICafeInform>;
   fetchCategory: Array<ICategory>;
@@ -455,7 +455,6 @@ export type IQueryFetchCafeMenuImageArgs = {
 
 export type IQueryFetchCafeStampsArgs = {
   cafeId: Scalars['String'];
-  page?: InputMaybe<Scalars['Int']>;
 };
 
 
