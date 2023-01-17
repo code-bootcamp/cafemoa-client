@@ -3,6 +3,7 @@ import {
   IMutation,
   IMutationUpdateUserArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_USER } from "../queries/useFetchUser";
 
 interface IFormUpdateUserData {
   address: string;
@@ -35,8 +36,12 @@ export const useUpdateUser = () => {
             profileImage: files,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USER,
+          },
+        ],
       });
-      alert("회원정보 수정 완료");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

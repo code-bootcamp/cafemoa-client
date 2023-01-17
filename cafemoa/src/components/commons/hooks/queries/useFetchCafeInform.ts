@@ -21,9 +21,11 @@ export const FETCH_CAFE_INFORM = gql`
         brandName
       }
       cafeImage {
+        id
         cafe_image
       }
       cafeMenuImage {
+        id
         menu_imageUrl
       }
       cafeTag {

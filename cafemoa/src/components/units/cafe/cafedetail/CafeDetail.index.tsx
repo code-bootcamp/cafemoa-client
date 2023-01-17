@@ -68,7 +68,9 @@ export default function CafeDetail() {
             ></S.Contents>
             <S.TagContainer>
               {data?.fetchCafeInform.cafeTag.map((el, idx) => (
-                <Tag size="md">{el.tagName}</Tag>
+                <Tag size="md" key={el.id}>
+                  {el.tagName}
+                </Tag>
               ))}
             </S.TagContainer>
           </S.OwnerContents>
