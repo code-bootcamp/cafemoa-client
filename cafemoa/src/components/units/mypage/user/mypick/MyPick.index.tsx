@@ -72,7 +72,7 @@ export default function MyPick() {
                       <S.MypickInfoWrapper>
                         <S.MypickCafeImg>
                           <img
-                            src={`https://storage.googleapis.com/${el.cafeInform.cafeImage[0].cafe_image}`}
+                            src={`https://storage.googleapis.com/${el.cafeInform.cafeImage[0]?.cafe_image}`}
                           />
                         </S.MypickCafeImg>
                         <S.MypickCafe>

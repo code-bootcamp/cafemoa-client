@@ -1,3 +1,4 @@
+import { Modal } from "antd";
 import { useForm } from "react-hook-form";
 import { useFindUserPwd } from "../../commons/hooks/mutations/useFindUserPwd";
 import Input02 from "../../commons/input/02/Input02.index";
@@ -7,7 +8,7 @@ import { IFormFindPassword } from "./Login.types";
 
 export default function Findpw() {
   const [findUserPwd] = useFindUserPwd();
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, getValues } = useForm({
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -15,15 +16,17 @@ export default function Findpw() {
   });
 
   const onClickFindpw = async (data: IFormFindPassword) => {
-    console.log(data);
-
-    const result = await findUserPwd({
-      variables: {
-        ...data,
-      },
-    });
-
-    console.log(result);
+    try {
+      await findUserPwd({
+        variables: {
+          ...data,
+        },
+      });
+      Modal.success({
+        width: 320,
+        content: `${getValues("email")}로 \n 이메일 전송이 완료되었습니다.`,
+      });
+    } catch (error) {}
   };
 
   return (
