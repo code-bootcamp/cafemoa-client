@@ -24,7 +24,10 @@ export const ProfileWrapper = styled.div`
 `;
 
 export const UserName = styled.div`
-  padding-bottom: 32px;
+  /* padding-bottom: 32px; */
+  padding: 0 32px 32px;
+  text-align: center;
+  word-break: keep-all;
 `;
 
 export const SettingIcon = styled.div`

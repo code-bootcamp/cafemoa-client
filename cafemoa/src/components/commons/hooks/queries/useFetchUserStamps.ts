@@ -39,7 +39,7 @@ export const useFetchUserStamps = () => {
   });
   const onSelectLocation = (location: string) => {
     console.log(location);
-    if (location === "전체") {
+    if (location === "") {
       setLocationState("");
     } else {
       setLocationState(location);
