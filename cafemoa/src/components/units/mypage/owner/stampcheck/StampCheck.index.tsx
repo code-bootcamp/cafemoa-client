@@ -128,7 +128,7 @@ export default function StampCheck() {
       >
         <S.ModalFromWrap onSubmit={handleSubmit(deleteStampSubmit)}>
           <Input01
-            type="text"
+            type="password"
             textAlign="center"
             placeHolder="가맹주 비밀번호 입력"
             register={register("ownerpassword")}
