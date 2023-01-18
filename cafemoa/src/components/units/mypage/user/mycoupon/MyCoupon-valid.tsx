@@ -66,7 +66,7 @@ export default function MyCouponValid() {
       >
         <S.ModalFromWrap onSubmit={handleSubmit(submitUseCoupon)}>
           <Input01
-            type="text"
+            type="password"
             textAlign="center"
             placeHolder="가맹주 비밀번호 입력"
             register={register("password")}
