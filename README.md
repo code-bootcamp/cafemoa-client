@@ -42,10 +42,6 @@
 
 ![DataFlow.png](https://user-images.githubusercontent.com/114391411/214557420-3365352c-253f-4ac5-bf0b-b05db0b539d0.png)
 
-### Data Schema
-
-![ERD.png](https://user-images.githubusercontent.com/114391411/214557586-6be7153a-56ce-4ca7-a03d-91e957d33b20.png)
-
 ### 기능 시연
 
 gif로 구현된 각 기능별 시연입니다
@@ -193,73 +189,3 @@ https://jaytech-fe.tistory.com/
 카페 리스트페이지, 카페 상세페이지, 댓글/대댓글, 배포
 
 ---
-
-**홍성준**
-
-![KakaoTalk_Photo_2023-01-17-16-43-42.jpeg](https://user-images.githubusercontent.com/114391411/214586523-5e9bfd7a-9b71-4616-a14b-b93d7f17dfda.jpeg)
-
-`팀역할` BE Git관리자
-
-`포지션` Back-end
-
-`휴대폰` 010-4919-2767
-
-`이메일` fhtm0241@gmail.com
-
-`블로그` [https://velog.io/@fhwm0241](https://velog.io/@fhwm0241)
-
-`기술스택`
-
-`JavaScript` `TypeScript` `NestJS` `GraphQL` `REST` `MySQL` `Redis` `TypeORM` `Kubernetes` `GCP` `Git/Github`
-
-`담당업무`
-
-가맹주 API, 카페정보 API, 카페 찜 리스트 API, ERD
-
----
-
-김태현
-
-![KakaoTalk_Photo_2023-01-17-16-41-49.jpeg](https://user-images.githubusercontent.com/114391411/214587205-801d1cd9-cd3d-4b20-907d-bee31528dfb8.jpeg)
-
-`팀역할` 시연발표제작
-
-`포지션` Back-end
-
-`휴대폰` 010-9917-5330
-
-`이메일` eiiyy1112@gmail.com
-
-`블로그` [https://eiiyy12.tistory.com](https://eiiyy12.tistory.com/)/
-
-`기술스택`
-
-`JavaScript` `TypeScript` `NestJS` `GraphQL` `REST` `MySQL` `Redis` `TypeORM` `Kubernetes` `GCP` `Git/Github`
-
-`담당업무`
-
-쿠폰/스탬프 API, 유저 API, 배포, ERD
-
----
-
-김상현
-
-![KakaoTalk_Photo_2023-01-17-16-44-00.jpeg](https://user-images.githubusercontent.com/114391411/214586628-84c008f9-c783-4f9a-90e5-d2dd503c6a57.jpeg)
-
-`팀역할` 시연발표제작
-
-`포지션` Back-end
-
-`휴대폰` 010-5032-7835
-
-`이메일` 2tkdgus3@gmail.com
-
-`블로그`[https://kimss97.tistory.com/](https://kimss97.tistory.com/)
-
-`기술스택`
-
-`JavaScript` `TypeScript` `NestJS` `GraphQL` `REST` `MySQL` `Redis` `TypeORM` `Kubernetes` `GCP` `Git/Github`
-
-`담당업무`
-
-API Docs, 댓글/대댓글, 이미지 업로드, ERD
