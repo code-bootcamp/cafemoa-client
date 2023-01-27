@@ -93,7 +93,7 @@ gif로 구현된 각 기능별 시연입니다
 
 - 이상적립점검(가맹주)
 
-  ![이상적립점검(가맹주).gif](https://user-images.githubusercontent.com/114391411/214577845-761847c4-f197-4f8d-a290-d1dbfaf65bd4.gif)
+  ![이상적립점검(가맹주).gif](https://user-images.githubusercontent.com/114391411/214581380-bd2edead-271f-4e1c-a646-44db757fdc6b.gif)
 
 - 마이페이지(유저)
 
