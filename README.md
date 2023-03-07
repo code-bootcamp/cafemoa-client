@@ -20,7 +20,7 @@
 
 ### 프로젝트 소개
 
-[https://youtu.be/GA33lvfLsz0](https://youtu.be/GA33lvfLsz0)
+[https://www.youtube.com/watch?v=zvrSrRmdQno](https://www.youtube.com/watch?v=zvrSrRmdQno)
 
 지난 10년간 카페들이 우후죽순으로 늘어나고있습니다.
 
